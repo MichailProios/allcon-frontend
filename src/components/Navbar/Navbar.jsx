@@ -115,7 +115,11 @@ const Navbar = () => {
                     Home
                   </Button>
 
-                  <Button component={Link} to="/home" className={styles.button}>
+                  <Button
+                    component={Link}
+                    to="/about"
+                    className={styles.button}
+                  >
                     About
                   </Button>
 

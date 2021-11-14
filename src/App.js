@@ -16,7 +16,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home/Home.jsx";
 //import Services from "./pages/Services/Services.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
-// import About from "./Pages/About/About.jsx";
+import About from "./pages/About/About.jsx";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -62,8 +62,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
-          {/* <Route path="/about" exact component={About} />
-          <Route path="/services" exact component={Services} /> */}
+          <Route path="/about" exact component={About} />
+          {/* <Route path="/services" exact component={Services} /> */}
           <Route path="/projects" exact component={Projects} />
         </Switch>
       </Router>
