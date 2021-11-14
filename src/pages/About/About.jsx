@@ -90,6 +90,15 @@ const About = () => {
       </Grid>
       <Divider />
       <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} />
     </div>
   );
 };
