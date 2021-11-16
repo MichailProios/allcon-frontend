@@ -89,16 +89,16 @@ const About = () => {
         </Grid>
       </Grid>
       <Divider />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
-      <ProfileCard image={"https://picsum.photos/500"} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2050} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2100} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2150} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2200} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2250} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2300} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2350} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2400} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2450} />
+      <ProfileCard image={"https://picsum.photos/500"} timeout={2500} />
     </div>
   );
 };

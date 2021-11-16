@@ -165,7 +165,7 @@ const Projects = () => {
   ]);
 
   const delayTime = (index) => {
-    return 150 * index;
+    return 300 * index;
   };
 
   return (
