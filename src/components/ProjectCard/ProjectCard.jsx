@@ -40,7 +40,12 @@ function ProjectCard({ title, image, link }) {
     // </Card>
     <Card className={styles.root}>
       <CardActionArea>
-        <Image imageStyle={{}} cover={true} animationDuration={100} />
+        <Image
+          imageStyle={{}}
+          src={image}
+          cover={true}
+          animationDuration={100}
+        />
         {/* <Typography gutterBottom variant="h5" component="h2">
           {title}
         </Typography> */}

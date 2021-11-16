@@ -1,5 +1,5 @@
 //Basic dependencies
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -14,6 +14,8 @@ import {
   useScrollTrigger,
   Zoom,
   Fab,
+  Tabs,
+  Tab,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 
@@ -29,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
     width: "3.2em",
   },
   companyName: {
-    margin: "0.8em 0.6em 0.6em 0.2em",
+    margin: "1em 0.6em 0.6em 0.2em",
     letterSpacing: "0.1em",
-    fontSize: "1.3em",
+    fontSize: "1.2em",
     fontSmooth: "5em",
     fontFamily: "EB Garamond , serif",
     color: "black",
@@ -46,7 +48,11 @@ const useStyles = makeStyles((theme) => ({
   button: {
     userDrag: "none",
     userSelect: "none",
-    margin: "1.1em 1em 1.1em 1em",
+    margin: "0.6em 0em 0em 0em",
+    color: "black",
+    minWidth: 120,
+    width: 120,
+    borderRadius: "0.2em",
   },
   links: {
     textDecoration: "none",
@@ -95,6 +101,11 @@ const HideOnScroll = ({ children }) => {
 const Navbar = () => {
   const styles = useStyles();
 
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <React.Fragment>
       <HideOnScroll>
@@ -110,33 +121,41 @@ const Navbar = () => {
                 </Grid>
               </Grid>
               <Grid className={styles.buttongrid} item>
-                <Grid justify={"space-between"} container>
-                  <Button component={Link} to="/home" className={styles.button}>
-                    Home
-                  </Button>
-
-                  <Button
+                <Tabs value={value} onChange={handleChange}>
+                  <Tab
+                    component={Link}
+                    to="/home"
+                    className={styles.button}
+                    label="Home"
+                  />
+                  <Tab
                     component={Link}
                     to="/about"
                     className={styles.button}
-                  >
-                    About
-                  </Button>
+                    label="About"
+                  />
 
-                  <Button
+                  <Tab
                     component={Link}
                     to="/projects"
                     className={styles.button}
-                  >
-                    Projects
-                  </Button>
-                  <Button component={Link} to="/home" className={styles.button}>
-                    Testimonies
-                  </Button>
-                  <Button component={Link} to="/home" className={styles.button}>
-                    Contacts
-                  </Button>
-                </Grid>
+                    label="Projects"
+                  />
+
+                  <Tab
+                    component={Link}
+                    to="/home"
+                    className={styles.button}
+                    label="Testimonies"
+                  />
+
+                  <Tab
+                    component={Link}
+                    to="/home"
+                    className={styles.button}
+                    label="Contacts"
+                  />
+                </Tabs>
               </Grid>
             </Grid>
           </Toolbar>
