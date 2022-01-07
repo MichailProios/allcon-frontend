@@ -1,5 +1,5 @@
 //Basic dependencies
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -9,98 +9,167 @@ import {
   Button,
   Typography,
   Grid,
+  Divider,
+  Slide,
+  useScrollTrigger,
+  Zoom,
+  Fab,
+  Tabs,
+  Tab,
 } from "@material-ui/core";
+import PropTypes from "prop-types";
+
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 //Pictures and Icons
-import companyLogo from "../../utilities/images/Logos/LOGO-HIGHRES2.png";
-import MenuIcon from "@material-ui/icons/Menu";
+import companyLogo from "../../utilities/images/Logos/logo-new.png";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
   logo: {
-    width: "12rem",
+    margin: "0.4em",
     height: "auto",
-    marginTop: 18,
-    marginBottom: 18,
-    marginLeft: 10,
+    width: "3.2em",
+  },
+  companyName: {
+    margin: "1em 0.6em 0.6em 0.2em",
+    letterSpacing: "0.1em",
+    fontSize: "1.2em",
+    fontSmooth: "5em",
+    fontFamily: "EB Garamond , serif",
+    color: "black",
+    userSelect: "none",
+    userDrag: "none",
   },
   appbar: {
     backgroundColor: "#fff",
     position: "fixed",
   },
+
   button: {
-    marginTop: "23px",
-    marginBottom: "20px",
-    marginLeft: "10px",
-    marginRight: "10px",
+    userDrag: "none",
+    userSelect: "none",
+    margin: "0.6em 0em 0em 0em",
+    color: "black",
+    minWidth: 120,
+    width: 120,
+    borderRadius: "0.2em",
   },
   links: {
     textDecoration: "none",
   },
   buttongrid: {
-    marginRight: "40px",
+    marginRight: "4em",
+  },
+  fab: {
+    position: "fixed",
+    zIndex: 1,
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
 }));
 
-function Navbar() {
-  const classes = useStyles();
+function ScrollTop(props) {
+  const { children } = props;
+  const styles = useStyles();
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = () => {
+    window[`scrollTo`]({ top: 0, behavior: `smooth` });
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={styles.fab}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
+
+const HideOnScroll = ({ children }) => {
+  const trigger = useScrollTrigger();
+  return (
+    <Slide direction={"down"} in={!trigger}>
+      {children}
+    </Slide>
+  );
+};
+
+const Navbar = () => {
+  const styles = useStyles();
+
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <React.Fragment>
-      <div className={classes.root}>
-        <AppBar className={classes.appbar} elevation={0}>
-          <Toolbar classname={classes.toolbar}>
+      <HideOnScroll>
+        <AppBar className={styles.appbar} elevation={0}>
+          <Toolbar classname={styles.toolbar}>
             <Grid justify={"space-between"} container>
-              <Grid xs={1} item>
-                <img className={classes.logo} src={companyLogo} alt="logo" />
-              </Grid>
-              <Grid className={classes.buttongrid} item>
+              <Grid item>
                 <Grid justify={"space-between"} container>
-                  <Button
+                  <img className={styles.logo} src={companyLogo} alt="logo" />
+                  <Typography className={styles.companyName}>
+                    ALL•CON Contracting
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid className={styles.buttongrid} item>
+                <Tabs value={value} onChange={handleChange}>
+                  <Tab
                     component={Link}
                     to="/home"
-                    className={classes.button}
-                  >
-                    Home
-                  </Button>
+                    className={styles.button}
+                    label="Home"
+                  />
+                  <Tab
+                    component={Link}
+                    to="/about"
+                    className={styles.button}
+                    label="About"
+                  />
 
-                  <Button
-                    component={Link}
-                    to="/home"
-                    className={classes.button}
-                  >
-                    About
-                  </Button>
-                  <Button
-                    component={Link}
-                    to="/home"
-                    className={classes.button}
-                  >
-                    Services
-                  </Button>
-                  <Button
+                  <Tab
                     component={Link}
                     to="/projects"
-                    className={classes.button}
-                  >
-                    Projects
-                  </Button>
-                  <Button
+                    className={styles.button}
+                    label="Projects"
+                  />
+
+                  <Tab
                     component={Link}
                     to="/home"
-                    className={classes.button}
-                  >
-                    Contacts
-                  </Button>
-                </Grid>
+                    className={styles.button}
+                    label="Testimonies"
+                  />
+
+                  <Tab
+                    component={Link}
+                    to="/home"
+                    className={styles.button}
+                    label="Contacts"
+                  />
+                </Tabs>
               </Grid>
             </Grid>
           </Toolbar>
+          <Divider />
         </AppBar>
-        <Toolbar />
-      </div>
+      </HideOnScroll>
+      <Toolbar />
+      <ScrollTop>
+        <Fab color="secondary" size="small">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </React.Fragment>
   );
-}
+};
 
 export default Navbar;
