@@ -7,8 +7,7 @@ import {
   Card,
   Grid,
   Typography,
-  Fade,
-  Divider,
+  Grow,
   CardActionArea,
 } from "@material-ui/core";
 
@@ -20,10 +19,10 @@ const useStyles = makeStyles({
   profileDescription: { width: "100%" },
 });
 
-const ProfileCard = ({ image, timeout }) => {
+const ProfileCard = ({ image, timeout, flag }) => {
   const styles = useStyles();
   return (
-    <Fade in={true} timeout={timeout}>
+    <Grow in={flag} timeout={timeout}>
       <Card className={styles.root}>
         <CardActionArea>
           <Grid container spacing={2} direction="row">
@@ -36,16 +35,25 @@ const ProfileCard = ({ image, timeout }) => {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-              <Typography variant="h4" className={styles.profileDescription}>
+              <Typography
+                color="textPrimary"
+                variant="h4"
+                className={styles.profileDescription}
+              >
                 Title
               </Typography>
               <Typography
+                color="textPrimary"
                 variant="subtitle1"
                 className={styles.profileDescription}
               >
                 Sub Title
               </Typography>
-              <Typography variant="h6" className={styles.profileDescription}>
+              <Typography
+                color="textPrimary"
+                variant="h6"
+                className={styles.profileDescription}
+              >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Pellentesque et molestie odio. Donec tortor nunc, venenatis sed
                 porttitor et, aliquet et lacus. Nunc dignissim sollicitudin
@@ -55,7 +63,7 @@ const ProfileCard = ({ image, timeout }) => {
           </Grid>
         </CardActionArea>
       </Card>
-    </Fade>
+    </Grow>
   );
 };
 

@@ -1,6 +1,6 @@
 //Basic dependencies
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import {
   createTheme,
@@ -53,20 +53,62 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#008B8B",
+      // light: "#3b3e6b",
+      //dark: "#00001b",
+      // dark: "#001d3e",
+    },
+    secondary: {
+      main: "#008B8B",
+      // light: "#4e6e97",
+      // dark: "#001d3e",
+    },
+    // button: {
+    //   main: "#1d4369",
+    //   hover: "#4D8AC9",
+    // },
+    success: {
+      main: "#4caf50",
+      secondary: "#3e8e41",
+    },
+    error: {
+      main: "#f44336",
+      secondary: "#c2160a",
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+      xxl: 2160,
+      xxxl: 3840,
+    },
+  },
+});
+
 function App() {
   const styles = useStyles();
+
   return (
     <React.Fragment>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/about" exact component={About} />
-          {/* <Route path="/services" exact component={Services} /> */}
-          <Route path="/projects" exact component={Projects} />
-        </Switch>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/home" exact element={<Home />} />
+            <Route path="/about" exact element={<About />} />
+            {/* <Route path="/services" exact element={<Services/>} /> */}
+            <Route path="/projects" exact element={<Projects />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </React.Fragment>
   );
 }

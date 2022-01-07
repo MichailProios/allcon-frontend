@@ -15,6 +15,8 @@ import Image from "material-ui-image";
 
 import { Transition } from "react-transition-group";
 
+import delayTransition from "../../utilities/customFunctions/delayTransition.jsx";
+
 //Material-UI Styles
 import { makeStyles } from "@material-ui/styles";
 
@@ -36,8 +38,15 @@ import hudsonAnimal from "../../utilities/images/hudsonanimal/DSC00135.JPG";
 import westchesterAve from "../../utilities/images/866westchester/DSC00300.JPG";
 import upperEastVetenary from "../../utilities/images/uppereastveterinary/DSC00250.JPG";
 import east209th from "../../utilities/images/20east9th/DSC00345.JPG";
+import { wait } from "@testing-library/user-event/dist/utils";
+import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  root: {
+    padding: "1em 0em 1em 1em",
+    width: "100%",
+  },
+});
 
 const Projects = () => {
   const styles = useStyles();
@@ -164,18 +173,10 @@ const Projects = () => {
     },
   ]);
 
-  const delayTime = (index) => {
-    return 300 * index;
-  };
-
   return (
-    <Grid container spacing={1} className={styles.root}>
+    <Grid container spacing={2} className={styles.root}>
       {listData.map((value, index) => (
-        <Grow in={true} timeout={delayTime(index)}>
-          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
-            <ProjectCard title={value.title} image={value.image} />
-          </Grid>
-        </Grow>
+        <ProjectCard title={value.title} image={value.image} index={index} />
       ))}
     </Grid>
   );

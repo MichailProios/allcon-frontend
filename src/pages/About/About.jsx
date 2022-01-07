@@ -1,26 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //Material-UI Styles
 import { makeStyles } from "@material-ui/styles";
 
-import { Grid, Typography, Grow, Divider } from "@material-ui/core";
+import { Grid, Typography, Grow, Slide, Divider } from "@material-ui/core";
 
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
+
+import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
 const useStyles = makeStyles({
   root: {
     margin: "2em 10em 2em 10em",
     width: "auto",
   },
-  header: { fontWeight: "600" },
+  //header: { fontWeight: "600" },
   profile: { marginTop: "0.5em" },
 });
 
 const About = () => {
   const styles = useStyles();
 
+  const [fade1, setFade1] = useState(false);
+  const [fade2, setFade2] = useState(false);
+  const [fade3, setFade3] = useState(false);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setFade1(true);
+    }, 1000);
+
+    const timer2 = setTimeout(() => {
+      setFade2(true);
+    }, 2000);
+
+    const timer3 = setTimeout(() => {
+      setFade3(true);
+    }, 3000);
+    return () => (
+      clearTimeout(timer1), clearTimeout(timer2), clearTimeout(timer3)
+    );
+  }, []);
+
   return (
-    <div styles={{ width: "100%" }}>
+    <div>
       <Grid container spacing={2} direction="column" className={styles.root}>
         <Grid
           item
@@ -31,8 +54,10 @@ const About = () => {
           xl={12}
           className={styles.header}
         >
-          <Grow in={true} timeout={300}>
-            <Typography variant="h4">Company Profile</Typography>
+          <Grow in={useDelayTransition(50)} timeout={800}>
+            <Typography color="textPrimary" variant="h4">
+              Company Profile
+            </Typography>
           </Grow>
         </Grid>
 
@@ -45,34 +70,22 @@ const About = () => {
           xl={12}
           className={styles.profile}
         >
-          <Grow in={true} timeout={800}>
-            <Typography variant="h6">
-              Founded in 2001, Allcon Contracting Corporation and its owners
-              Marko Bistakis and George Proios have a solid reputation in the
-              tri-state area for producing and delivering high-quality
-              construction projects.
+          <Grow in={useDelayTransition(150)} timeout={800}>
+            <Typography color="textPrimary" variant="h6">
+              ALL•CON Contracting is built on a reputation of delivering high
+              quality projects serving a variety of private and public clients
+              throughout New York State.
               <br />
               <br />
             </Typography>
           </Grow>
-          <Grow in={true} timeout={1200}>
-            <Typography variant="h6">
-              Allcon Contracting provides a full range of construction services.
-              We offer quality work at affordable pricing. Our staff at Allcon
-              Contracting brings complete teamwork to oversee every project. The
-              owners are hands on and involved to make sure all projects are
-              completed on time and on the budget.
-              <br /> At Allcon Contracting we are meticulous about the work we
-              do. We continually thrive to go the extra mile and deliver quality
-              results.
-              <br />
-              <br />
-            </Typography>
-          </Grow>
-          <Grow in={true} timeout={1600}>
-            <Typography variant="h6">
-              Our staff of professionals each have the knowledge to manage any
-              assignment that is put in front of them. From architects,
+          <Grow in={useDelayTransition(250)} timeout={800}>
+            <Typography color="textPrimary" variant="h6">
+              Our Executive Management understands that teamwork, which includes
+              hands on involvement of the owners, guarantee that all projects
+              are completed on time and on the budget. AllCon's staff is always
+              meticulous with details of each project and continually thrives to
+              go the extra mile and deliver quality results. From architects,
               planners, designers, and construction specialists everyone works
               in a collaborative environment bringing forth their unique talent
               and techniques.
@@ -80,25 +93,35 @@ const About = () => {
               <br />
             </Typography>
           </Grow>
-          <Grow in={true} timeout={2000}>
-            <Typography variant="h6">
-              We are all fully committed to innovation and excellence in our
-              pursuit to exceed our client expectations.
+          <Grow in={useDelayTransition(350)} timeout={800}>
+            <Typography color="textPrimary" variant="h6">
+              With a goal to "built it once and build it right" we use
+              innovative solutions to achieve infinite possibilities for each
+              project.
+              <br />
             </Typography>
           </Grow>
         </Grid>
       </Grid>
-      <Divider />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2050} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2100} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2150} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2200} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2250} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2300} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2350} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2400} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2450} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2500} />
+      <Slide direction="right" in={true} timeout={1000}>
+        <Divider />
+      </Slide>
+
+      <ProfileCard
+        image={"https://picsum.photos/500"}
+        timeout={800}
+        flag={useDelayTransition(1000)}
+      />
+      <ProfileCard
+        image={"https://picsum.photos/500"}
+        timeout={800}
+        flag={useDelayTransition(2000)}
+      />
+      <ProfileCard
+        image={"https://picsum.photos/500"}
+        timeout={800}
+        flag={useDelayTransition(3000)}
+      />
     </div>
   );
 };
