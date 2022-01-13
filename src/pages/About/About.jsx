@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //Material-UI Styles
 import { makeStyles } from "@material-ui/styles";
 
-import { Grid, Typography, Grow, Divider } from "@material-ui/core";
+import { Grid, Typography, Grow, Slide, Divider } from "@material-ui/core";
 
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
+import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
+
+import pic from "../../utilities/images/Logos/logo-new.png";
+
 const useStyles = makeStyles({
-  root: {
+  companyProfileGrid: {
     margin: "2em 10em 2em 10em",
     width: "auto",
   },
-  header: { fontWeight: "600" },
+  profileCardsGrid: {
+    margin: "2em 10em 2em 10em",
+    width: "auto",
+  },
+  //header: { fontWeight: "600" },
   profile: { marginTop: "0.5em" },
 });
 
@@ -20,8 +28,13 @@ const About = () => {
   const styles = useStyles();
 
   return (
-    <div styles={{ width: "100%" }}>
-      <Grid container spacing={2} direction="column" className={styles.root}>
+    <div>
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        className={styles.companyProfileGrid}
+      >
         <Grid
           item
           xs={12}
@@ -31,8 +44,10 @@ const About = () => {
           xl={12}
           className={styles.header}
         >
-          <Grow in={true} timeout={300}>
-            <Typography variant="h4">Company Profile</Typography>
+          <Grow in={useDelayTransition(50)} timeout={800}>
+            <Typography color="textPrimary" variant="h4">
+              Company Profile
+            </Typography>
           </Grow>
         </Grid>
 
@@ -45,34 +60,22 @@ const About = () => {
           xl={12}
           className={styles.profile}
         >
-          <Grow in={true} timeout={800}>
-            <Typography variant="h6">
-              Founded in 2001, Allcon Contracting Corporation and its owners
-              Marko Bistakis and George Proios have a solid reputation in the
-              tri-state area for producing and delivering high-quality
-              construction projects.
+          <Grow in={useDelayTransition(150)} timeout={800}>
+            <Typography color="textPrimary" variant="h6">
+              ALL•CON Contracting is built on a reputation of delivering high
+              quality projects serving a variety of private and public clients
+              throughout New York State.
               <br />
               <br />
             </Typography>
           </Grow>
-          <Grow in={true} timeout={1200}>
-            <Typography variant="h6">
-              Allcon Contracting provides a full range of construction services.
-              We offer quality work at affordable pricing. Our staff at Allcon
-              Contracting brings complete teamwork to oversee every project. The
-              owners are hands on and involved to make sure all projects are
-              completed on time and on the budget.
-              <br /> At Allcon Contracting we are meticulous about the work we
-              do. We continually thrive to go the extra mile and deliver quality
-              results.
-              <br />
-              <br />
-            </Typography>
-          </Grow>
-          <Grow in={true} timeout={1600}>
-            <Typography variant="h6">
-              Our staff of professionals each have the knowledge to manage any
-              assignment that is put in front of them. From architects,
+          <Grow in={useDelayTransition(250)} timeout={800}>
+            <Typography color="textPrimary" variant="h6">
+              Our Executive Management understands that teamwork, which includes
+              hands on involvement of the owners, guarantee that all projects
+              are completed on time and on the budget. AllCon's staff is always
+              meticulous with details of each project and continually thrives to
+              go the extra mile and deliver quality results. From architects,
               planners, designers, and construction specialists everyone works
               in a collaborative environment bringing forth their unique talent
               and techniques.
@@ -80,25 +83,57 @@ const About = () => {
               <br />
             </Typography>
           </Grow>
-          <Grow in={true} timeout={2000}>
-            <Typography variant="h6">
-              We are all fully committed to innovation and excellence in our
-              pursuit to exceed our client expectations.
+          <Grow in={useDelayTransition(350)} timeout={800}>
+            <Typography color="textPrimary" variant="h6">
+              With a goal to "built it once and build it right" we use
+              innovative solutions to achieve infinite possibilities for each
+              project.
+              <br />
             </Typography>
           </Grow>
         </Grid>
       </Grid>
-      <Divider />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2050} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2100} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2150} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2200} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2250} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2300} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2350} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2400} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2450} />
-      <ProfileCard image={"https://picsum.photos/500"} timeout={2500} />
+      <Slide direction="right" in={true} timeout={1000}>
+        <Divider />
+      </Slide>
+
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        className={styles.profileCardsGrid}
+      >
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <ProfileCard
+            image={pic}
+            title="George Proios"
+            description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
+            subtitle="President of Operations"
+            timeout={800}
+            flag={useDelayTransition(1000)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <ProfileCard
+            image={pic}
+            title="Marko Bistakis"
+            description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
+            subtitle="President of Administration and Marketing"
+            timeout={800}
+            flag={useDelayTransition(1500)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <ProfileCard
+            image={pic}
+            title="Joseph P. Grant"
+            description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
+            subtitle="Executive"
+            timeout={800}
+            flag={useDelayTransition(2000)}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };

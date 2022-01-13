@@ -1,5 +1,5 @@
 //Basic dependencies
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -16,8 +16,10 @@ import {
   Fab,
   Tabs,
   Tab,
+  Tooltip,
 } from "@material-ui/core";
-import PropTypes from "prop-types";
+
+import { useLocation } from "react-router-dom";
 
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "0.4em",
     height: "auto",
     width: "3.2em",
+    userDrag: "none",
   },
   companyName: {
     margin: "1em 0.6em 0.6em 0.2em",
@@ -37,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     fontSmooth: "5em",
     fontFamily: "EB Garamond , serif",
     color: "black",
+    textDecoration: "none",
     userSelect: "none",
     userDrag: "none",
   },
@@ -54,9 +58,7 @@ const useStyles = makeStyles((theme) => ({
     width: 120,
     borderRadius: "0.2em",
   },
-  links: {
-    textDecoration: "none",
-  },
+
   buttongrid: {
     marginRight: "4em",
   },
@@ -65,6 +67,17 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+  },
+  appbarLinks: {
+    textDecoration: "none",
+    //color: "#fff",
+    userDrag: "none",
+    display: "flex",
+    flexDirection: "row",
+  },
+  loading: {
+    zIndex: theme.zIndex.drawer + 5,
+    height: "0.18em",
   },
 }));
 
@@ -100,8 +113,37 @@ const HideOnScroll = ({ children }) => {
 
 const Navbar = () => {
   const styles = useStyles();
-
   const [value, setValue] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  const location = useLocation();
+  useEffect(() => {
+    const pathnames = location.pathname;
+
+    switch (true) {
+      case pathnames === "/":
+        setValue(0);
+        break;
+      case pathnames.startsWith("/home"):
+        setValue(0);
+        break;
+      case pathnames.startsWith("/about"):
+        setValue(1);
+        break;
+      case pathnames.startsWith("/projects"):
+        setValue(2);
+        break;
+      case pathnames.startsWith("/testimonies"):
+        setValue(3);
+        break;
+      case pathnames.startsWith("/contacts"):
+        setValue(4);
+        break;
+      default:
+        break;
+    }
+  }, [location]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -110,14 +152,23 @@ const Navbar = () => {
     <React.Fragment>
       <HideOnScroll>
         <AppBar className={styles.appbar} elevation={0}>
-          <Toolbar classname={styles.toolbar}>
-            <Grid justify={"space-between"} container>
+          <Toolbar className={styles.toolbar}>
+            <Grid justifyContent={"space-between"} container>
               <Grid item>
-                <Grid justify={"space-between"} container>
-                  <img className={styles.logo} src={companyLogo} alt="logo" />
-                  <Typography className={styles.companyName}>
-                    ALL•CON Contracting
-                  </Typography>
+                <Grid justifyContent={"space-between"} container>
+                  <Tooltip title="Home" placement="right">
+                    <Link to="/home" className={styles.appbarLinks}>
+                      <img
+                        className={styles.logo}
+                        src={companyLogo}
+                        alt="logo"
+                      />
+
+                      <Typography className={styles.companyName}>
+                        ALL•CON Contracting
+                      </Typography>
+                    </Link>
+                  </Tooltip>
                 </Grid>
               </Grid>
               <Grid className={styles.buttongrid} item>

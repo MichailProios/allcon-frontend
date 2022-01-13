@@ -9,8 +9,10 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
+import { Grow } from "@material-ui/core";
 
 import { CardHeader, Paper } from "@material-ui/core";
+import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles({
   },
   media: {},
 });
-function ProjectCard({ title, image, link }) {
+function ProjectCard({ title, image, link, index }) {
   const styles = useStyles();
   return (
     // <Card className={styles.root}>
@@ -38,19 +40,23 @@ function ProjectCard({ title, image, link }) {
     //     </CardContent>
     //   </CardActionArea>
     // </Card>
-    <Card className={styles.root}>
-      <CardActionArea>
-        <Image
-          imageStyle={{}}
-          src={image}
-          cover={true}
-          animationDuration={100}
-        />
-        {/* <Typography gutterBottom variant="h5" component="h2">
+    <Grow in={useDelayTransition(100 * index)} timeout={800}>
+      <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
+        <Card className={styles.root}>
+          <CardActionArea>
+            <Image
+              imageStyle={{}}
+              src={image}
+              cover={true}
+              animationDuration={100}
+            />
+            {/* <Typography gutterBottom variant="h5" component="h2">
           {title}
         </Typography> */}
-      </CardActionArea>
-    </Card>
+          </CardActionArea>
+        </Card>
+      </Grid>
+    </Grow>
   );
 }
 

@@ -7,18 +7,27 @@ import church from "../../utilities/images/Home/church.jpg";
 
 import Image from "material-ui-image";
 
-import { Paper, Typography } from "@material-ui/core";
+import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
+
+import { Paper, Typography, Fade } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
     overflow: "hidden",
-    height: "100%",
+    width: "100%",
+    // position: "fixed",
+    // left: 0,
+    // top: -50,
+    userDrag: "none",
+    userSelect: "none",
   },
   picture: {
     width: "100%",
     height: "auto",
     position: "fixed",
     left: 0,
+    userDrag: "none",
+    userSelect: "none",
   },
   quote: {
     margin: 0,
@@ -38,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
     userDrag: "none",
   },
   paper: {
-    height: "88vh",
+    height: "90vh",
+    userDrag: "none",
+    userSelect: "none",
   },
 }));
 
@@ -58,21 +69,20 @@ const Home = () => {
   ];
 
   return (
-    <div>
-      <Carousel
-        animation={"fade"}
-        autoPlay={true}
-        indicators={true}
-        stopAutoPlayOnHover={false}
-        interval={15000}
-        duration={500}
-        className={styles.homeContainer}
-      >
-        {items.map((item, i) => (
-          <Picture key={i} {...item} />
-        ))}
-      </Carousel>
-    </div>
+    <Carousel
+      animation={"fade"}
+      autoPlay={true}
+      indicators={false}
+      navButtonsAlwaysInvisible={true}
+      stopAutoPlayOnHover={false}
+      interval={15000}
+      duration={500}
+      className={styles.homeContainer}
+    >
+      {items.map((item, i) => (
+        <Picture key={i} {...item} />
+      ))}
+    </Carousel>
   );
 };
 
@@ -80,21 +90,38 @@ const Picture = ({ name, image, position }) => {
   const styles = useStyles();
   return (
     <Paper className={styles.paper}>
-      <Image
-        imageStyle={{
-          width: "100%",
-          height: "auto",
-          position: "fixed",
-          left: 0,
-          top: position,
-        }}
-        animationDuration={100}
-        src={image}
-      />
+      <Fade in={useDelayTransition(150)} timeout={500}>
+        <Image
+          imageStyle={{
+            width: "100%",
+            height: "auto",
+            position: "fixed",
+            left: 0,
+            top: position,
+            userDrag: "none",
+            userSelect: "none",
+          }}
+          animationDuration={100}
+          src={image}
+        />
 
-      <Typography variant="h4" className={styles.quote}>
-        Infinite Possibilities through Integrated Solutions
-      </Typography>
+        {/* <img
+          style={{
+            width: "100%",
+            height: "auto",
+            position: "fixed",
+            left: 0,
+            top: position,
+          }}
+          src={image}
+          alt="img"
+        /> */}
+      </Fade>
+      <Fade in={useDelayTransition(1000)} timeout={1500}>
+        <Typography variant="h4" className={styles.quote}>
+          Infinite Possibilities through Integrated Solutions
+        </Typography>
+      </Fade>
     </Paper>
   );
 };

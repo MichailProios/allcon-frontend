@@ -7,23 +7,38 @@ import {
   Card,
   Grid,
   Typography,
-  Fade,
-  Divider,
+  Grow,
   CardActionArea,
+  CardHeader,
+  CardMedia,
 } from "@material-ui/core";
 
 import Image from "material-ui-image";
 
 const useStyles = makeStyles({
-  root: { margin: "2em 14em 2em 14em", width: "auto" },
-  profileImage: {},
-  profileDescription: { width: "100%" },
+  root: {
+    // marginTop: "10em",
+    // width: "auto",
+    height: "20em",
+    userDrag: "none",
+    userSelect: "none",
+  },
+  profileImage: { userDrag: "none", userSelect: "none" },
+  profileDescription: { padding: "0.8em", width: "100%" },
 });
 
-const ProfileCard = ({ image, timeout }) => {
+const ProfileCard = ({
+  title,
+  subtitle,
+  description,
+  image,
+  timeout,
+  flag,
+}) => {
   const styles = useStyles();
+
   return (
-    <Fade in={true} timeout={timeout}>
+    <Grow in={flag} timeout={timeout}>
       <Card className={styles.root}>
         <CardActionArea>
           <Grid container spacing={2} direction="row">
@@ -33,29 +48,38 @@ const ProfileCard = ({ image, timeout }) => {
                 src={image}
                 cover={true}
                 animationDuration={100}
+                className={styles.profileImage}
               />
+
+              {/* <CardMedia
+                image={"src/utilities/images/Logos/logo-new.png"}
+                title="Image"
+              /> */}
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-              <Typography variant="h4" className={styles.profileDescription}>
-                Title
-              </Typography>
-              <Typography
-                variant="subtitle1"
+              {/* <Typography
+                color="textPrimary"
+                variant="h4"
                 className={styles.profileDescription}
               >
-                Sub Title
-              </Typography>
-              <Typography variant="h6" className={styles.profileDescription}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque et molestie odio. Donec tortor nunc, venenatis sed
-                porttitor et, aliquet et lacus. Nunc dignissim sollicitudin
-                sodales. Sed dapibus nibh ultrices risus scelerisque vestibulum.
+                {title}
+              </Typography> */}
+              <CardHeader title={title} subheader={subtitle} />
+              {/* <Typography className={styles.profileDescription}>
+                {subtitle}
+              </Typography> */}
+              <Typography
+                color="textPrimary"
+                variant="h6"
+                className={styles.profileDescription}
+              >
+                {description}
               </Typography>
             </Grid>
           </Grid>
         </CardActionArea>
       </Card>
-    </Fade>
+    </Grow>
   );
 };
 
