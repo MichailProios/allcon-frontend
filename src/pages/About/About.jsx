@@ -9,8 +9,14 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
+import pic from "../../utilities/images/Logos/logo-new.png";
+
 const useStyles = makeStyles({
-  root: {
+  companyProfileGrid: {
+    margin: "2em 10em 2em 10em",
+    width: "auto",
+  },
+  profileCardsGrid: {
     margin: "2em 10em 2em 10em",
     width: "auto",
   },
@@ -21,30 +27,14 @@ const useStyles = makeStyles({
 const About = () => {
   const styles = useStyles();
 
-  const [fade1, setFade1] = useState(false);
-  const [fade2, setFade2] = useState(false);
-  const [fade3, setFade3] = useState(false);
-
-  useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setFade1(true);
-    }, 1000);
-
-    const timer2 = setTimeout(() => {
-      setFade2(true);
-    }, 2000);
-
-    const timer3 = setTimeout(() => {
-      setFade3(true);
-    }, 3000);
-    return () => (
-      clearTimeout(timer1), clearTimeout(timer2), clearTimeout(timer3)
-    );
-  }, []);
-
   return (
     <div>
-      <Grid container spacing={2} direction="column" className={styles.root}>
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        className={styles.companyProfileGrid}
+      >
         <Grid
           item
           xs={12}
@@ -107,21 +97,43 @@ const About = () => {
         <Divider />
       </Slide>
 
-      <ProfileCard
-        image={"https://picsum.photos/500"}
-        timeout={800}
-        flag={useDelayTransition(1000)}
-      />
-      <ProfileCard
-        image={"https://picsum.photos/500"}
-        timeout={800}
-        flag={useDelayTransition(2000)}
-      />
-      <ProfileCard
-        image={"https://picsum.photos/500"}
-        timeout={800}
-        flag={useDelayTransition(3000)}
-      />
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        className={styles.profileCardsGrid}
+      >
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <ProfileCard
+            image={pic}
+            title="George Proios"
+            description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
+            subtitle="President of Operations"
+            timeout={800}
+            flag={useDelayTransition(1000)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <ProfileCard
+            image={pic}
+            title="Marko Bistakis"
+            description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
+            subtitle="President of Administration and Marketing"
+            timeout={800}
+            flag={useDelayTransition(1500)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <ProfileCard
+            image={pic}
+            title="Joseph P. Grant"
+            description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
+            subtitle="Partner"
+            timeout={800}
+            flag={useDelayTransition(2000)}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };
