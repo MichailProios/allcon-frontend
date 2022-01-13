@@ -128,7 +128,7 @@ const About = () => {
             image={pic}
             title="Joseph P. Grant"
             description="Integer suscipit congue diam id pharetra. Donec et elementum purus. Aenean auctor nec felis eu eleifend. Pellentesque egestas interdum tortor sit amet porttitor. Fusce sed turpis at urna molestie feugiat. Donec euismod elit semper lectus pellentesque, id convallis lectus eleifend. Morbi ultricies varius arcu vitae bibendum. Nullam dictum felis vel consectetur iaculis."
-            subtitle="Partner"
+            subtitle="Executive"
             timeout={800}
             flag={useDelayTransition(2000)}
           />
