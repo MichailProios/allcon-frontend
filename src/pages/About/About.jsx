@@ -13,15 +13,13 @@ import pic from "../../utilities/images/Logos/logo-new.png";
 
 const useStyles = makeStyles({
   companyProfileGrid: {
-    margin: "2em 10em 2em 10em",
+    padding: "2em 10em 2em 10em",
     width: "auto",
   },
   profileCardsGrid: {
-    margin: "2em 10em 2em 10em",
+    padding: "1em 10em 2em 10em",
     width: "auto",
   },
-  //header: { fontWeight: "600" },
-  profile: { marginTop: "0.5em" },
 });
 
 const About = () => {
@@ -51,15 +49,7 @@ const About = () => {
           </Grow>
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={10}
-          xl={12}
-          className={styles.profile}
-        >
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grow in={useDelayTransition(150)} timeout={800}>
             <Typography color="textPrimary" variant="h6">
               ALL•CON Contracting is built on a reputation of delivering high
@@ -103,6 +93,21 @@ const About = () => {
         direction="column"
         className={styles.profileCardsGrid}
       >
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          className={styles.header}
+        >
+          <Grow in={useDelayTransition(800)} timeout={800}>
+            <Typography color="textPrimary" variant="h4">
+              Executives
+            </Typography>
+          </Grow>
+        </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <ProfileCard
             image={pic}

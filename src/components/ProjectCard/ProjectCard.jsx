@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -19,10 +19,41 @@ const useStyles = makeStyles({
     width: "auto",
     height: "30em",
   },
-  media: {},
+  opacity: {
+    transition: "opacity 0.15s ease-in-out",
+    opacity: "1",
+    "&:hover": { opacity: "0.5" },
+  },
+
+  media: {
+    transition: "transform 0.15s ease-in-out",
+    "&:hover": {
+      transform: "scale3d(1.05, 1.05, 1)",
+    },
+    userDrag: "none",
+  },
+  title: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    whiteSpace: "nowrap",
+    pointerEvents: "none",
+    fontWeight: 520,
+  },
 });
 function ProjectCard({ title, image, link, index }) {
   const styles = useStyles();
+
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
   return (
     // <Card className={styles.root}>
     //   <CardActionArea>
@@ -44,12 +75,32 @@ function ProjectCard({ title, image, link, index }) {
       <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
         <Card className={styles.root}>
           <CardActionArea>
-            <Image
-              imageStyle={{}}
-              src={image}
-              cover={true}
-              animationDuration={100}
-            />
+            <div className={styles.opacity}>
+              <Image
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                imageStyle={{
+                  transition: "transform 0.15s ease-in-out",
+                  "&:hover": {
+                    transform: "scale3d(1.05, 1.05, 1)",
+                  },
+                }}
+                src={image}
+                cover={true}
+                animationDuration={100}
+                className={styles.media}
+              />
+            </div>
+            {isHovering && (
+              <Typography
+                className={styles.title}
+                color="textPrimary"
+                variant="h5"
+              >
+                {title}
+              </Typography>
+            )}
+
             {/* <Typography gutterBottom variant="h5" component="h2">
           {title}
         </Typography> */}
