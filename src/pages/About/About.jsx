@@ -102,7 +102,7 @@ const About = () => {
           xl={12}
           className={styles.header}
         >
-          <Grow in={useDelayTransition(800)} timeout={800}>
+          <Grow in={useDelayTransition(700)} timeout={800}>
             <Typography color="textPrimary" variant="h4">
               Executives
             </Typography>

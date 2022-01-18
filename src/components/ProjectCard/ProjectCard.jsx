@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
-import { Grow } from "@material-ui/core";
+import { Grow, Fade } from "@material-ui/core";
 
 import { CardHeader, Paper } from "@material-ui/core";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
@@ -19,24 +19,35 @@ const useStyles = makeStyles({
     width: "auto",
     height: "30em",
   },
-  opacity: {
-    transition: "opacity 0.15s ease-in-out",
-    opacity: "1",
-    "&:hover": { opacity: "0.5" },
+
+  textOpacity: {
+    position: "absolute",
+    top: "67%",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(243, 243, 243, 0.5)",
+    pointerEvents: "none",
   },
 
   media: {
     transition: "transform 0.15s ease-in-out",
     "&:hover": {
-      transform: "scale3d(1.05, 1.05, 1)",
+      transform: "scale3d(1.02, 1.02, 1)",
     },
     userDrag: "none",
   },
   title: {
+    // position: "absolute",
+    // top: "50%",
+    // left: "50%",
+    // transform: "translate(-50%, -50%)",
+
+    right: 0,
+    left: 0,
     position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+    top: "3%",
+    width: "100%",
     whiteSpace: "nowrap",
     pointerEvents: "none",
     fontWeight: 520,
@@ -75,14 +86,14 @@ function ProjectCard({ title, image, link, index }) {
       <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
         <Card className={styles.root}>
           <CardActionArea>
-            <div className={styles.opacity}>
+            <div className={styles.imageOpacity}>
               <Image
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
                 imageStyle={{
                   transition: "transform 0.15s ease-in-out",
                   "&:hover": {
-                    transform: "scale3d(1.05, 1.05, 1)",
+                    transform: "scale3d(1.02, 1.02, 1)",
                   },
                 }}
                 src={image}
@@ -91,19 +102,22 @@ function ProjectCard({ title, image, link, index }) {
                 className={styles.media}
               />
             </div>
-            {isHovering && (
-              <Typography
-                className={styles.title}
-                color="textPrimary"
-                variant="h5"
-              >
-                {title}
-              </Typography>
-            )}
 
-            {/* <Typography gutterBottom variant="h5" component="h2">
-          {title}
-        </Typography> */}
+            {isHovering && (
+              <Fade in={true} timeout={250}>
+                <div className={styles.textOpacity}>
+                  <Fade in={true} timeout={350}>
+                    <Typography
+                      className={styles.title}
+                      color="textPrimary"
+                      variant="h5"
+                    >
+                      {title}
+                    </Typography>
+                  </Fade>
+                </div>
+              </Fade>
+            )}
           </CardActionArea>
         </Card>
       </Grid>

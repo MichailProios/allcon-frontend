@@ -176,7 +176,13 @@ const Projects = () => {
   return (
     <Grid container spacing={2} className={styles.root}>
       {listData.map((value, index) => (
-        <ProjectCard title={value.title} image={value.image} index={index} />
+        <ProjectCard
+          title={value.title}
+          image={value.image}
+          index={index}
+          component={Link}
+          to={value.link}
+        />
       ))}
     </Grid>
   );
