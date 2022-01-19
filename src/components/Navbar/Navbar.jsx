@@ -117,6 +117,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
+
   useEffect(() => {
     const pathnames = location.pathname;
 

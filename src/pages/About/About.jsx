@@ -14,11 +14,11 @@ import pic from "../../utilities/images/Logos/logo-new.png";
 const useStyles = makeStyles({
   companyProfileGrid: {
     padding: "2em 10em 2em 10em",
-    width: "auto",
+    width: "100%",
   },
   profileCardsGrid: {
     padding: "1em 10em 2em 10em",
-    width: "auto",
+    width: "100%",
   },
 });
 

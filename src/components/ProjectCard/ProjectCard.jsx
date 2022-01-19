@@ -10,8 +10,9 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
 import { Grow, Fade } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-import { CardHeader, Paper } from "@material-ui/core";
+import { Slide, CardHeader, Paper } from "@material-ui/core";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
 const useStyles = makeStyles({
@@ -22,9 +23,11 @@ const useStyles = makeStyles({
 
   textOpacity: {
     position: "absolute",
-    top: "67%",
+    top: "95%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: "100%",
-    height: "100%",
+    height: "10%",
     backgroundColor: "rgba(243, 243, 243, 0.5)",
     pointerEvents: "none",
   },
@@ -36,18 +39,19 @@ const useStyles = makeStyles({
     },
     userDrag: "none",
   },
-  title: {
-    // position: "absolute",
-    // top: "50%",
-    // left: "50%",
-    // transform: "translate(-50%, -50%)",
 
-    right: 0,
-    left: 0,
+  actionArea: {
+    textDecoration: "none",
+    height: "30em",
+    userDrag: "none",
+  },
+
+  title: {
     position: "absolute",
-    textAlign: "center",
-    top: "3%",
-    width: "100%",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+
     whiteSpace: "nowrap",
     pointerEvents: "none",
     fontWeight: 520,
@@ -66,58 +70,41 @@ function ProjectCard({ title, image, link, index }) {
     setIsHovering(false);
   };
   return (
-    // <Card className={styles.root}>
-    //   <CardActionArea>
-    //     <Image
-    //       className={styles.media}
-    //       imageStyle={{ height: "30em" }}
-    //       src={image}
-    //       animationDuration={100}
-    //       cover={true}
-    //     />
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h5" component="h2">
-    //         {title}
-    //       </Typography>
-    //     </CardContent>
-    //   </CardActionArea>
-    // </Card>
     <Grow in={useDelayTransition(100 * index)} timeout={800}>
       <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
         <Card className={styles.root}>
-          <CardActionArea>
-            <div className={styles.imageOpacity}>
-              <Image
-                onMouseOver={handleMouseOver}
-                onMouseOut={handleMouseOut}
-                imageStyle={{
-                  transition: "transform 0.15s ease-in-out",
-                  "&:hover": {
-                    transform: "scale3d(1.02, 1.02, 1)",
-                  },
-                }}
-                src={image}
-                cover={true}
-                animationDuration={100}
-                className={styles.media}
-              />
-            </div>
+          <CardActionArea
+            className={styles.actionArea}
+            component={Link}
+            to={link}
+          >
+            <Image
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+              imageStyle={{
+                height: "30em",
+                transition: "transform 0.15s ease-in-out",
+                "&:hover": {
+                  transform: "scale3d(1.02, 1.02, 1)",
+                },
+              }}
+              src={image}
+              cover={true}
+              animationDuration={100}
+              className={styles.media}
+            />
 
-            {isHovering && (
-              <Fade in={true} timeout={250}>
-                <div className={styles.textOpacity}>
-                  <Fade in={true} timeout={350}>
-                    <Typography
-                      className={styles.title}
-                      color="textPrimary"
-                      variant="h5"
-                    >
-                      {title}
-                    </Typography>
-                  </Fade>
-                </div>
-              </Fade>
-            )}
+            <Fade in={isHovering} timeout={300}>
+              <div className={styles.textOpacity}>
+                <Typography
+                  className={styles.title}
+                  color="textPrimary"
+                  variant="h5"
+                >
+                  {title}
+                </Typography>
+              </div>
+            </Fade>
           </CardActionArea>
         </Card>
       </Grid>
