@@ -22,10 +22,6 @@ const useStyles = makeStyles((theme) => ({
     userSelect: "none",
   },
   picture: {
-    width: "100%",
-    height: "auto",
-    position: "fixed",
-    left: 0,
     userDrag: "none",
     userSelect: "none",
   },
@@ -69,20 +65,25 @@ const Home = () => {
   ];
 
   return (
-    <Carousel
-      animation={"fade"}
-      autoPlay={true}
-      indicators={false}
-      navButtonsAlwaysInvisible={true}
-      stopAutoPlayOnHover={false}
-      interval={15000}
-      duration={500}
-      className={styles.homeContainer}
-    >
-      {items.map((item, i) => (
-        <Picture key={i} {...item} />
-      ))}
-    </Carousel>
+    <Fade in={useDelayTransition(150)} timeout={500}>
+      <div>
+        <Carousel
+          animation={"fade"}
+          autoPlay={true}
+          indicators={false}
+          swipe={false}
+          navButtonsAlwaysInvisible={true}
+          stopAutoPlayOnHover={false}
+          interval={15000}
+          duration={500}
+          className={styles.homeContainer}
+        >
+          {items.map((item, i) => (
+            <Picture key={i} {...item} />
+          ))}
+        </Carousel>
+      </div>
+    </Fade>
   );
 };
 
@@ -90,22 +91,22 @@ const Picture = ({ name, image, position }) => {
   const styles = useStyles();
   return (
     <Paper className={styles.paper}>
-      <Fade in={useDelayTransition(150)} timeout={500}>
-        <Image
-          imageStyle={{
-            width: "100%",
-            height: "auto",
-            position: "fixed",
-            left: 0,
-            top: position,
-            userDrag: "none",
-            userSelect: "none",
-          }}
-          animationDuration={100}
-          src={image}
-        />
+      <Image
+        imageStyle={{
+          width: "100%",
+          height: "auto",
+          position: "fixed",
+          left: 0,
+          top: position,
+          userDrag: "none",
+          userSelect: "none",
+        }}
+        animationDuration={100}
+        src={image}
+        className={styles.picture}
+      />
 
-        {/* <img
+      {/* <img
           style={{
             width: "100%",
             height: "auto",
@@ -116,7 +117,7 @@ const Picture = ({ name, image, position }) => {
           src={image}
           alt="img"
         /> */}
-      </Fade>
+
       <Fade in={useDelayTransition(1000)} timeout={1500}>
         <Typography variant="h4" className={styles.quote}>
           Infinite Possibilities through Integrated Solutions

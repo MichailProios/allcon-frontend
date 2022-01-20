@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 // Material-UI
 import {
@@ -57,7 +56,7 @@ const Projects = () => {
       image: lupton,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/projects/LuptonHall",
     },
     {
       title: "Carle Place UFSD – Lobby Renovations",
@@ -176,7 +175,12 @@ const Projects = () => {
   return (
     <Grid container spacing={2} className={styles.root}>
       {listData.map((value, index) => (
-        <ProjectCard title={value.title} image={value.image} index={index} />
+        <ProjectCard
+          title={value.title}
+          image={value.image}
+          link={value.link}
+          index={index}
+        />
       ))}
     </Grid>
   );

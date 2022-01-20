@@ -18,6 +18,8 @@ import Home from "./pages/Home/Home.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
 import About from "./pages/About/About.jsx";
 
+import LuptonHall from "./pages/Projects/LuptonHall/LuptonHall.jsx";
+
 const useStyles = makeStyles((theme) => ({
   "@global": {
     "*": {
@@ -106,6 +108,7 @@ function App() {
             <Route path="/about" exact element={<About />} />
             {/* <Route path="/services" exact element={<Services/>} /> */}
             <Route path="/projects" exact element={<Projects />} />
+            <Route path="/projects/LuptonHall" exact element={<LuptonHall />} />
           </Routes>
         </Router>
       </ThemeProvider>
