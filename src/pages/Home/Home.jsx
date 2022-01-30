@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 
 import lupton from "../../utilities/images/Home/lupton.jpg";
@@ -10,6 +10,11 @@ import Image from "material-ui-image";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
 import { Paper, Typography, Fade } from "@material-ui/core";
+
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
@@ -51,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const styles = useStyles();
+  const theme = useTheme();
   const items = [
     {
       name: "Lupton",
@@ -82,6 +88,16 @@ const Home = () => {
             <Picture key={i} {...item} />
           ))}
         </Carousel>
+
+        {/* <AutoPlaySwipeableViews
+          className={styles.views}
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          enableMouseEvents={false}
+        >
+          {items.map((item, i) => (
+            <Picture key={i} {...item} />
+          ))}
+        </AutoPlaySwipeableViews> */}
       </div>
     </Fade>
   );

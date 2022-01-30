@@ -19,9 +19,12 @@ import {
   Tooltip,
 } from "@material-ui/core";
 
+import { useNavigate } from "react-router-dom";
+
 import { useLocation } from "react-router-dom";
 
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
 //Pictures and Icons
 import companyLogo from "../../utilities/images/Logos/logo-new.png";
@@ -65,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
     zIndex: 1,
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: theme.spacing(1),
+    right: theme.spacing(1),
   },
   appbarLinks: {
     textDecoration: "none",
@@ -78,6 +81,12 @@ const useStyles = makeStyles((theme) => ({
   loading: {
     zIndex: theme.zIndex.drawer + 5,
     height: "0.18em",
+  },
+  backFAB: {
+    position: "fixed",
+    zIndex: 1,
+    bottom: theme.spacing(1),
+    left: theme.spacing(1),
   },
 }));
 
@@ -102,6 +111,38 @@ function ScrollTop(props) {
   );
 }
 
+function BackFAB() {
+  const styles = useStyles();
+  const navigate = useNavigate();
+
+  const [showFlag, setShowFlag] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const pathnames = location.pathname;
+
+    if (pathnames.startsWith("/Projects/".toLowerCase())) {
+      setShowFlag(true);
+    } else {
+      setShowFlag(false);
+    }
+  }, [location]);
+
+  return (
+    <Zoom in={showFlag}>
+      <Fab
+        color="secondary"
+        size="small"
+        className={styles.backFAB}
+        onClick={() => navigate(-1)}
+      >
+        <KeyboardArrowLeftIcon />
+      </Fab>
+    </Zoom>
+  );
+}
+
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
   return (
@@ -119,7 +160,7 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const pathnames = location.pathname;
+    const pathnames = location.pathname.toLowerCase();
 
     switch (true) {
       case pathnames === "/":
@@ -158,7 +199,7 @@ const Navbar = () => {
               <Grid item>
                 <Grid justifyContent={"space-between"} container>
                   <Tooltip title="Home" placement="right">
-                    <Link to="/home" className={styles.appbarLinks}>
+                    <Link to="/Home" className={styles.appbarLinks}>
                       <img
                         className={styles.logo}
                         src={companyLogo}
@@ -176,34 +217,34 @@ const Navbar = () => {
                 <Tabs value={value} onChange={handleChange}>
                   <Tab
                     component={Link}
-                    to="/home"
+                    to="/Home"
                     className={styles.button}
                     label="Home"
                   />
                   <Tab
                     component={Link}
-                    to="/about"
+                    to="/About"
                     className={styles.button}
                     label="About"
                   />
 
                   <Tab
                     component={Link}
-                    to="/projects"
+                    to="/Projects"
                     className={styles.button}
                     label="Projects"
                   />
 
                   <Tab
                     component={Link}
-                    to="/home"
+                    to="/Home"
                     className={styles.button}
                     label="Testimonies"
                   />
 
                   <Tab
                     component={Link}
-                    to="/home"
+                    to="/Contacts"
                     className={styles.button}
                     label="Contacts"
                   />
@@ -220,6 +261,7 @@ const Navbar = () => {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
+      <BackFAB />
     </React.Fragment>
   );
 };
