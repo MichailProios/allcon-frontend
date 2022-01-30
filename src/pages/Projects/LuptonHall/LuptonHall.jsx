@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 import Card from "@material-ui/core/Card";
@@ -25,7 +25,7 @@ import { autoPlay } from "react-swipeable-views-utils";
 
 import wait from "wait";
 
-import Image from "material-ui-image";
+import MuiImage from "material-ui-image";
 
 import useDelayTransition from "../../../utilities/customHooks/useDelayTransition";
 
@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: "4px",
     // width: "100%",
     // height: "60vh",
-    height: "100%",
+    height: "auto",
+    objectFit: "contain",
+    objectPosition: "center",
   },
   carousel: {
     width: "100%",
@@ -74,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function importAll(r) {
   let images = {};
-  r.keys().map((item, index) => {
+  r.keys().forEach((item, index) => {
     images[item.replace("./", "")] = r(item);
   });
   return images;
@@ -92,10 +94,18 @@ const LuptonHall = () => {
     )
   );
 
-  images = Object.values(images);
+  // images = Object.values(images);
+
+  useEffect(() => {
+    Object.values(images).forEach((picture) => {
+      const img = new Image();
+
+      new Image().src = picture.fileName;
+    });
+  }, []);
 
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = images.length;
+  const maxSteps = Object.values(images).length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -116,6 +126,8 @@ const LuptonHall = () => {
     }
   };
 
+  // return <h1>test</h1>;
+
   return (
     <Grid container spacing={1} className={styles.root}>
       <Fade in={useDelayTransition(150)} timeout={800}>
@@ -128,7 +140,7 @@ const LuptonHall = () => {
               onChangeIndex={handleStepChange}
               enableMouseEvents={false}
             >
-              {images.map((item, i) => (
+              {Object.values(images).map((item, i) => (
                 <Picture key={i} image={item} />
               ))}
             </SwipeableViews>
@@ -261,10 +273,12 @@ const Picture = ({ name, image, position }) => {
 
   return (
     <Paper className={styles.paper}>
-      <Image
+      <MuiImage
         imageStyle={{
           width: "100%",
-          height: "100%",
+          height: "auto",
+          objectFit: "contain",
+          objectPosition: "center",
           // position: "fixed",
           // left: 0,
           // top: position,
@@ -272,8 +286,10 @@ const Picture = ({ name, image, position }) => {
           // userSelect: "none",
           // borderRadius: "4px",
         }}
-        cover={true}
-        animationDuration={100}
+        // cover={true}
+
+        animationDuration={0}
+        disableTransition={true}
         src={image}
         className={styles.picture}
       />

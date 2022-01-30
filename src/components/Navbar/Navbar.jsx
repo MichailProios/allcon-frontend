@@ -197,21 +197,15 @@ const Navbar = () => {
           <Toolbar className={styles.toolbar}>
             <Grid justifyContent={"space-between"} container>
               <Grid item>
-                <Grid justifyContent={"space-between"} container>
-                  <Tooltip title="Home" placement="right">
-                    <Link to="/Home" className={styles.appbarLinks}>
-                      <img
-                        className={styles.logo}
-                        src={companyLogo}
-                        alt="logo"
-                      />
+                <Tooltip title="Home" placement="right">
+                  <Link to="/Home" className={styles.appbarLinks}>
+                    <img className={styles.logo} src={companyLogo} alt="logo" />
 
-                      <Typography className={styles.companyName}>
-                        ALL•CON Contracting
-                      </Typography>
-                    </Link>
-                  </Tooltip>
-                </Grid>
+                    <Typography className={styles.companyName}>
+                      ALL•CON Contracting
+                    </Typography>
+                  </Link>
+                </Tooltip>
               </Grid>
               <Grid className={styles.buttongrid} item>
                 <Tabs value={value} onChange={handleChange}>
