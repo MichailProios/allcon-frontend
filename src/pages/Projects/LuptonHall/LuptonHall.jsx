@@ -21,7 +21,7 @@ import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
+import { virtualize, bindKeyboard } from "react-swipeable-views-utils";
 
 import wait from "wait";
 
@@ -31,7 +31,7 @@ import useDelayTransition from "../../../utilities/customHooks/useDelayTransitio
 
 import { Paper, Grid, Fade, Grow } from "@material-ui/core";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +82,14 @@ function importAll(r) {
   return images;
 }
 
+function slideRenderer(params, images) {
+  const { index, key } = params;
+
+  console.log(params);
+
+  return <Picture key={key} image={Object.values(images)[index]} />;
+}
+
 const LuptonHall = () => {
   const styles = useStyles();
   const theme = useTheme();
@@ -94,13 +102,10 @@ const LuptonHall = () => {
     )
   );
 
-  // images = Object.values(images);
-
   useEffect(() => {
     Object.values(images).forEach((picture) => {
       const img = new Image();
-
-      new Image().src = picture.fileName;
+      img.src = picture;
     });
   }, []);
 
@@ -126,24 +131,24 @@ const LuptonHall = () => {
     }
   };
 
-  // return <h1>test</h1>;
-
   return (
     <Grid container spacing={1} className={styles.root}>
       <Fade in={useDelayTransition(150)} timeout={800}>
         <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
           <Paper elevation={2} className={styles.carousel}>
-            <SwipeableViews
+            <VirtualizeSwipeableViews
               className={styles.views}
               axis={theme.direction === "rtl" ? "x-reverse" : "x"}
               index={activeStep}
               onChangeIndex={handleStepChange}
               enableMouseEvents={false}
-            >
-              {Object.values(images).map((item, i) => (
-                <Picture key={i} image={item} />
-              ))}
-            </SwipeableViews>
+              animateHeight={true}
+              slideRenderer={(params) => slideRenderer(params, images)}
+              overscanSlideAfter={maxSteps}
+              overscanSlideBefore={maxSteps}
+              slideCount={maxSteps}
+            />
+
             <MobileStepper
               className={styles.stepper}
               steps={maxSteps}
@@ -275,10 +280,10 @@ const Picture = ({ name, image, position }) => {
     <Paper className={styles.paper}>
       <MuiImage
         imageStyle={{
-          width: "100%",
+          // width: "100%",
           height: "auto",
           objectFit: "contain",
-          objectPosition: "center",
+
           // position: "fixed",
           // left: 0,
           // top: position,

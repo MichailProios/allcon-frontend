@@ -60,10 +60,10 @@ const Home = () => {
 
   useEffect(() => {
     const img1 = new Image();
-    new Image().src = lupton.fileName;
+    img1.src = lupton.fileName;
 
     const img2 = new Image();
-    new Image().src = church.fileName;
+    img2.src = church.fileName;
   }, []);
 
   const items = [
