@@ -21,7 +21,7 @@ import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
-import { virtualize, bindKeyboard } from "react-swipeable-views-utils";
+import { virtualize } from "react-swipeable-views-utils";
 
 import wait from "wait";
 
@@ -85,22 +85,20 @@ function importAll(r) {
 function slideRenderer(params, images) {
   const { index, key } = params;
 
-  console.log(params);
-
   return <Picture key={key} image={Object.values(images)[index]} />;
 }
+
+let images = importAll(
+  require.context(
+    "../../../utilities/images/lupton-hall",
+    false,
+    /\.(JPG|PNG|png|jpe?g|svg)$/
+  )
+);
 
 const LuptonHall = () => {
   const styles = useStyles();
   const theme = useTheme();
-
-  let images = importAll(
-    require.context(
-      "../../../utilities/images/lupton-hall",
-      false,
-      /\.(JPG|PNG|png|jpe?g|svg)$/
-    )
-  );
 
   useEffect(() => {
     Object.values(images).forEach((picture) => {
@@ -142,11 +140,12 @@ const LuptonHall = () => {
               index={activeStep}
               onChangeIndex={handleStepChange}
               enableMouseEvents={false}
-              animateHeight={true}
               slideRenderer={(params) => slideRenderer(params, images)}
-              overscanSlideAfter={maxSteps}
-              overscanSlideBefore={maxSteps}
+              overscanSlideAfter={1}
+              overscanSlideBefore={1}
+              disableLazyLoading={false}
               slideCount={maxSteps}
+              animateTransitions={true}
             />
 
             <MobileStepper
@@ -280,7 +279,7 @@ const Picture = ({ name, image, position }) => {
     <Paper className={styles.paper}>
       <MuiImage
         imageStyle={{
-          // width: "100%",
+          width: "100%",
           height: "auto",
           objectFit: "contain",
 
@@ -292,9 +291,8 @@ const Picture = ({ name, image, position }) => {
           // borderRadius: "4px",
         }}
         // cover={true}
-
-        animationDuration={0}
-        disableTransition={true}
+        animationDuration={500}
+        disableTransition={false}
         src={image}
         className={styles.picture}
       />

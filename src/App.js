@@ -103,14 +103,20 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/home" exact element={<Home />} />
-            <Route path="/about" exact element={<About />} />
-            <Route path="/contacts" exact element={<Contacts />} />
-            <Route path="/projects" exact element={<Projects />} />
-            <Route path="/projects/LuptonHall" exact element={<LuptonHall />} />
-          </Routes>
+          <div style={{ overflow: "hidden" }}>
+            <Routes>
+              <Route path="/" exact element={<Home />} />
+              <Route path="/home" exact element={<Home />} />
+              <Route path="/about" exact element={<About />} />
+              <Route path="/contacts" exact element={<Contacts />} />
+              <Route path="/projects" exact element={<Projects />} />
+              <Route
+                path="/projects/LuptonHall"
+                exact
+                element={<LuptonHall />}
+              />
+            </Routes>
+          </div>
         </Router>
       </ThemeProvider>
     </React.Fragment>
