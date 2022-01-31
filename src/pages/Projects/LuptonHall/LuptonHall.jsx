@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 import Card from "@material-ui/core/Card";
@@ -21,17 +21,17 @@ import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
+import { virtualize, bindKeyboard } from "react-swipeable-views-utils";
 
 import wait from "wait";
 
-import Image from "material-ui-image";
+import MuiImage from "material-ui-image";
 
 import useDelayTransition from "../../../utilities/customHooks/useDelayTransition";
 
 import { Paper, Grid, Fade, Grow } from "@material-ui/core";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: "4px",
     // width: "100%",
     // height: "60vh",
-    height: "100%",
+    height: "auto",
+    objectFit: "contain",
+    objectPosition: "center",
   },
   carousel: {
     width: "100%",
@@ -74,10 +76,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 function importAll(r) {
   let images = {};
-  r.keys().map((item, index) => {
+  r.keys().forEach((item, index) => {
     images[item.replace("./", "")] = r(item);
   });
   return images;
+}
+
+function slideRenderer(params, images) {
+  const { index, key } = params;
+
+  console.log(params);
+
+  return <Picture key={key} image={Object.values(images)[index]} />;
 }
 
 const LuptonHall = () => {
@@ -92,10 +102,15 @@ const LuptonHall = () => {
     )
   );
 
-  images = Object.values(images);
+  useEffect(() => {
+    Object.values(images).forEach((picture) => {
+      const img = new Image();
+      img.src = picture;
+    });
+  }, []);
 
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = images.length;
+  const maxSteps = Object.values(images).length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -121,17 +136,19 @@ const LuptonHall = () => {
       <Fade in={useDelayTransition(150)} timeout={800}>
         <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
           <Paper elevation={2} className={styles.carousel}>
-            <SwipeableViews
+            <VirtualizeSwipeableViews
               className={styles.views}
               axis={theme.direction === "rtl" ? "x-reverse" : "x"}
               index={activeStep}
               onChangeIndex={handleStepChange}
               enableMouseEvents={false}
-            >
-              {images.map((item, i) => (
-                <Picture key={i} image={item} />
-              ))}
-            </SwipeableViews>
+              animateHeight={true}
+              slideRenderer={(params) => slideRenderer(params, images)}
+              overscanSlideAfter={maxSteps}
+              overscanSlideBefore={maxSteps}
+              slideCount={maxSteps}
+            />
+
             <MobileStepper
               className={styles.stepper}
               steps={maxSteps}
@@ -261,10 +278,12 @@ const Picture = ({ name, image, position }) => {
 
   return (
     <Paper className={styles.paper}>
-      <Image
+      <MuiImage
         imageStyle={{
-          width: "100%",
-          height: "100%",
+          // width: "100%",
+          height: "auto",
+          objectFit: "contain",
+
           // position: "fixed",
           // left: 0,
           // top: position,
@@ -272,8 +291,10 @@ const Picture = ({ name, image, position }) => {
           // userSelect: "none",
           // borderRadius: "4px",
         }}
-        cover={true}
-        animationDuration={100}
+        // cover={true}
+
+        animationDuration={0}
+        disableTransition={true}
         src={image}
         className={styles.picture}
       />

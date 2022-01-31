@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 
 import lupton from "../../utilities/images/Home/lupton.jpg";
 import church from "../../utilities/images/Home/church.jpg";
 
-import Image from "material-ui-image";
+import MuiImage from "material-ui-image";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
@@ -57,6 +57,15 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const styles = useStyles();
   const theme = useTheme();
+
+  useEffect(() => {
+    const img1 = new Image();
+    img1.src = lupton.fileName;
+
+    const img2 = new Image();
+    img2.src = church.fileName;
+  }, []);
+
   const items = [
     {
       name: "Lupton",
@@ -107,7 +116,7 @@ const Picture = ({ name, image, position }) => {
   const styles = useStyles();
   return (
     <Paper className={styles.paper}>
-      <Image
+      <MuiImage
         imageStyle={{
           width: "100%",
           height: "auto",

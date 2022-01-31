@@ -186,6 +186,11 @@ const Navbar = () => {
     }
   }, [location]);
 
+  useEffect(() => {
+    const img1 = new Image();
+    img1.src = companyLogo.fileName;
+  }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -197,20 +202,19 @@ const Navbar = () => {
           <Toolbar className={styles.toolbar}>
             <Grid justifyContent={"space-between"} container>
               <Grid item>
-                <Grid justifyContent={"space-between"} container>
-                  <Tooltip title="Home" placement="right">
-                    <Link to="/Home" className={styles.appbarLinks}>
-                      <img
-                        className={styles.logo}
-                        src={companyLogo}
-                        alt="logo"
-                      />
-
-                      <Typography className={styles.companyName}>
-                        ALL•CON Contracting
-                      </Typography>
-                    </Link>
-                  </Tooltip>
+                <Grid container>
+                  {/* <Tooltip title="Home" placement="right"> */}
+                  <Grid item>
+                    {/* <Link to="/Home" className={styles.appbarLinks}> */}
+                    <img className={styles.logo} src={companyLogo} alt="logo" />
+                  </Grid>
+                  <Grid item>
+                    <Typography className={styles.companyName}>
+                      ALL•CON Contracting
+                    </Typography>
+                  </Grid>
+                  {/* </Link> */}
+                  {/* </Tooltip> */}
                 </Grid>
               </Grid>
               <Grid className={styles.buttongrid} item>
