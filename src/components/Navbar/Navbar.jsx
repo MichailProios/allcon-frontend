@@ -31,7 +31,7 @@ import companyLogo from "../../utilities/images/Logos/logo-new.png";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
-    margin: "0.4em",
+    margin: "0.3em",
     height: "auto",
     width: "3.2em",
     userDrag: "none",

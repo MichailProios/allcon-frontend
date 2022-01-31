@@ -4,6 +4,11 @@
 html {
   background-color: #f3f3f3;
   scroll-behavior: smooth;
+  height: 100vh !important;
+}
+
+body {
+  height: 100vh !important;
 }
 
 * {

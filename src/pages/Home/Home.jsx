@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 
@@ -9,17 +9,20 @@ import MuiImage from "material-ui-image";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
+import { useTransition, animated, config } from "react-spring";
+
 import { Paper, Typography, Fade } from "@material-ui/core";
 
 import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
+import { autoPlay, virtualize } from "react-swipeable-views-utils";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const AutoPlaySwipeableViews = autoPlay(virtualize(SwipeableViews));
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
     overflow: "hidden",
     width: "100%",
+    height: "auto",
     // position: "fixed",
     // left: 0,
     // top: -50,
@@ -29,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   picture: {
     userDrag: "none",
     userSelect: "none",
+    overflow: "hidden",
   },
   quote: {
     margin: 0,
@@ -48,65 +52,102 @@ const useStyles = makeStyles((theme) => ({
     userDrag: "none",
   },
   paper: {
-    height: "90vh",
-    userDrag: "none",
-    userSelect: "none",
+    backgroundImage: "url(" + church + ")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    overflow: "hidden",
+    position: "fixed",
+    left: 0,
+    top: 0,
   },
 }));
+
+const items = [
+  {
+    id: 0,
+    name: "Lupton",
+    image: lupton,
+    position: -50,
+  },
+  {
+    id: 1,
+    name: "Church",
+    image: church,
+    position: -300,
+  },
+];
 
 const Home = () => {
   const styles = useStyles();
   const theme = useTheme();
 
-  useEffect(() => {
-    const img1 = new Image();
-    img1.src = lupton.fileName;
+  // useEffect(() => {
+  //   const img1 = new Image();
+  //   img1.src = lupton.fileName;
 
-    const img2 = new Image();
-    img2.src = church.fileName;
-  }, []);
+  //   const img2 = new Image();
+  //   img2.src = church.fileName;
+  // }, []);
 
-  const items = [
-    {
-      name: "Lupton",
-      image: lupton,
-      position: -50,
-    },
-    {
-      name: "Church",
-      image: church,
-      position: -300,
-    },
-  ];
+  // const maxSteps = items.length;
+
+  const [index, set] = useState(0);
+  // const transitions = useTransition(slides[index], (item) => item.id, {
+  //   from: { opacity: 0 },
+  //   enter: { opacity: 1 },
+  //   leave: { opacity: 0 },
+  //   config: config.molasses,
+  // });
+
+  useEffect(
+    () =>
+      void setInterval(
+        () => set((state) => (state === 0 ? state + 1 : state - 1)),
+        5000
+      ),
+    []
+  );
+
+  console.log(index);
 
   return (
     <Fade in={useDelayTransition(150)} timeout={500}>
-      <div>
-        <Carousel
-          animation={"fade"}
-          autoPlay={true}
-          indicators={false}
-          swipe={false}
-          navButtonsAlwaysInvisible={true}
-          stopAutoPlayOnHover={false}
-          interval={15000}
-          duration={500}
-          className={styles.homeContainer}
-        >
-          {items.map((item, i) => (
-            <Picture key={i} {...item} />
-          ))}
-        </Carousel>
-
+      <div
+        style={{
+          overflow: "hidden",
+        }}
+      >
         {/* <AutoPlaySwipeableViews
-          className={styles.views}
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          className={styles.homeContainer}
+          // axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          // index={activeStep}
+          // onChangeIndex={handleStepChange}'
+          ignoreNativeScroll={true}
           enableMouseEvents={false}
-        >
-          {items.map((item, i) => (
-            <Picture key={i} {...item} />
-          ))}
-        </AutoPlaySwipeableViews> */}
+          animateHeight={true}
+          slideRenderer={(params) => slideRenderer(params, items)}
+          overscanSlideAfter={0}
+          overscanSlideBefore={0}
+          disableLazyLoading={true}
+          slideCount={maxSteps}
+          animateTransitions={false}
+          autoplay={true}
+          interval={3000}
+        /> */}
+        {index === 0 ? (
+          <Picture image={church} position={-350} />
+        ) : index === 1 ? (
+          <Picture image={lupton} position={-50} />
+        ) : (
+          <div />
+        )}
+
+        <Fade in={useDelayTransition(1000)} timeout={1500}>
+          <Typography variant="h4" className={styles.quote}>
+            Infinite Possibilities through Integrated Solutions
+          </Typography>
+        </Fade>
       </div>
     </Fade>
   );
@@ -114,6 +155,13 @@ const Home = () => {
 
 const Picture = ({ name, image, position }) => {
   const styles = useStyles();
+
+  // const [flag, setFlag] = useState(false);
+
+  // useEffect(() => {
+  //   setFlag(true);
+  // }, [flag]);
+
   return (
     <Paper className={styles.paper}>
       <MuiImage
@@ -123,31 +171,18 @@ const Picture = ({ name, image, position }) => {
           position: "fixed",
           left: 0,
           top: position,
-          userDrag: "none",
-          userSelect: "none",
+          // objectFit: "contain",
+
+          overflow: "hidden",
+
+          // userDrag: "none",
+          // userSelect: "none",
         }}
-        animationDuration={100}
+        animationDuration={500}
+        disableTransition={true}
         src={image}
         className={styles.picture}
       />
-
-      {/* <img
-          style={{
-            width: "100%",
-            height: "auto",
-            position: "fixed",
-            left: 0,
-            top: position,
-          }}
-          src={image}
-          alt="img"
-        /> */}
-
-      <Fade in={useDelayTransition(1000)} timeout={1500}>
-        <Typography variant="h4" className={styles.quote}>
-          Infinite Possibilities through Integrated Solutions
-        </Typography>
-      </Fade>
     </Paper>
   );
 };
