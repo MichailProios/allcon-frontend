@@ -99,6 +99,12 @@ const Home = () => {
   //   leave: { opacity: 0 },
   //   config: config.molasses,
   // });
+  // useEffect(() => {
+  //   document.body.style.backgroundImage = `url(${church})`;
+  //   document.body.style.backgroundRepeat = "no-repeat";
+  //   document.body.style.backgroundPosition = "center";
+  //   document.body.style.backgroundSize = "cover";
+  // }, []);
 
   useEffect(
     () =>
@@ -113,8 +119,13 @@ const Home = () => {
 
   return (
     <Fade in={useDelayTransition(150)} timeout={500}>
-      <div
+      <Paper
         style={{
+          backgroundImage: "url(" + lupton + ")",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
           overflow: "hidden",
         }}
       >
@@ -135,20 +146,21 @@ const Home = () => {
           autoplay={true}
           interval={3000}
         /> */}
-        {index === 0 ? (
+
+        {/* {index === 0 ? (
           <Picture image={church} position={-350} />
         ) : index === 1 ? (
           <Picture image={lupton} position={-50} />
         ) : (
           <div />
-        )}
+        )} */}
 
         <Fade in={useDelayTransition(1000)} timeout={1500}>
           <Typography variant="h4" className={styles.quote}>
             Infinite Possibilities through Integrated Solutions
           </Typography>
         </Fade>
-      </div>
+      </Paper>
     </Fade>
   );
 };
