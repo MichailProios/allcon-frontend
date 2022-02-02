@@ -19,21 +19,6 @@ import { autoPlay, virtualize } from "react-swipeable-views-utils";
 const AutoPlaySwipeableViews = autoPlay(virtualize(SwipeableViews));
 
 const useStyles = makeStyles((theme) => ({
-  homeContainer: {
-    overflow: "hidden",
-    width: "100%",
-    height: "auto",
-    // position: "fixed",
-    // left: 0,
-    // top: -50,
-    userDrag: "none",
-    userSelect: "none",
-  },
-  picture: {
-    userDrag: "none",
-    userSelect: "none",
-    overflow: "hidden",
-  },
   quote: {
     margin: 0,
     position: "absolute",
@@ -50,16 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
     userSelect: "none",
     userDrag: "none",
-  },
-  paper: {
-    backgroundImage: "url(" + church + ")",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    overflow: "hidden",
-    position: "fixed",
-    left: 0,
-    top: 0,
   },
 }));
 
@@ -103,44 +78,43 @@ const Home = () => {
   useEffect(
     () =>
       void setInterval(
-        () => set((state) => (state === 0 ? state + 1 : state - 1)),
-        5000
+        () => set((state) => (state === 0 ? state + 1 : (state = 0))) % 5,
+        10000
       ),
     []
   );
 
-  console.log(index);
-
   return (
     <Fade in={useDelayTransition(150)} timeout={500}>
-      <div
-        style={{
-          overflow: "hidden",
-        }}
-      >
-        {/* <AutoPlaySwipeableViews
-          className={styles.homeContainer}
-          // axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          // index={activeStep}
-          // onChangeIndex={handleStepChange}'
-          ignoreNativeScroll={true}
-          enableMouseEvents={false}
-          animateHeight={true}
-          slideRenderer={(params) => slideRenderer(params, items)}
-          overscanSlideAfter={0}
-          overscanSlideBefore={0}
-          disableLazyLoading={true}
-          slideCount={maxSteps}
-          animateTransitions={false}
-          autoplay={true}
-          interval={3000}
-        /> */}
-        {index === 0 ? (
-          <Picture image={church} position={-350} />
-        ) : index === 1 ? (
-          <Picture image={lupton} position={-50} />
-        ) : (
-          <div />
+      <div>
+        {index === 0 && (
+          <Fade in={true} timeout={2000}>
+            <Paper
+              style={{
+                backgroundImage: "url(" + lupton + ")",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            />
+          </Fade>
+        )}
+
+        {index === 1 && (
+          <Fade in={true} timeout={2000}>
+            <Paper
+              style={{
+                backgroundImage: "url(" + church + ")",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            />
+          </Fade>
         )}
 
         <Fade in={useDelayTransition(1000)} timeout={1500}>
@@ -150,40 +124,6 @@ const Home = () => {
         </Fade>
       </div>
     </Fade>
-  );
-};
-
-const Picture = ({ name, image, position }) => {
-  const styles = useStyles();
-
-  // const [flag, setFlag] = useState(false);
-
-  // useEffect(() => {
-  //   setFlag(true);
-  // }, [flag]);
-
-  return (
-    <Paper className={styles.paper}>
-      <MuiImage
-        imageStyle={{
-          width: "100%",
-          height: "auto",
-          position: "fixed",
-          left: 0,
-          top: position,
-          // objectFit: "contain",
-
-          overflow: "hidden",
-
-          // userDrag: "none",
-          // userSelect: "none",
-        }}
-        animationDuration={500}
-        disableTransition={true}
-        src={image}
-        className={styles.picture}
-      />
-    </Paper>
   );
 };
 
