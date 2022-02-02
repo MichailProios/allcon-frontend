@@ -44,13 +44,11 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: "4px",
     // width: "100%",
     // height: "60vh",
-    height: "auto",
-    objectFit: "contain",
-    objectPosition: "center",
+    height: "45em",
   },
   carousel: {
     width: "100%",
-    height: "100%",
+    height: "45em",
   },
 
   views: {
@@ -189,7 +187,10 @@ const LuptonHall = () => {
       <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
         <Grow in={useDelayTransition(300)} timeout={800}>
           <Card style={{ height: "48em" }}>
-            <CardHeader title="Project Info" className={styles.cardHeader} />
+            <CardHeader
+              title="Project Info"
+              classNamechange={styles.cardHeader}
+            />
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
@@ -279,8 +280,8 @@ const Picture = ({ name, image, position }) => {
     <Paper className={styles.paper}>
       <MuiImage
         imageStyle={{
-          width: "100%",
-          height: "auto",
+          maxWidth: "100%",
+          height: "45em",
           objectFit: "contain",
 
           // position: "fixed",
