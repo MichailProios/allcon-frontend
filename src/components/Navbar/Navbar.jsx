@@ -165,23 +165,30 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
+        document.body.style.overflow = "hidden";
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
+        document.body.style.overflow = "hidden";
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
+        document.body.style.overflow = "visible";
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
+        document.body.style.overflow = "visible";
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
+        document.body.style.overflow = "visible";
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
+        document.body.style.overflow = "visible";
         break;
       default:
+        document.body.style.overflow = "visible";
         break;
     }
   }, [location]);
