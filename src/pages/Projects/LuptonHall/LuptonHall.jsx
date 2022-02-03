@@ -343,7 +343,7 @@ const Picture = ({ name, image, position }) => {
           maxWidth: "100%",
           height: "45em",
         }}
-        animationDuration={500}
+        animationDuration={800}
         disableTransition={false}
         src={image}
         className={styles.picture}
