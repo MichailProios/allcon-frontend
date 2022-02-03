@@ -163,7 +163,7 @@ const LuptonHall = () => {
 
   return (
     <Grid container spacing={1} className={styles.root}>
-      <Fade in={useDelayTransition(150)} timeout={500}>
+      <Fade in={useDelayTransition(50)} timeout={500}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
           <Paper elevation={2} className={styles.carousel}>
             <VirtualizeSwipeableViews
