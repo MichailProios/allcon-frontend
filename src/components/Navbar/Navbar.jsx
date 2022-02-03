@@ -1,5 +1,17 @@
 //Basic dependencies
 import React, { useState, useEffect } from "react";
+import * as Scroll from "react-scroll";
+import { isMobile } from "react-device-detect";
+import {
+  LinkScroll,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
+
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -49,7 +61,9 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     backgroundColor: "#fff",
-    position: "fixed",
+    position: "sticky",
+    width: "100vw",
+    overflowX: "hidden",
   },
 
   button: {
@@ -99,7 +113,12 @@ function ScrollTop(props) {
   });
 
   const handleClick = () => {
-    window[`scrollTo`]({ top: 0, behavior: `smooth` });
+    //window[`scrollTo`]({ top: 0, behavior: `smooth` });
+    if (isMobile) {
+      scroll.scrollToTop({ duration: 800, delay: 0, smooth: "easeInOutQuart" });
+    } else {
+      scroll.scrollToTop({ duration: 0, delay: 0, smooth: "easeInOutQuart" });
+    }
   };
 
   return (
@@ -166,37 +185,128 @@ const Navbar = () => {
       case pathnames === "/":
         setValue(0);
         document.body.style.overflow = "hidden";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
         document.body.style.overflow = "hidden";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
         document.body.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
         document.body.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
         document.body.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
         document.body.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       default:
         document.body.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
     }
   }, [location]);
 
-  useEffect(() => {
-    const img1 = new Image();
-    img1.src = companyLogo.fileName;
-  }, []);
+  // useEffect(() => {
+  //   const img1 = new Image();
+  //   img1.src = companyLogo.fileName;
+  // }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -209,20 +319,24 @@ const Navbar = () => {
           <Toolbar className={styles.toolbar}>
             <Grid justifyContent={"space-between"} container>
               <Grid item>
-                <Grid container>
-                  {/* <Tooltip title="Home" placement="right"> */}
-                  <Grid item>
-                    {/* <Link to="/Home" className={styles.appbarLinks}> */}
-                    <img className={styles.logo} src={companyLogo} alt="logo" />
-                  </Grid>
-                  <Grid item>
-                    <Typography className={styles.companyName}>
-                      ALL•CON Contracting
-                    </Typography>
-                  </Grid>
-                  {/* </Link> */}
-                  {/* </Tooltip> */}
-                </Grid>
+                <Tooltip title="Home" placement="right">
+                  <Link to="/Home" className={styles.appbarLinks}>
+                    <Grid container>
+                      <Grid item>
+                        <img
+                          className={styles.logo}
+                          src={companyLogo}
+                          alt="logo"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Typography className={styles.companyName}>
+                          ALL•CON Contracting
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Link>
+                </Tooltip>
               </Grid>
               <Grid className={styles.buttongrid} item>
                 <Tabs value={value} onChange={handleChange}>
@@ -266,7 +380,7 @@ const Navbar = () => {
           <Divider />
         </AppBar>
       </HideOnScroll>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <ScrollTop>
         <Fab color="secondary" size="small">
           <KeyboardArrowUpIcon />

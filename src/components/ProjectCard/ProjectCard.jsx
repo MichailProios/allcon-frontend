@@ -8,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Image from "material-ui-image";
+import MuiImage from "material-ui-image";
 import { Grow, Fade } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
@@ -71,22 +71,28 @@ function ProjectCard({ title, image, link, index }) {
   };
   return (
     <Grow in={useDelayTransition(100 * index)} timeout={800}>
-      <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
+      <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
         <Card className={styles.root}>
           <CardActionArea
             className={styles.actionArea}
             component={Link}
             to={link}
           >
-            <Image
+            <MuiImage
               onMouseOver={handleMouseOver}
               onMouseOut={handleMouseOut}
               imageStyle={{
+                maxWidth: "100%",
                 height: "30em",
+
                 transition: "transform 0.15s ease-in-out",
                 "&:hover": {
                   transform: "scale3d(1.02, 1.02, 1)",
                 },
+              }}
+              iconContainerStyle={{
+                maxWidth: "100%",
+                height: "30em",
               }}
               src={image}
               cover={true}

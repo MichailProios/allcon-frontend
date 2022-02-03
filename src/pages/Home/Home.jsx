@@ -88,7 +88,7 @@ const Home = () => {
     <Fade in={useDelayTransition(150)} timeout={500}>
       <div>
         {index === 0 && (
-          <Fade in={true} timeout={2000}>
+          <Fade in={true} timeout={800}>
             <Paper
               style={{
                 backgroundImage: "url(" + lupton + ")",
@@ -103,7 +103,7 @@ const Home = () => {
         )}
 
         {index === 1 && (
-          <Fade in={true} timeout={2000}>
+          <Fade in={true} timeout={800}>
             <Paper
               style={{
                 backgroundImage: "url(" + church + ")",

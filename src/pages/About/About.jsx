@@ -20,6 +20,10 @@ const useStyles = makeStyles({
     padding: "1em 10em 2em 10em",
     width: "100%",
   },
+  text: {
+    userSelect: "none",
+    userDrag: "none",
+  },
 });
 
 const About = () => {
@@ -43,7 +47,11 @@ const About = () => {
           className={styles.header}
         >
           <Grow in={useDelayTransition(50)} timeout={800}>
-            <Typography color="textPrimary" variant="h4">
+            <Typography
+              color="textPrimary"
+              variant="h4"
+              className={styles.text}
+            >
               Company Profile
             </Typography>
           </Grow>
@@ -51,7 +59,11 @@ const About = () => {
 
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grow in={useDelayTransition(150)} timeout={800}>
-            <Typography color="textPrimary" variant="h6">
+            <Typography
+              color="textPrimary"
+              variant="h6"
+              className={styles.text}
+            >
               ALL•CON Contracting is built on a reputation of delivering high
               quality projects serving a variety of private and public clients
               throughout New York State.
@@ -60,7 +72,11 @@ const About = () => {
             </Typography>
           </Grow>
           <Grow in={useDelayTransition(250)} timeout={800}>
-            <Typography color="textPrimary" variant="h6">
+            <Typography
+              color="textPrimary"
+              variant="h6"
+              className={styles.text}
+            >
               Our Executive Management understands that teamwork, which includes
               hands on involvement of the owners, guarantee that all projects
               are completed on time and on the budget. AllCon's staff is always
@@ -74,7 +90,11 @@ const About = () => {
             </Typography>
           </Grow>
           <Grow in={useDelayTransition(350)} timeout={800}>
-            <Typography color="textPrimary" variant="h6">
+            <Typography
+              color="textPrimary"
+              variant="h6"
+              className={styles.text}
+            >
               With a goal to "built it once and build it right" we use
               innovative solutions to achieve infinite possibilities for each
               project.

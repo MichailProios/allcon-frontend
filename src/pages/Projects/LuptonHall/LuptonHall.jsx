@@ -15,6 +15,18 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Box from "@mui/material/Box";
 import { Divider } from "@material-ui/core";
 
+import * as Scroll from "react-scroll";
+import { isMobile } from "react-device-detect";
+import {
+  LinkScroll,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
+
 import MobileStepper from "@material-ui/core/MobileStepper";
 
 import Button from "@material-ui/core/Button";
@@ -41,14 +53,11 @@ const useStyles = makeStyles((theme) => ({
   picture: {
     userDrag: "none",
     userSelect: "none",
-    // borderRadius: "4px",
-    // width: "100%",
-    // height: "60vh",
-    height: "45em",
+    // height: "45em",
   },
   carousel: {
     width: "100%",
-    height: "45em",
+    // height: "45em",
   },
 
   views: {
@@ -57,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   stepper: {
+    backgroundColor: "#fff",
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
     overflow: "none",
@@ -65,11 +75,24 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
 
-  paper: { overflow: "hidden", height: "45em" },
+  paper: {
+    overflow: "hidden",
+    height: "45em",
+    borderBottomLeftRadius: "0px",
+    borderBottomRightRadius: "0px",
+  },
 
   cardHeader: {
     userSelect: "none",
     userDragL: "none",
+  },
+  textPrimary: {
+    userSelect: "none",
+    useDrag: "none",
+  },
+  textSecondary: {
+    // userSelect: "contain",
+    useDrag: "none",
   },
 }));
 function importAll(r) {
@@ -98,12 +121,12 @@ const LuptonHall = () => {
   const styles = useStyles();
   const theme = useTheme();
 
-  useEffect(() => {
-    Object.values(images).forEach((picture) => {
-      const img = new Image();
-      img.src = picture;
-    });
-  }, []);
+  // useEffect(() => {
+  //   Object.values(images).forEach((picture) => {
+  //     const img = new Image();
+  //     img.src = picture;
+  //   });
+  // }, []);
 
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = Object.values(images).length;
@@ -120,17 +143,28 @@ const LuptonHall = () => {
     setActiveStep(step);
   };
 
-  const handleClick = async (event, expanded) => {
+  const handleClick = (event, expanded) => {
     if (expanded) {
-      await wait(250);
-      window[`scrollTo`]({ top: 99999, behavior: "smooth" });
+      if (isMobile) {
+        scroll.scrollToBottom({
+          duration: 800,
+          delay: 250,
+          smooth: "easeInOutQuart",
+        });
+      } else {
+        scroll.scrollToBottom({
+          duration: 0,
+          delay: 250,
+          smooth: "easeInOutQuart",
+        });
+      }
     }
   };
 
   return (
     <Grid container spacing={1} className={styles.root}>
-      <Fade in={useDelayTransition(150)} timeout={800}>
-        <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+      <Fade in={useDelayTransition(150)} timeout={500}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
           <Paper elevation={2} className={styles.carousel}>
             <VirtualizeSwipeableViews
               className={styles.views}
@@ -184,45 +218,58 @@ const LuptonHall = () => {
           </Paper>
         </Grid>
       </Fade>
-      <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
-        <Grow in={useDelayTransition(300)} timeout={800}>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+        <Grow in={useDelayTransition(400)} timeout={800}>
           <Card style={{ height: "48em" }}>
-            <CardHeader
-              title="Project Info"
-              classNamechange={styles.cardHeader}
-            />
+            <CardHeader title="Project Info" className={styles.cardHeader} />
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Name:</Typography>
-                  <Typography variant="body1">SUNY Lupton Hall </Typography>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Project Name:
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    SUNY Lupton Hall
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Location:</Typography>
-                  <Typography variant="body1">
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Project Location:
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
                     2350 Broadhollow Road, Farmingdale, NY 11735
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">
+                  <Typography variant="h6" className={styles.textPrimary}>
                     Client/ Affiliated Agency:
                   </Typography>
-                  <Typography variant="body1">
+                  <Typography variant="body1" className={styles.textSecondary}>
                     NYS OGS – Design & Construction Group
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Year Completed:</Typography>
-                  <Typography variant="body1">In Progress</Typography>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Year Completed:
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    In Progress
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Cost/Budget:</Typography>
-                  <Typography variant="body1">$10,856,274.00</Typography>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Project Cost/Budget:
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    $10,856,274.00
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Designer:</Typography>
-                  <Typography variant="body1">
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Project Designer:
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
                     Hoffmann Architects, Inc.
                   </Typography>
                 </Grid>
@@ -232,7 +279,7 @@ const LuptonHall = () => {
         </Grow>
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-        <Grow in={useDelayTransition(600)} timeout={800}>
+        <Grow in={useDelayTransition(800)} timeout={800}>
           <Accordion onChange={handleClick}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography
@@ -246,7 +293,7 @@ const LuptonHall = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body1">
+              <Typography variant="body1" className={styles.textPrimary}>
                 An extensive 90,000 square foot of new copper roofing. The
                 project started with the removal of the existing roofing system
                 and Asbestos abatement.
@@ -292,6 +339,10 @@ const Picture = ({ name, image, position }) => {
           // borderRadius: "4px",
         }}
         // cover={true}
+        iconContainerStyle={{
+          maxWidth: "100%",
+          height: "45em",
+        }}
         animationDuration={500}
         disableTransition={false}
         src={image}

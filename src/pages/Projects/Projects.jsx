@@ -56,14 +56,14 @@ const Projects = () => {
       image: lupton,
       cols: 4,
       rows: 1,
-      link: "/projects/LuptonHall",
+      link: "/Projects/LuptonHall",
     },
     {
       title: "Carle Place UFSD – Lobby Renovations",
       image: carlPlaceLobby,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -71,7 +71,7 @@ const Projects = () => {
       image: stdemetrios,
       cols: 4,
       rows: 2,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -79,7 +79,7 @@ const Projects = () => {
       image: carlPlaceLib,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -87,14 +87,14 @@ const Projects = () => {
       image: west255,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "Williston Animal Hospital",
       image: wilsonAnimal,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -102,7 +102,7 @@ const Projects = () => {
       image: bareBurger,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -110,28 +110,28 @@ const Projects = () => {
       image: townhouse17w,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "164 W79th Street",
       image: w79thStreet,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "55 Pierrpoint Street",
       image: pierrpointStreet,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "Hudson Animal Hospital",
       image: hudsonAnimal,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -139,21 +139,21 @@ const Projects = () => {
       image: njvet,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "20 East 9th Street",
       image: east209th,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "Carle Place UFSD – Auditorium Renovations",
       image: carlePlaceAuditorium,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
 
     {
@@ -161,14 +161,14 @@ const Projects = () => {
       image: upperEastVetenary,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
     {
       title: "866 Westchester Ave.",
       image: westchesterAve,
       cols: 4,
       rows: 1,
-      link: "/projects/inprogress",
+      link: "/Projects/inprogress",
     },
   ]);
 
