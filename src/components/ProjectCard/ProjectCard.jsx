@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -8,17 +8,22 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Image from "material-ui-image";
+import MuiImage from "material-ui-image";
 import { Grow, Fade } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { Slide, CardHeader, Paper } from "@material-ui/core";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "auto",
     height: "30em",
+
+    [theme.breakpoints.down("sm")]: {
+      height: "26em",
+    },
   },
 
   textOpacity: {
@@ -40,10 +45,17 @@ const useStyles = makeStyles({
     userDrag: "none",
   },
 
+  mediaSmall: {
+    userDrag: "none",
+  },
+
   actionArea: {
     textDecoration: "none",
     height: "30em",
     userDrag: "none",
+    [theme.breakpoints.down("sm")]: {
+      height: "26em",
+    },
   },
 
   title: {
@@ -56,9 +68,10 @@ const useStyles = makeStyles({
     pointerEvents: "none",
     fontWeight: 520,
   },
-});
+}));
 function ProjectCard({ title, image, link, index }) {
   const styles = useStyles();
+  const theme = useTheme();
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -71,30 +84,119 @@ function ProjectCard({ title, image, link, index }) {
   };
   return (
     <Grow in={useDelayTransition(100 * index)} timeout={800}>
-      <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
+      <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
         <Card className={styles.root}>
           <CardActionArea
             className={styles.actionArea}
             component={Link}
             to={link}
           >
-            <Image
+            {/* <MuiImage
               onMouseOver={handleMouseOver}
               onMouseOut={handleMouseOut}
               imageStyle={{
+                maxWidth: "100%",
                 height: "30em",
+
                 transition: "transform 0.15s ease-in-out",
                 "&:hover": {
                   transform: "scale3d(1.02, 1.02, 1)",
                 },
               }}
+              iconContainerStyle={{
+                maxWidth: "100%",
+                height: "30em",
+              }}
               src={image}
               cover={true}
               animationDuration={100}
               className={styles.media}
-            />
+            /> */}
 
-            <Fade in={isHovering} timeout={300}>
+            {isMobile && (
+              <MuiImage
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                imageStyle={{
+                  maxWidth: "100%",
+                  height: "30em",
+                }}
+                iconContainerStyle={{
+                  maxWidth: "100%",
+                  height: "30em",
+                }}
+                src={image}
+                cover={true}
+                animationDuration={100}
+                className={styles.mediaSmall}
+              />
+            )}
+
+            {!isMobile && (
+              <MuiImage
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                imageStyle={{
+                  maxWidth: "100%",
+                  height: "30em",
+
+                  transition: "transform 0.15s ease-in-out",
+                  "&:hover": {
+                    transform: "scale3d(1.02, 1.02, 1)",
+                  },
+                }}
+                iconContainerStyle={{
+                  maxWidth: "100%",
+                  height: "30em",
+                }}
+                src={image}
+                cover={true}
+                animationDuration={100}
+                className={styles.media}
+              />
+            )}
+
+            {isMobile && (
+              <Fade in={true} timeout={300}>
+                <div className={styles.textOpacity}>
+                  <Typography
+                    className={styles.title}
+                    color="textPrimary"
+                    variant="subtitle1"
+                  >
+                    {title}
+                  </Typography>
+                </div>
+              </Fade>
+            )}
+
+            {!isMobile && (
+              <Fade in={isHovering} timeout={300}>
+                <div className={styles.textOpacity}>
+                  <Typography
+                    className={styles.title}
+                    color="textPrimary"
+                    variant="h5"
+                  >
+                    {title}
+                  </Typography>
+                </div>
+              </Fade>
+            )}
+
+            {/* <Fade in={isHovering} timeout={300}>
+                <div className={styles.textOpacity}>
+                  <Typography
+                    className={styles.title}
+                    color="textPrimary"
+                    variant="h5"
+                  >
+                    {title}
+                  </Typography>
+                </div>
+              </Fade> */}
+
+            {/* <Fade in={isHovering} timeout={300}>
               <div className={styles.textOpacity}>
                 <Typography
                   className={styles.title}
@@ -104,7 +206,7 @@ function ProjectCard({ title, image, link, index }) {
                   {title}
                 </Typography>
               </div>
-            </Fade>
+            </Fade> */}
           </CardActionArea>
         </Card>
       </Grid>

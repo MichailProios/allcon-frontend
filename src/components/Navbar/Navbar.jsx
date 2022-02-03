@@ -1,5 +1,18 @@
 //Basic dependencies
 import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import * as Scroll from "react-scroll";
+import { isMobile } from "react-device-detect";
+import {
+  LinkScroll,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
+
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -17,7 +30,13 @@ import {
   Tabs,
   Tab,
   Tooltip,
+  Drawer,
+  Backdrop,
 } from "@material-ui/core";
+
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 import { useNavigate } from "react-router-dom";
 
@@ -28,6 +47,9 @@ import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
 //Pictures and Icons
 import companyLogo from "../../utilities/images/Logos/logo-new.png";
+import { useTheme } from "@material-ui/styles";
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -37,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     userDrag: "none",
   },
   companyName: {
-    margin: "1em 0.6em 0.6em 0.2em",
+    margin: "1em 0.4em 0.6em 0.2em",
     letterSpacing: "0.1em",
     fontSize: "1.2em",
     fontSmooth: "5em",
@@ -47,9 +69,95 @@ const useStyles = makeStyles((theme) => ({
     userSelect: "none",
     userDrag: "none",
   },
+  companyNameSmall: {
+    margin: "1em 0em 0em 0em",
+    letterSpacing: "0.1em",
+    fontSize: "1.2em",
+    fontSmooth: "5em",
+    fontFamily: "EB Garamond , serif",
+    color: "black",
+    textDecoration: "none",
+    userSelect: "none",
+    userDrag: "none",
+
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
   appbar: {
     backgroundColor: "#fff",
-    position: "fixed",
+    position: "sticky",
+    width: "100vw",
+    overflowX: "hidden",
+    zIndex: theme.zIndex.drawer + 1,
+    // backgroundColor: theme.palette.primary.main,
+    // transition: theme.transitions.create(["width", "margin"], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
+  },
+
+  // appbarShift: {
+  //   marginLeft: drawerWidth,
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   transition: theme.transitions.create(["width", "margin"], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+
+  //   [theme.breakpoints.down("sm")]: {
+  //     width: "100%",
+  //   },
+  // },
+
+  drawer: {
+    width: drawerWidth,
+    zIndex: theme.zIndex.drawer + 2,
+    flexShrink: 0,
+  },
+
+  drawerPaper: {
+    width: drawerWidth,
+    zIndex: theme.zIndex.drawer + 2,
+    userSelect: "none",
+    userDrag: "none",
+  },
+
+  drawerIcon: {
+    color: "black",
+    fontSize: "28px",
+  },
+
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0.7, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
+  },
+
+  menuButton: {
+    // display: "none",
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "100%",
+    // },
+    // top: "50%",
+    // transform: "translateY(-50%)",
+    // margin: "0.1em 0em 0em 0em",
+    color: "black",
+  },
+
+  menuIcon: {
+    fontSize: "40px",
+  },
+
+  menuButtonGrid: {
+    display: "none",
+
+    [theme.breakpoints.down("md")]: {
+      display: "initial",
+    },
   },
 
   button: {
@@ -62,8 +170,20 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.2em",
   },
 
+  buttonSmall: {
+    width: "100%",
+    userSelect: "none",
+    userDrag: "none",
+  },
+
   buttongrid: {
-    marginRight: "4em",
+    paddingRight: "4em",
+    userSelect: "none",
+    userDrag: "none",
+
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
   fab: {
     position: "fixed",
@@ -88,6 +208,29 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(1),
     left: theme.spacing(1),
   },
+
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+
+    // [theme.breakpoints.down("xs")]: {
+    //   zIndex: theme.zIndex.drawer + 1,
+    // },
+  },
+  verticalTabs: {
+    userSelect: "none",
+    userDrag: "none",
+  },
+
+  indicator: {
+    left: 0,
+  },
+  // contentShift: {
+  //   transition: theme.transitions.create("margin", {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  //   marginRight: 0,
+  // },
 }));
 
 function ScrollTop(props) {
@@ -99,7 +242,12 @@ function ScrollTop(props) {
   });
 
   const handleClick = () => {
-    window[`scrollTo`]({ top: 0, behavior: `smooth` });
+    //window[`scrollTo`]({ top: 0, behavior: `smooth` });
+    if (isMobile) {
+      scroll.scrollToTop({ duration: 800, delay: 0, smooth: "easeInOutQuart" });
+    } else {
+      scroll.scrollToTop({ duration: 0, delay: 0, smooth: "easeInOutQuart" });
+    }
   };
 
   return (
@@ -154,6 +302,7 @@ const HideOnScroll = ({ children }) => {
 
 const Navbar = () => {
   const styles = useStyles();
+  const theme = useTheme();
   const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -165,38 +314,150 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
-        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
-        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
       default:
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
+        if (isMobile) {
+          scroll.scrollToTop({
+            duration: 800,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        } else {
+          scroll.scrollToTop({
+            duration: 0,
+            delay: 0,
+            smooth: "easeInOutQuart",
+          });
+        }
         break;
     }
   }, [location]);
 
-  useEffect(() => {
-    const img1 = new Image();
-    img1.src = companyLogo.fileName;
-  }, []);
+  // useEffect(() => {
+  //   const img1 = new Image();
+  //   img1.src = companyLogo.fileName;
+  // }, []);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const handleDrawerOpen = (e) => {
+    setOpenDrawer(true);
+  };
+
+  // Fire to close drawer
+  const handleDrawerClose = (e) => {
+    setOpenDrawer(false);
+  };
+
+  if (openDrawer === true) {
+    document.documentElement.style.overflow = "hidden";
+  } else {
+    if (
+      !location.pathname.toLowerCase().startsWith("/") ||
+      !location.pathname.toLowerCase().startsWith("/home")
+    ) {
+      document.documentElement.style.overflow = "visible";
+    }
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -209,20 +470,29 @@ const Navbar = () => {
           <Toolbar className={styles.toolbar}>
             <Grid justifyContent={"space-between"} container>
               <Grid item>
-                <Grid container>
-                  {/* <Tooltip title="Home" placement="right"> */}
-                  <Grid item>
-                    {/* <Link to="/Home" className={styles.appbarLinks}> */}
-                    <img className={styles.logo} src={companyLogo} alt="logo" />
-                  </Grid>
-                  <Grid item>
-                    <Typography className={styles.companyName}>
-                      ALL•CON Contracting
-                    </Typography>
-                  </Grid>
-                  {/* </Link> */}
-                  {/* </Tooltip> */}
-                </Grid>
+                <Tooltip title="Home" placement="right">
+                  <Link to="/Home" className={styles.appbarLinks}>
+                    <Grid container>
+                      <Grid item>
+                        <img
+                          className={styles.logo}
+                          src={companyLogo}
+                          alt="logo"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Typography className={styles.companyName}>
+                          ALL•CON
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography className={styles.companyNameSmall}>
+                          Contracting
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Link>
+                </Tooltip>
               </Grid>
               <Grid className={styles.buttongrid} item>
                 <Tabs value={value} onChange={handleChange}>
@@ -261,18 +531,100 @@ const Navbar = () => {
                   />
                 </Tabs>
               </Grid>
+              <Grid className={styles.menuButtonGrid}>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="end"
+                  onClick={handleDrawerOpen}
+                  className={styles.menuButton}
+                >
+                  <MenuIcon className={styles.menuIcon} />
+                </IconButton>
+              </Grid>
             </Grid>
           </Toolbar>
           <Divider />
         </AppBar>
       </HideOnScroll>
-      <Toolbar />
+
+      <Drawer
+        className={styles.drawer}
+        variant="persistent"
+        anchor="right"
+        open={openDrawer}
+        classes={{
+          paper: styles.drawerPaper,
+        }}
+      >
+        <div className={styles.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronRightIcon className={styles.drawerIcon} />
+          </IconButton>
+        </div>
+        <Divider />
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          className={styles.verticalTabs}
+          classes={{
+            indicator: styles.indicator,
+          }}
+        >
+          <Tab
+            component={Link}
+            to="/Home"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Home"
+          />
+          <Tab
+            component={Link}
+            to="/About"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="About"
+          />
+
+          <Tab
+            component={Link}
+            to="/Projects"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Projects"
+          />
+
+          <Tab
+            component={Link}
+            to="/Home"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Testimonies"
+          />
+
+          <Tab
+            component={Link}
+            to="/Contacts"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Contacts"
+          />
+        </Tabs>
+      </Drawer>
+      {/* <Toolbar /> */}
       <ScrollTop>
         <Fab color="secondary" size="small">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
       <BackFAB />
+      <Backdrop
+        className={styles.backdrop}
+        open={openDrawer}
+        onClick={handleDrawerClose}
+      />
     </React.Fragment>
   );
 };
