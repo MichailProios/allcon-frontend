@@ -104,6 +104,8 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     zIndex: theme.zIndex.drawer + 2,
+    userSelect: "none",
+    userDrag: "none",
   },
 
   drawerIcon: {
@@ -155,10 +157,14 @@ const useStyles = makeStyles((theme) => ({
 
   buttonSmall: {
     width: "100%",
+    userSelect: "none",
+    userDrag: "none",
   },
 
   buttongrid: {
     paddingRight: "4em",
+    userSelect: "none",
+    userDrag: "none",
 
     [theme.breakpoints.down("md")]: {
       display: "none",
@@ -194,6 +200,10 @@ const useStyles = makeStyles((theme) => ({
     // [theme.breakpoints.down("xs")]: {
     //   zIndex: theme.zIndex.drawer + 1,
     // },
+  },
+  verticalTabs: {
+    userSelect: "none",
+    userDrag: "none",
   },
 
   indicator: {
@@ -538,6 +548,7 @@ const Navbar = () => {
           variant="scrollable"
           value={value}
           onChange={handleChange}
+          className={styles.verticalTabs}
           classes={{
             indicator: styles.indicator,
           }}
