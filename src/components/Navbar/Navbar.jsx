@@ -1,5 +1,6 @@
 //Basic dependencies
 import React, { useState, useEffect } from "react";
+import clsx from "clsx";
 import * as Scroll from "react-scroll";
 import { isMobile } from "react-device-detect";
 import {
@@ -29,7 +30,13 @@ import {
   Tabs,
   Tab,
   Tooltip,
+  Drawer,
+  Backdrop,
 } from "@material-ui/core";
+
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 import { useNavigate } from "react-router-dom";
 
@@ -40,6 +47,9 @@ import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
 //Pictures and Icons
 import companyLogo from "../../utilities/images/Logos/logo-new.png";
+import { useTheme } from "@material-ui/styles";
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -64,6 +74,73 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     width: "100vw",
     overflowX: "hidden",
+    zIndex: theme.zIndex.drawer + 1,
+    // backgroundColor: theme.palette.primary.main,
+    // transition: theme.transitions.create(["width", "margin"], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
+  },
+
+  // appbarShift: {
+  //   marginLeft: drawerWidth,
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   transition: theme.transitions.create(["width", "margin"], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+
+  //   [theme.breakpoints.down("sm")]: {
+  //     width: "100%",
+  //   },
+  // },
+
+  drawer: {
+    width: drawerWidth,
+    zIndex: theme.zIndex.drawer + 2,
+    flexShrink: 0,
+  },
+
+  drawerPaper: {
+    width: drawerWidth,
+    zIndex: theme.zIndex.drawer + 2,
+  },
+
+  drawerIcon: {
+    color: "black",
+    fontSize: "28px",
+  },
+
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0.7, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
+  },
+
+  menuButton: {
+    // display: "none",
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "100%",
+    // },
+    // top: "50%",
+    // transform: "translateY(-50%)",
+    // margin: "0.1em 0em 0em 0em",
+    color: "black",
+  },
+
+  menuIcon: {
+    fontSize: "40px",
+  },
+
+  menuButtonGrid: {
+    display: "none",
+
+    [theme.breakpoints.down("md")]: {
+      display: "inline",
+    },
   },
 
   button: {
@@ -76,8 +153,16 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.2em",
   },
 
+  buttonSmall: {
+    width: "100%",
+  },
+
   buttongrid: {
-    marginRight: "4em",
+    paddingRight: "4em",
+
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
   fab: {
     position: "fixed",
@@ -102,6 +187,25 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(1),
     left: theme.spacing(1),
   },
+
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+
+    // [theme.breakpoints.down("xs")]: {
+    //   zIndex: theme.zIndex.drawer + 1,
+    // },
+  },
+
+  indicator: {
+    left: 0,
+  },
+  // contentShift: {
+  //   transition: theme.transitions.create("margin", {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  //   marginRight: 0,
+  // },
 }));
 
 function ScrollTop(props) {
@@ -173,6 +277,7 @@ const HideOnScroll = ({ children }) => {
 
 const Navbar = () => {
   const styles = useStyles();
+  const theme = useTheme();
   const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -307,6 +412,27 @@ const Navbar = () => {
   //   const img1 = new Image();
   //   img1.src = companyLogo.fileName;
   // }, []);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const handleDrawerOpen = (e) => {
+    setOpenDrawer(true);
+  };
+
+  // Fire to close drawer
+  const handleDrawerClose = (e) => {
+    setOpenDrawer(false);
+  };
+
+  if (openDrawer === true) {
+    document.body.style.overflow = "hidden";
+  } else {
+    if (
+      !location.pathname.toLowerCase().startsWith("/") ||
+      !location.pathname.toLowerCase().startsWith("/home")
+    ) {
+      document.body.style.overflow = "visible";
+    }
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -375,11 +501,87 @@ const Navbar = () => {
                   />
                 </Tabs>
               </Grid>
+              <Grid className={styles.menuButtonGrid}>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="end"
+                  onClick={handleDrawerOpen}
+                  className={styles.menuButton}
+                >
+                  <MenuIcon className={styles.menuIcon} />
+                </IconButton>
+              </Grid>
             </Grid>
           </Toolbar>
           <Divider />
         </AppBar>
       </HideOnScroll>
+
+      <Drawer
+        className={styles.drawer}
+        variant="persistent"
+        anchor="right"
+        open={openDrawer}
+        classes={{
+          paper: styles.drawerPaper,
+        }}
+      >
+        <div className={styles.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronRightIcon className={styles.drawerIcon} />
+          </IconButton>
+        </div>
+        <Divider />
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          classes={{
+            indicator: styles.indicator,
+          }}
+        >
+          <Tab
+            component={Link}
+            to="/Home"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Home"
+          />
+          <Tab
+            component={Link}
+            to="/About"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="About"
+          />
+
+          <Tab
+            component={Link}
+            to="/Projects"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Projects"
+          />
+
+          <Tab
+            component={Link}
+            to="/Home"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Testimonies"
+          />
+
+          <Tab
+            component={Link}
+            to="/Contacts"
+            onClick={handleDrawerClose}
+            className={styles.buttonSmall}
+            label="Contacts"
+          />
+        </Tabs>
+      </Drawer>
       {/* <Toolbar /> */}
       <ScrollTop>
         <Fab color="secondary" size="small">
@@ -387,6 +589,11 @@ const Navbar = () => {
         </Fab>
       </ScrollTop>
       <BackFAB />
+      <Backdrop
+        className={styles.backdrop}
+        open={openDrawer}
+        onClick={handleDrawerClose}
+      />
     </React.Fragment>
   );
 };

@@ -180,6 +180,7 @@ const Projects = () => {
           image={value.image}
           link={value.link}
           index={index}
+          key={index}
         />
       ))}
     </Grid>
