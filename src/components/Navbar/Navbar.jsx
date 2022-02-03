@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     userDrag: "none",
   },
   companyName: {
-    margin: "1em 0.6em 0.6em 0.2em",
+    margin: "1em 0.4em 0.6em 0.2em",
     letterSpacing: "0.1em",
     fontSize: "1.2em",
     fontSmooth: "5em",
@@ -68,6 +68,21 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     userSelect: "none",
     userDrag: "none",
+  },
+  companyNameSmall: {
+    margin: "1em 0em 0em 0em",
+    letterSpacing: "0.1em",
+    fontSize: "1.2em",
+    fontSmooth: "5em",
+    fontFamily: "EB Garamond , serif",
+    color: "black",
+    textDecoration: "none",
+    userSelect: "none",
+    userDrag: "none",
+
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   appbar: {
     backgroundColor: "#fff",
@@ -141,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
 
     [theme.breakpoints.down("md")]: {
-      display: "inline",
+      display: "initial",
     },
   },
 
@@ -299,7 +314,7 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
-        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -316,7 +331,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
-        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -333,7 +348,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -350,7 +365,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -367,7 +382,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -384,7 +399,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -400,7 +415,7 @@ const Navbar = () => {
         }
         break;
       default:
-        document.body.style.overflow = "visible";
+        document.documentElement.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -434,13 +449,13 @@ const Navbar = () => {
   };
 
   if (openDrawer === true) {
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
   } else {
     if (
       !location.pathname.toLowerCase().startsWith("/") ||
       !location.pathname.toLowerCase().startsWith("/home")
     ) {
-      document.body.style.overflow = "visible";
+      document.documentElement.style.overflow = "visible";
     }
   }
 
@@ -467,7 +482,12 @@ const Navbar = () => {
                       </Grid>
                       <Grid item>
                         <Typography className={styles.companyName}>
-                          ALL•CON Contracting
+                          ALL•CON
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography className={styles.companyNameSmall}>
+                          Contracting
                         </Typography>
                       </Grid>
                     </Grid>

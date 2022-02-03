@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   quote: {
     margin: 0,
     position: "absolute",
+    width: "auto",
     top: "90%",
     left: "25%",
     transform: "translate(-50%, -50%)",
@@ -35,6 +36,21 @@ const useStyles = makeStyles((theme) => ({
 
     userSelect: "none",
     userDrag: "none",
+
+    [theme.breakpoints.down("lg")]: {
+      top: "90%",
+      left: "30%",
+    },
+
+    [theme.breakpoints.down("md")]: {
+      top: "90%",
+      left: "40%",
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      top: "85%",
+      left: "35%",
+    },
   },
 }));
 

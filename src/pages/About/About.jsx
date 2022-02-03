@@ -11,20 +11,45 @@ import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
 import pic from "../../utilities/images/Logos/logo-new.png";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   companyProfileGrid: {
     padding: "2em 10em 2em 10em",
+
+    [theme.breakpoints.down("lg")]: {
+      padding: "2em 8em 2em 8em",
+    },
+
+    [theme.breakpoints.down("md")]: {
+      padding: "2em 4em 2em 4em",
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      padding: "2em 1em 2em 1em",
+    },
+
     width: "100%",
   },
   profileCardsGrid: {
     padding: "1em 10em 2em 10em",
     width: "100%",
+
+    [theme.breakpoints.down("lg")]: {
+      padding: "2em 8em 2em 8em",
+    },
+
+    [theme.breakpoints.down("md")]: {
+      padding: "2em 4em 2em 4em",
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      padding: "1em 1em 1em 1em",
+    },
   },
   text: {
     userSelect: "none",
     userDrag: "none",
   },
-});
+}));
 
 const About = () => {
   const styles = useStyles();

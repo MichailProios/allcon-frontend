@@ -82,6 +82,13 @@ const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: "0px",
   },
 
+  card: {
+    height: "48em",
+
+    [theme.breakpoints.down("lg")]: {
+      height: "auto",
+    },
+  },
   cardHeader: {
     userSelect: "none",
     userDragL: "none",
@@ -220,7 +227,7 @@ const LuptonHall = () => {
       </Fade>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
         <Grow in={useDelayTransition(400)} timeout={800}>
-          <Card style={{ height: "48em" }}>
+          <Card className={styles.card}>
             <CardHeader title="Project Info" className={styles.cardHeader} />
             <Divider />
             <CardContent>
