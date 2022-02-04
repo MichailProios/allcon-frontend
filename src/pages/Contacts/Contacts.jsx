@@ -8,6 +8,12 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import GoogleMapReact from "google-map-react";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
 
 import { Grid, Grow, Slide, Divider } from "@material-ui/core";
 
@@ -16,6 +22,19 @@ import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 const useStyles = makeStyles((theme) => ({
   contactUsGridContainer: {
     padding: "2em 10em 2em 10em",
+
+    [theme.breakpoints.down("lg")]: {
+      padding: "2em 8em 2em 8em",
+    },
+
+    [theme.breakpoints.down("md")]: {
+      padding: "2em 4em 2em 4em",
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      padding: "2em 1em 2em 1em",
+    },
+
     width: "100%",
   },
   button: {
@@ -32,6 +51,16 @@ const useStyles = makeStyles((theme) => ({
   stepper: {
     backgroundColor: "#fff",
     borderRadius: "6px",
+  },
+
+  mapPaper: {
+    maxWidth: "100%",
+    height: "100vh",
+  },
+
+  card: {
+    maxWidth: "100%",
+    height: "100vh",
   },
 }));
 
@@ -161,11 +190,16 @@ const Contacts = () => {
     setActiveStep(0);
   };
 
+  const center = {
+    lat: 40.756823037731245,
+    lng: -73.55916134438887,
+  };
+
   return (
     <Grid
       container
       spacing={2}
-      direction="column"
+      direction="row"
       className={styles.contactUsGridContainer}
     >
       <Grid
@@ -238,6 +272,46 @@ const Contacts = () => {
           </Paper>
         )}
       </Grid>
+      <Grow in={useDelayTransition(500)} timeout={800}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
+          <Paper className={styles.mapPaper}>
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
+              }}
+              defaultCenter={center}
+              defaultZoom={18}
+            >
+              {/* <AnyReactComponent
+            lat={59.955413}
+            lng={30.337844}
+            text="My Marker"
+          /> */}
+            </GoogleMapReact>
+          </Paper>
+        </Grid>
+      </Grow>
+
+      <Grow in={useDelayTransition(1000)} timeout={800}>
+        <Grid item xs={12} sm={12} md={2} lg={12} xl={2}>
+          <Card className={styles.card}>
+            <CardHeader
+              title=" Office Information"
+              className={styles.cardHeader}
+            />
+            <Divider />
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Office Information
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grow>
     </Grid>
   );
 };
