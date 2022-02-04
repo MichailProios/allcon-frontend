@@ -14,6 +14,7 @@ export default async function delayTransition(ms) {
   }
 
   await wait(milliseconds);
+
   flag = true;
 
   return flag;

@@ -15,6 +15,18 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Box from "@mui/material/Box";
 import { Divider } from "@material-ui/core";
 
+import * as Scroll from "react-scroll";
+import { isMobile } from "react-device-detect";
+import {
+  LinkScroll,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
+
 import MobileStepper from "@material-ui/core/MobileStepper";
 
 import Button from "@material-ui/core/Button";
@@ -27,9 +39,13 @@ import wait from "wait";
 
 import MuiImage from "material-ui-image";
 
-import useDelayTransition from "../../../utilities/customHooks/useDelayTransition";
+import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
+import delayTransition from "../../utilities/customFunctions/delayTransition";
 
 import { Paper, Grid, Fade, Grow } from "@material-ui/core";
+
+import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -41,16 +57,11 @@ const useStyles = makeStyles((theme) => ({
   picture: {
     userDrag: "none",
     userSelect: "none",
-    // borderRadius: "4px",
-    // width: "100%",
-    // height: "60vh",
-    height: "auto",
-    objectFit: "contain",
-    objectPosition: "center",
+    // height: "45em",
   },
   carousel: {
     width: "100%",
-    height: "100%",
+    // height: "45em",
   },
 
   views: {
@@ -59,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   stepper: {
+    backgroundColor: "#fff",
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
     overflow: "none",
@@ -67,20 +79,33 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
 
-  paper: { overflow: "hidden", height: "45em" },
+  paper: {
+    overflow: "hidden",
+    height: "45em",
+    borderBottomLeftRadius: "0px",
+    borderBottomRightRadius: "0px",
+  },
 
+  card: {
+    height: "48em",
+
+    [theme.breakpoints.down("lg")]: {
+      height: "auto",
+    },
+  },
   cardHeader: {
     userSelect: "none",
     userDragL: "none",
   },
+  textPrimary: {
+    userSelect: "none",
+    useDrag: "none",
+  },
+  textSecondary: {
+    userSelect: "none",
+    useDrag: "none",
+  },
 }));
-function importAll(r) {
-  let images = {};
-  r.keys().forEach((item, index) => {
-    images[item.replace("./", "")] = r(item);
-  });
-  return images;
-}
 
 function slideRenderer(params, images) {
   const { index, key } = params;
@@ -88,23 +113,42 @@ function slideRenderer(params, images) {
   return <Picture key={key} image={Object.values(images)[index]} />;
 }
 
-let images = importAll(
-  require.context(
-    "../../../utilities/images/lupton-hall",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg)$/
-  )
-);
-
-const ProjectPage = ({ ImageFolder, ProjectInfo, ProjectDescription }) => {
+const ProjectPage = ({
+  pictures,
+  projectName,
+  projectLocation,
+  clientAffiliatedAgency,
+  yearCompleted,
+  projectCostBudget,
+  projectDesigner,
+  description,
+}) => {
   const styles = useStyles();
   const theme = useTheme();
 
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [animationFlag1, setAnimationFlag1] = useState(false);
+  const [animationFlag2, setAnimationFlag2] = useState(false);
+  const [animationFlag3, setAnimationFlag3] = useState(false);
+
+  // setAnimationFlag1(useDelayTransition(100));
+  // setAnimationFlag2(useDelayTransition(500));
+  // setAnimationFlag3(useDelayTransition(800));
+
+  let images = pictures;
+
   useEffect(() => {
-    Object.values(images).forEach((picture) => {
-      const img = new Image();
-      img.src = picture;
-    });
+    // Object.values(images).forEach((picture) => {
+    //   const img = new Image();
+    //   img.src = picture;
+    // });
+
+    // cacheImages(Object.values(images));
+
+    setIsLoaded(true);
+    delayTransition(0).then((response) => setAnimationFlag1(response));
+    delayTransition(500).then((response) => setAnimationFlag2(response));
+    delayTransition(1200).then((response) => setAnimationFlag3(response));
   }, []);
 
   const [activeStep, setActiveStep] = useState(0);
@@ -122,154 +166,187 @@ const ProjectPage = ({ ImageFolder, ProjectInfo, ProjectDescription }) => {
     setActiveStep(step);
   };
 
-  const handleClick = async (event, expanded) => {
+  const handleClick = (event, expanded) => {
     if (expanded) {
-      await wait(250);
-      window[`scrollTo`]({ top: 99999, behavior: "smooth" });
+      if (isMobile) {
+        scroll.scrollToBottom({
+          duration: 800,
+          delay: 250,
+          smooth: "easeInOutQuart",
+        });
+      } else {
+        scroll.scrollToBottom({
+          duration: 0,
+          delay: 250,
+          smooth: "easeInOutQuart",
+        });
+      }
     }
   };
 
-  return (
-    <Grid container spacing={1} className={styles.root}>
-      <Fade in={useDelayTransition(150)} timeout={800}>
-        <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
-          <Paper elevation={2} className={styles.carousel}>
-            <VirtualizeSwipeableViews
-              className={styles.views}
-              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-              index={activeStep}
-              onChangeIndex={handleStepChange}
-              enableMouseEvents={false}
-              slideRenderer={(params) => slideRenderer(params, images)}
-              overscanSlideAfter={1}
-              overscanSlideBefore={1}
-              disableLazyLoading={false}
-              slideCount={maxSteps}
-              animateTransitions={true}
-            />
+  if (isLoaded) {
+    return (
+      <Grid container spacing={1} className={styles.root}>
+        <Grow in={animationFlag1} timeout={800}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
+            <Paper elevation={2} className={styles.carousel}>
+              <VirtualizeSwipeableViews
+                className={styles.views}
+                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                index={activeStep}
+                onChangeIndex={handleStepChange}
+                enableMouseEvents={false}
+                slideRenderer={(params) => slideRenderer(params, images)}
+                overscanSlideAfter={1}
+                overscanSlideBefore={1}
+                disableLazyLoading={false}
+                slideCount={maxSteps}
+                animateTransitions={true}
+              />
 
-            <MobileStepper
-              className={styles.stepper}
-              steps={maxSteps}
-              position="static"
-              variant="dots"
-              activeStep={activeStep}
-              nextButton={
-                <Button
-                  size="small"
-                  onClick={handleNext}
-                  disabled={activeStep === maxSteps - 1}
-                >
-                  Next
-                  {theme.direction === "rtl" ? (
-                    <KeyboardArrowLeft />
-                  ) : (
-                    <KeyboardArrowRight />
-                  )}
-                </Button>
-              }
-              backButton={
-                <Button
-                  size="small"
-                  onClick={handleBack}
-                  disabled={activeStep === 0}
-                >
-                  {theme.direction === "rtl" ? (
-                    <KeyboardArrowRight />
-                  ) : (
-                    <KeyboardArrowLeft />
-                  )}
-                  Back
-                </Button>
-              }
-            />
-          </Paper>
+              <MobileStepper
+                className={styles.stepper}
+                steps={maxSteps}
+                position="static"
+                variant={!isMobile ? "dots" : "text"}
+                activeStep={activeStep}
+                nextButton={
+                  <Button
+                    size="small"
+                    onClick={handleNext}
+                    disabled={activeStep === maxSteps - 1}
+                  >
+                    Next
+                    {theme.direction === "rtl" ? (
+                      <KeyboardArrowLeft />
+                    ) : (
+                      <KeyboardArrowRight />
+                    )}
+                  </Button>
+                }
+                backButton={
+                  <Button
+                    size="small"
+                    onClick={handleBack}
+                    disabled={activeStep === 0}
+                  >
+                    {theme.direction === "rtl" ? (
+                      <KeyboardArrowRight />
+                    ) : (
+                      <KeyboardArrowLeft />
+                    )}
+                    Back
+                  </Button>
+                }
+              />
+            </Paper>
+          </Grid>
+        </Grow>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+          <Grow in={animationFlag2} timeout={800}>
+            <Card className={styles.card}>
+              <CardHeader title="Project Info" className={styles.cardHeader} />
+              <Divider />
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Project Name:
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      {projectName}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Project Location:
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      {projectLocation}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Client/ Affiliated Agency:
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      {clientAffiliatedAgency}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Year Completed:
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      {yearCompleted}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Project Cost/Budget:
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      {projectCostBudget}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Project Designer:
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      {projectDesigner}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grow>
         </Grid>
-      </Fade>
-      <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
-        <Grow in={useDelayTransition(300)} timeout={800}>
-          <Card style={{ height: "48em" }}>
-            <CardHeader title="Project Info" className={styles.cardHeader} />
-            <Divider />
-            <CardContent>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Name:</Typography>
-                  <Typography variant="body1">SUNY Lupton Hall </Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Location:</Typography>
-                  <Typography variant="body1">
-                    2350 Broadhollow Road, Farmingdale, NY 11735
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">
-                    Client/ Affiliated Agency:
-                  </Typography>
-                  <Typography variant="body1">
-                    NYS OGS – Design & Construction Group
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Year Completed:</Typography>
-                  <Typography variant="body1">In Progress</Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Cost/Budget:</Typography>
-                  <Typography variant="body1">$10,856,274.00</Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6">Project Designer:</Typography>
-                  <Typography variant="body1">
-                    Hoffmann Architects, Inc.
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grow>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grow in={animationFlag3} timeout={800}>
+            <Accordion onChange={handleClick}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography
+                  variant="body1"
+                  component="div"
+                  className={styles.accordionHeader}
+                >
+                  <Box sx={{ fontWeight: "bold" }}>
+                    Project Description (Click to Expand)
+                  </Box>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1" className={styles.textPrimary}>
+                  {description}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </Grow>
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-        <Grow in={useDelayTransition(600)} timeout={800}>
-          <Accordion onChange={handleClick}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography
-                variant="body1"
-                component="div"
-                className={styles.accordionHeader}
-              >
-                <Box sx={{ fontWeight: "bold" }}>
-                  Project Description (Click to Expand)
-                </Box>
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1">
-                An extensive 90,000 square foot of new copper roofing. The
-                project started with the removal of the existing roofing system
-                and Asbestos abatement.
-                <br /> <br />
-                Moving to a new unique structural design that Allcon proposed
-                and developed.
-                <br /> <br />
-                The structural design included a high gauge metal system that
-                bypass the concrete deck and attached to the existing structural
-                system with blind bolts (box bolts) and withstands wind speed up
-                to 126 mph.
-                <br /> <br />
-                The copper fabrication was a mix between machine fabrications
-                for the panels and hand art for the little details.
-                <br /> <br />
-                With all the beautiful details, this building is set to be a
-                landmarks for Farmingdale.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        </Grow>
-      </Grid>
-    </Grid>
-  );
+    );
+  } else {
+    return <LoadingSpinner />;
+  }
 };
 
 const Picture = ({ name, image, position }) => {
@@ -279,8 +356,8 @@ const Picture = ({ name, image, position }) => {
     <Paper className={styles.paper}>
       <MuiImage
         imageStyle={{
-          width: "100%",
-          height: "auto",
+          maxWidth: "100%",
+          height: "45em",
           objectFit: "contain",
 
           // position: "fixed",
@@ -291,7 +368,11 @@ const Picture = ({ name, image, position }) => {
           // borderRadius: "4px",
         }}
         // cover={true}
-        animationDuration={500}
+        iconContainerStyle={{
+          maxWidth: "100%",
+          height: "45em",
+        }}
+        animationDuration={800}
         disableTransition={false}
         src={image}
         className={styles.picture}

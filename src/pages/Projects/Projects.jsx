@@ -22,21 +22,24 @@ import { makeStyles } from "@material-ui/styles";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
 import lupton from "../../utilities/images/lupton-hall/lupton.jpg";
-import carlPlaceLobby from "../../utilities/images/carlplacelobby/carlplacelobby.JPG";
+import stdemetrios from "../../utilities/images/stdemetrios/image003.jpg";
+import nold from "../../utilities/images/nold/11-6-21-2.jpg";
+import bridgewater500 from "../../utilities/images/500brightwater/1-18-2022-35.jpg";
 import bareBurger from "../../utilities/images/bareburger/DSC00355.JPG";
-import carlPlaceLib from "../../utilities/images/carlplacelibrary/DSC00231.JPG";
-import west255 from "../../utilities/images/255w/DSC00902.JPG";
-import townhouse17w from "../../utilities/images/17w10street/IMG_7491.jpg";
-import pierrpointStreet from "../../utilities/images/55pierre/DSC00083.JPG";
-import w79thStreet from "../../utilities/images/164w79th/image001.jpg";
 import wilsonAnimal from "../../utilities/images/hudsonanimal/DSC00249.JPG";
-import stdemetrios from "../../utilities/images/stdemetrios/church.jpg";
-import njvet from "../../utilities/images/njvet/DSC00209.JPG";
+import west255 from "../../utilities/images/255w/DSC00902.JPG";
+import east209th from "../../utilities/images/20east9th/DSC00345.JPG";
+import upperEastVetenary from "../../utilities/images/uppereastveterinary/DSC00250.JPG";
 import carlePlaceAuditorium from "../../utilities/images/carlplace/DSC00161.JPG";
+import carlPlaceLobby from "../../utilities/images/carlplacelobby/carlplacelobby.JPG";
+import carlPlaceLib from "../../utilities/images/carlplacelibrary/DSC00231.JPG";
+import njvet from "../../utilities/images/njvet/DSC00209.JPG";
 import hudsonAnimal from "../../utilities/images/hudsonanimal/DSC00135.JPG";
 import westchesterAve from "../../utilities/images/866westchester/DSC00300.JPG";
-import upperEastVetenary from "../../utilities/images/uppereastveterinary/DSC00250.JPG";
-import east209th from "../../utilities/images/20east9th/DSC00345.JPG";
+import pierrpointStreet from "../../utilities/images/55pierre/DSC00083.JPG";
+import w79thStreet from "../../utilities/images/164w79th/image001.jpg";
+import townhouse17w from "../../utilities/images/17w10street/IMG_7491.jpg";
+
 import { wait } from "@testing-library/user-event/dist/utils";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
@@ -54,121 +57,95 @@ const Projects = () => {
     {
       title: "Lupton Hall - Roof Replacement",
       image: lupton,
-      cols: 4,
-      rows: 1,
       link: "/Projects/LuptonHall",
     },
     {
-      title: "Carle Place UFSD – Lobby Renovations",
-      image: carlPlaceLobby,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
+      title: "St. Demetrios Greek Orthodox Church",
+      image: stdemetrios,
+      link: "/Projects/SaintDemetriosChurch",
+    },
+    {
+      title: "Farmingdale Nold Hall Gymnasium",
+      image: nold,
+      link: "/Projects/Nold",
+    },
+    {
+      title: "500 Brightwater Court",
+      image: bridgewater500,
+      link: "/Projects/500Bridgewater",
+    },
+    {
+      title: "Bareburger 1681 East 87th Street",
+      image: bareBurger,
+      link: "/Projects/Bareburger",
+    },
+    {
+      title: "Williston Animal Hospital",
+      image: wilsonAnimal,
+      link: "/Projects/WilsonAnimal",
+    },
+    {
+      title: "255 West 108th Street",
+      image: west255,
+      link: "/Projects/255West",
+    },
+    {
+      title: "20 East 9th Street",
+      image: east209th,
+      link: "/Projects/20East",
+    },
+    {
+      title: "Upper East Side Veterinary Hospital",
+      image: upperEastVetenary,
+      link: "/Projects/UpperEastVetenary",
+    },
+    {
+      title: "Carle Place UFSD – Auditorium Renovations",
+      image: carlePlaceAuditorium,
+      link: "/Projects/CarlePlaceAuditorium",
     },
 
     {
-      title: "St. Demetrios Greek Orthodox Church",
-      image: stdemetrios,
-      cols: 4,
-      rows: 2,
-      link: "/Projects/inprogress",
+      title: "Carle Place UFSD – Lobby Renovations",
+      image: carlPlaceLobby,
+      link: "/Projects/CarlePlaceLobby",
     },
 
     {
       title: "Carle Place UFSD – Library Renovations",
       image: carlPlaceLib,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-
-    {
-      title: "255 West 108th Street",
-      image: west255,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
+      link: "/Projects/CarlePlaceLibrary",
     },
     {
-      title: "Williston Animal Hospital",
-      image: wilsonAnimal,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
+      title: "New Jersey Veterinary Hospital",
+      image: njvet,
+      link: "/Projects/NewJerseyVeterinary ",
     },
-
     {
-      title: "1681 East 87th Street",
-      image: bareBurger,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
+      title: "Hudson Animal Hospital",
+      image: hudsonAnimal,
+      link: "/Projects/HudsonAnimalHospital",
+    },
+    {
+      title: "866 Westchester Ave.",
+      image: westchesterAve,
+      link: "/Projects/866Westchester",
+    },
+    {
+      title: "55 Pierrpoint Street",
+      image: pierrpointStreet,
+      link: "/Projects/55Pierrpoint",
+    },
+    {
+      title: "164 W79th Street",
+      image: w79thStreet,
+      link: "/Projects/164_W79th",
     },
 
     {
       title: "17W 10th St Townhouse",
       image: townhouse17w,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-    {
-      title: "164 W79th Street",
-      image: w79thStreet,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-    {
-      title: "55 Pierrpoint Street",
-      image: pierrpointStreet,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-    {
-      title: "Hudson Animal Hospital",
-      image: hudsonAnimal,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-
-    {
-      title: "New Jersey Veterinary Hospital",
-      image: njvet,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-    {
-      title: "20 East 9th Street",
-      image: east209th,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-    {
-      title: "Carle Place UFSD – Auditorium Renovations",
-      image: carlePlaceAuditorium,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-
-    {
-      title: "Upper East Side Veterinary Hospital",
-      image: upperEastVetenary,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
-    },
-    {
-      title: "866 Westchester Ave.",
-      image: westchesterAve,
-      cols: 4,
-      rows: 1,
-      link: "/Projects/inprogress",
+      link: "/Projects/17W_10th_Townhouse ",
     },
   ]);
 
