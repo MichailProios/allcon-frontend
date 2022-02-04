@@ -379,7 +379,7 @@ const ProjectPage = ({
 const Picture = ({ name, image, position }) => {
   const styles = useStyles();
   const theme = useTheme();
-  const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
+  // const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
   const matchesXXL = useMediaQuery(theme.breakpoints.up("xxl"));
   const matchesXXXL = useMediaQuery(theme.breakpoints.up("xxxl"));
 
@@ -391,7 +391,7 @@ const Picture = ({ name, image, position }) => {
     <Paper className={styles.paper}>
       <MuiImage
         imageStyle={
-          matchesXL && !matchesXXL && !matchesXXXL
+          matchesXXL && !matchesXXXL
             ? {
                 maxWidth: "100%",
                 height: "60em",
@@ -408,10 +408,25 @@ const Picture = ({ name, image, position }) => {
             : { maxWidth: "100%", height: "45em", objectFit: "contain" }
         }
         // cover={true}
-        iconContainerStyle={{
-          maxWidth: "100%",
-          height: "45em",
-        }}
+        iconContainerStyle={
+          matchesXXL && !matchesXXXL
+            ? {
+                maxWidth: "100%",
+                height: "60em",
+              }
+            : matchesXXL && !matchesXXXL
+            ? {
+                maxWidth: "100%",
+                height: "65em",
+              }
+            : matchesXXXL
+            ? { maxWidth: "100%", height: "120em" }
+            : { maxWidth: "100%", height: "45em" }
+        }
+        // iconContainerStyle={{
+        //   maxWidth: "100%",
+        //   height: "45em",
+        // }}
         animationDuration={800}
         disableTransition={false}
         src={image}

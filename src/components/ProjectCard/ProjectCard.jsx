@@ -12,6 +12,7 @@ import MuiImage from "material-ui-image";
 import { Grow, Fade } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { Slide, CardHeader, Paper } from "@material-ui/core";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
@@ -73,6 +74,9 @@ function ProjectCard({ title, image, link, index }) {
   const styles = useStyles();
   const theme = useTheme();
 
+  // const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseOver = () => {
@@ -121,10 +125,11 @@ function ProjectCard({ title, image, link, index }) {
                   maxWidth: "100%",
                   height: "30em",
                 }}
-                iconContainerStyle={{
-                  maxWidth: "100%",
-                  height: "30em",
-                }}
+                iconContainerStyle={
+                  matchesSM
+                    ? { maxWidth: "100%", height: "26em" }
+                    : { maxWidth: "100%", height: "30em" }
+                }
                 src={image}
                 cover={true}
                 animationDuration={100}

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 
-import lupton from "../../utilities/images/Home/lupton.jpg";
-import church from "../../utilities/images/Home/church.jpg";
+import church from "../../utilities/images/optimizedImages/image003.jpg";
+import lupton from "../../utilities/images/optimizedImages/10-23-1-22.jpg";
+import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.jpg";
+import nold from "../../utilities/images/optimizedImages/11-6-21-2.jpg";
 
 import MuiImage from "material-ui-image";
 
@@ -94,12 +96,21 @@ const Home = () => {
   useEffect(
     () =>
       void setInterval(
-        () => set((state) => (state === 0 ? state + 1 : (state = 0))) % 5,
+        () =>
+          set((state) =>
+            state === 0
+              ? (state = 1)
+              : state === 1
+              ? (state = 2)
+              : state === 2
+              ? (state = 3)
+              : (state = 0)
+          ) % 5,
         10000
       ),
     []
   );
-
+  console.log(index);
   return (
     <Fade in={useDelayTransition(150)} timeout={500}>
       <div>
@@ -123,6 +134,36 @@ const Home = () => {
             <Paper
               style={{
                 backgroundImage: "url(" + church + ")",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            />
+          </Fade>
+        )}
+
+        {index === 2 && (
+          <Fade in={true} timeout={800}>
+            <Paper
+              style={{
+                backgroundImage: "url(" + brightwater500 + ")",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            />
+          </Fade>
+        )}
+
+        {index === 3 && (
+          <Fade in={true} timeout={800}>
+            <Paper
+              style={{
+                backgroundImage: "url(" + nold + ")",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
