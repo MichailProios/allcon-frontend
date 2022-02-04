@@ -46,7 +46,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
 //Pictures and Icons
-import companyLogo from "../../utilities/images/Logos/logo-new.png";
+import companyLogo from "../../utilities/images/optimizedImages/logo-new.webp";
 import { useTheme } from "@material-ui/styles";
 
 const drawerWidth = 240;

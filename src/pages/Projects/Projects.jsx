@@ -21,10 +21,10 @@ import { makeStyles } from "@material-ui/styles";
 
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
-import lupton from "../../utilities/images/lupton-hall/lupton.jpg";
-import stdemetrios from "../../utilities/images/stdemetrios/image003.jpg";
-import nold from "../../utilities/images/nold/11-6-21-2.jpg";
-import bridgewater500 from "../../utilities/images/500brightwater/1-18-2022-35.jpg";
+import lupton from "../../utilities/images/optimizedImages/10-23-1-22.jpg";
+import stdemetrios from "../../utilities/images/optimizedImages/image003.jpg";
+import nold from "../../utilities/images/optimizedImages/11-6-21-2.jpg";
+import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.jpg";
 import bareBurger from "../../utilities/images/bareburger/DSC00355.JPG";
 import wilsonAnimal from "../../utilities/images/hudsonanimal/DSC00249.JPG";
 import west255 from "../../utilities/images/255w/DSC00902.JPG";
@@ -71,7 +71,7 @@ const Projects = () => {
     },
     {
       title: "500 Brightwater Court",
-      image: bridgewater500,
+      image: brightwater500,
       link: "/Projects/500Bridgewater",
     },
     {
