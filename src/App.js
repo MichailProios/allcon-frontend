@@ -18,8 +18,15 @@ import Home from "./pages/Home/Home.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
 import About from "./pages/About/About.jsx";
 
-import LuptonHall from "./pages/Projects/LuptonHall/LuptonHall.jsx";
 import Contacts from "./pages/Contacts/Contacts";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
+
+import routes from "./utilities/routes/routes";
+
+import lupton from "./utilities/images/Home/lupton.jpg";
+import church from "./utilities/images/Home/church.jpg";
+
+import cacheImages from "./utilities/customFunctions/cacheImages.jsx";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -97,27 +104,46 @@ const theme = createTheme({
 
 function App() {
   const styles = useStyles();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const imgs = [church, lupton];
+
+    cacheImages(imgs);
+
+    setIsLoaded(true);
+  }, []);
+
+  const routeComponents = routes.map(({ path, component }, key) => (
+    // <Route exact path={path} component={component} key={key} />
+    <Route path={path} exact element={component} key={key} />
+  ));
 
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Router>
-          <Navbar />
-          <div style={{ overflow: "hidden" }}>
-            <Routes>
-              <Route path="/" exact element={<Home />} />
-              <Route path="/home" exact element={<Home />} />
-              <Route path="/about" exact element={<About />} />
-              <Route path="/contacts" exact element={<Contacts />} />
-              <Route path="/projects" exact element={<Projects />} />
-              <Route
-                path="/projects/LuptonHall"
-                exact
-                element={<LuptonHall />}
-              />
-            </Routes>
-          </div>
-        </Router>
+        {isLoaded === true ? (
+          <Router>
+            <Navbar />
+            <div style={{ overflow: "hidden" }}>
+              <Routes>
+                <Route path="/" exact element={<Home />} />
+                <Route path="/home" exact element={<Home />} />
+                <Route path="/about" exact element={<About />} />
+                <Route path="/contacts" exact element={<Contacts />} />
+                <Route path="/projects" exact element={<Projects />} />
+                {/* <Route
+                  path="/projects/LuptonHall"
+                  exact
+                  element={<LuptonHall />}
+                /> */}
+                {routeComponents}
+              </Routes>
+            </div>
+          </Router>
+        ) : (
+          <LoadingSpinner />
+        )}
       </ThemeProvider>
     </React.Fragment>
   );

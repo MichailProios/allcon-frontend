@@ -268,7 +268,7 @@ function BackFAB() {
   const location = useLocation();
 
   useEffect(() => {
-    const pathnames = location.pathname;
+    const pathnames = location.pathname.toLowerCase();
 
     if (pathnames.startsWith("/Projects/".toLowerCase())) {
       setShowFlag(true);
