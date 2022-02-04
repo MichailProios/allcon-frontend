@@ -14,6 +14,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Tooltip from "@material-ui/core/Tooltip";
 import Box from "@mui/material/Box";
 import { Divider } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import * as Scroll from "react-scroll";
 import { isMobile } from "react-device-detect";
@@ -82,12 +83,38 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     overflow: "hidden",
     height: "45em",
+
+    // [theme.breakpoints.down("lg")]: {
+    //   height: "45em",
+    // },
+    // [theme.breakpoints.up("xl")]: {
+    //   height: "45em",
+    // },
+    [theme.breakpoints.up("xxl")]: {
+      height: "65em",
+    },
+
+    [theme.breakpoints.up("xxxl")]: {
+      height: "120em",
+    },
+
     borderBottomLeftRadius: "0px",
     borderBottomRightRadius: "0px",
   },
 
   card: {
     height: "48em",
+
+    // [theme.breakpoints.up("xl")]: {
+    //   height: "63em",
+    // },
+    [theme.breakpoints.up("xxl")]: {
+      height: "68em",
+    },
+
+    [theme.breakpoints.up("xxxl")]: {
+      height: "123em",
+    },
 
     [theme.breakpoints.down("lg")]: {
       height: "auto",
@@ -138,12 +165,12 @@ const ProjectPage = ({
   let images = pictures;
 
   useEffect(() => {
-    // Object.values(images).forEach((picture) => {
-    //   const img = new Image();
-    //   img.src = picture;
-    // });
+    Object.values(images).forEach((picture) => {
+      const img = new Image();
+      img.src = picture;
+    });
 
-    // cacheImages(Object.values(images));
+    cacheImages(Object.values(images));
 
     setIsLoaded(true);
     delayTransition(0).then((response) => setAnimationFlag1(response));
@@ -351,22 +378,35 @@ const ProjectPage = ({
 
 const Picture = ({ name, image, position }) => {
   const styles = useStyles();
+  const theme = useTheme();
+  const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
+  const matchesXXL = useMediaQuery(theme.breakpoints.up("xxl"));
+  const matchesXXXL = useMediaQuery(theme.breakpoints.up("xxxl"));
+
+  // console.log(matchesXL);
+  // console.log(matchesXXL);
+  console.log(matchesXXXL);
 
   return (
     <Paper className={styles.paper}>
       <MuiImage
-        imageStyle={{
-          maxWidth: "100%",
-          height: "45em",
-          objectFit: "contain",
-
-          // position: "fixed",
-          // left: 0,
-          // top: position,
-          // userDrag: "none",
-          // userSelect: "none",
-          // borderRadius: "4px",
-        }}
+        imageStyle={
+          matchesXL && !matchesXXL && !matchesXXXL
+            ? {
+                maxWidth: "100%",
+                height: "60em",
+                objectFit: "contain",
+              }
+            : matchesXXL && !matchesXXXL
+            ? {
+                maxWidth: "100%",
+                height: "65em",
+                objectFit: "contain",
+              }
+            : matchesXXXL
+            ? { maxWidth: "100%", height: "120em", objectFit: "contain" }
+            : { maxWidth: "100%", height: "45em", objectFit: "contain" }
+        }
         // cover={true}
         iconContainerStyle={{
           maxWidth: "100%",
