@@ -314,7 +314,8 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
-        document.documentElement.style.overflow = "hidden";
+        document.documentElement.style.overflowY = "hidden";
+        document.body.style.overflowY = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -331,7 +332,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
-        document.documentElement.style.overflow = "hidden";
+        document.documentElement.style.overflowY = "hidden";
+        document.body.style.overflowY = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -348,7 +350,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
-        document.documentElement.style.overflow = "visible";
+        document.documentElement.style.overflowY = "visible";
+        document.body.style.overflowY = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -365,7 +368,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.documentElement.style.overflow = "visible";
+        document.documentElement.style.overflowY = "visible";
+        document.body.style.overflowY = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -382,7 +386,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.documentElement.style.overflow = "visible";
+        document.documentElement.style.overflowY = "visible";
+        document.body.style.overflowY = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -399,7 +404,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.documentElement.style.overflow = "visible";
+        document.documentElement.style.overflowY = "visible";
+        document.body.style.overflowY = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -415,7 +421,8 @@ const Navbar = () => {
         }
         break;
       default:
-        document.documentElement.style.overflow = "visible";
+        document.documentElement.style.overflowY = "visible";
+        document.body.style.overflowY = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
