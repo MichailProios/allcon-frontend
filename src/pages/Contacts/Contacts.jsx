@@ -97,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "transform 0.10s ease-in-out",
     "&:hover": {
       transform: "scale3d(1.1, 1.1, 1)",
+      cursor: "pointer",
     },
     color: "#de5246",
   },
@@ -401,7 +402,7 @@ const Contacts = () => {
                     Office Address
                   </Typography>
                   <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to View Address">
+                    <Tooltip title="Click to View our Office Address">
                       <a
                         className={styles.links}
                         href="https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
@@ -468,7 +469,9 @@ const Contacts = () => {
                     className={styles.textSecondary}
                     style={{ color: "#008B8B", userSelect: "all" }}
                   >
-                    516-333-3344
+                    <Tooltip title="Click to Highlight">
+                      <span style={{ width: "auto" }}>516-333-3344</span>
+                    </Tooltip>
                   </Typography>
                 </Grid>
               </Grid>
