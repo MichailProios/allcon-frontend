@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Carousel from "react-material-ui-carousel";
 
 import church from "../../utilities/images/optimizedImages/image003.jpg";
-import lupton from "../../utilities/images/optimizedImages/10-23-1-22.jpg";
-import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.jpg";
-import nold from "../../utilities/images/optimizedImages/11-6-21-2.jpg";
+import lupton from "../../utilities/images/optimizedImages/10-23-1-22.webp";
+import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.webp";
+import nold from "../../utilities/images/optimizedImages/11-6-21-2.webp";
 
 import MuiImage from "material-ui-image";
 
@@ -17,6 +16,10 @@ import { Paper, Typography, Fade } from "@material-ui/core";
 
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay, virtualize } from "react-swipeable-views-utils";
+
+import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
+import delayTransition from "../../utilities/customFunctions/delayTransition";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const AutoPlaySwipeableViews = autoPlay(virtualize(SwipeableViews));
 
@@ -34,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "0.04em",
     fontSize: "2em",
     fontSmooth: "5em",
-    fontFamily: "EB Garamond , serif",
+    fontFamily: "EB Garamond , serif !important",
 
     userSelect: "none",
     userDrag: "none",
@@ -74,24 +77,30 @@ const items = [
 const Home = () => {
   const styles = useStyles();
   const theme = useTheme();
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   const img1 = new Image();
-  //   img1.src = lupton.fileName;
+  const [animationFlag1, setAnimationFlag1] = useState(false);
+  const [animationFlag2, setAnimationFlag2] = useState(false);
 
-  //   const img2 = new Image();
-  //   img2.src = church.fileName;
-  // }, []);
+  useEffect(() => {
+    let arr = [];
+
+    arr.push(lupton);
+    arr.push(brightwater500);
+    arr.push(church);
+    arr.push(nold);
+
+    cacheImages(arr).then(() => setIsLoaded(true));
+
+    // setIsLoaded(true);
+
+    delayTransition(150).then((response) => setAnimationFlag1(response));
+    delayTransition(1000).then((response) => setAnimationFlag2(response));
+  }, []);
 
   // const maxSteps = items.length;
 
   const [index, set] = useState(0);
-  // const transitions = useTransition(slides[index], (item) => item.id, {
-  //   from: { opacity: 0 },
-  //   enter: { opacity: 1 },
-  //   leave: { opacity: 0 },
-  //   config: config.molasses,
-  // });
 
   useEffect(
     () =>
@@ -110,78 +119,82 @@ const Home = () => {
       ),
     []
   );
-  console.log(index);
-  return (
-    <Fade in={useDelayTransition(150)} timeout={500}>
-      <div>
-        {index === 0 && (
-          <Fade in={true} timeout={800}>
-            <Paper
-              style={{
-                backgroundImage: "url(" + lupton + ")",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                height: "100vh",
-                overflow: "hidden",
-              }}
-            />
-          </Fade>
-        )}
 
-        {index === 1 && (
-          <Fade in={true} timeout={800}>
-            <Paper
-              style={{
-                backgroundImage: "url(" + church + ")",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                height: "100vh",
-                overflow: "hidden",
-              }}
-            />
-          </Fade>
-        )}
+  if (isLoaded) {
+    return (
+      <Fade in={animationFlag1} timeout={500}>
+        <div>
+          {index === 0 && (
+            <Fade in={true} timeout={800}>
+              <Paper
+                style={{
+                  backgroundImage: "url(" + lupton + ")",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  height: "100vh",
+                  overflow: "hidden",
+                }}
+              />
+            </Fade>
+          )}
 
-        {index === 2 && (
-          <Fade in={true} timeout={800}>
-            <Paper
-              style={{
-                backgroundImage: "url(" + brightwater500 + ")",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                height: "100vh",
-                overflow: "hidden",
-              }}
-            />
-          </Fade>
-        )}
+          {index === 1 && (
+            <Fade in={true} timeout={800}>
+              <Paper
+                style={{
+                  backgroundImage: "url(" + church + ")",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  height: "100vh",
+                  overflow: "hidden",
+                }}
+              />
+            </Fade>
+          )}
 
-        {index === 3 && (
-          <Fade in={true} timeout={800}>
-            <Paper
-              style={{
-                backgroundImage: "url(" + nold + ")",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                height: "100vh",
-                overflow: "hidden",
-              }}
-            />
-          </Fade>
-        )}
+          {index === 2 && (
+            <Fade in={true} timeout={800}>
+              <Paper
+                style={{
+                  backgroundImage: "url(" + brightwater500 + ")",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  height: "100vh",
+                  overflow: "hidden",
+                }}
+              />
+            </Fade>
+          )}
 
-        <Fade in={useDelayTransition(1000)} timeout={1500}>
-          <Typography variant="h4" className={styles.quote}>
-            Infinite Possibilities through Integrated Solutions
-          </Typography>
-        </Fade>
-      </div>
-    </Fade>
-  );
+          {index === 3 && (
+            <Fade in={true} timeout={800}>
+              <Paper
+                style={{
+                  backgroundImage: "url(" + nold + ")",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  height: "100vh",
+                  overflow: "hidden",
+                }}
+              />
+            </Fade>
+          )}
+
+          <Fade in={animationFlag2} timeout={1500}>
+            <Typography variant="h4" className={styles.quote}>
+              Infinite Possibilities through Integrated Solutions
+            </Typography>
+          </Fade>
+        </div>
+      </Fade>
+    );
+  } else {
+    return <LoadingSpinner />;
+  }
 };
 
 export default Home;

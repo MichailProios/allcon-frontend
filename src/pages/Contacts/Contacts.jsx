@@ -9,13 +9,15 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import GoogleMapReact from "google-map-react";
+import Marker from "google-map-react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import RoomIcon from "@material-ui/icons/Room";
 
-import { Grid, Grow, Slide, Divider } from "@material-ui/core";
+import { Grid, Grow, Slide, Divider, Tooltip } from "@material-ui/core";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
@@ -61,6 +63,26 @@ const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: "100%",
     height: "100vh",
+  },
+
+  textPrimary: {
+    userSelect: "none",
+    useDrag: "none",
+  },
+  textSecondary: {
+    userSelect: "none",
+    useDrag: "none",
+  },
+
+  links: {
+    textDecoration: "none",
+    color: "#008B8B",
+    userDrag: "none",
+    userSelect: "none",
+
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
 }));
 
@@ -191,8 +213,8 @@ const Contacts = () => {
   };
 
   const center = {
-    lat: 40.756823037731245,
-    lng: -73.55916134438887,
+    lat: 40.75669,
+    lng: -73.55922,
   };
 
   return (
@@ -280,20 +302,45 @@ const Contacts = () => {
                 key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
               }}
               defaultCenter={center}
-              defaultZoom={18}
+              defaultZoom={11}
+              options={{
+                panControl: false,
+                zoomControl: false,
+                rotateControl: false,
+                scaleControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                mapTypeControl: false,
+                scrollwheel: false,
+                gestureHandling: "none",
+                mapTypeId: "roadmap",
+              }}
             >
+              <RoomIcon
+                lat={40.75669}
+                lng={-73.55922}
+                style={{
+                  position: "absolute",
+                  width: 40,
+                  height: 40,
+                  left: -40 / 2,
+                  top: -40 / 2,
+                }}
+              />
+
               {/* <AnyReactComponent
             lat={59.955413}
             lng={30.337844}
             text="My Marker"
           /> */}
+              {/* <Marker position={{ lat: -34.397, lng: 150.644 }} /> */}
             </GoogleMapReact>
           </Paper>
         </Grid>
       </Grow>
 
       <Grow in={useDelayTransition(1000)} timeout={800}>
-        <Grid item xs={12} sm={12} md={2} lg={12} xl={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
           <Card className={styles.card}>
             <CardHeader
               title=" Office Information"
@@ -304,7 +351,50 @@ const Contacts = () => {
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <Typography variant="h6" className={styles.textPrimary}>
-                    Office Information
+                    Address:
+                  </Typography>
+                  <Tooltip title="Click to View Address">
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <a
+                        className={styles.links}
+                        href="https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        66 Brooklyn Avenue, Westbury, New York, 11590
+                      </a>
+                    </Typography>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Phone Number:
+                  </Typography>
+                  <Tooltip title="Click to Call">
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <a className={styles.links} href="tel:+1 516-333-3339">
+                        516-333-3339
+                      </a>
+                    </Typography>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Fax Number:
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    className={styles.textSecondary}
+                    style={{ color: "#008B8B", userSelect: "all" }}
+                  >
+                    516-333-3344
                   </Typography>
                 </Grid>
               </Grid>

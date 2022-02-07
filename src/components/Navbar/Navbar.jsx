@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "0.1em",
     fontSize: "1.2em",
     fontSmooth: "5em",
-    fontFamily: "EB Garamond , serif",
+    fontFamily: "EB Garamond , serif !important",
     color: "black",
     textDecoration: "none",
     userSelect: "none",
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "0.1em",
     fontSize: "1.2em",
     fontSmooth: "5em",
-    fontFamily: "EB Garamond , serif",
+    fontFamily: "EB Garamond , serif !important",
     color: "black",
     textDecoration: "none",
     userSelect: "none",
@@ -87,9 +87,9 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     backgroundColor: "#fff",
     position: "sticky",
-    width: "100vw",
     overflowX: "hidden",
     zIndex: theme.zIndex.drawer + 1,
+    widht: "100vh",
     // backgroundColor: theme.palette.primary.main,
     // transition: theme.transitions.create(["width", "margin"], {
     //   easing: theme.transitions.easing.sharp,
@@ -188,8 +188,8 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
     zIndex: 1,
-    bottom: theme.spacing(1),
-    right: theme.spacing(1),
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
   appbarLinks: {
     textDecoration: "none",
@@ -314,8 +314,8 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
-        document.documentElement.style.overflowY = "hidden";
-        document.body.style.overflowY = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -332,8 +332,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
-        document.documentElement.style.overflowY = "hidden";
-        document.body.style.overflowY = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -350,8 +350,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
-        document.documentElement.style.overflowY = "visible";
-        document.body.style.overflowY = "visible";
+        document.documentElement.style.overflow = "visible";
+        document.body.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -368,8 +368,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.documentElement.style.overflowY = "visible";
-        document.body.style.overflowY = "visible";
+        document.documentElement.style.overflow = "visible";
+        document.body.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -386,8 +386,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.documentElement.style.overflowY = "visible";
-        document.body.style.overflowY = "visible";
+        document.documentElement.style.overflow = "visible";
+        document.body.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -404,8 +404,8 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.documentElement.style.overflowY = "visible";
-        document.body.style.overflowY = "visible";
+        document.documentElement.style.overflow = "visible";
+        document.body.style.overflow = "visible";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -421,8 +421,8 @@ const Navbar = () => {
         }
         break;
       default:
-        document.documentElement.style.overflowY = "visible";
-        document.body.style.overflowY = "visible";
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -626,7 +626,7 @@ const Navbar = () => {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-      <BackFAB />
+      {/* <BackFAB /> */}
       <Backdrop
         className={styles.backdrop}
         open={openDrawer}

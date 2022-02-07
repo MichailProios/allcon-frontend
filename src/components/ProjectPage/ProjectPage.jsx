@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Carousel from "react-material-ui-carousel";
+
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -12,7 +12,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Tooltip from "@material-ui/core/Tooltip";
-import Box from "@mui/material/Box";
+import Box from "@material-ui/core/Box";
 import { Divider } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -165,14 +165,8 @@ const ProjectPage = ({
   let images = pictures;
 
   useEffect(() => {
-    Object.values(images).forEach((picture) => {
-      const img = new Image();
-      img.src = picture;
-    });
+    cacheImages(Object.values(images)).then(() => setIsLoaded(true));
 
-    cacheImages(Object.values(images));
-
-    setIsLoaded(true);
     delayTransition(0).then((response) => setAnimationFlag1(response));
     delayTransition(500).then((response) => setAnimationFlag2(response));
     delayTransition(1200).then((response) => setAnimationFlag3(response));
@@ -382,10 +376,6 @@ const Picture = ({ name, image, position }) => {
   // const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
   const matchesXXL = useMediaQuery(theme.breakpoints.up("xxl"));
   const matchesXXXL = useMediaQuery(theme.breakpoints.up("xxxl"));
-
-  // console.log(matchesXL);
-  // console.log(matchesXXL);
-  console.log(matchesXXXL);
 
   return (
     <Paper className={styles.paper}>

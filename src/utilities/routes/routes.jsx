@@ -1,3 +1,4 @@
+import React from "react";
 import ProjectPage from "../../components/ProjectPage/ProjectPage";
 import projects from "../projects/projects.jsx";
 
