@@ -4,18 +4,14 @@
 html {
   background-color: #f3f3f3;
   scroll-behavior: smooth;
-  height: 100vh !important;
-  overflow-x: hidden;
 }
-
+/* 
 body {
-  height: 100vh !important;
-  overflow-x: hidden;
-}
+} */
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif !important;
 }

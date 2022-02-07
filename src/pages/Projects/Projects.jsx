@@ -10,7 +10,7 @@ import {
   useScrollTrigger,
 } from "@material-ui/core";
 
-import Image from "material-ui-image";
+// import Image from "material-ui-image";
 
 import { Transition } from "react-transition-group";
 
@@ -21,10 +21,10 @@ import { makeStyles } from "@material-ui/styles";
 
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
-import lupton from "../../utilities/images/optimizedImages/10-23-1-22.jpg";
+import lupton from "../../utilities/images/optimizedImages/10-23-1-22.webp";
 import stdemetrios from "../../utilities/images/optimizedImages/image003.jpg";
-import nold from "../../utilities/images/optimizedImages/11-6-21-2.jpg";
-import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.jpg";
+import nold from "../../utilities/images/optimizedImages/11-6-21-2.webp";
+import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.webp";
 import bareBurger from "../../utilities/images/bareburger/DSC00355.JPG";
 import wilsonAnimal from "../../utilities/images/hudsonanimal/DSC00249.JPG";
 import west255 from "../../utilities/images/255w/DSC00902.JPG";
@@ -42,6 +42,9 @@ import townhouse17w from "../../utilities/images/17w10street/IMG_7491.jpg";
 
 import { wait } from "@testing-library/user-event/dist/utils";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
+
+import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const useStyles = makeStyles({
   root: {
@@ -149,19 +152,34 @@ const Projects = () => {
     },
   ]);
 
-  return (
-    <Grid container spacing={2} className={styles.root}>
-      {listData.map((value, index) => (
-        <ProjectCard
-          title={value.title}
-          image={value.image}
-          link={value.link}
-          index={index}
-          key={index}
-        />
-      ))}
-    </Grid>
-  );
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    let arr = [];
+
+    listData.forEach((value) => {
+      arr.push(value.image);
+    });
+    cacheImages(arr).then(() => setIsLoaded(true));
+  }, []);
+
+  if (isLoaded) {
+    return (
+      <Grid container spacing={2} className={styles.root}>
+        {listData.map((value, index) => (
+          <ProjectCard
+            title={value.title}
+            image={value.image}
+            link={value.link}
+            index={index}
+            key={index}
+          />
+        ))}
+      </Grid>
+    );
+  } else {
+    return <LoadingSpinner />;
+  }
 };
 
 export default Projects;

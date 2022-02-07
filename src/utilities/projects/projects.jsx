@@ -1,3 +1,5 @@
+import React from "react";
+
 function importAll(r) {
   let images = {};
   r.keys().forEach((item, index) => {
@@ -74,7 +76,7 @@ export const projects = [
     pictures: importAll(
       require.context("../images/nold", false, /\.(JPG|PNG|png|jpe?g|svg)$/)
     ),
-    projectName: "Saint Demetrios Greek Orthodox Church",
+    projectName: "SUNY Farmingdale Nold Hall Gymnasium",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "State University Construction Fund",
     yearCompleted: "2017",
