@@ -14,11 +14,8 @@ import {
 } from "@material-ui/core";
 import { isMobile } from "react-device-detect";
 
-import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
-
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MuiImage from "material-ui-image";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,17 +26,23 @@ const useStyles = makeStyles((theme) => ({
     userDrag: "none",
     userSelect: "none",
   },
-  cardAction: {
-    height: "20em",
+  container: {
+    padding: "2em 10em 2em 10em",
+
+    [theme.breakpoints.down("lg")]: {
+      padding: "2em 6em 2em 6em",
+    },
 
     [theme.breakpoints.down("md")]: {
-      height: "auto",
+      padding: "2em 3em 2em 3em",
     },
 
-    transition: "transform 0.15s ease-in-out",
-    "&:hover": {
-      transform: "scale3d(1.01, 1.01, 1)",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2em 1em 2em 1em",
     },
+  },
+  cardAction: {
+    height: "auto",
   },
   profileImage: {
     userDrag: "none",
@@ -48,22 +51,38 @@ const useStyles = makeStyles((theme) => ({
   profileDescription: { padding: "0.8em", width: "100%" },
 }));
 
-const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
+const ProfilePage = ({ picture, title, subtitle, description }) => {
   const styles = useStyles();
   const theme = useTheme();
 
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Grow in={useDelayTransition(delay)} timeout={800}>
-      <Card className={styles.root}>
-        <CardActionArea
-          className={styles.cardAction}
-          component={Link}
-          to={link}
-        >
-          <Grid container spacing={0} direction="row">
-            <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
+    <Grow in={true} timeout={800}>
+      <div className={styles.container}>
+        <Card className={styles.root}>
+          <Grid
+            container
+            spacing={0}
+            direction="row"
+            className={styles.cardAction}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={3}
+              xl={3}
+              style={
+                {
+                  // // padding: theme.spacing(3, 2),
+                  // display: "flex",
+                  // flexDirection: "column",
+                  // justifyContent: "center",
+                }
+              }
+            >
               <MuiImage
                 imageStyle={
                   matchesMD
@@ -74,6 +93,8 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                     : {
                         maxWidth: "100%",
                         height: "20em",
+                        // borderTopRightRadius: "2px",
+                        borderBottomRightRadius: "2px",
                       }
                 }
                 aspectRatio={matchesMD ? 1.5 : 1}
@@ -88,7 +109,7 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                         height: "20em",
                       }
                 }
-                src={image}
+                src={picture}
                 cover={true}
                 animationDuration={100}
                 className={styles.profileImage}
@@ -106,10 +127,10 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
               </Typography>
             </Grid>
           </Grid>
-        </CardActionArea>
-      </Card>
+        </Card>
+      </div>
     </Grow>
   );
 };
 
-export default ProfileCard;
+export default ProfilePage;

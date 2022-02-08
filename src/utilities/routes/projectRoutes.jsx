@@ -2,7 +2,7 @@ import React from "react";
 import ProjectPage from "../../components/ProjectPage/ProjectPage";
 import projects from "../projects/projects.jsx";
 
-export const routes = [];
+export const projectRoutes = [];
 
 projects.map(
   (
@@ -19,7 +19,7 @@ projects.map(
     },
     key
   ) =>
-    routes.push({
+    projectRoutes.push({
       path: link,
       component: (
         <ProjectPage
@@ -37,4 +37,4 @@ projects.map(
     })
 );
 
-export default routes;
+export default projectRoutes;

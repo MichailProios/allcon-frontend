@@ -272,7 +272,7 @@ const ProjectPage = ({
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h6" className={styles.textPrimary}>
-                      Project Name:
+                      Project Name
                     </Typography>
                     <Typography
                       variant="body1"
@@ -283,7 +283,7 @@ const ProjectPage = ({
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h6" className={styles.textPrimary}>
-                      Project Location:
+                      Project Location
                     </Typography>
                     <Typography
                       variant="body1"
@@ -294,7 +294,7 @@ const ProjectPage = ({
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h6" className={styles.textPrimary}>
-                      Client/ Affiliated Agency:
+                      Client/ Affiliated Agency
                     </Typography>
                     <Typography
                       variant="body1"
@@ -305,7 +305,7 @@ const ProjectPage = ({
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h6" className={styles.textPrimary}>
-                      Year Completed:
+                      Year Completed
                     </Typography>
                     <Typography
                       variant="body1"
@@ -316,7 +316,7 @@ const ProjectPage = ({
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h6" className={styles.textPrimary}>
-                      Project Cost/Budget:
+                      Project Cost/Budget
                     </Typography>
                     <Typography
                       variant="body1"
@@ -327,7 +327,7 @@ const ProjectPage = ({
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h6" className={styles.textPrimary}>
-                      Project Designer:
+                      Project Designer
                     </Typography>
                     <Typography
                       variant="body1"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -16,10 +16,15 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import RoomIcon from "@material-ui/icons/Room";
+import Popover from "@material-ui/core/Popover";
+
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { isMobile } from "react-device-detect";
 
 import { Grid, Grow, Slide, Divider, Tooltip } from "@material-ui/core";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
+import { useTheme } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   contactUsGridContainer: {
@@ -83,6 +88,21 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       textDecoration: "underline",
     },
+  },
+
+  mapMarker: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    left: -50 / 2,
+    top: -50 / 2,
+
+    transition: "transform 0.10s ease-in-out",
+    "&:hover": {
+      transform: "scale3d(1.1, 1.1, 1)",
+      cursor: "pointer",
+    },
+    color: "#de5246",
   },
 }));
 
@@ -197,7 +217,8 @@ function getStepContent(step, styles) {
 
 const Contacts = () => {
   const styles = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -211,6 +232,20 @@ const Contacts = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
+  const matchesLG = useMediaQuery(theme.breakpoints.up("lg"));
 
   const center = {
     lat: 40.75669,
@@ -316,17 +351,36 @@ const Contacts = () => {
                 mapTypeId: "roadmap",
               }}
             >
-              <RoomIcon
-                lat={40.75669}
-                lng={-73.55922}
-                style={{
-                  position: "absolute",
-                  width: 40,
-                  height: 40,
-                  left: -40 / 2,
-                  top: -40 / 2,
-                }}
-              />
+              {isMobile ? (
+                <Tooltip
+                  title="Westbury Office"
+                  open={true}
+                  arrow={true}
+                  placement="bottom"
+                  enterDelay={150}
+                  leaveDelay={150}
+                >
+                  <RoomIcon
+                    lat={40.75669}
+                    lng={-73.55922}
+                    className={styles.mapMarker}
+                  />
+                </Tooltip>
+              ) : (
+                <Tooltip
+                  title="Westbury Office"
+                  arrow={true}
+                  placement="bottom"
+                  enterDelay={150}
+                  leaveDelay={150}
+                >
+                  <RoomIcon
+                    lat={40.75669}
+                    lng={-73.55922}
+                    className={styles.mapMarker}
+                  />
+                </Tooltip>
+              )}
 
               {/* <AnyReactComponent
             lat={59.955413}
@@ -343,7 +397,7 @@ const Contacts = () => {
         <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
           <Card className={styles.card}>
             <CardHeader
-              title=" Office Information"
+              title="General Information"
               className={styles.cardHeader}
             />
             <Divider />
@@ -351,13 +405,10 @@ const Contacts = () => {
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <Typography variant="h6" className={styles.textPrimary}>
-                    Address:
+                    Office Address
                   </Typography>
-                  <Tooltip title="Click to View Address">
-                    <Typography
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    <Tooltip title="Click to View our Office Address">
                       <a
                         className={styles.links}
                         href="https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
@@ -366,35 +417,68 @@ const Contacts = () => {
                       >
                         66 Brooklyn Avenue, Westbury, New York, 11590
                       </a>
-                    </Typography>
-                  </Tooltip>
+                    </Tooltip>
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <Typography variant="h6" className={styles.textPrimary}>
-                    Phone Number:
+                    LinkedIn
                   </Typography>
-                  <Tooltip title="Click to Call">
-                    <Typography
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    <Tooltip title="Click to View our LinkedIn">
+                      <a
+                        className={styles.links}
+                        href="https://www.linkedin.com/company/allcon-contracting"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        www.linkedin.com /company/{matchesLG && <br />}
+                        allcon-contracting
+                      </a>
+                    </Tooltip>
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Email Address
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    <Tooltip title="Click to Email">
+                      <a
+                        className={styles.links}
+                        href="mailto:info@allconcontracting.com"
+                      >
+                        info@allconcontracting.com
+                      </a>
+                    </Tooltip>
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    Phone Number
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    <Tooltip title="Click to Call">
                       <a className={styles.links} href="tel:+1 516-333-3339">
                         516-333-3339
                       </a>
-                    </Typography>
-                  </Tooltip>
+                    </Tooltip>
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <Typography variant="h6" className={styles.textPrimary}>
-                    Fax Number:
+                    Fax Number
                   </Typography>
-
                   <Typography
                     variant="body1"
                     className={styles.textSecondary}
                     style={{ color: "#008B8B", userSelect: "all" }}
                   >
-                    516-333-3344
+                    <Tooltip title="Click to Highlight">
+                      <span style={{ width: "auto" }}>516-333-3344</span>
+                    </Tooltip>
                   </Typography>
                 </Grid>
               </Grid>

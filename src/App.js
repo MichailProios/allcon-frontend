@@ -21,7 +21,9 @@ import About from "./pages/About/About.jsx";
 import Contacts from "./pages/Contacts/Contacts";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
-import routes from "./utilities/routes/routes";
+import projectRoutes from "./utilities/routes/projectRoutes";
+
+import profileRoutes from "./utilities/routes/profileRoutes";
 
 import lupton from "./utilities/images/Home/lupton.jpg";
 import church from "./utilities/images/Home/church.jpg";
@@ -114,7 +116,12 @@ function App() {
     setIsLoaded(true);
   }, []);
 
-  const routeComponents = routes.map(({ path, component }, key) => (
+  const projectComponents = projectRoutes.map(({ path, component }, key) => (
+    // <Route exact path={path} component={component} key={key} />
+    <Route path={path} exact element={component} key={key} />
+  ));
+
+  const profileComponents = profileRoutes.map(({ path, component }, key) => (
     // <Route exact path={path} component={component} key={key} />
     <Route path={path} exact element={component} key={key} />
   ));
@@ -137,7 +144,8 @@ function App() {
                   exact
                   element={<LuptonHall />}
                 /> */}
-                {routeComponents}
+                {projectComponents}
+                {profileComponents}
               </Routes>
             </div>
           </Router>
