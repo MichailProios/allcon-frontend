@@ -21,35 +21,28 @@ const useStyles = makeStyles((theme) => ({
   root: {
     // marginTop: "10em",
     // width: "auto",
-    padding: "2em 10em 2em 10em",
-
-    [theme.breakpoints.down("lg")]: {
-      padding: "2em 8em 2em 8em",
-    },
-
-    [theme.breakpoints.down("md")]: {
-      padding: "2em 4em 2em 4em",
-    },
-
-    [theme.breakpoints.down("sm")]: {
-      padding: "2em 1em 2em 1em",
-    },
 
     height: "auto",
     userDrag: "none",
     userSelect: "none",
   },
-  cardAction: {
-    height: "20em",
+  container: {
+    padding: "2em 10em 2em 10em",
+
+    [theme.breakpoints.down("lg")]: {
+      padding: "2em 6em 2em 6em",
+    },
 
     [theme.breakpoints.down("md")]: {
-      height: "auto",
+      padding: "2em 3em 2em 3em",
     },
 
-    transition: "transform 0.15s ease-in-out",
-    "&:hover": {
-      transform: "scale3d(1.01, 1.01, 1)",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2em 1em 2em 1em",
     },
+  },
+  cardAction: {
+    height: "auto",
   },
   profileImage: {
     userDrag: "none",
@@ -58,47 +51,64 @@ const useStyles = makeStyles((theme) => ({
   profileDescription: { padding: "0.8em", width: "100%" },
 }));
 
-const ProfilePage = ({ image, title, subtitle, description }) => {
+const ProfilePage = ({ picture, title, subtitle, description }) => {
   const styles = useStyles();
   const theme = useTheme();
 
-  //   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Grow in={true} timeout={800}>
-      <Card className={styles.root}>
-        <CardActionArea className={styles.cardAction}>
-          <Grid container spacing={0} direction="row">
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <MuiImage
-                imageStyle={{
-                  maxWidth: "100%",
-                  height: "auto",
-                }}
-                iconContainerStyle={{
-                  maxWidth: "100%",
-                  height: "auto",
-                }}
-                src={image}
-                cover={true}
-                animationDuration={100}
-                className={styles.profileImage}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <CardHeader title={title} subheader={subtitle} />
+      <div className={styles.container}>
+        <Card className={styles.root}>
+          <CardActionArea className={styles.cardAction}>
+            <Grid container spacing={0} direction="row">
+              <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
+                <MuiImage
+                  imageStyle={
+                    matchesMD
+                      ? {
+                          maxWidth: "100%",
+                          height: "auto",
+                        }
+                      : {
+                          maxWidth: "100%",
+                          height: "20em",
+                        }
+                  }
+                  aspectRatio={matchesMD ? 1.5 : 1}
+                  iconContainerStyle={
+                    matchesMD
+                      ? {
+                          maxWidth: "100%",
+                          height: "auto",
+                        }
+                      : {
+                          maxWidth: "100%",
+                          height: "20em",
+                        }
+                  }
+                  src={picture}
+                  cover={true}
+                  animationDuration={100}
+                  className={styles.profileImage}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
+                <CardHeader title={title} subheader={subtitle} />
 
-              <Typography
-                color="textPrimary"
-                variant="h6"
-                className={styles.profileDescription}
-              >
-                {description}
-              </Typography>
+                <Typography
+                  color="textPrimary"
+                  variant="h6"
+                  className={styles.profileDescription}
+                >
+                  {description}
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        </CardActionArea>
-      </Card>
+          </CardActionArea>
+        </Card>
+      </div>
     </Grow>
   );
 };

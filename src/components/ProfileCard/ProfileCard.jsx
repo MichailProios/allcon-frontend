@@ -18,6 +18,7 @@ import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MuiImage from "material-ui-image";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   profileDescription: { padding: "0.8em", width: "100%" },
 }));
 
-const ProfileCard = ({ title, subtitle, description, image, delay }) => {
+const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -56,7 +57,11 @@ const ProfileCard = ({ title, subtitle, description, image, delay }) => {
   return (
     <Grow in={useDelayTransition(delay)} timeout={800}>
       <Card className={styles.root}>
-        <CardActionArea className={styles.cardAction}>
+        <CardActionArea
+          className={styles.cardAction}
+          component={Link}
+          to={link}
+        >
           <Grid container spacing={0} direction="row">
             <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
               <MuiImage
