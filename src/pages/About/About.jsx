@@ -8,12 +8,25 @@ import { Grid, Typography, Grow, Slide, Divider } from "@material-ui/core";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
+import { isMobile } from "react-device-detect";
+
+import {
+  LinkScroll,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
 
 import pic from "../../utilities/images/Logos/logo-new.png";
 
 import george from "../../utilities/images/temp/georgeproios.jpg";
 import markos from "../../utilities/images/temp/markobistakis.jpg";
 import joseph from "../../utilities/images/temp/josephgrant.JPG";
+import nick from "../../utilities/images/temp/nickgiannikouris.jpg";
+import ahmed from "../../utilities/images/temp/ahmed.jpg";
 
 const useStyles = makeStyles((theme) => ({
   companyProfileGrid: {
@@ -58,6 +71,22 @@ const useStyles = makeStyles((theme) => ({
 const About = () => {
   const styles = useStyles();
 
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     scroll.scrollToTop({
+  //       duration: 800,
+  //       delay: 150,
+  //       smooth: "easeInOutQuart",
+  //     });
+  //   } else {
+  //     scroll.scrollToTop({
+  //       duration: 0,
+  //       delay: 150,
+  //       smooth: "easeInOutQuart",
+  //     });
+  //   }
+  // }, []);
+
   const [listData, setListData] = useState([
     {
       link: "/About/GeorgeProios",
@@ -96,7 +125,7 @@ const About = () => {
     },
     {
       link: "/About/NikolaosGiannikouris",
-      image: pic,
+      image: nick,
       title: "Nikolaos Giannikouris",
       subtitle: "Senior Project Manager",
       description: `Nick earned his Bachelor of Architecture Degree from The New York Institute of Technology.
@@ -106,7 +135,7 @@ const About = () => {
     },
     {
       link: "/About/AhmedBassiouny",
-      image: pic,
+      image: ahmed,
       title: "Ahmed M Bassiouny",
       subtitle: "Senior Project Manager",
       description: `Ahmed received his Bachelor of Science in Civil Engineering from Alexandria University in Egypt 

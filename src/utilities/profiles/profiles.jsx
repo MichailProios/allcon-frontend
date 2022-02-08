@@ -12,6 +12,8 @@ import pic from "../images/Logos/logo-new.png";
 import george from "../images/temp/georgeproios.jpg";
 import markos from "../images/temp/markobistakis.jpg";
 import joseph from "../images/temp/josephgrant.JPG";
+import nick from "../images/temp/nickgiannikouris.jpg";
+import ahmed from "../images/temp/ahmed.jpg";
 
 export const profiles = [
   {
@@ -115,8 +117,8 @@ export const profiles = [
     ),
   },
   {
-    link: "/About/NikolasGiannikouris",
-    picture: pic,
+    link: "/About/NikolaosGiannikouris",
+    picture: nick,
     title: "Nikolas Giannikouris",
     subtitle: "Senior Project Manager",
     description: (
@@ -137,10 +139,25 @@ export const profiles = [
   },
   {
     link: "/About/AhmedBassiouny",
-    picture: pic,
+    picture: ahmed,
     title: "Ahmed M Bassiouny",
     subtitle: "Senior Project Manager",
-    description: "",
+    description: (
+      <>
+        Ahmed received his Bachelor of Science in Civil Engineering from
+        Alexandria University in Egypt and Project Management Diploma from North
+        Carolina State University. After earning his degree, Ahmed began his
+        career in construction as a project cost estimator where he obtained a
+        unique insight in the interconnection of quality, cost, and project
+        management play in the success of any given project. He has extensive
+        experience working with public agents such as the State University of
+        New York, New York State Office of General Services, and the Long Island
+        Railroad just to name a few. As a Project Manager at ALL*Con, Ahmed has
+        established a proven track record of success on a variety of public and
+        private client projects and has because a key part of our Senior
+        Management Team.
+      </>
+    ),
   },
   {
     link: "/About/MohamedElaasser",

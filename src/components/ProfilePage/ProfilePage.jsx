@@ -61,52 +61,72 @@ const ProfilePage = ({ picture, title, subtitle, description }) => {
     <Grow in={true} timeout={800}>
       <div className={styles.container}>
         <Card className={styles.root}>
-          <CardActionArea className={styles.cardAction}>
-            <Grid container spacing={0} direction="row">
-              <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
-                <MuiImage
-                  imageStyle={
-                    matchesMD
-                      ? {
-                          maxWidth: "100%",
-                          height: "auto",
-                        }
-                      : {
-                          maxWidth: "100%",
-                          height: "20em",
-                        }
-                  }
-                  aspectRatio={matchesMD ? 1.5 : 1}
-                  iconContainerStyle={
-                    matchesMD
-                      ? {
-                          maxWidth: "100%",
-                          height: "auto",
-                        }
-                      : {
-                          maxWidth: "100%",
-                          height: "20em",
-                        }
-                  }
-                  src={picture}
-                  cover={true}
-                  animationDuration={100}
-                  className={styles.profileImage}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-                <CardHeader title={title} subheader={subtitle} />
-
-                <Typography
-                  color="textPrimary"
-                  variant="h6"
-                  className={styles.profileDescription}
-                >
-                  {description}
-                </Typography>
-              </Grid>
+          <Grid
+            container
+            spacing={0}
+            direction="row"
+            className={styles.cardAction}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={3}
+              xl={3}
+              style={
+                {
+                  // // padding: theme.spacing(3, 2),
+                  // display: "flex",
+                  // flexDirection: "column",
+                  // justifyContent: "center",
+                }
+              }
+            >
+              <MuiImage
+                imageStyle={
+                  matchesMD
+                    ? {
+                        maxWidth: "100%",
+                        height: "auto",
+                      }
+                    : {
+                        maxWidth: "100%",
+                        height: "20em",
+                        // borderTopRightRadius: "2px",
+                        borderBottomRightRadius: "2px",
+                      }
+                }
+                aspectRatio={matchesMD ? 1.5 : 1}
+                iconContainerStyle={
+                  matchesMD
+                    ? {
+                        maxWidth: "100%",
+                        height: "auto",
+                      }
+                    : {
+                        maxWidth: "100%",
+                        height: "20em",
+                      }
+                }
+                src={picture}
+                cover={true}
+                animationDuration={100}
+                className={styles.profileImage}
+              />
             </Grid>
-          </CardActionArea>
+            <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
+              <CardHeader title={title} subheader={subtitle} />
+
+              <Typography
+                color="textPrimary"
+                variant="h6"
+                className={styles.profileDescription}
+              >
+                {description}
+              </Typography>
+            </Grid>
+          </Grid>
         </Card>
       </div>
     </Grow>

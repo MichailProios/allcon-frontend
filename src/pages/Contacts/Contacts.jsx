@@ -17,11 +17,14 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import RoomIcon from "@material-ui/icons/Room";
 import Popover from "@material-ui/core/Popover";
+
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { isMobile } from "react-device-detect";
 
 import { Grid, Grow, Slide, Divider, Tooltip } from "@material-ui/core";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
+import { useTheme } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   contactUsGridContainer: {
@@ -214,6 +217,7 @@ function getStepContent(step, styles) {
 
 const Contacts = () => {
   const styles = useStyles();
+  const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
@@ -240,6 +244,8 @@ const Contacts = () => {
   };
 
   const open = Boolean(anchorEl);
+
+  const matchesLG = useMediaQuery(theme.breakpoints.up("lg"));
 
   const center = {
     lat: 40.75669,
@@ -426,7 +432,8 @@ const Contacts = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        www.linkedin.com/company/allcon-contracting
+                        www.linkedin.com /company/{matchesLG && <br />}
+                        allcon-contracting
                       </a>
                     </Tooltip>
                   </Typography>
