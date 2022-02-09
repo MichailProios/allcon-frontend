@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "6px",
   },
 
+  map: { borderRadius: "20px" },
   mapPaper: {
     maxWidth: "100%",
     height: "100vh",
@@ -363,6 +364,7 @@ const Contacts = () => {
                 gestureHandling: "none",
                 mapTypeId: "roadmap",
               }}
+              className={styles.map}
             >
               {isMobile ? (
                 <Tooltip
