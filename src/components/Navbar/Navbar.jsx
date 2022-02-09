@@ -525,7 +525,7 @@ const Navbar = () => {
 
                   <Tab
                     component={Link}
-                    to="/Home"
+                    to="/Testimonies"
                     className={styles.button}
                     label="Testimonies"
                   />
@@ -605,7 +605,7 @@ const Navbar = () => {
 
           <Tab
             component={Link}
-            to="/Home"
+            to="/Testimonies"
             onClick={handleDrawerClose}
             className={styles.buttonSmall}
             label="Testimonies"
