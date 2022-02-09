@@ -70,14 +70,14 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#008B8B",
-      // light: "#3b3e6b",
-      //dark: "#00001b",
+      light: "#00b3b3",
+      dark: "#006666",
       // dark: "#001d3e",
     },
     secondary: {
       main: "#008B8B",
-      // light: "#4e6e97",
-      // dark: "#001d3e",
+      light: "#00b3b3",
+      dark: "#006666",
     },
     // button: {
     //   main: "#1d4369",
