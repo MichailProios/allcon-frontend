@@ -19,6 +19,7 @@ import Projects from "./pages/Projects/Projects.jsx";
 import About from "./pages/About/About.jsx";
 
 import Contacts from "./pages/Contacts/Contacts";
+import Testimonies from "./pages/Testimonies/Testimonies";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
 import projectRoutes from "./utilities/routes/projectRoutes";
@@ -135,10 +136,12 @@ function App() {
             <div style={{ overflow: "hidden" }}>
               <Routes>
                 <Route path="/" exact element={<Home />} />
-                <Route path="/home" exact element={<Home />} />
-                <Route path="/about" exact element={<About />} />
-                <Route path="/contacts" exact element={<Contacts />} />
-                <Route path="/projects" exact element={<Projects />} />
+                <Route path="/Home" exact element={<Home />} />
+                <Route path="/About" exact element={<About />} />
+                <Route path="/Contacts" exact element={<Contacts />} />
+                <Route path="/Projects" exact element={<Projects />} />
+                <Route path="/Testimonies" exact element={<Testimonies />} />
+
                 {/* <Route
                   path="/projects/LuptonHall"
                   exact

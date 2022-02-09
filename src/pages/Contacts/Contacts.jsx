@@ -245,7 +245,7 @@ const Contacts = () => {
 
   const open = Boolean(anchorEl);
 
-  const matchesLG = useMediaQuery(theme.breakpoints.up("lg"));
+  const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
 
   const center = {
     lat: 40.75669,
@@ -329,6 +329,7 @@ const Contacts = () => {
           </Paper>
         )}
       </Grid>
+
       <Grow in={useDelayTransition(500)} timeout={800}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
           <Paper className={styles.mapPaper}>
@@ -337,7 +338,7 @@ const Contacts = () => {
                 key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
               }}
               defaultCenter={center}
-              defaultZoom={11}
+              defaultZoom={8}
               options={{
                 panControl: false,
                 zoomControl: false,
@@ -381,6 +382,36 @@ const Contacts = () => {
                   />
                 </Tooltip>
               )}
+              {isMobile ? (
+                <Tooltip
+                  title="Woodbridge Office"
+                  open={true}
+                  arrow={true}
+                  placement="bottom"
+                  enterDelay={150}
+                  leaveDelay={150}
+                >
+                  <RoomIcon
+                    lat={40.57057}
+                    lng={-74.29052}
+                    className={styles.mapMarker}
+                  />
+                </Tooltip>
+              ) : (
+                <Tooltip
+                  title="Woodbridge Office"
+                  arrow={true}
+                  placement="bottom"
+                  enterDelay={150}
+                  leaveDelay={150}
+                >
+                  <RoomIcon
+                    lat={40.57057}
+                    lng={-74.29052}
+                    className={styles.mapMarker}
+                  />
+                </Tooltip>
+              )}
 
               {/* <AnyReactComponent
             lat={59.955413}
@@ -392,7 +423,6 @@ const Contacts = () => {
           </Paper>
         </Grid>
       </Grow>
-
       <Grow in={useDelayTransition(1000)} timeout={800}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
           <Card className={styles.card}>
@@ -405,10 +435,10 @@ const Contacts = () => {
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <Typography variant="h6" className={styles.textPrimary}>
-                    Office Address
+                    Main Office Address
                   </Typography>
                   <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to View our Office Address">
+                    <Tooltip title="Click to View our Main Office Address">
                       <a
                         className={styles.links}
                         href="https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
@@ -416,6 +446,24 @@ const Contacts = () => {
                         rel="noopener noreferrer"
                       >
                         66 Brooklyn Avenue, Westbury, New York, 11590
+                      </a>
+                    </Tooltip>
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                  <Typography variant="h6" className={styles.textPrimary}>
+                    New Jersey Office Address
+                  </Typography>
+                  <Typography variant="body1" className={styles.textSecondary}>
+                    <Tooltip title="Click to View our New Jersey Office Address">
+                      <a
+                        className={styles.links}
+                        href="https://www.google.com/maps/place/300+Kimball+St+%23204b,+Woodbridge,+NJ+07095/@40.5704583,-74.2927654,17z/data=!3m1!4b1!4m5!3m4!1s0x89c3b43787c7a943:0x65a7ff4b9f5b4c13!8m2!3d40.5704542!4d-74.2905767"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        300 Kimball St, Suite 204B, Woodbridge, New Jersey,
+                        07095
                       </a>
                     </Tooltip>
                   </Typography>
@@ -432,7 +480,7 @@ const Contacts = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        www.linkedin.com /company/{matchesLG && <br />}
+                        www.linkedin.com/company/{matchesXL && <br />}
                         allcon-contracting
                       </a>
                     </Tooltip>
@@ -462,7 +510,7 @@ const Contacts = () => {
                   <Typography variant="body1" className={styles.textSecondary}>
                     <Tooltip title="Click to Call">
                       <a className={styles.links} href="tel:+1 516-333-3339">
-                        516-333-3339
+                        +1-516-333-3339
                       </a>
                     </Tooltip>
                   </Typography>
@@ -477,7 +525,7 @@ const Contacts = () => {
                     style={{ color: "#008B8B", userSelect: "all" }}
                   >
                     <Tooltip title="Click to Highlight">
-                      <span style={{ width: "auto" }}>516-333-3344</span>
+                      <span style={{ width: "auto" }}>+1-516-333-3344</span>
                     </Tooltip>
                   </Typography>
                 </Grid>
