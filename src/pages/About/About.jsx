@@ -174,11 +174,7 @@ const About = () => {
           className={styles.header}
         >
           <Grow in={useDelayTransition(50)} timeout={800}>
-            <Typography
-              color="textPrimary"
-              variant="h4"
-              className={styles.text}
-            >
+            <Typography color="primary" variant="h4" className={styles.text}>
               Company Profile
             </Typography>
           </Grow>
@@ -250,11 +246,7 @@ const About = () => {
           className={styles.header}
         >
           <Grow in={useDelayTransition(500)} timeout={800}>
-            <Typography
-              color="textPrimary"
-              variant="h4"
-              className={styles.text}
-            >
+            <Typography color="primary" variant="h4" className={styles.text}>
               Executives
             </Typography>
           </Grow>

@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   cardAction: {
     height: "20em",
-
+    userDrag: "none",
+    userSelect: "none",
     [theme.breakpoints.down("md")]: {
       height: "auto",
     },

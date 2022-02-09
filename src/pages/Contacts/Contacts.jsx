@@ -247,9 +247,21 @@ const Contacts = () => {
 
   const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
 
+  const handleClickWestbury = () => {
+    window.open(
+      "https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
+    );
+  };
+
+  const handleClickWoodbridge = () => {
+    window.open(
+      "https://www.google.com/maps/place/300+Kimball+St+%23204b,+Woodbridge,+NJ+07095/@40.5704583,-74.2927654,17z/data=!3m1!4b1!4m5!3m4!1s0x89c3b43787c7a943:0x65a7ff4b9f5b4c13!8m2!3d40.5704542!4d-74.2905767"
+    );
+  };
+
   const center = {
-    lat: 40.75669,
-    lng: -73.55922,
+    lat: 40.69802902554617,
+    lng: -73.87054320174943,
   };
 
   return (
@@ -269,7 +281,7 @@ const Contacts = () => {
         className={styles.header}
       >
         <Grow in={useDelayTransition(50)} timeout={800}>
-          <Typography color="textPrimary" variant="h4">
+          <Typography color="primary" variant="h4">
             Contact Us
           </Typography>
         </Grow>
@@ -338,7 +350,7 @@ const Contacts = () => {
                 key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
               }}
               defaultCenter={center}
-              defaultZoom={8}
+              defaultZoom={9}
               options={{
                 panControl: false,
                 zoomControl: false,
@@ -360,10 +372,11 @@ const Contacts = () => {
                   placement="bottom"
                   enterDelay={150}
                   leaveDelay={150}
+                  lat={40.75677833945324}
+                  lng={-73.55917207324349}
                 >
                   <RoomIcon
-                    lat={40.75669}
-                    lng={-73.55922}
+                    onClick={handleClickWestbury}
                     className={styles.mapMarker}
                   />
                 </Tooltip>
@@ -374,10 +387,11 @@ const Contacts = () => {
                   placement="bottom"
                   enterDelay={150}
                   leaveDelay={150}
+                  lat={40.75677833945324}
+                  lng={-73.55917207324349}
                 >
                   <RoomIcon
-                    lat={40.75669}
-                    lng={-73.55922}
+                    onClick={handleClickWestbury}
                     className={styles.mapMarker}
                   />
                 </Tooltip>
@@ -390,10 +404,11 @@ const Contacts = () => {
                   placement="bottom"
                   enterDelay={150}
                   leaveDelay={150}
+                  lat={40.57076413473068}
+                  lng={-74.29056081340242}
                 >
                   <RoomIcon
-                    lat={40.57057}
-                    lng={-74.29052}
+                    onClick={handleClickWoodbridge}
                     className={styles.mapMarker}
                   />
                 </Tooltip>
@@ -404,10 +419,11 @@ const Contacts = () => {
                   placement="bottom"
                   enterDelay={150}
                   leaveDelay={150}
+                  lat={40.57076413473068}
+                  lng={-74.29056081340242}
                 >
                   <RoomIcon
-                    lat={40.57057}
-                    lng={-74.29052}
+                    onClick={handleClickWoodbridge}
                     className={styles.mapMarker}
                   />
                 </Tooltip>
