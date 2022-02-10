@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
   links: {
     textDecoration: "none",
-    color: "#008B8B",
+    color: theme.palette.primary.main,
     userDrag: "none",
     userSelect: "none",
 
@@ -104,6 +104,9 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
     color: "#de5246",
+  },
+  tooltipStyle: {
+    zIndex: 50,
   },
 }));
 
@@ -248,6 +251,8 @@ const Contacts = () => {
 
   const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
 
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+
   const handleClickWestbury = () => {
     window.open(
       "https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
@@ -350,8 +355,10 @@ const Contacts = () => {
               bootstrapURLKeys={{
                 key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
               }}
-              defaultCenter={center}
-              defaultZoom={9}
+              // defaultCenter={center}
+              center={center}
+              zoom={matchesMD ? 8 : 9}
+              // defaultZoom={matchesMD ? 8 : 9}
               options={{
                 panControl: false,
                 zoomControl: false,
@@ -373,7 +380,7 @@ const Contacts = () => {
                   arrow={true}
                   placement="bottom"
                   enterDelay={150}
-                  leaveDelay={150}
+                  leaveDelay={0}
                   lat={40.75677833945324}
                   lng={-73.55917207324349}
                 >
@@ -388,7 +395,7 @@ const Contacts = () => {
                   arrow={true}
                   placement="bottom"
                   enterDelay={150}
-                  leaveDelay={150}
+                  leaveDelay={0}
                   lat={40.75677833945324}
                   lng={-73.55917207324349}
                 >
@@ -405,7 +412,7 @@ const Contacts = () => {
                   arrow={true}
                   placement="bottom"
                   enterDelay={150}
-                  leaveDelay={150}
+                  leaveDelay={0}
                   lat={40.57076413473068}
                   lng={-74.29056081340242}
                 >
@@ -420,7 +427,7 @@ const Contacts = () => {
                   arrow={true}
                   placement="bottom"
                   enterDelay={150}
-                  leaveDelay={150}
+                  leaveDelay={0}
                   lat={40.57076413473068}
                   lng={-74.29056081340242}
                 >

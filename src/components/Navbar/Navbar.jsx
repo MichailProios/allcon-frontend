@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
 
   drawerPaper: {
     width: drawerWidth,
-    zIndex: theme.zIndex.drawer + 2,
+    zIndex: theme.zIndex.drawer + 302,
     userSelect: "none",
     userDrag: "none",
   },
@@ -210,7 +210,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 301,
 
     // [theme.breakpoints.down("xs")]: {
     //   zIndex: theme.zIndex.drawer + 1,
@@ -314,44 +314,23 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
-        document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
-        if (isMobile) {
-          scroll.scrollToTop({
-            duration: 800,
-            delay: 0,
-            smooth: "easeInOutQuart",
-          });
-        } else {
-          scroll.scrollToTop({
-            duration: 0,
-            delay: 0,
-            smooth: "easeInOutQuart",
-          });
-        }
+
+        window.scrollTo(0, 0);
+
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
-        document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
-        if (isMobile) {
-          scroll.scrollToTop({
-            duration: 800,
-            delay: 0,
-            smooth: "easeInOutQuart",
-          });
-        } else {
-          scroll.scrollToTop({
-            duration: 0,
-            delay: 0,
-            smooth: "easeInOutQuart",
-          });
-        }
+
+        window.scrollTo(0, 0);
+
         break;
       case pathnames.startsWith("/about"):
         setValue(1);
-        document.documentElement.style.overflow = "visible";
-        document.body.style.overflow = "visible";
+
+        document.body.style.overflow = "auto";
+
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -365,11 +344,11 @@ const Navbar = () => {
             smooth: "easeInOutQuart",
           });
         }
+
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.documentElement.style.overflow = "visible";
-        document.body.style.overflow = "visible";
+        document.body.style.overflow = "auto";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -383,11 +362,11 @@ const Navbar = () => {
             smooth: "easeInOutQuart",
           });
         }
+
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.documentElement.style.overflow = "visible";
-        document.body.style.overflow = "visible";
+        document.body.style.overflow = "auto";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -401,11 +380,12 @@ const Navbar = () => {
             smooth: "easeInOutQuart",
           });
         }
+
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.documentElement.style.overflow = "visible";
-        document.body.style.overflow = "visible";
+        document.body.style.overflow = "auto";
+
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -419,23 +399,12 @@ const Navbar = () => {
             smooth: "easeInOutQuart",
           });
         }
+
         break;
       default:
-        document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
-        if (isMobile) {
-          scroll.scrollToTop({
-            duration: 800,
-            delay: 0,
-            smooth: "easeInOutQuart",
-          });
-        } else {
-          scroll.scrollToTop({
-            duration: 0,
-            delay: 0,
-            smooth: "easeInOutQuart",
-          });
-        }
+        window.scrollTo(0, 0);
+
         break;
     }
   }, [location]);

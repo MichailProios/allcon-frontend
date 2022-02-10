@@ -83,6 +83,12 @@ const Home = () => {
   const [animationFlag2, setAnimationFlag2] = useState(false);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     let arr = [];
 
     arr.push(lupton);
@@ -115,7 +121,7 @@ const Home = () => {
               ? (state = 3)
               : (state = 0)
           ) % 5,
-        10000
+        5000
       ),
     []
   );
