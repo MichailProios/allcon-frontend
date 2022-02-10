@@ -394,12 +394,6 @@ const Picture = ({ name, image, position }) => {
           matchesXXL && !matchesXXXL
             ? {
                 maxWidth: "100%",
-                height: "60em",
-                objectFit: "contain",
-              }
-            : matchesXXL && !matchesXXXL
-            ? {
-                maxWidth: "100%",
                 height: "65em",
                 objectFit: "contain",
               }
