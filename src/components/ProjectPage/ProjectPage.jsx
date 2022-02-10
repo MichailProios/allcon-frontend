@@ -233,6 +233,8 @@ const ProjectPage = ({
                 activeStep={activeStep}
                 nextButton={
                   <Button
+                    variant="contained"
+                    color="primary"
                     size="small"
                     onClick={handleNext}
                     disabled={activeStep === maxSteps - 1}
@@ -247,6 +249,8 @@ const ProjectPage = ({
                 }
                 backButton={
                   <Button
+                    variant="contained"
+                    color="primary"
                     size="small"
                     onClick={handleBack}
                     disabled={activeStep === 0}
@@ -275,6 +279,7 @@ const ProjectPage = ({
                       Project Name
                     </Typography>
                     <Typography
+                      color="primary"
                       variant="body1"
                       className={styles.textSecondary}
                     >
@@ -286,6 +291,7 @@ const ProjectPage = ({
                       Project Location
                     </Typography>
                     <Typography
+                      color="primary"
                       variant="body1"
                       className={styles.textSecondary}
                     >
@@ -297,6 +303,7 @@ const ProjectPage = ({
                       Client/ Affiliated Agency
                     </Typography>
                     <Typography
+                      color="primary"
                       variant="body1"
                       className={styles.textSecondary}
                     >
@@ -308,6 +315,7 @@ const ProjectPage = ({
                       Year Completed
                     </Typography>
                     <Typography
+                      color="primary"
                       variant="body1"
                       className={styles.textSecondary}
                     >
@@ -319,6 +327,7 @@ const ProjectPage = ({
                       Project Cost/Budget
                     </Typography>
                     <Typography
+                      color="primary"
                       variant="body1"
                       className={styles.textSecondary}
                     >
@@ -330,6 +339,7 @@ const ProjectPage = ({
                       Project Designer
                     </Typography>
                     <Typography
+                      color="primary"
                       variant="body1"
                       className={styles.textSecondary}
                     >
