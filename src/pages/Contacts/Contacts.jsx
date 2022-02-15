@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -113,13 +113,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return [
-    "Name",
-    "Contact Information",
-    "Address",
-    "Business Information",
-    "Inquiry",
-  ];
+  return ["Name", "Contact Information", "Address", "Inquiry"];
 }
 
 function getStepContent(
@@ -132,7 +126,17 @@ function getStepContent(
   emailError,
   filterEmail,
   phoneNumberError,
-  filterPhoneNumber
+  filterPhoneNumber,
+  addressLineError,
+  filterAddressLine,
+  cityError,
+  filterCity,
+  zipError,
+  filterZip,
+  stateError,
+  filterState,
+  inquiryError,
+  filterInquiry
 ) {
   switch (step) {
     case 0:
@@ -149,6 +153,7 @@ function getStepContent(
               onChange={filterFirstName}
               error={firstNameError}
               required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
@@ -159,6 +164,7 @@ function getStepContent(
               onChange={filterLastName}
               error={lastNameError}
               required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
         </Grid>
@@ -177,6 +183,7 @@ function getStepContent(
               onChange={filterEmail}
               error={emailError}
               required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
@@ -190,6 +197,7 @@ function getStepContent(
               onChange={filterPhoneNumber}
               error={phoneNumberError}
               required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
         </Grid>
@@ -205,7 +213,10 @@ function getStepContent(
               fullWidth={true}
               label="Address Line"
               variant="standard"
+              onChange={filterAddressLine}
+              error={addressLineError}
               required={false}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
@@ -213,7 +224,10 @@ function getStepContent(
               fullWidth={true}
               label="City"
               variant="standard"
+              onChange={filterCity}
+              error={cityError}
               required={false}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
@@ -221,7 +235,10 @@ function getStepContent(
               fullWidth={true}
               label="Zip / Postal Code"
               variant="standard"
+              onChange={filterZip}
+              error={zipError}
               required={false}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
@@ -229,49 +246,16 @@ function getStepContent(
               fullWidth={true}
               label="State"
               variant="standard"
+              onChange={filterState}
+              error={stateError}
               required={false}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
         </Grid>
       );
+
     case 3:
-      return (
-        <Grid container spacing={1} direction="column">
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Enter any business information (optional):</Typography>
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-            <TextField
-              fullWidth={true}
-              label="Name"
-              variant="standard"
-              required={false}
-            />
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-            <TextField
-              fullWidth={true}
-              label="Email"
-              variant="standard"
-              required={false}
-            />
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-            <MuiPhoneNumber
-              defaultCountry={"us"}
-              onlyCountries={["us"]}
-              fullWidth={true}
-              label="Phone Number"
-              color="primary"
-              variant="standard"
-              onChange={filterPhoneNumber}
-              error={phoneNumberError}
-              required={true}
-            />
-          </Grid>
-        </Grid>
-      );
-    case 4:
       return (
         <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -284,7 +268,10 @@ function getStepContent(
               minRows={6}
               label="Message"
               variant="standard"
+              onChange={filterInquiry}
+              error={inquiryError}
               required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
         </Grid>
@@ -294,84 +281,218 @@ function getStepContent(
   }
 }
 
+export const postContactUsEmail = (inputs) => {
+  return axios.post(
+    "https://allconcontracting.com:2096/api/postContactUsEmail",
+    inputs,
+    {
+      headers: {
+        //Authorization: "Bearer " + getApiTokenState(),
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
 const Contacts = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
-  const [disableNext, setDisableNext] = useState(false);
+  const [disableNext, setDisableNext] = useState(true);
 
   const [firstName, setFirstName] = useState("");
   const [firstNameError, setFirstNameError] = useState(false);
+  const [lastName, setLastName] = useState("");
+  const [lastNameError, setLastNameError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [addressLine, setAddressLine] = useState("");
+  const [addressLineError, setAddressLineError] = useState(false);
+  const [city, setCity] = useState("");
+  const [cityError, setCityError] = useState(false);
+  const [zip, setZip] = useState("");
+  const [zipError, setZipError] = useState(false);
+  const [state, setState] = useState("");
+  const [stateError, setStateError] = useState(false);
+  const [inquiry, setInquiry] = useState("");
+  const [inquiryError, setInquiryError] = useState(false);
 
   const filterFirstName = (e) => {
     if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
       setFirstNameError(true);
       setFirstName("");
+      setDisableNext(true);
     } else if (e.target.value === "") {
       setFirstNameError(false);
       setFirstName("");
+      setDisableNext(true);
     } else {
       setFirstNameError(false);
       setFirstName(e.target.value.toLowerCase());
+      lastName !== "" && setDisableNext(false);
     }
   };
-
-  const [lastName, setLastName] = useState("");
-  const [lastNameError, setLastNameError] = useState(false);
 
   const filterLastName = (e) => {
     if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
       setLastNameError(true);
       setLastName("");
+      setDisableNext(true);
     } else if (e.target.value === "") {
       setLastNameError(false);
       setLastName("");
+      setDisableNext(true);
     } else {
       setLastNameError(false);
       setLastName(e.target.value.toLowerCase());
+      firstName !== "" && setDisableNext(false);
     }
   };
-
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
 
   const filterEmail = (e) => {
-    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+    if (
+      !e.target.value.match(/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/gim) &&
+      e.target.value !== ""
+    ) {
       setEmailError(true);
-      setDisableNext(true);
       setEmail("");
+      setDisableNext(true);
     } else if (e.target.value === "") {
       setEmailError(false);
-      setDisableNext(true);
       setEmail("");
+      setDisableNext(true);
     } else {
       setEmailError(false);
-      setDisableNext(false);
       setEmail(e.target.value.toLowerCase());
+      phoneNumber.length === 17 && setEmailError(false);
     }
   };
-
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [phoneNumberError, setPhoneNumberError] = useState(false);
-
-  console.log(phoneNumber.length);
 
   const filterPhoneNumber = (e) => {
     setPhoneNumber(e);
+
+    if (phoneNumber.length !== 17) {
+      setDisableNext(true);
+    } else {
+      email !== "" && setDisableNext(false);
+    }
+  };
+
+  const filterAddressLine = (e) => {
+    if (
+      !e.target.value.match(/[A-Za-z0-9'\.\-\s\,]/) &&
+      e.target.value !== ""
+    ) {
+      setAddressLineError(true);
+      setAddressLine("");
+    } else if (e.target.value === "") {
+      setAddressLineError(false);
+      setAddressLine("");
+    } else {
+      setAddressLineError(false);
+      setAddressLine(e.target.value.toLowerCase());
+    }
+  };
+
+  const filterCity = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setCityError(true);
+      setCity("");
+    } else if (e.target.value === "") {
+      setCityError(false);
+      setCity("");
+    } else {
+      setCityError(false);
+      setCity(e.target.value.toLowerCase());
+    }
+  };
+
+  const filterZip = (e) => {
+    if (
+      !e.target.value.match(/^\d{5}(?:[-\s]\d{4})?$/) &&
+      e.target.value !== ""
+    ) {
+      setZipError(true);
+      setZip("");
+    } else if (e.target.value === "") {
+      setZipError(false);
+      setZip("");
+    } else {
+      setZipError(false);
+      setZip(e.target.value.toLowerCase());
+    }
+  };
+
+  const filterState = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setStateError(true);
+      setState("");
+    } else if (e.target.value === "") {
+      setStateError(false);
+      setState("");
+    } else {
+      setStateError(false);
+      setState(e.target.value.toLowerCase());
+    }
+  };
+
+  const filterInquiry = (e) => {
+    if (e.target.value === "") {
+      setInquiryError(false);
+      setInquiry("");
+    } else {
+      setInquiryError(false);
+      setInquiry(e.target.value.toLowerCase());
+      setDisableNext(false);
+    }
+  };
+
+  const handleSend = () => {
+    const inputs = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      addressLine,
+      city,
+      zip,
+      state,
+      inquiry,
+    };
+
+    postContactUsEmail(inputs);
   };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      email !== "" &&
+      phoneNumber.length === 17
+    ) {
+      setDisableNext(false);
+    } else {
+      setDisableNext(true);
+    }
+
+    if (activeStep === steps.length - 2) {
+      inquiry === "" && setDisableNext(true);
+    }
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setDisableNext(false);
   };
 
   const handleReset = () => {
     setActiveStep(0);
+    // setDisableNext(true);
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -459,7 +580,17 @@ const Contacts = () => {
                       emailError,
                       filterEmail,
                       phoneNumberError,
-                      filterPhoneNumber
+                      filterPhoneNumber,
+                      addressLineError,
+                      filterAddressLine,
+                      cityError,
+                      filterCity,
+                      zipError,
+                      filterZip,
+                      stateError,
+                      filterState,
+                      inquiryError,
+                      filterInquiry
                     )}
                   </div>
                   <div className={styles.actionsContainer}>
@@ -471,15 +602,27 @@ const Contacts = () => {
                       >
                         Back
                       </Button>
-                      <Button
-                        disabled={disableNext}
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={styles.button}
-                      >
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                      </Button>
+                      {activeStep === steps.length - 1 ? (
+                        <Button
+                          disabled={disableNext}
+                          variant="contained"
+                          color="primary"
+                          onClick={handleSend}
+                          className={styles.button}
+                        >
+                          Send Email
+                        </Button>
+                      ) : (
+                        <Button
+                          disabled={disableNext}
+                          variant="contained"
+                          color="primary"
+                          onClick={handleNext}
+                          className={styles.button}
+                        >
+                          Next
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </StepContent>
