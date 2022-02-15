@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
     transition: "transform 0.15s ease-in-out",
     "&:hover": {
-      transform: "scale3d(1.01, 1.01, 1)",
+      transform: "scale3d(1.005, 1.005, 1)",
     },
   },
   profileImage: {
@@ -74,7 +74,7 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                       }
                     : {
                         maxWidth: "100%",
-                        height: "20em",
+                        height: "30em",
                       }
                 }
                 aspectRatio={matchesMD ? 1.5 : 1}
@@ -86,7 +86,7 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                       }
                     : {
                         maxWidth: "100%",
-                        height: "20em",
+                        height: "30em",
                       }
                 }
                 src={image}

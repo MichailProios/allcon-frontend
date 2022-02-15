@@ -88,13 +88,13 @@ const ProfilePage = ({ picture, title, subtitle, description }) => {
                   matchesMD
                     ? {
                         maxWidth: "100%",
-                        height: "auto",
+                        height: "20em",
                       }
                     : {
                         maxWidth: "100%",
-                        height: "20em",
+                        height: "auto",
                         // borderTopRightRadius: "2px",
-                        borderBottomRightRadius: "2px",
+                        // borderBottomRightRadius: "2px",
                       }
                 }
                 aspectRatio={matchesMD ? 1.5 : 1}
@@ -106,7 +106,7 @@ const ProfilePage = ({ picture, title, subtitle, description }) => {
                       }
                     : {
                         maxWidth: "100%",
-                        height: "20em",
+                        height: "auto",
                       }
                 }
                 src={picture}

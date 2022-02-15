@@ -9,8 +9,8 @@ import React from "react";
 // }
 
 import pic from "../images/Logos/logo-new.png";
-import george from "../images/temp/georgeproios.jpg";
-import markos from "../images/temp/markobistakis.jpg";
+import george from "../images/temp/2-7-2022-74.jpg";
+import markos from "../images/temp/2-7-2022-59.jpg";
 import joseph from "../images/temp/josephgrant.JPG";
 import nick from "../images/temp/nickgiannikouris.jpg";
 import ahmed from "../images/temp/ahmed.jpg";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -17,6 +17,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import RoomIcon from "@material-ui/icons/Room";
 import Popover from "@material-ui/core/Popover";
+import { CircularProgress } from "@material-ui/core";
+import axios from "axios";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { isMobile } from "react-device-detect";
@@ -111,105 +114,200 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return [
-    "Name",
-    "Contact Information",
-    "Address",
-    "Company Information",
-    "Inquiry",
-  ];
+  return ["Name", "Contact Information", "Address", "Inquiry"];
 }
 
-function getStepContent(step, styles) {
+function getStepContent(
+  step,
+  styles,
+  firstName,
+  firstNameError,
+  filterFirstName,
+  lastName,
+  lastNameError,
+  filterLastName,
+  email,
+  emailError,
+  filterEmail,
+  phoneNumber,
+  phoneNumberError,
+  filterPhoneNumber,
+  addressLine,
+  addressLineError,
+  filterAddressLine,
+  city,
+  cityError,
+  filterCity,
+  zip,
+  zipError,
+  filterZip,
+  state,
+  stateError,
+  filterState,
+  inquiry,
+  inquiryError,
+  filterInquiry
+) {
   switch (step) {
     case 0:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Enter your first and last name:</Typography>
+            <Typography className={styles.textSecondary}>
+              Enter your first and last name:
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="First Name" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              className={styles.textSecondary}
+              label="First Name"
+              variant="standard"
+              fullWidth={true}
+              onChange={filterFirstName}
+              value={firstName}
+              error={firstNameError}
+              required={true}
+              inputProps={{ maxLength: 255 }}
+            />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="Last Name" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              className={styles.textSecondary}
+              label="Last Name"
+              variant="standard"
+              fullWidth={true}
+              onChange={filterLastName}
+              value={lastName}
+              error={lastNameError}
+              required={true}
+              inputProps={{ maxLength: 255 }}
+            />
           </Grid>
         </Grid>
       );
     case 1:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Enter your contact information:</Typography>
+            <Typography className={styles.textSecondary}>
+              Enter your contact information:
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="Email" variant="standard" required={true} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
             <TextField
-              label="Phone Number"
+              className={styles.textSecondary}
+              label="Email"
+              fullWidth={true}
               variant="standard"
+              onChange={filterEmail}
+              value={email}
+              error={emailError}
               required={true}
+              inputProps={{ maxLength: 255 }}
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <MuiPhoneNumber
+              className={styles.textSecondary}
+              defaultCountry={"us"}
+              onlyCountries={["us"]}
+              fullWidth={true}
+              label="Phone Number"
+              color="primary"
+              variant="standard"
+              onChange={filterPhoneNumber}
+              value={phoneNumber}
+              error={phoneNumberError}
+              required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
         </Grid>
       );
     case 2:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Enter your address:</Typography>
+            <Typography className={styles.textSecondary}>
+              Enter your address (optional):
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
             <TextField
+              className={styles.textSecondary}
+              fullWidth={true}
               label="Address Line"
               variant="standard"
+              onChange={filterAddressLine}
+              value={addressLine}
+              error={addressLineError}
               required={false}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="City" variant="standard" required={true} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
             <TextField
+              className={styles.textSecondary}
+              fullWidth={true}
+              label="City"
+              variant="standard"
+              onChange={filterCity}
+              value={city}
+              error={cityError}
+              required={false}
+              inputProps={{ maxLength: 255 }}
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              className={styles.textSecondary}
+              fullWidth={true}
               label="Zip / Postal Code"
               variant="standard"
-              required={true}
+              onChange={filterZip}
+              value={zip}
+              error={zipError}
+              required={false}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="State" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              className={styles.textSecondary}
+              fullWidth={true}
+              label="State"
+              variant="standard"
+              onChange={filterState}
+              value={state}
+              error={stateError}
+              required={false}
+              inputProps={{ maxLength: 255 }}
+            />
           </Grid>
         </Grid>
       );
+
     case 3:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Fill the company name:</Typography>
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="First Name" variant="standard" required={true} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="Last Name" variant="standard" required={true} />
-          </Grid>
-        </Grid>
-      );
-    case 4:
-      return (
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Type your inquiry:</Typography>
+            <Typography className={styles.textSecondary}>
+              Type your inquiry:
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <TextField
-              style={{ width: "100%" }}
+              className={styles.textSecondary}
+              fullWidth={true}
               multiline={true}
               minRows={6}
               label="Message"
               variant="standard"
+              onChange={filterInquiry}
+              value={inquiry}
+              error={inquiryError}
               required={true}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
         </Grid>
@@ -219,22 +317,238 @@ function getStepContent(step, styles) {
   }
 }
 
+const postContactUsEmail = (inputs) => {
+  return axios.post(
+    "https://allconcontracting.com:2096/api/postContactUsEmail",
+    inputs,
+    {
+      headers: {
+        //Authorization: "Bearer " + getApiTokenState(),
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
 const Contacts = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
+  const [disableNext, setDisableNext] = useState(true);
+
+  const [firstName, setFirstName] = useState("");
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastName, setLastName] = useState("");
+  const [lastNameError, setLastNameError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [addressLine, setAddressLine] = useState("");
+  const [addressLineError, setAddressLineError] = useState(false);
+  const [city, setCity] = useState("");
+  const [cityError, setCityError] = useState(false);
+  const [zip, setZip] = useState("");
+  const [zipError, setZipError] = useState(false);
+  const [state, setState] = useState("");
+  const [stateError, setStateError] = useState(false);
+  const [inquiry, setInquiry] = useState("");
+  const [inquiryError, setInquiryError] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [response, setResponse] = useState("");
+
+  const filterFirstName = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setFirstNameError(true);
+      setFirstName(e.target.value);
+      setDisableNext(true);
+    } else if (e.target.value === "") {
+      setFirstNameError(false);
+      setFirstName("");
+      setDisableNext(true);
+    } else {
+      setFirstNameError(false);
+      setFirstName(e.target.value);
+      lastName !== "" && setDisableNext(false);
+    }
+  };
+
+  const filterLastName = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setLastNameError(true);
+      setLastName(e.target.value);
+      setDisableNext(true);
+    } else if (e.target.value === "") {
+      setLastNameError(false);
+      setLastName("");
+      setDisableNext(true);
+    } else {
+      setLastNameError(false);
+      setLastName(e.target.value);
+      firstName !== "" && setDisableNext(false);
+    }
+  };
+
+  const filterEmail = (e) => {
+    if (
+      !e.target.value.match(/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/gim) &&
+      e.target.value !== ""
+    ) {
+      setEmailError(true);
+      setEmail(e.target.value);
+      setDisableNext(true);
+    } else if (e.target.value === "") {
+      setEmailError(false);
+      setEmail("");
+      setDisableNext(true);
+    } else {
+      setEmailError(false);
+      setEmail(e.target.value);
+      phoneNumber.length === 17 && setDisableNext(false);
+    }
+  };
+
+  const filterPhoneNumber = (e) => {
+    if (phoneNumber.length < 16) {
+      setDisableNext(true);
+    } else {
+      email !== "" && setDisableNext(false);
+    }
+    setPhoneNumber(e);
+  };
+
+  const filterAddressLine = (e) => {
+    if (
+      !e.target.value.match(/[A-Za-z0-9'\.\-\s\,]/) &&
+      e.target.value !== ""
+    ) {
+      setAddressLineError(true);
+      setAddressLine(e.target.value);
+    } else if (e.target.value === "") {
+      setAddressLineError(false);
+      setAddressLine("");
+    } else {
+      setAddressLineError(false);
+      setAddressLine(e.target.value);
+    }
+  };
+
+  const filterCity = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setCityError(true);
+      setCity(e.target.value);
+    } else if (e.target.value === "") {
+      setCityError(false);
+      setCity("");
+    } else {
+      setCityError(false);
+      setCity(e.target.value);
+    }
+  };
+
+  const filterZip = (e) => {
+    if (
+      !e.target.value.match(/^\d{5}(?:[-\s]\d{4})?$/) &&
+      e.target.value !== ""
+    ) {
+      setZipError(true);
+      setZip(e.target.value);
+    } else if (e.target.value === "") {
+      setZipError(false);
+      setZip("");
+    } else {
+      setZipError(false);
+      setZip(e.target.value);
+    }
+  };
+
+  const filterState = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setStateError(true);
+      setState(e.target.value);
+    } else if (e.target.value === "") {
+      setStateError(false);
+      setState("");
+    } else {
+      setStateError(false);
+      setState(e.target.value);
+    }
+  };
+
+  const filterInquiry = (e) => {
+    if (e.target.value === "") {
+      setInquiryError(false);
+      setInquiry("");
+    } else {
+      setInquiryError(false);
+      setInquiry(e.target.value);
+      setDisableNext(false);
+    }
+  };
+
+  const handleFinished = (response) => {
+    setResponse(response);
+    setIsLoading(false);
+  };
+  const handleSend = async () => {
+    const inputs = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      addressLine,
+      city,
+      zip,
+      state,
+      inquiry,
+    };
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    await postContactUsEmail(inputs).then((response) =>
+      handleFinished(response.status)
+    );
+  };
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      email !== "" &&
+      phoneNumber.length >= 16
+    ) {
+      setDisableNext(false);
+    } else {
+      setDisableNext(true);
+    }
+
+    if (activeStep === steps.length - 2) {
+      inquiry === "" && setDisableNext(true);
+    }
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setDisableNext(false);
   };
 
   const handleReset = () => {
     setActiveStep(0);
+    setDisableNext(true);
+
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPhoneNumber("");
+    setAddressLine("");
+    setCity("");
+    setZip("");
+    setState("");
+    setInquiry("");
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -310,8 +624,40 @@ const Contacts = () => {
             {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <div>{getStepContent(index, styles)}</div>
+                <StepContent TransitionProps={{ unmountOnExit: false }}>
+                  <div>
+                    {getStepContent(
+                      index,
+                      styles,
+                      firstName,
+                      firstNameError,
+                      filterFirstName,
+                      lastName,
+                      lastNameError,
+                      filterLastName,
+                      email,
+                      emailError,
+                      filterEmail,
+                      phoneNumber,
+                      phoneNumberError,
+                      filterPhoneNumber,
+                      addressLine,
+                      addressLineError,
+                      filterAddressLine,
+                      city,
+                      cityError,
+                      filterCity,
+                      zip,
+                      zipError,
+                      filterZip,
+                      state,
+                      stateError,
+                      filterState,
+                      inquiry,
+                      inquiryError,
+                      filterInquiry
+                    )}
+                  </div>
                   <div className={styles.actionsContainer}>
                     <div>
                       <Button
@@ -321,14 +667,27 @@ const Contacts = () => {
                       >
                         Back
                       </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={styles.button}
-                      >
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                      </Button>
+                      {activeStep === steps.length - 1 ? (
+                        <Button
+                          disabled={disableNext}
+                          variant="contained"
+                          color="primary"
+                          onClick={handleSend}
+                          className={styles.button}
+                        >
+                          Send Email
+                        </Button>
+                      ) : (
+                        <Button
+                          disabled={disableNext}
+                          variant="contained"
+                          color="primary"
+                          onClick={handleNext}
+                          className={styles.button}
+                        >
+                          Next
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </StepContent>
@@ -336,14 +695,36 @@ const Contacts = () => {
             ))}
           </Stepper>
         </Grow>
-        {activeStep === steps.length && (
+        {activeStep === steps.length && !isLoading && (
           <Paper square elevation={0} className={styles.resetContainer}>
-            <Typography>
-              Your email is sent, thank you for contacting ALL•CON Contracting
-            </Typography>
+            {response === 200 ? (
+              <Typography className={styles.textSecondary}>
+                Your email is sent, thank you for contacting ALL•CON
+              </Typography>
+            ) : (
+              <Typography className={styles.textSecondary}>
+                Email failed with code {response}
+              </Typography>
+            )}
             <Button onClick={handleReset} className={styles.button}>
               Reset
             </Button>
+          </Paper>
+        )}
+
+        {activeStep === steps.length && isLoading && (
+          <Paper square elevation={0} className={styles.resetContainer}>
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid item xs={3}>
+                <CircularProgress />
+              </Grid>
+            </Grid>
           </Paper>
         )}
       </Grid>
