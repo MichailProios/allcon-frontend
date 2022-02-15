@@ -3,7 +3,14 @@ import React, { useState, useEffect } from "react";
 //Material-UI Styles
 import { makeStyles } from "@material-ui/styles";
 
-import { Grid, Typography, Grow, Slide, Divider } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Grow,
+  Slide,
+  Divider,
+  Paper,
+} from "@material-ui/core";
 
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
@@ -20,13 +27,17 @@ import {
   scroller,
 } from "react-scroll";
 
+import MuiImage from "material-ui-image";
+
 import pic from "../../utilities/images/Logos/logo-new.png";
 
-import george from "../../utilities/images/temp/georgeproios.jpg";
-import markos from "../../utilities/images/temp/markobistakis.jpg";
+import george from "../../utilities/images/temp/2-7-2022-74.jpg";
+import markos from "../../utilities/images/temp/2-7-2022-59.jpg";
 import joseph from "../../utilities/images/temp/josephgrant.JPG";
 import nick from "../../utilities/images/temp/nickgiannikouris.jpg";
 import ahmed from "../../utilities/images/temp/ahmed.jpg";
+
+import company from "../../utilities/images/temp/2-7-2022-80.jpg";
 
 const useStyles = makeStyles((theme) => ({
   companyProfileGrid: {
@@ -46,6 +57,13 @@ const useStyles = makeStyles((theme) => ({
 
     width: "100%",
   },
+  paper: {
+    marginTop: "2em",
+    height: "auto",
+    width: "70em",
+    margin: "0 auto",
+  },
+
   profileCardsGrid: {
     padding: "1em 10em 2em 10em",
     width: "100%",
@@ -180,7 +198,15 @@ const About = () => {
           </Grow>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          style={{ justifySelf: "center" }}
+        >
           <Grow in={useDelayTransition(150)} timeout={800}>
             <Typography
               color="textPrimary"
@@ -223,6 +249,26 @@ const About = () => {
               project.
               <br />
             </Typography>
+          </Grow>
+          <Grow in={useDelayTransition(450)} timeout={800}>
+            <Paper className={styles.paper}>
+              <MuiImage
+                imageStyle={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+                cover={true}
+                iconContainerStyle={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+                aspectRatio={1.5}
+                animationDuration={800}
+                src={company}
+              />
+            </Paper>
           </Grow>
         </Grid>
       </Grid>

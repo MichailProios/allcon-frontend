@@ -17,6 +17,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import RoomIcon from "@material-ui/icons/Room";
 import Popover from "@material-ui/core/Popover";
+import axios from "axios";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { isMobile } from "react-device-detect";
@@ -115,40 +117,78 @@ function getSteps() {
     "Name",
     "Contact Information",
     "Address",
-    "Company Information",
+    "Business Information",
     "Inquiry",
   ];
 }
 
-function getStepContent(step, styles) {
+function getStepContent(
+  step,
+  styles,
+  firstNameError,
+  filterFirstName,
+  lastNameError,
+  filterLastName,
+  emailError,
+  filterEmail,
+  phoneNumberError,
+  filterPhoneNumber
+) {
   switch (step) {
     case 0:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Typography>Enter your first and last name:</Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="First Name" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              label="First Name"
+              variant="standard"
+              fullWidth={true}
+              onChange={filterFirstName}
+              error={firstNameError}
+              required={true}
+            />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="Last Name" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              label="Last Name"
+              variant="standard"
+              fullWidth={true}
+              onChange={filterLastName}
+              error={lastNameError}
+              required={true}
+            />
           </Grid>
         </Grid>
       );
     case 1:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Typography>Enter your contact information:</Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="Email" variant="standard" required={true} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
             <TextField
-              label="Phone Number"
+              label="Email"
+              fullWidth={true}
               variant="standard"
+              onChange={filterEmail}
+              error={emailError}
+              required={true}
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <MuiPhoneNumber
+              defaultCountry={"us"}
+              onlyCountries={["us"]}
+              fullWidth={true}
+              label="Phone Number"
+              color="primary"
+              variant="standard"
+              onChange={filterPhoneNumber}
+              error={phoneNumberError}
               required={true}
             />
           </Grid>
@@ -156,55 +196,90 @@ function getStepContent(step, styles) {
       );
     case 2:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Enter your address:</Typography>
+            <Typography>Enter your address (optional):</Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
             <TextField
+              fullWidth={true}
               label="Address Line"
               variant="standard"
               required={false}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="City" variant="standard" required={true} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
             <TextField
-              label="Zip / Postal Code"
+              fullWidth={true}
+              label="City"
               variant="standard"
-              required={true}
+              required={false}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="State" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              fullWidth={true}
+              label="Zip / Postal Code"
+              variant="standard"
+              required={false}
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              fullWidth={true}
+              label="State"
+              variant="standard"
+              required={false}
+            />
           </Grid>
         </Grid>
       );
     case 3:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Typography>Fill the company name:</Typography>
+            <Typography>Enter any business information (optional):</Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="First Name" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              fullWidth={true}
+              label="Name"
+              variant="standard"
+              required={false}
+            />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <TextField label="Last Name" variant="standard" required={true} />
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <TextField
+              fullWidth={true}
+              label="Email"
+              variant="standard"
+              required={false}
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <MuiPhoneNumber
+              defaultCountry={"us"}
+              onlyCountries={["us"]}
+              fullWidth={true}
+              label="Phone Number"
+              color="primary"
+              variant="standard"
+              onChange={filterPhoneNumber}
+              error={phoneNumberError}
+              required={true}
+            />
           </Grid>
         </Grid>
       );
     case 4:
       return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} direction="column">
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Typography>Type your inquiry:</Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <TextField
-              style={{ width: "100%" }}
+              fullWidth={true}
               multiline={true}
               minRows={6}
               label="Message"
@@ -224,6 +299,68 @@ const Contacts = () => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
+
+  const [disableNext, setDisableNext] = useState(false);
+
+  const [firstName, setFirstName] = useState("");
+  const [firstNameError, setFirstNameError] = useState(false);
+
+  const filterFirstName = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setFirstNameError(true);
+      setFirstName("");
+    } else if (e.target.value === "") {
+      setFirstNameError(false);
+      setFirstName("");
+    } else {
+      setFirstNameError(false);
+      setFirstName(e.target.value.toLowerCase());
+    }
+  };
+
+  const [lastName, setLastName] = useState("");
+  const [lastNameError, setLastNameError] = useState(false);
+
+  const filterLastName = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setLastNameError(true);
+      setLastName("");
+    } else if (e.target.value === "") {
+      setLastNameError(false);
+      setLastName("");
+    } else {
+      setLastNameError(false);
+      setLastName(e.target.value.toLowerCase());
+    }
+  };
+
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+
+  const filterEmail = (e) => {
+    if (!e.target.value.match(/^[a-z ,.'-]+$/i) && e.target.value !== "") {
+      setEmailError(true);
+      setDisableNext(true);
+      setEmail("");
+    } else if (e.target.value === "") {
+      setEmailError(false);
+      setDisableNext(true);
+      setEmail("");
+    } else {
+      setEmailError(false);
+      setDisableNext(false);
+      setEmail(e.target.value.toLowerCase());
+    }
+  };
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+
+  console.log(phoneNumber.length);
+
+  const filterPhoneNumber = (e) => {
+    setPhoneNumber(e);
+  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -310,8 +447,21 @@ const Contacts = () => {
             {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <div>{getStepContent(index, styles)}</div>
+                <StepContent TransitionProps={{ unmountOnExit: false }}>
+                  <div>
+                    {getStepContent(
+                      index,
+                      styles,
+                      firstNameError,
+                      filterFirstName,
+                      lastNameError,
+                      filterLastName,
+                      emailError,
+                      filterEmail,
+                      phoneNumberError,
+                      filterPhoneNumber
+                    )}
+                  </div>
                   <div className={styles.actionsContainer}>
                     <div>
                       <Button
@@ -322,6 +472,7 @@ const Contacts = () => {
                         Back
                       </Button>
                       <Button
+                        disabled={disableNext}
                         variant="contained"
                         color="primary"
                         onClick={handleNext}
