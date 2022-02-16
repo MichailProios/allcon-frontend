@@ -74,7 +74,7 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                       }
                     : {
                         maxWidth: "100%",
-                        height: "30em",
+                        height: "auto",
                       }
                 }
                 aspectRatio={matchesMD ? 1.5 : 1}

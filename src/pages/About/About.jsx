@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: "2em",
     height: "auto",
-    width: "70em",
+    width: "auto",
     margin: "0 auto",
   },
 
@@ -126,7 +126,7 @@ const About = () => {
                    Marko has grown the company from a small renovations company to a General 
                    Contracting company working on numerous high-profile 
                    projects for both public and private clients throughout the Tri State area.`,
-      delay: 1500,
+      delay: 1100,
     },
     {
       link: "/About/JosephGrant",
@@ -139,7 +139,7 @@ const About = () => {
                     management and general contracting. He is a 
                     Architect in eight states and has been involved 
                     in some of NYC’s largest projects.`,
-      delay: 2000,
+      delay: 1200,
     },
     {
       link: "/About/NikolaosGiannikouris",
@@ -149,7 +149,7 @@ const About = () => {
       description: `Nick earned his Bachelor of Architecture Degree from The New York Institute of Technology.
                     After earning his degree, Nick began managing a wide range of construction projects including
                     restoration and construction projects for NYC Public Schools as well as an extensive amount of experience with Local Law 1198 compliance jobs.`,
-      delay: 2500,
+      delay: 1300,
     },
     {
       link: "/About/AhmedBassiouny",
@@ -160,7 +160,7 @@ const About = () => {
                     and Project Management Diploma from North Carolina State University. After earning his degree, 
                     Ahmed began his career in construction as a project cost estimator where he obtained a unique 
                     insight in the interconnection of quality, cost, and project management play in the success of any given project.`,
-      delay: 3000,
+      delay: 1400,
     },
     {
       link: "/About/MohamedElaasser",
@@ -170,7 +170,7 @@ const About = () => {
       description: `Mohamed earned his Bachelor of Science in Civil Engineering from Alexandria University in Egypt. 
                     After earning his degree, Mohamed began managing a wide range of construction projects throughout
                     the world including Dubai, Muscat and New York.`,
-      delay: 3500,
+      delay: 1500,
     },
   ]);
 
@@ -257,16 +257,15 @@ const About = () => {
                   maxWidth: "100%",
                   height: "auto",
                   objectFit: "contain",
+                  borderRadius: "6px",
                 }}
                 cover={true}
-                iconContainerStyle={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  objectFit: "contain",
-                }}
                 aspectRatio={1.5}
                 animationDuration={800}
                 src={company}
+                style={{
+                  borderRadius: "6px",
+                }}
               />
             </Paper>
           </Grow>
