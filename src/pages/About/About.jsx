@@ -10,22 +10,13 @@ import {
   Slide,
   Divider,
   Paper,
+  Fade,
 } from "@material-ui/core";
 
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 import { isMobile } from "react-device-detect";
-
-import {
-  LinkScroll,
-  DirectLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
 
 import MuiImage from "material-ui-image";
 
@@ -250,7 +241,7 @@ const About = () => {
               <br />
             </Typography>
           </Grow>
-          <Grow in={useDelayTransition(450)} timeout={800}>
+          <Fade in={useDelayTransition(600)} timeout={800}>
             <Paper className={styles.paper}>
               <MuiImage
                 imageStyle={{
@@ -268,7 +259,7 @@ const About = () => {
                 }}
               />
             </Paper>
-          </Grow>
+          </Fade>
         </Grid>
       </Grid>
       <Slide direction="right" in={true} timeout={1000}>
