@@ -136,6 +136,10 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-start",
   },
+  toolbar: {
+    minHeight: "64px",
+    height: "64px",
+  },
 
   menuButton: {
     // display: "none",
@@ -188,8 +192,8 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
     zIndex: 1,
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: theme.spacing(4),
+    right: theme.spacing(4),
   },
   appbarLinks: {
     textDecoration: "none",
@@ -329,7 +333,7 @@ const Navbar = () => {
       case pathnames.startsWith("/about"):
         setValue(1);
 
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "overlay";
 
         if (isMobile) {
           scroll.scrollToTop({
@@ -348,7 +352,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "overlay";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -366,7 +370,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "overlay";
         if (isMobile) {
           scroll.scrollToTop({
             duration: 800,
@@ -384,7 +388,7 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "overlay";
 
         if (isMobile) {
           scroll.scrollToTop({
