@@ -13,8 +13,10 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Tooltip from "@material-ui/core/Tooltip";
 import Box from "@material-ui/core/Box";
-import { Divider } from "@material-ui/core";
+import { Divider, IconButton } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import Fab from "@material-ui/core/Fab";
 
 import * as Scroll from "react-scroll";
 import { isMobile } from "react-device-detect";
@@ -62,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
   carousel: {
     width: "100%",
+    position: "relative",
     // height: "45em",
   },
 
@@ -75,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
     overflow: "none",
+    height: "48px",
   },
   accordionHeader: {
     fontWeight: "bold",
@@ -131,6 +135,22 @@ const useStyles = makeStyles((theme) => ({
   textSecondary: {
     userSelect: "none",
     useDrag: "none",
+  },
+
+  prevButton: {
+    position: "absolute",
+
+    top: "45%",
+    left: theme.spacing(1),
+    zIndex: "999",
+  },
+
+  nextButton: {
+    position: "absolute",
+
+    top: "45%",
+    right: theme.spacing(1),
+    zIndex: "999",
   },
 }));
 
@@ -225,44 +245,66 @@ const ProjectPage = ({
                 animateTransitions={true}
               />
 
+              <Fab
+                color="primary"
+                size="small"
+                onClick={handleBack}
+                disabled={activeStep === 0}
+                className={styles.prevButton}
+              >
+                <KeyboardArrowLeft style={{ color: "#fff" }} />
+              </Fab>
+
+              <Fab
+                color="primary"
+                size="small"
+                onClick={handleNext}
+                disabled={activeStep === maxSteps - 1}
+                className={styles.nextButton}
+              >
+                <KeyboardArrowRight style={{ color: "#fff" }} />
+              </Fab>
+
               <MobileStepper
                 className={styles.stepper}
                 steps={maxSteps}
                 position="static"
                 variant={!isMobile ? "dots" : "text"}
                 activeStep={activeStep}
-                nextButton={
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={handleNext}
-                    disabled={activeStep === maxSteps - 1}
-                  >
-                    Next
-                    {theme.direction === "rtl" ? (
-                      <KeyboardArrowLeft />
-                    ) : (
-                      <KeyboardArrowRight />
-                    )}
-                  </Button>
-                }
-                backButton={
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={handleBack}
-                    disabled={activeStep === 0}
-                  >
-                    {theme.direction === "rtl" ? (
-                      <KeyboardArrowRight />
-                    ) : (
-                      <KeyboardArrowLeft />
-                    )}
-                    Back
-                  </Button>
-                }
+                backButton={<div />}
+                nextButton={<div />}
+                // nextButton={
+                //   <Button
+                //     variant="contained"
+                //     color="primary"
+                //     size="small"
+                //     onClick={handleNext}
+                //     disabled={activeStep === maxSteps - 1}
+                //   >
+                //     Next
+                //     {theme.direction === "rtl" ? (
+                //       <KeyboardArrowLeft />
+                //     ) : (
+                //       <KeyboardArrowRight />
+                //     )}
+                //   </Button>
+                // }
+                // backButton={
+                //   <Button
+                //     variant="contained"
+                //     color="primary"
+                //     size="small"
+                //     onClick={handleBack}
+                //     disabled={activeStep === 0}
+                //   >
+                //     {theme.direction === "rtl" ? (
+                //       <KeyboardArrowRight />
+                //     ) : (
+                //       <KeyboardArrowLeft />
+                //     )}
+                //     Back
+                //   </Button>
+                // }
               />
             </Paper>
           </Grid>
