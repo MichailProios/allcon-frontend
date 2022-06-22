@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardAction: {
     height: "auto",
+    minHeight: "60vh",
   },
   profileImage: {
     userDrag: "none",
@@ -88,29 +89,31 @@ const ProfilePage = ({ picture, title, subtitle, description }) => {
                   matchesMD
                     ? {
                         maxWidth: "100%",
-                        height: "20em",
+                        // height: "20em",
+                        objectFit: "contain",
                       }
                     : {
                         maxWidth: "100%",
                         height: "auto",
+                        objectFit: "contain",
                         // borderTopRightRadius: "2px",
                         // borderBottomRightRadius: "2px",
                       }
                 }
-                aspectRatio={matchesMD ? 1.5 : 1}
-                iconContainerStyle={
-                  matchesMD
-                    ? {
-                        maxWidth: "100%",
-                        height: "auto",
-                      }
-                    : {
-                        maxWidth: "100%",
-                        height: "auto",
-                      }
-                }
+                // aspectRatio={matchesMD ? 1.5 : 1}
+                // iconContainerStyle={
+                //   matchesMD
+                //     ? {
+                //         maxWidth: "100%",
+                //         height: "auto",
+                //       }
+                //     : {
+                //         maxWidth: "100%",
+                //         height: "auto",
+                //       }
+                // }
                 src={picture}
-                cover={true}
+                // cover={true}
                 animationDuration={100}
                 className={styles.profileImage}
               />

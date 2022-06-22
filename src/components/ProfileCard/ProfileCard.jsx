@@ -25,17 +25,13 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: "10em",
     // width: "auto",
 
-    height: "auto",
     userDrag: "none",
     userSelect: "none",
   },
   cardAction: {
-    height: "20em",
+    height: "auto",
     userDrag: "none",
     userSelect: "none",
-    [theme.breakpoints.down("md")]: {
-      height: "auto",
-    },
 
     transition: "transform 0.15s ease-in-out",
     "&:hover": {
@@ -70,27 +66,30 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                   matchesMD
                     ? {
                         maxWidth: "100%",
-                        height: "auto",
+                        // height: "20em",
+                        objectFit: "contain",
                       }
                     : {
                         maxWidth: "100%",
                         height: "auto",
+                        objectFit: "contain",
+                        // borderTopRightRadius: "2px",
+                        // borderBottomRightRadius: "2px",
                       }
                 }
-                aspectRatio={matchesMD ? 1.5 : 1}
-                iconContainerStyle={
-                  matchesMD
-                    ? {
-                        maxWidth: "100%",
-                        height: "auto",
-                      }
-                    : {
-                        maxWidth: "100%",
-                        height: "30em",
-                      }
-                }
+                // aspectRatio={matchesMD ? 1.5 : 1}
+                // iconContainerStyle={
+                //   matchesMD
+                //     ? {
+                //         maxWidth: "100%",
+                //         height: "auto",
+                //       }
+                //     : {
+                //         maxWidth: "100%",
+                //         height: "auto",
+                //       }
+                // }
                 src={image}
-                cover={true}
                 animationDuration={100}
                 className={styles.profileImage}
               />
