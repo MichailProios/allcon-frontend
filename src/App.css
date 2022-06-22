@@ -6,10 +6,15 @@ html {
   overflow: overlay;
   scroll-behavior: smooth;
 }
-
+/* 
+html,
 body {
-  min-height: 100%;
-}
+  touch-action: none;
+} */
+
+/* body {
+  overflow: overlay;
+} */
 
 * {
   box-sizing: border-box;

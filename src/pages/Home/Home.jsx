@@ -12,6 +12,9 @@ import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
 import { useTransition, animated, config } from "react-spring";
 
+import { isMobile } from "react-device-detect";
+import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
+
 import { Paper, Typography, Fade } from "@material-ui/core";
 
 import SwipeableViews from "react-swipeable-views";
@@ -21,7 +24,7 @@ import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
 import delayTransition from "../../utilities/customFunctions/delayTransition";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
-const AutoPlaySwipeableViews = autoPlay(virtualize(SwipeableViews));
+import SimpleImageSlider from "react-simple-image-slider";
 
 const useStyles = makeStyles((theme) => ({
   quote: {
@@ -77,130 +80,48 @@ const items = [
 const Home = () => {
   const styles = useStyles();
   const theme = useTheme();
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const [animationFlag1, setAnimationFlag1] = useState(false);
-  const [animationFlag2, setAnimationFlag2] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    let arr = [];
+  const height = useDetectHeight();
 
-    arr.push(lupton);
-    arr.push(brightwater500);
-    arr.push(church);
-    arr.push(nold);
+  const images = [
+    { url: lupton },
+    { url: nold },
+    { url: brightwater500 },
+    { url: church },
+  ];
 
-    cacheImages(arr).then(() => setIsLoaded(true));
+  return (
+    <Fade in={true} timeout={300}>
+      <div>
+        <SimpleImageSlider
+          width={"100%"}
+          height={isMobile ? `${height}px` : `calc(${height}px - 65px)`}
+          images={images}
+          showBullets={true}
+          loop={true}
+          autoPlay={true}
+          autoPlayDelay={5.0}
+        />
 
-    // setIsLoaded(true);
-
-    delayTransition(150).then((response) => setAnimationFlag1(response));
-    delayTransition(1000).then((response) => setAnimationFlag2(response));
-  }, []);
-
-  // const maxSteps = items.length;
-
-  const [index, set] = useState(0);
-
-  useEffect(
-    () =>
-      void setInterval(
-        () =>
-          set((state) =>
-            state === 0
-              ? (state = 1)
-              : state === 1
-              ? (state = 2)
-              : state === 2
-              ? (state = 3)
-              : (state = 0)
-          ) % 5,
-        5000
-      ),
-    []
+        <Fade
+          in={true}
+          style={{
+            // transformOrigin: "0 0 0",
+            transitionDelay: `${15 + `00`}ms`,
+          }}
+          timeout={300}
+        >
+          <Typography variant="h4" className={styles.quote}>
+            Infinite Possibilities through Integrated Solutions
+          </Typography>
+        </Fade>
+      </div>
+    </Fade>
   );
-
-  if (isLoaded) {
-    return (
-      <Fade in={animationFlag1} timeout={500}>
-        <div>
-          {index === 0 && (
-            <Fade in={true} timeout={800}>
-              <Paper
-                style={{
-                  backgroundImage: "url(" + lupton + ")",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  height: "calc(100vh - 64px)",
-                  overflow: "hidden",
-                }}
-              />
-            </Fade>
-          )}
-
-          {index === 1 && (
-            <Fade in={true} timeout={800}>
-              <Paper
-                style={{
-                  backgroundImage: "url(" + church + ")",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  height: "calc(100vh - 64px)",
-                  overflow: "hidden",
-                }}
-              />
-            </Fade>
-          )}
-
-          {index === 2 && (
-            <Fade in={true} timeout={800}>
-              <Paper
-                style={{
-                  backgroundImage: "url(" + brightwater500 + ")",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  height: "calc(100vh - 64px)",
-                  overflow: "hidden",
-                }}
-              />
-            </Fade>
-          )}
-
-          {index === 3 && (
-            <Fade in={true} timeout={800}>
-              <Paper
-                style={{
-                  backgroundImage: "url(" + nold + ")",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  height: "calc(100vh - 64px)",
-                  overflow: "hidden",
-                }}
-              />
-            </Fade>
-          )}
-
-          <Fade in={animationFlag2} timeout={1500}>
-            <Typography variant="h4" className={styles.quote}>
-              Infinite Possibilities through Integrated Solutions
-            </Typography>
-          </Fade>
-        </div>
-      </Fade>
-    );
-  } else {
-    return <LoadingSpinner />;
-  }
 };
 
 export default Home;

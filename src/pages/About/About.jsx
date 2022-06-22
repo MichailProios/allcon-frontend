@@ -49,8 +49,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: "2em 1em 2em 1em",
     },
-
-    width: "100%",
   },
   paper: {
     marginTop: "2em",
@@ -60,17 +58,13 @@ const useStyles = makeStyles((theme) => ({
   },
 
   profileCardsGrid: {
-    padding: "1em 10em 2em 10em",
-    width: "100%",
-
+    padding: "2em 10em 2em 10em",
     [theme.breakpoints.down("lg")]: {
       padding: "2em 8em 2em 8em",
     },
-
     [theme.breakpoints.down("md")]: {
       padding: "2em 4em 2em 4em",
     },
-
     [theme.breakpoints.down("sm")]: {
       padding: "1em 1em 1em 1em",
     },
@@ -179,7 +173,7 @@ const About = () => {
     {
       link: "/About/TinaRichusa",
       image: tina,
-      title: "Sandra Dias",
+      title: "Tina Richusa",
       subtitle: "Office Administrator",
       description: `In 2018 Tina joined ALL•CON in charge of day-to-day activities to support our employees and ensure client satisfaction. 
                 Tina makes sure ALL•CON staff have all the necessary tools and resources required to assure our projects are always delivered with top quality.`,
@@ -215,10 +209,10 @@ const About = () => {
   ]);
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.companyProfileGrid}
       >
@@ -317,8 +311,8 @@ const About = () => {
 
       <Grid
         container
-        spacing={2}
-        direction="column"
+        // spacing={2}
+        direction="row"
         className={styles.profileCardsGrid}
       >
         <Grid
@@ -337,62 +331,25 @@ const About = () => {
           </Grow>
         </Grid>
         {listData.map((value, index) => (
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12} key={index}>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            xl={12}
+            key={index}
+            style={{ paddingTop: "1.5em" }}
+          >
             <ProfileCard
               image={value.image}
               title={value.title}
               subtitle={value.subtitle}
               description={value.description}
-              delay={value.delay}
               link={value.link}
             />
           </Grid>
         ))}
-        {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <ProfileCard
-            image={markos}
-            title="Marko Bistakis"
-            description="Since founding ALL•CON Contracting in 2001, Marko has grown the company from a small renovations company to a General Contracting company working on numerous high-profile projects for both public and private clients throughout the Tri State area."
-            subtitle="President of Administration and Marketing"
-            flag={useDelayTransition(1500)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <ProfileCard
-            image={joseph}
-            title="Joseph P. Grant"
-            description="Joseph received his bachelor’s degree from the New York Institute of Technology and has almost 30 years of experience in architecture, construction management and general contracting. He is a registered Architect in eight states and has been involved in some of NYC’s largest projects."
-            subtitle="Executive"
-            flag={useDelayTransition(2000)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <ProfileCard
-            image={pic}
-            title="Nikolaos Giannikouris"
-            description="Nick earned his Bachelor of Architecture Degree from The New York Institute of Technology. After earning his degree, Nick began managing a wide range of construction projects including restoration and construction projects for NYC Public Schools as well as an extensive amount of experience with Local Law 1198 compliance jobs."
-            subtitle="Senior Project Manager"
-            flag={useDelayTransition(2500)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <ProfileCard
-            image={pic}
-            title="Ahmed M Bassiouny"
-            description="Ahmed received his Bachelor of Science in Civil Engineering from Alexandria University in Egypt and Project Management Diploma from North Carolina State University. After earning his degree, Ahmed began his career in construction as a project cost estimator where he obtained a unique insight in the interconnection of quality, cost, and project management play in the success of any given project."
-            subtitle="Senior Project Manager"
-            flag={useDelayTransition(3000)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <ProfileCard
-            image={pic}
-            title="Mohamed Elaasser"
-            description="Mohamed earned his Bachelor of Science in Civil Engineering from Alexandria University in Egypt. After earning his degree, Mohamed began managing a wide range of construction projects throughout the world including Dubai, Muscat and New York."
-            subtitle="Senior Project Manager"
-            flag={useDelayTransition(3500)}
-          />
-        </Grid> */}
       </Grid>
     </div>
   );

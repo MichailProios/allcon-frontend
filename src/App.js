@@ -1,12 +1,19 @@
 //Basic dependencies
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import {
   createTheme,
   ThemeProvider,
   makeStyles,
 } from "@material-ui/core/styles";
+
+import { Box } from "@material-ui/core";
 
 //Styling
 import "./App.css";
@@ -133,14 +140,30 @@ function App() {
         {isLoaded === true ? (
           <Router>
             <Navbar />
-            <div style={{ overflow: "hidden" }}>
+            <Box
+              style={{
+                maxHeight: "100%",
+              }}
+            >
               <Routes>
-                <Route path="/" exact element={<Home />} />
+                {/* <Route path="/" exact element={<Home />} /> */}
                 <Route path="/Home" exact element={<Home />} />
                 <Route path="/About" exact element={<About />} />
                 <Route path="/Contacts" exact element={<Contacts />} />
                 <Route path="/Projects" exact element={<Projects />} />
                 <Route path="/Testimonies" exact element={<Testimonies />} />
+
+                <Route
+                  path="*"
+                  exact
+                  element={<Navigate to="/Home" replace />}
+                />
+
+                <Route
+                  path="/"
+                  exact
+                  element={<Navigate to="/Home" replace />}
+                />
 
                 {/* <Route
                   path="/projects/LuptonHall"
@@ -150,7 +173,7 @@ function App() {
                 {projectComponents}
                 {profileComponents}
               </Routes>
-            </div>
+            </Box>
           </Router>
         ) : (
           <LoadingSpinner />

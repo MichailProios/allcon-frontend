@@ -86,8 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     backgroundColor: "#fff",
-    position: "sticky",
-    overflowX: "hidden",
+
     zIndex: theme.zIndex.drawer + 1,
     widht: "100vh",
     // backgroundColor: theme.palette.primary.main,
@@ -248,7 +247,7 @@ function ScrollTop(props) {
   const handleClick = () => {
     //window[`scrollTo`]({ top: 0, behavior: `smooth` });
     if (isMobile) {
-      scroll.scrollToTop({ duration: 800, delay: 0, smooth: "easeInOutQuart" });
+      scroll.scrollToTop({ duration: 400, delay: 0, smooth: "easeInOutQuart" });
     } else {
       scroll.scrollToTop({ duration: 0, delay: 0, smooth: "easeInOutQuart" });
     }
@@ -297,11 +296,19 @@ function BackFAB() {
 
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
-  return (
-    <Slide direction={"down"} in={!trigger}>
-      {children}
-    </Slide>
-  );
+  if (isMobile) {
+    return (
+      <Slide direction={"down"} in={true}>
+        {children}
+      </Slide>
+    );
+  } else {
+    return (
+      <Slide direction={"down"} in={!trigger}>
+        {children}
+      </Slide>
+    );
+  }
 };
 
 const Navbar = () => {
@@ -318,14 +325,12 @@ const Navbar = () => {
     switch (true) {
       case pathnames === "/":
         setValue(0);
-        document.body.style.overflow = "hidden";
 
         window.scrollTo(0, 0);
 
         break;
       case pathnames.startsWith("/home"):
         setValue(0);
-        document.body.style.overflow = "hidden";
 
         window.scrollTo(0, 0);
 
@@ -333,11 +338,9 @@ const Navbar = () => {
       case pathnames.startsWith("/about"):
         setValue(1);
 
-        document.body.style.overflow = "overlay";
-
         if (isMobile) {
           scroll.scrollToTop({
-            duration: 800,
+            duration: 400,
             delay: 0,
             smooth: "easeInOutQuart",
           });
@@ -352,10 +355,10 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/projects"):
         setValue(2);
-        document.body.style.overflow = "overlay";
+
         if (isMobile) {
           scroll.scrollToTop({
-            duration: 800,
+            duration: 400,
             delay: 0,
             smooth: "easeInOutQuart",
           });
@@ -370,10 +373,10 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/testimonies"):
         setValue(3);
-        document.body.style.overflow = "overlay";
+
         if (isMobile) {
           scroll.scrollToTop({
-            duration: 800,
+            duration: 400,
             delay: 0,
             smooth: "easeInOutQuart",
           });
@@ -388,11 +391,10 @@ const Navbar = () => {
         break;
       case pathnames.startsWith("/contacts"):
         setValue(4);
-        document.body.style.overflow = "overlay";
 
         if (isMobile) {
           scroll.scrollToTop({
-            duration: 800,
+            duration: 400,
             delay: 0,
             smooth: "easeInOutQuart",
           });
@@ -406,7 +408,6 @@ const Navbar = () => {
 
         break;
       default:
-        document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
 
         break;
@@ -428,17 +429,6 @@ const Navbar = () => {
     setOpenDrawer(false);
   };
 
-  if (openDrawer === true) {
-    document.documentElement.style.overflow = "hidden";
-  } else {
-    if (
-      !location.pathname.toLowerCase().startsWith("/") ||
-      !location.pathname.toLowerCase().startsWith("/home")
-    ) {
-      document.documentElement.style.overflow = "visible";
-    }
-  }
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -446,7 +436,7 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <HideOnScroll>
-        <AppBar className={styles.appbar} elevation={0}>
+        <AppBar className={styles.appbar} position={"sticky"} elevation={0}>
           <Toolbar className={styles.toolbar}>
             <Grid justifyContent={"space-between"} container>
               <Grid item>
