@@ -195,7 +195,7 @@ export const profiles = [
   {
     link: "/About/TinaRichusa",
     picture: tina,
-    title: "Sandra Dias",
+    title: "Tina Richusa",
     subtitle: "Office Administrator",
     description: (
       <>

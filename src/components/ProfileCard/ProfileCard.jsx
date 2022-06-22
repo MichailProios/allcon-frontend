@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Material-UI Styles
 import { makeStyles, useTheme } from "@material-ui/styles";
@@ -13,6 +13,8 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { isMobile } from "react-device-detect";
+
+import { useInView } from "react-intersection-observer";
 
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 
@@ -51,9 +53,20 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
 
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
+  const [ref, inView] = useInView();
+  const [flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    if (inView) {
+      setFlag(true);
+    } else {
+      setFlag(false);
+    }
+  }, [inView]);
+
   return (
-    <Grow in={useDelayTransition(delay)} timeout={800}>
-      <Card className={styles.root}>
+    <Grow in={flag} timeout={800}>
+      <Card className={styles.root} ref={ref}>
         <CardActionArea
           className={styles.cardAction}
           component={Link}
