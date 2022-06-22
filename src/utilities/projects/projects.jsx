@@ -13,7 +13,7 @@ export const projects = [
     link: "/Projects/LuptonHall",
     pictures: importAll(
       require.context(
-        "../images/lupton-hall",
+        "D:/Websites/Pictures/Projects/lupton-hall",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -49,7 +49,7 @@ export const projects = [
     link: "/Projects/SaintDemetriosChurch",
     pictures: importAll(
       require.context(
-        "../images/stdemetrios",
+        "D:/Websites/Pictures/Projects/stdemetrios",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -74,7 +74,11 @@ export const projects = [
   {
     link: "/Projects/Nold",
     pictures: importAll(
-      require.context("../images/nold", false, /\.(JPG|PNG|png|jpe?g|svg)$/)
+      require.context(
+        "D:/Websites/Pictures/Projects/nold",
+        false,
+        /\.(JPG|PNG|png|jpe?g|svg)$/
+      )
     ),
     projectName: "SUNY Farmingdale Nold Hall Gymnasium",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
@@ -106,7 +110,7 @@ export const projects = [
     link: "/Projects/500Bridgewater",
     pictures: importAll(
       require.context(
-        "../images/500brightwater",
+        "D:/Websites/Pictures/Projects/500brightwater",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -140,7 +144,7 @@ export const projects = [
     link: "/Projects/Bareburger",
     pictures: importAll(
       require.context(
-        "../images/bareburger",
+        "D:/Websites/Pictures/Projects/bareburger",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -163,7 +167,7 @@ export const projects = [
     link: "/Projects/WilsonAnimal",
     pictures: importAll(
       require.context(
-        "../images/willstonanimal",
+        "D:/Websites/Pictures/Projects/willstonanimal",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -185,7 +189,11 @@ export const projects = [
   {
     link: "/Projects/255West",
     pictures: importAll(
-      require.context("../images/255w", false, /\.(JPG|PNG|png|jpe?g|svg)$/)
+      require.context(
+        "D:/Websites/Pictures/Projects/255w",
+        false,
+        /\.(JPG|PNG|png|jpe?g|svg)$/
+      )
     ),
     projectName: "255 West 108th Street",
     projectLocation: "N/A",
@@ -199,7 +207,7 @@ export const projects = [
     link: "/Projects/20East",
     pictures: importAll(
       require.context(
-        "../images/20east9th",
+        "D:/Websites/Pictures/Projects/20east9th",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -216,7 +224,7 @@ export const projects = [
     link: "/Projects/UpperEastVetenary",
     pictures: importAll(
       require.context(
-        "../images/uppereastveterinary",
+        "D:/Websites/Pictures/Projects/uppereastveterinary",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -239,7 +247,7 @@ export const projects = [
     link: "/Projects/CarlePlaceAuditorium",
     pictures: importAll(
       require.context(
-        "../images/carlplace",
+        "D:/Websites/Pictures/Projects/carlplace",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -262,7 +270,7 @@ export const projects = [
     link: "/Projects/CarlePlaceLobby",
     pictures: importAll(
       require.context(
-        "../images/carlplacelobby",
+        "D:/Websites/Pictures/Projects/carlplacelobby",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -279,7 +287,7 @@ export const projects = [
     link: "/Projects/CarlePlaceLibrary",
     pictures: importAll(
       require.context(
-        "../images/carlplacelibrary",
+        "D:/Websites/Pictures/Projects/carlplacelibrary",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -295,7 +303,11 @@ export const projects = [
   {
     link: "/Projects/NewJerseyVeterinary",
     pictures: importAll(
-      require.context("../images/njvet", false, /\.(JPG|PNG|png|jpe?g|svg)$/)
+      require.context(
+        "D:/Websites/Pictures/Projects/njvet",
+        false,
+        /\.(JPG|PNG|png|jpe?g|svg)$/
+      )
     ),
     projectName: "New Jersey Veterinary Hospital",
     projectLocation: "N/A",
@@ -315,7 +327,7 @@ export const projects = [
     link: "/Projects/HudsonAnimalHospital",
     pictures: importAll(
       require.context(
-        "../images/hudsonanimal",
+        "D:/Websites/Pictures/Projects/hudsonanimal",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -338,7 +350,7 @@ export const projects = [
     link: "/Projects/866Westchester",
     pictures: importAll(
       require.context(
-        "../images/866westchester",
+        "D:/Websites/Pictures/Projects/866westchester",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )
@@ -360,7 +372,11 @@ export const projects = [
   {
     link: "/Projects/55Pierrpoint",
     pictures: importAll(
-      require.context("../images/55pierre", false, /\.(JPG|PNG|png|jpe?g|svg)$/)
+      require.context(
+        "D:/Websites/Pictures/Projects/55pierre",
+        false,
+        /\.(JPG|PNG|png|jpe?g|svg)$/
+      )
     ),
     projectName: "55 Pierrpoint Street",
     projectLocation: "N/A",
@@ -380,7 +396,11 @@ export const projects = [
   {
     link: "/Projects/164_W79th",
     pictures: importAll(
-      require.context("../images/164w79th", false, /\.(JPG|PNG|png|jpe?g|svg)$/)
+      require.context(
+        "D:/Websites/Pictures/Projects/164w79th",
+        false,
+        /\.(JPG|PNG|png|jpe?g|svg)$/
+      )
     ),
     projectName: "164 W79th Street",
     projectLocation: "N/A",
@@ -394,7 +414,7 @@ export const projects = [
     link: "/Projects/17W_10th_Townhouse",
     pictures: importAll(
       require.context(
-        "../images/17w10street",
+        "D:/Websites/Pictures/Projects/17w10street",
         false,
         /\.(JPG|PNG|png|jpe?g|svg)$/
       )

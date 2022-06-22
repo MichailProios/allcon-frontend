@@ -22,12 +22,6 @@ import {
 
 import pic from "../../utilities/images/Logos/logo-new.png";
 
-import george from "../../utilities/images/temp/georgeproios.jpg";
-import markos from "../../utilities/images/temp/markobistakis.jpg";
-import joseph from "../../utilities/images/temp/josephgrant.JPG";
-import nick from "../../utilities/images/temp/nickgiannikouris.jpg";
-import ahmed from "../../utilities/images/temp/ahmed.jpg";
-
 const useStyles = makeStyles((theme) => ({
   testimoniesGridHeader: {
     padding: "2em 10em 0em 10em",

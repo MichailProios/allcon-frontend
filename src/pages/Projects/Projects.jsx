@@ -40,7 +40,6 @@ import pierrpointStreet from "../../utilities/images/55pierre/DSC00083.JPG";
 import w79thStreet from "../../utilities/images/164w79th/image001.jpg";
 import townhouse17w from "../../utilities/images/17w10street/IMG_7491.jpg";
 
-import { wait } from "@testing-library/user-event/dist/utils";
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
 import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";

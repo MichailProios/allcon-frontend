@@ -138,7 +138,7 @@ const Home = () => {
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  height: "100vh",
+                  height: "calc(100vh - 64px)",
                   overflow: "hidden",
                 }}
               />
@@ -153,7 +153,7 @@ const Home = () => {
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  height: "100vh",
+                  height: "calc(100vh - 64px)",
                   overflow: "hidden",
                 }}
               />
@@ -168,7 +168,7 @@ const Home = () => {
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  height: "100vh",
+                  height: "calc(100vh - 64px)",
                   overflow: "hidden",
                 }}
               />
@@ -183,7 +183,7 @@ const Home = () => {
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  height: "100vh",
+                  height: "calc(100vh - 64px)",
                   overflow: "hidden",
                 }}
               />

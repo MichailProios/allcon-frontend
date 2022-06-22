@@ -9,11 +9,15 @@ import React from "react";
 // }
 
 import pic from "../images/Logos/logo-new.png";
-import george from "../images/temp/2-7-2022-74.jpg";
-import markos from "../images/temp/2-7-2022-59.jpg";
-import joseph from "../images/temp/josephgrant.JPG";
-import nick from "../images/temp/nickgiannikouris.jpg";
-import ahmed from "../images/temp/ahmed.jpg";
+import george from "../../utilities/images/temp/5-8-2022-24.jpg";
+import markos from "../../utilities/images/temp/5-8-2022-19.jpg";
+import joseph from "../../utilities/images/temp/5-8-2022-23.jpg";
+import nick from "../../utilities/images/temp/5-8-2022-16.jpg";
+import ahmed from "../../utilities/images/temp/5-8-2022-28.jpg";
+import sandra from "../../utilities/images/temp/5-8-2022-14.jpg";
+import tina from "../../utilities/images/temp/5-8-2022-13.jpg";
+import wahid from "../../utilities/images/temp/5-8-2022-12.jpg";
+import ana from "../../utilities/images/temp/5-8-2022-27.jpg";
 
 export const profiles = [
   {
@@ -164,7 +168,92 @@ export const profiles = [
     picture: pic,
     title: "Mohamed Elaasser",
     subtitle: "Senior Project Manager",
-    description: "",
+    description: (
+      <>
+        Mohamed earned his Bachelor of Science in Civil Engineering from
+        Alexandria University in Egypt. After earning his degree, Mohamed began
+        managing a wide range of construction projects throughout the world
+        including Dubai, Muscat and New York.
+      </>
+    ),
+  },
+  {
+    link: "/About/SandraDias",
+    picture: sandra,
+    title: "Sandra Dias",
+    subtitle: "Office Manager",
+    description: (
+      <>
+        Since joining ALL•CON in 2015 Sandra has developed affective and
+        efficient intra-office communications protocols. As Office Manager, she
+        utilizes her organizational skills to streamline our administrative
+        procedures, increase our efficiency and enhance the company’s safety
+        protocols.
+      </>
+    ),
+  },
+  {
+    link: "/About/TinaRichusa",
+    picture: tina,
+    title: "Sandra Dias",
+    subtitle: "Office Administrator",
+    description: (
+      <>
+        In 2018 Tina joined ALL•CON in charge of day-to-day activities to
+        support our employees and ensure client satisfaction. Tina makes sure
+        ALL•CON staff have all the necessary tools and resources required to
+        assure our projects are always delivered with top quality.
+      </>
+    ),
+  },
+  {
+    link: "/About/StavrosGiannopoulos",
+    picture: pic,
+    title: "Stavros Giannopoulos",
+    subtitle: "Staff Accountant",
+    description: (
+      <>
+        Stavros runs the Accounting Department at ALL•CON and is responsible for
+        overseeing all activities from maintaining and reviewing all financial
+        accounts and statements to preparing financial reporting. Since 2014, he
+        has been assisting with all financial audits, developing budgeting
+        procedures for ALL•CON and maintaining and reconciling yearly accounts.
+      </>
+    ),
+  },
+  {
+    link: "/About/WahidWahab",
+    picture: wahid,
+    title: "Wahid Wahab",
+    subtitle: "Senior Estimator",
+    description: (
+      <>
+        As Senior Estimator Wahid is responsible prepares all cost estimates for
+        planned construction projects. In 2019, he was brought into the ALL•CON
+        family because of his ability to work closely with owners’
+        representatives, designers, vendors, and subcontractors to best
+        determine the overall cost of a project and generate quality takeoffs.
+        His ability to keep up to date with current technologies and
+        construction methodologies is a critical component to ALL•CON being able
+        to provide accurate and precise project pricing.
+      </>
+    ),
+  },
+  {
+    link: "/About/AnaVillarrubia",
+    picture: ana,
+    title: "Ana Villarrubia",
+    subtitle: "Estimator",
+    description: (
+      <>
+        Ana received her BS in Construction Management/Engineering Technology
+        from the State University at Farmingdale and is a vital member of the
+        Estimating Team at ALL•CON. Her proficiency in AUTOCAD, Procore and
+        Bluebeam along with an eye towards detail and the ability to read
+        blueprints gives her a unique capability to perform accurate project
+        take offs and generate qualified bids.
+      </>
+    ),
   },
 ];
 

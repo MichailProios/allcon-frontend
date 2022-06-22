@@ -22,13 +22,17 @@ import MuiImage from "material-ui-image";
 
 import pic from "../../utilities/images/Logos/logo-new.png";
 
-import george from "../../utilities/images/temp/2-7-2022-74.jpg";
-import markos from "../../utilities/images/temp/2-7-2022-59.jpg";
-import joseph from "../../utilities/images/temp/josephgrant.JPG";
-import nick from "../../utilities/images/temp/nickgiannikouris.jpg";
-import ahmed from "../../utilities/images/temp/ahmed.jpg";
+import george from "../../utilities/images/temp/5-8-2022-24.jpg";
+import markos from "../../utilities/images/temp/5-8-2022-19.jpg";
+import joseph from "../../utilities/images/temp/5-8-2022-23.jpg";
+import nick from "../../utilities/images/temp/5-8-2022-16.jpg";
+import ahmed from "../../utilities/images/temp/5-8-2022-28.jpg";
+import sandra from "../../utilities/images/temp/5-8-2022-14.jpg";
+import tina from "../../utilities/images/temp/5-8-2022-13.jpg";
+import wahid from "../../utilities/images/temp/5-8-2022-12.jpg";
+import ana from "../../utilities/images/temp/5-8-2022-27.jpg";
 
-import company from "../../utilities/images/temp/2-7-2022-80.jpg";
+import company from "../../utilities/images/temp/5-8-2022-8.jpg";
 
 const useStyles = makeStyles((theme) => ({
   companyProfileGrid: {
@@ -117,7 +121,7 @@ const About = () => {
                    Marko has grown the company from a small renovations company to a General 
                    Contracting company working on numerous high-profile 
                    projects for both public and private clients throughout the Tri State area.`,
-      delay: 1100,
+      delay: 1050,
     },
     {
       link: "/About/JosephGrant",
@@ -130,7 +134,7 @@ const About = () => {
                     management and general contracting. He is a 
                     Architect in eight states and has been involved 
                     in some of NYC’s largest projects.`,
-      delay: 1200,
+      delay: 1100,
     },
     {
       link: "/About/NikolaosGiannikouris",
@@ -140,7 +144,7 @@ const About = () => {
       description: `Nick earned his Bachelor of Architecture Degree from The New York Institute of Technology.
                     After earning his degree, Nick began managing a wide range of construction projects including
                     restoration and construction projects for NYC Public Schools as well as an extensive amount of experience with Local Law 1198 compliance jobs.`,
-      delay: 1300,
+      delay: 1150,
     },
     {
       link: "/About/AhmedBassiouny",
@@ -151,7 +155,7 @@ const About = () => {
                     and Project Management Diploma from North Carolina State University. After earning his degree, 
                     Ahmed began his career in construction as a project cost estimator where he obtained a unique 
                     insight in the interconnection of quality, cost, and project management play in the success of any given project.`,
-      delay: 1400,
+      delay: 1200,
     },
     {
       link: "/About/MohamedElaasser",
@@ -161,6 +165,51 @@ const About = () => {
       description: `Mohamed earned his Bachelor of Science in Civil Engineering from Alexandria University in Egypt. 
                     After earning his degree, Mohamed began managing a wide range of construction projects throughout
                     the world including Dubai, Muscat and New York.`,
+      delay: 1250,
+    },
+    {
+      link: "/About/SandraDias",
+      image: sandra,
+      title: "Sandra Dias",
+      subtitle: "Office Manager",
+      description: `Since joining ALL•CON in 2015 Sandra has developed affective and efficient intra-office communications protocols. 
+                    As Office Manager, she utilizes her organizational skills to streamline our administrative procedures, increase our efficiency and enhance the company’s safety protocols.`,
+      delay: 1300,
+    },
+    {
+      link: "/About/TinaRichusa",
+      image: tina,
+      title: "Sandra Dias",
+      subtitle: "Office Administrator",
+      description: `In 2018 Tina joined ALL•CON in charge of day-to-day activities to support our employees and ensure client satisfaction. 
+                Tina makes sure ALL•CON staff have all the necessary tools and resources required to assure our projects are always delivered with top quality.`,
+      delay: 1350,
+    },
+    {
+      link: "/About/StavrosGiannopoulos",
+      image: pic,
+      title: "Stavros Giannopoulos",
+      subtitle: "Staff Accountant",
+      description: `Stavros runs the Accounting Department at ALL•CON and is responsible for overseeing all activities from maintaining and reviewing all financial accounts and statements to preparing financial reporting. 
+                    Since 2014, he has been assisting with all financial audits, developing budgeting procedures for ALL•CON and maintaining and reconciling yearly accounts.`,
+      delay: 1400,
+    },
+    {
+      link: "/About/WahidWahab",
+      image: wahid,
+      title: "Wahid Wahab",
+      subtitle: "Senior Estimator",
+      description: `As Senior Estimator Wahid is responsible prepares all cost estimates for planned construction projects. In 2019, he was brought into the ALL•CON family because of his ability to work closely with owners’ representatives, designers, vendors, and subcontractors to best determine the overall cost of a project and generate quality takeoffs. 
+                  His ability to keep up to date with current technologies and construction methodologies is a critical component to ALL•CON being able to provide accurate and precise project pricing. `,
+      delay: 1450,
+    },
+    {
+      link: "/About/AnaVillarrubia",
+      image: ana,
+      title: "Ana Villarrubia",
+      subtitle: "Estimator",
+      description: `Ana received her BS in Construction Management/Engineering Technology from the State University at Farmingdale and is a vital member of the Estimating Team at ALL•CON. 
+                    Her proficiency in AUTOCAD, Procore and Bluebeam along with an eye towards detail and the ability to read blueprints gives her a unique capability to perform accurate project take offs and generate qualified bids. `,
       delay: 1500,
     },
   ]);
