@@ -31,21 +31,21 @@ import { useTheme } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   contactUsGridContainer: {
-    padding: "2em 10em 2em 10em",
+    padding: "1em 6em 2em 6em",
 
     [theme.breakpoints.down("lg")]: {
-      padding: "2em 8em 2em 8em",
+      padding: "1em 4em 2em 4em",
     },
 
     [theme.breakpoints.down("md")]: {
-      padding: "2em 4em 2em 4em",
+      padding: "1em 2em 2em 2em",
     },
 
     [theme.breakpoints.down("sm")]: {
-      padding: "2em 1em 2em 1em",
+      padding: "1em 0.5em 2em 0.5em",
     },
 
-    width: "100%",
+    // width: "100vh",
   },
   button: {
     marginTop: theme.spacing(1),
@@ -107,9 +107,6 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
     color: "#de5246",
-  },
-  tooltipStyle: {
-    zIndex: 50,
   },
 }));
 
@@ -585,362 +582,379 @@ const Contacts = () => {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction="row"
-      className={styles.contactUsGridContainer}
-    >
+    <div className={styles.contactUsGridContainer}>
       <Grid
-        item
-        xs={12}
-        sm={12}
-        md={12}
-        lg={12}
-        xl={12}
-        className={styles.header}
+        container
+        spacing={2}
+        direction="row"
+        className={styles.contactUsGridContainer}
       >
-        <Grow in={useDelayTransition(50)} timeout={800}>
-          <Typography color="primary" variant="h4">
-            Contact Us
-          </Typography>
-        </Grow>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sm={12}
-        md={12}
-        lg={12}
-        xl={12}
-        className={styles.header}
-      >
-        <Grow in={useDelayTransition(200)} timeout={800}>
-          <Stepper
-            activeStep={activeStep}
-            orientation="vertical"
-            className={styles.stepper}
-          >
-            {steps.map((label, index) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent TransitionProps={{ unmountOnExit: false }}>
-                  <div>
-                    {getStepContent(
-                      index,
-                      styles,
-                      firstName,
-                      firstNameError,
-                      filterFirstName,
-                      lastName,
-                      lastNameError,
-                      filterLastName,
-                      email,
-                      emailError,
-                      filterEmail,
-                      phoneNumber,
-                      phoneNumberError,
-                      filterPhoneNumber,
-                      addressLine,
-                      addressLineError,
-                      filterAddressLine,
-                      city,
-                      cityError,
-                      filterCity,
-                      zip,
-                      zipError,
-                      filterZip,
-                      state,
-                      stateError,
-                      filterState,
-                      inquiry,
-                      inquiryError,
-                      filterInquiry
-                    )}
-                  </div>
-                  <div className={styles.actionsContainer}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          className={styles.header}
+        >
+          <Grow in={useDelayTransition(50)} timeout={800}>
+            <Typography color="primary" variant="h4">
+              Contact Us
+            </Typography>
+          </Grow>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          className={styles.header}
+        >
+          <Grow in={useDelayTransition(200)} timeout={800}>
+            <Stepper
+              activeStep={activeStep}
+              orientation="vertical"
+              className={styles.stepper}
+            >
+              {steps.map((label, index) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                  <StepContent TransitionProps={{ unmountOnExit: false }}>
                     <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        className={styles.button}
-                      >
-                        Back
-                      </Button>
-                      {activeStep === steps.length - 1 ? (
-                        <Button
-                          disabled={disableNext}
-                          variant="contained"
-                          color="primary"
-                          onClick={handleSend}
-                          className={styles.button}
-                        >
-                          Send Email
-                        </Button>
-                      ) : (
-                        <Button
-                          disabled={disableNext}
-                          variant="contained"
-                          color="primary"
-                          onClick={handleNext}
-                          className={styles.button}
-                        >
-                          Next
-                        </Button>
+                      {getStepContent(
+                        index,
+                        styles,
+                        firstName,
+                        firstNameError,
+                        filterFirstName,
+                        lastName,
+                        lastNameError,
+                        filterLastName,
+                        email,
+                        emailError,
+                        filterEmail,
+                        phoneNumber,
+                        phoneNumberError,
+                        filterPhoneNumber,
+                        addressLine,
+                        addressLineError,
+                        filterAddressLine,
+                        city,
+                        cityError,
+                        filterCity,
+                        zip,
+                        zipError,
+                        filterZip,
+                        state,
+                        stateError,
+                        filterState,
+                        inquiry,
+                        inquiryError,
+                        filterInquiry
                       )}
                     </div>
-                  </div>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-        </Grow>
-        {activeStep === steps.length && !isLoading && (
-          <Paper square elevation={0} className={styles.resetContainer}>
-            {response === 200 ? (
-              <Typography className={styles.textSecondary}>
-                Your email is sent, thank you for contacting ALL•CON
-              </Typography>
-            ) : (
-              <Typography className={styles.textSecondary}>
-                Email failed with code {response}
-              </Typography>
-            )}
-            <Button onClick={handleReset} className={styles.button}>
-              Reset
-            </Button>
-          </Paper>
-        )}
+                    <div className={styles.actionsContainer}>
+                      <div>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={handleBack}
+                          className={styles.button}
+                        >
+                          Back
+                        </Button>
+                        {activeStep === steps.length - 1 ? (
+                          <Button
+                            disabled={disableNext}
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSend}
+                            className={styles.button}
+                          >
+                            Send Email
+                          </Button>
+                        ) : (
+                          <Button
+                            disabled={disableNext}
+                            variant="contained"
+                            color="primary"
+                            onClick={handleNext}
+                            className={styles.button}
+                          >
+                            Next
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </StepContent>
+                </Step>
+              ))}
+            </Stepper>
+          </Grow>
+          {activeStep === steps.length && !isLoading && (
+            <Paper square elevation={0} className={styles.resetContainer}>
+              {response === 200 ? (
+                <Typography className={styles.textSecondary}>
+                  Your email is sent, thank you for contacting ALL•CON
+                </Typography>
+              ) : (
+                <Typography className={styles.textSecondary}>
+                  Email failed with code {response}
+                </Typography>
+              )}
+              <Button onClick={handleReset} className={styles.button}>
+                Reset
+              </Button>
+            </Paper>
+          )}
 
-        {activeStep === steps.length && isLoading && (
-          <Paper square elevation={0} className={styles.resetContainer}>
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Grid item xs={3}>
-                <CircularProgress />
+          {activeStep === steps.length && isLoading && (
+            <Paper square elevation={0} className={styles.resetContainer}>
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid item xs={3}>
+                  <CircularProgress />
+                </Grid>
               </Grid>
-            </Grid>
-          </Paper>
-        )}
-      </Grid>
+            </Paper>
+          )}
+        </Grid>
 
-      <Grow in={useDelayTransition(500)} timeout={800}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
-          <Paper className={styles.mapPaper}>
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
-              }}
-              // defaultCenter={center}
-              center={center}
-              zoom={matchesMD ? 8 : 9}
-              // defaultZoom={matchesMD ? 8 : 9}
-              options={{
-                panControl: false,
-                zoomControl: false,
-                rotateControl: false,
-                scaleControl: false,
-                fullscreenControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-                scrollwheel: false,
-                gestureHandling: "none",
-                mapTypeId: "roadmap",
-              }}
-              className={styles.map}
-            >
-              {isMobile ? (
-                <Tooltip
-                  title="Westbury Office"
-                  open={true}
-                  arrow={true}
-                  placement="bottom"
-                  enterDelay={150}
-                  leaveDelay={0}
-                  lat={40.75677833945324}
-                  lng={-73.55917207324349}
-                >
-                  <RoomIcon
-                    onClick={handleClickWestbury}
-                    className={styles.mapMarker}
-                  />
-                </Tooltip>
-              ) : (
-                <Tooltip
-                  title="Westbury Office"
-                  arrow={true}
-                  placement="bottom"
-                  enterDelay={150}
-                  leaveDelay={0}
-                  lat={40.75677833945324}
-                  lng={-73.55917207324349}
-                >
-                  <RoomIcon
-                    onClick={handleClickWestbury}
-                    className={styles.mapMarker}
-                  />
-                </Tooltip>
-              )}
-              {isMobile ? (
-                <Tooltip
-                  title="Woodbridge Office"
-                  open={true}
-                  arrow={true}
-                  placement="bottom"
-                  enterDelay={150}
-                  leaveDelay={0}
-                  lat={40.57076413473068}
-                  lng={-74.29056081340242}
-                >
-                  <RoomIcon
-                    onClick={handleClickWoodbridge}
-                    className={styles.mapMarker}
-                  />
-                </Tooltip>
-              ) : (
-                <Tooltip
-                  title="Woodbridge Office"
-                  arrow={true}
-                  placement="bottom"
-                  enterDelay={150}
-                  leaveDelay={0}
-                  lat={40.57076413473068}
-                  lng={-74.29056081340242}
-                >
-                  <RoomIcon
-                    onClick={handleClickWoodbridge}
-                    className={styles.mapMarker}
-                  />
-                </Tooltip>
-              )}
+        <Grow in={useDelayTransition(500)} timeout={800}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
+            <Paper className={styles.mapPaper}>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyBu03kEKAEtz-cNwAyJMoNHkjYHfJPFWUU",
+                }}
+                // defaultCenter={center}
+                center={center}
+                zoom={matchesMD ? 8 : 9}
+                // defaultZoom={matchesMD ? 8 : 9}
+                options={{
+                  panControl: false,
+                  zoomControl: false,
+                  rotateControl: false,
+                  scaleControl: false,
+                  fullscreenControl: false,
+                  streetViewControl: false,
+                  mapTypeControl: false,
+                  scrollwheel: false,
+                  gestureHandling: "none",
+                  mapTypeId: "roadmap",
+                }}
+                className={styles.map}
+              >
+                {isMobile ? (
+                  <Tooltip
+                    title="Westbury Office"
+                    open={true}
+                    arrow={true}
+                    placement="bottom"
+                    enterDelay={150}
+                    leaveDelay={0}
+                    lat={40.75677833945324}
+                    lng={-73.55917207324349}
+                  >
+                    <RoomIcon
+                      onClick={handleClickWestbury}
+                      className={styles.mapMarker}
+                    />
+                  </Tooltip>
+                ) : (
+                  <Tooltip
+                    title="Westbury Office"
+                    arrow={true}
+                    placement="bottom"
+                    enterDelay={150}
+                    leaveDelay={0}
+                    lat={40.75677833945324}
+                    lng={-73.55917207324349}
+                  >
+                    <RoomIcon
+                      onClick={handleClickWestbury}
+                      className={styles.mapMarker}
+                    />
+                  </Tooltip>
+                )}
+                {isMobile ? (
+                  <Tooltip
+                    title="Woodbridge Office"
+                    open={true}
+                    arrow={true}
+                    placement="bottom"
+                    enterDelay={150}
+                    leaveDelay={0}
+                    lat={40.57076413473068}
+                    lng={-74.29056081340242}
+                  >
+                    <RoomIcon
+                      onClick={handleClickWoodbridge}
+                      className={styles.mapMarker}
+                    />
+                  </Tooltip>
+                ) : (
+                  <Tooltip
+                    title="Woodbridge Office"
+                    arrow={true}
+                    placement="bottom"
+                    enterDelay={150}
+                    leaveDelay={0}
+                    lat={40.57076413473068}
+                    lng={-74.29056081340242}
+                  >
+                    <RoomIcon
+                      onClick={handleClickWoodbridge}
+                      className={styles.mapMarker}
+                    />
+                  </Tooltip>
+                )}
 
-              {/* <AnyReactComponent
+                {/* <AnyReactComponent
             lat={59.955413}
             lng={30.337844}
             text="My Marker"
           /> */}
-              {/* <Marker position={{ lat: -34.397, lng: 150.644 }} /> */}
-            </GoogleMapReact>
-          </Paper>
-        </Grid>
-      </Grow>
-      <Grow in={useDelayTransition(1000)} timeout={800}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
-          <Card className={styles.card}>
-            <CardHeader
-              title="General Information"
-              className={styles.cardHeader}
-            />
-            <Divider />
-            <CardContent>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6" className={styles.textPrimary}>
-                    Main Office Address
-                  </Typography>
-                  <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to View our Main Office Address">
-                      <a
-                        className={styles.links}
-                        href="https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        66 Brooklyn Avenue, Westbury, New York, 11590
-                      </a>
-                    </Tooltip>
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6" className={styles.textPrimary}>
-                    New Jersey Office Address
-                  </Typography>
-                  <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to View our New Jersey Office Address">
-                      <a
-                        className={styles.links}
-                        href="https://www.google.com/maps/place/300+Kimball+St+%23204b,+Woodbridge,+NJ+07095/@40.5704583,-74.2927654,17z/data=!3m1!4b1!4m5!3m4!1s0x89c3b43787c7a943:0x65a7ff4b9f5b4c13!8m2!3d40.5704542!4d-74.2905767"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        300 Kimball St, Suite 204B, Woodbridge, New Jersey,
-                        07095
-                      </a>
-                    </Tooltip>
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6" className={styles.textPrimary}>
-                    LinkedIn
-                  </Typography>
-                  <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to View our LinkedIn">
-                      <a
-                        className={styles.links}
-                        href="https://www.linkedin.com/company/allcon-contracting"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        www.linkedin.com/company/{matchesXL && <br />}
-                        allcon-contracting
-                      </a>
-                    </Tooltip>
-                  </Typography>
-                </Grid>
+                {/* <Marker position={{ lat: -34.397, lng: 150.644 }} /> */}
+              </GoogleMapReact>
+            </Paper>
+          </Grid>
+        </Grow>
+        <Grow in={useDelayTransition(1000)} timeout={800}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+            <Card className={styles.card}>
+              <CardHeader
+                title="General Information"
+                className={styles.cardHeader}
+              />
+              <Divider />
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Main Office Address
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <Tooltip title="Click to View our Main Office Address">
+                        <a
+                          className={styles.links}
+                          href="https://www.google.com/maps/place/66+Brooklyn+Ave,+Westbury,+NY+11590/@40.7566889,-73.5613715,17z/data=!3m1!4b1!4m5!3m4!1s0x89c280cb33822bf3:0x68442c7cd931282c!8m2!3d40.7566849!4d-73.5591828"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          66 Brooklyn Avenue, Westbury, New York, 11590
+                        </a>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      New Jersey Office Address
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <Tooltip title="Click to View our New Jersey Office Address">
+                        <a
+                          className={styles.links}
+                          href="https://www.google.com/maps/place/300+Kimball+St+%23204b,+Woodbridge,+NJ+07095/@40.5704583,-74.2927654,17z/data=!3m1!4b1!4m5!3m4!1s0x89c3b43787c7a943:0x65a7ff4b9f5b4c13!8m2!3d40.5704542!4d-74.2905767"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          300 Kimball St, Suite 204B, Woodbridge, New Jersey,
+                          07095
+                        </a>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      LinkedIn
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <Tooltip title="Click to View our LinkedIn">
+                        <a
+                          className={styles.links}
+                          href="https://www.linkedin.com/company/allcon-contracting"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          www.linkedin.com/company/{matchesXL && <br />}
+                          allcon-contracting
+                        </a>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
 
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6" className={styles.textPrimary}>
-                    Email Address
-                  </Typography>
-                  <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to Email">
-                      <a
-                        className={styles.links}
-                        href="mailto:info@allconcontracting.com"
-                      >
-                        info@allconcontracting.com
-                      </a>
-                    </Tooltip>
-                  </Typography>
-                </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Email Address
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <Tooltip title="Click to Email">
+                        <a
+                          className={styles.links}
+                          href="mailto:info@allconcontracting.com"
+                        >
+                          info@allconcontracting.com
+                        </a>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
 
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6" className={styles.textPrimary}>
-                    Phone Number
-                  </Typography>
-                  <Typography variant="body1" className={styles.textSecondary}>
-                    <Tooltip title="Click to Call">
-                      <a className={styles.links} href="tel:+1 516-333-3339">
-                        +1-516-333-3339
-                      </a>
-                    </Tooltip>
-                  </Typography>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Phone Number
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                    >
+                      <Tooltip title="Click to Call">
+                        <a className={styles.links} href="tel:+1 516-333-3339">
+                          +1-516-333-3339
+                        </a>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Typography variant="h6" className={styles.textPrimary}>
+                      Fax Number
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      className={styles.textSecondary}
+                      style={{ color: "#008B8B", userSelect: "all" }}
+                    >
+                      <Tooltip title="Click to Highlight">
+                        <span style={{ width: "auto" }}>+1-516-333-3344</span>
+                      </Tooltip>
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <Typography variant="h6" className={styles.textPrimary}>
-                    Fax Number
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    className={styles.textSecondary}
-                    style={{ color: "#008B8B", userSelect: "all" }}
-                  >
-                    <Tooltip title="Click to Highlight">
-                      <span style={{ width: "auto" }}>+1-516-333-3344</span>
-                    </Tooltip>
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grow>
-    </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grow>
+      </Grid>
+    </div>
   );
 };
 

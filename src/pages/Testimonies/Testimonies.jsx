@@ -37,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: "2em 1em 0em 1em",
     },
-
-    width: "100%",
   },
 
   testimoniesGrid: {
@@ -55,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: "2em 1em 2em 1em",
     },
-
-    width: "100%",
   },
 
   text: {
@@ -88,7 +84,7 @@ const Testimonies = () => {
     <div>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -107,7 +103,15 @@ const Testimonies = () => {
             </Typography>
           </Grow>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          style={{ paddingTop: "1.5em" }}
+        >
           <Grow in={useDelayTransition(250)} timeout={800}>
             <Typography
               color="textPrimary"
@@ -129,7 +133,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -155,7 +159,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -180,7 +184,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -207,7 +211,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -232,7 +236,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -257,7 +261,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -282,7 +286,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >
@@ -306,7 +310,7 @@ const Testimonies = () => {
       </Slide>
       <Grid
         container
-        spacing={2}
+        // spacing={2}
         direction="column"
         className={styles.testimoniesGrid}
       >

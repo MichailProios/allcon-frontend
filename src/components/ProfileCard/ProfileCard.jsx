@@ -65,7 +65,7 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
   }, [inView]);
 
   return (
-    <Grow in={flag} timeout={800}>
+    <Grow in={flag} timeout={400}>
       <Card className={styles.root} ref={ref}>
         <CardActionArea
           className={styles.cardAction}
@@ -79,8 +79,8 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                   matchesMD
                     ? {
                         maxWidth: "100%",
-                        // height: "20em",
-                        objectFit: "contain",
+
+                        objectFit: "cover",
                       }
                     : {
                         maxWidth: "100%",
@@ -91,17 +91,17 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                       }
                 }
                 // aspectRatio={matchesMD ? 1.5 : 1}
-                // iconContainerStyle={
-                //   matchesMD
-                //     ? {
-                //         maxWidth: "100%",
-                //         height: "auto",
-                //       }
-                //     : {
-                //         maxWidth: "100%",
-                //         height: "auto",
-                //       }
-                // }
+                iconContainerStyle={
+                  matchesMD
+                    ? {
+                        maxWidth: "100%",
+                        height: "auto",
+                      }
+                    : {
+                        maxWidth: "100%",
+                        height: "auto",
+                      }
+                }
                 src={image}
                 animationDuration={100}
                 className={styles.profileImage}

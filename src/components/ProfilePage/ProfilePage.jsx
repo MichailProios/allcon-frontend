@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
     padding: "2em 10em 2em 10em",
 
     [theme.breakpoints.down("lg")]: {
-      padding: "2em 6em 2em 6em",
+      padding: "2em 8em 2em 8em",
     },
 
     [theme.breakpoints.down("md")]: {
-      padding: "2em 3em 2em 3em",
+      padding: "2em 8em 2em 8em",
     },
 
     [theme.breakpoints.down("sm")]: {

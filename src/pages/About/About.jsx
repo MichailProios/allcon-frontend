@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "2em 8em 2em 8em",
     },
     [theme.breakpoints.down("md")]: {
-      padding: "2em 4em 2em 4em",
+      padding: "2em 8em 2em 8em",
     },
     [theme.breakpoints.down("sm")]: {
       padding: "1em 1em 1em 1em",
@@ -239,7 +239,7 @@ const About = () => {
           md={12}
           lg={12}
           xl={12}
-          style={{ justifySelf: "center" }}
+          style={{ justifySelf: "center", paddingTop: "1.5em" }}
         >
           <Grow in={useDelayTransition(150)} timeout={800}>
             <Typography
@@ -278,7 +278,7 @@ const About = () => {
               variant="h6"
               className={styles.text}
             >
-              With a goal to "built it once and build it right" we use
+              With a goal to "build it once and build it right" we use
               innovative solutions to achieve infinite possibilities for each
               project.
               <br />

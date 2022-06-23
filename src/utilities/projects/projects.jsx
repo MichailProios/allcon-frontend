@@ -26,22 +26,20 @@ export const projects = [
     projectDesigner: "Hoffmann Architects, Inc.",
     description: (
       <>
-        An extensive 90,000 square foot of new copper roofing. The project
-        started with the removal of the existing roofing system and Asbestos
-        abatement.
-        <br /> <br />
-        Moving to a new unique structural design that Allcon proposed and
-        developed.
-        <br /> <br />
-        The structural design included a high gauge metal system that bypass the
-        concrete deck and attached to the existing structural system with blind
-        bolts (box bolts) and withstands wind speed up to 126 mph.
-        <br /> <br />
-        The copper fabrication was a mix between machine fabrications for the
-        panels and hand art for the little details.
-        <br /> <br />
-        With all the beautiful details, this building is set to be a landmarks
-        for Farmingdale.
+        ALLCON constructed this uniquely designed 90,000sf copper roof which now
+        transforms Lupton Hall into a landmark for the SUNY Farmingdale Campus.
+        ALLCON proposed and helped developed a distinctive structural design
+        during the initial removal and abatement stages of the project. The
+        structural design included a high gauge metal framing system that
+        bypasses the concrete deck and attaches to the existing framing
+        structure with blind bolts. Craftsmanship is found throughout the roof
+        from the artfully fabricated dormers to the carefully sculpted gutter
+        system designed to withstands wind speed up to 126 mph. ALLCON made sure
+        that the copper fabrication was a mix of machine fabrication for the
+        panels to control cost and hard created units for the fine intricate
+        detail work. This inspiration assignment is not just a showcase project
+        for ALLCON but a signature piece of work for Farmingdale’s dedication to
+        excellence on campus.
       </>
     ),
   },
@@ -65,7 +63,7 @@ export const projects = [
       <>
         As part of a multiphase project for Saint Demetrios Greek Orthodox
         Church, AllCon was selected as the General Contractor for the first
-        phase. AllCon performed all demolition and site clearing/preparation of
+        phase. AllCon performed the demolition and site clearing/preparation of
         existing adjacent houses and garages acquired by the church to expand
         its site and it service to the South Nassau Hellenic Community.
       </>
@@ -131,11 +129,11 @@ export const projects = [
         structure/ promenade to house the facilities new boilers, hot water
         heaters, electrical services, and new generator system. This 18 story,
         192-unit apartment building for the elderly was fully occupied during
-        construction and required extensive coordination between AllCon and the
+        construction and required extensive coordination between ALLCON and the
         construction manager. Complete window and balcony door replacement was
         required as well as over 15,000 sf of built-up roofing and 35,000 sf of
         unit pavers throughout the building. Through close collaboration with
-        the CM and building occupants AllCon was able to complete this project
+        the CM and building occupants ALLCON was able to complete this project
         ahead of schedule.
       </>
     ),

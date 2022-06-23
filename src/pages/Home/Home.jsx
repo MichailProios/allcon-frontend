@@ -99,9 +99,9 @@ const Home = () => {
       <div>
         <SimpleImageSlider
           width={"100%"}
-          height={isMobile ? `${height}px` : `calc(${height}px - 65px)`}
+          height={`calc(${height}px - 65px)`}
           images={images}
-          showBullets={true}
+          showBullets={false}
           loop={true}
           autoPlay={true}
           autoPlayDelay={5.0}

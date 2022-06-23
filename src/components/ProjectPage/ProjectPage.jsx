@@ -55,7 +55,7 @@ const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "1em",
-    width: "100%",
+    // width: "100%",
   },
   picture: {
     userDrag: "none",
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     // height: "45em",
   },
   carousel: {
-    width: "100%",
+    // width: "100%",
     position: "relative",
     // height: "45em",
   },
@@ -227,195 +227,200 @@ const ProjectPage = ({
 
   if (isLoaded) {
     return (
-      <Grid container spacing={1} className={styles.root}>
-        <Grow in={animationFlag1} timeout={800}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
-            <Paper elevation={2} className={styles.carousel}>
-              <VirtualizeSwipeableViews
-                className={styles.views}
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents={false}
-                slideRenderer={(params) => slideRenderer(params, images)}
-                overscanSlideAfter={1}
-                overscanSlideBefore={1}
-                disableLazyLoading={false}
-                slideCount={maxSteps}
-                animateTransitions={true}
-              />
+      <div className={styles.root}>
+        <Grid container spacing={1}>
+          <Grow in={animationFlag1} timeout={800}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
+              <Paper elevation={2} className={styles.carousel}>
+                <VirtualizeSwipeableViews
+                  className={styles.views}
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents={false}
+                  slideRenderer={(params) => slideRenderer(params, images)}
+                  overscanSlideAfter={1}
+                  overscanSlideBefore={1}
+                  disableLazyLoading={false}
+                  slideCount={maxSteps}
+                  animateTransitions={true}
+                />
 
-              <Fab
-                color="primary"
-                size="small"
-                onClick={handleBack}
-                disabled={activeStep === 0}
-                className={styles.prevButton}
-              >
-                <KeyboardArrowLeft style={{ color: "#fff" }} />
-              </Fab>
-
-              <Fab
-                color="primary"
-                size="small"
-                onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-                className={styles.nextButton}
-              >
-                <KeyboardArrowRight style={{ color: "#fff" }} />
-              </Fab>
-
-              <MobileStepper
-                className={styles.stepper}
-                steps={maxSteps}
-                position="static"
-                variant={!isMobile ? "dots" : "text"}
-                activeStep={activeStep}
-                backButton={<div />}
-                nextButton={<div />}
-                // nextButton={
-                //   <Button
-                //     variant="contained"
-                //     color="primary"
-                //     size="small"
-                //     onClick={handleNext}
-                //     disabled={activeStep === maxSteps - 1}
-                //   >
-                //     Next
-                //     {theme.direction === "rtl" ? (
-                //       <KeyboardArrowLeft />
-                //     ) : (
-                //       <KeyboardArrowRight />
-                //     )}
-                //   </Button>
-                // }
-                // backButton={
-                //   <Button
-                //     variant="contained"
-                //     color="primary"
-                //     size="small"
-                //     onClick={handleBack}
-                //     disabled={activeStep === 0}
-                //   >
-                //     {theme.direction === "rtl" ? (
-                //       <KeyboardArrowRight />
-                //     ) : (
-                //       <KeyboardArrowLeft />
-                //     )}
-                //     Back
-                //   </Button>
-                // }
-              />
-            </Paper>
-          </Grid>
-        </Grow>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
-          <Grow in={animationFlag2} timeout={800}>
-            <Card className={styles.card}>
-              <CardHeader title="Project Info" className={styles.cardHeader} />
-              <Divider />
-              <CardContent>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="h6" className={styles.textPrimary}>
-                      Project Name
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
-                      {projectName}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="h6" className={styles.textPrimary}>
-                      Project Location
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
-                      {projectLocation}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="h6" className={styles.textPrimary}>
-                      Client/ Affiliated Agency
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
-                      {clientAffiliatedAgency}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="h6" className={styles.textPrimary}>
-                      Year Completed
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
-                      {yearCompleted}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="h6" className={styles.textPrimary}>
-                      Project Cost/Budget
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
-                      {projectCostBudget}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Typography variant="h6" className={styles.textPrimary}>
-                      Project Designer
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="body1"
-                      className={styles.textSecondary}
-                    >
-                      {projectDesigner}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grow>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grow in={animationFlag3} timeout={800}>
-            <Accordion onChange={handleClick}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography
-                  variant="body1"
-                  component="div"
-                  className={styles.accordionHeader}
+                <Fab
+                  color="primary"
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                  className={styles.prevButton}
                 >
-                  <Box sx={{ fontWeight: "bold" }}>
-                    Project Description (Click to Expand)
-                  </Box>
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body1" className={styles.textPrimary}>
-                  {description}
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
+                  <KeyboardArrowLeft style={{ color: "#fff" }} />
+                </Fab>
+
+                <Fab
+                  color="primary"
+                  size="small"
+                  onClick={handleNext}
+                  disabled={activeStep === maxSteps - 1}
+                  className={styles.nextButton}
+                >
+                  <KeyboardArrowRight style={{ color: "#fff" }} />
+                </Fab>
+
+                <MobileStepper
+                  className={styles.stepper}
+                  steps={maxSteps}
+                  position="static"
+                  variant={!isMobile ? "dots" : "text"}
+                  activeStep={activeStep}
+                  backButton={<div />}
+                  nextButton={<div />}
+                  // nextButton={
+                  //   <Button
+                  //     variant="contained"
+                  //     color="primary"
+                  //     size="small"
+                  //     onClick={handleNext}
+                  //     disabled={activeStep === maxSteps - 1}
+                  //   >
+                  //     Next
+                  //     {theme.direction === "rtl" ? (
+                  //       <KeyboardArrowLeft />
+                  //     ) : (
+                  //       <KeyboardArrowRight />
+                  //     )}
+                  //   </Button>
+                  // }
+                  // backButton={
+                  //   <Button
+                  //     variant="contained"
+                  //     color="primary"
+                  //     size="small"
+                  //     onClick={handleBack}
+                  //     disabled={activeStep === 0}
+                  //   >
+                  //     {theme.direction === "rtl" ? (
+                  //       <KeyboardArrowRight />
+                  //     ) : (
+                  //       <KeyboardArrowLeft />
+                  //     )}
+                  //     Back
+                  //   </Button>
+                  // }
+                />
+              </Paper>
+            </Grid>
           </Grow>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+            <Grow in={animationFlag2} timeout={800}>
+              <Card className={styles.card}>
+                <CardHeader
+                  title="Project Info"
+                  className={styles.cardHeader}
+                />
+                <Divider />
+                <CardContent>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Name
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectName}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Location
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectLocation}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Client/ Affiliated Agency
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {clientAffiliatedAgency}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Year Completed
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {yearCompleted}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Cost/Budget
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectCostBudget}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Designer
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectDesigner}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grow>
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grow in={animationFlag3} timeout={800}>
+              <Accordion onChange={handleClick}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography
+                    variant="body1"
+                    component="div"
+                    className={styles.accordionHeader}
+                  >
+                    <Box sx={{ fontWeight: "bold" }}>
+                      Project Description (Click to Expand)
+                    </Box>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body1" className={styles.textPrimary}>
+                    {description}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Grow>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     );
   } else {
     return <LoadingSpinner />;

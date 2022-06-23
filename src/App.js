@@ -13,7 +13,7 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
-import { Box } from "@material-ui/core";
+import { Box, Tooltip } from "@material-ui/core";
 
 //Styling
 import "./App.css";
@@ -99,6 +99,7 @@ const theme = createTheme({
       secondary: "#c2160a",
     },
   },
+
   breakpoints: {
     values: {
       xs: 0,
