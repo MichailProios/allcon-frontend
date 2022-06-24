@@ -65,7 +65,7 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
   }, [inView]);
 
   return (
-    <Grow in={flag} timeout={400}>
+    <Grow in={flag} timeout={350}>
       <Card className={styles.root} ref={ref}>
         <CardActionArea
           className={styles.cardAction}
@@ -95,11 +95,11 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                   matchesMD
                     ? {
                         maxWidth: "100%",
-                        height: "auto",
+                        height: "100%",
                       }
                     : {
                         maxWidth: "100%",
-                        height: "auto",
+                        height: "100%",
                       }
                 }
                 src={image}

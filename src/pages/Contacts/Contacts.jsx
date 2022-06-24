@@ -755,7 +755,6 @@ const Contacts = () => {
                 {isMobile ? (
                   <Tooltip
                     title="Westbury Office"
-                    open={true}
                     arrow={true}
                     placement="bottom"
                     enterDelay={150}
@@ -787,7 +786,6 @@ const Contacts = () => {
                 {isMobile ? (
                   <Tooltip
                     title="Woodbridge Office"
-                    open={true}
                     arrow={true}
                     placement="bottom"
                     enterDelay={150}

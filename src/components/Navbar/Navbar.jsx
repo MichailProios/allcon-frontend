@@ -110,6 +110,7 @@ const useStyles = makeStyles((theme) => ({
   // },
 
   drawer: {
+    overflow: "hidden",
     width: drawerWidth,
     zIndex: theme.zIndex.drawer + 2,
     flexShrink: 0,
@@ -214,7 +215,7 @@ const useStyles = makeStyles((theme) => ({
 
   backdrop: {
     zIndex: theme.zIndex.drawer + 301,
-
+    overflow: "none",
     // [theme.breakpoints.down("xs")]: {
     //   zIndex: theme.zIndex.drawer + 1,
     // },
@@ -432,6 +433,12 @@ const Navbar = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  if (openDrawer === true) {
+    document.documentElement.style.overflow = "hidden";
+  } else {
+    document.documentElement.style.overflow = "visible";
+  }
 
   return (
     <React.Fragment>

@@ -211,7 +211,7 @@ const ProjectPage = ({
     if (expanded) {
       if (isMobile) {
         scroll.scrollToBottom({
-          duration: 800,
+          duration: 400,
           delay: 250,
           smooth: "easeInOutQuart",
         });
