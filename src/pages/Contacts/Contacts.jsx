@@ -154,7 +154,7 @@ function getStepContent(
               Enter your first and last name:
             </Typography>
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               label="First Name"
@@ -167,7 +167,7 @@ function getStepContent(
               inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               label="Last Name"
@@ -190,7 +190,7 @@ function getStepContent(
               Enter your contact information:
             </Typography>
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               label="Email"
@@ -203,7 +203,7 @@ function getStepContent(
               inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <MuiPhoneNumber
               className={styles.textSecondary}
               defaultCountry={"us"}
@@ -229,7 +229,7 @@ function getStepContent(
               Enter your address (optional):
             </Typography>
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               fullWidth={true}
@@ -242,7 +242,7 @@ function getStepContent(
               inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               fullWidth={true}
@@ -255,7 +255,7 @@ function getStepContent(
               inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               fullWidth={true}
@@ -268,7 +268,7 @@ function getStepContent(
               inputProps={{ maxLength: 255 }}
             />
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
             <TextField
               className={styles.textSecondary}
               fullWidth={true}
@@ -705,7 +705,7 @@ const Contacts = () => {
                 </Typography>
               )}
               <Button onClick={handleReset} className={styles.button}>
-                Reset
+                Send Another Inquiry
               </Button>
             </Paper>
           )}
