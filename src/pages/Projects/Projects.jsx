@@ -19,8 +19,6 @@ import delayTransition from "../../utilities/customFunctions/delayTransition.jsx
 //Material-UI Styles
 import { makeStyles } from "@material-ui/styles";
 
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
-
 import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
 import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
@@ -29,138 +27,18 @@ import imagesImport from "../../utilities/customFunctions/imagesImport.jsx";
 import getImageList from "../../utilities/customFunctions/getImageList.jsx";
 import useDetectHeight from "../../utilities/customHooks/useDetectHeight.jsx";
 
-const optimizedImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/optimizedImages",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-// const optimizedImages = getImageList("/Projects/optimizedImages");
-
-const bareBurgerImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/bareburger",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const wilsonAnimalImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/willstonanimal",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const west255Images = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/255w",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const east209thImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/20east9th",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const upperEastVetenaryImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/uppereastveterinary",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const carlePlaceAuditoriumImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/carlplace",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const carlPlaceLobbyImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/carlplacelobby",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const carlPlaceLibImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/carlplacelibrary",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const njvetImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/njvet",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const hudsonAnimalImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/hudsonanimal",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const westchesterAveImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/866westchester",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const pierrpointStreetImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/55pierre",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const w79thStreetImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/164w79th",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
-
-const townhouse17wImages = imagesImport(
-  require.context(
-    "D:/Websites/Pictures/Projects/17w10street",
-    false,
-    /\.(JPG|PNG|png|jpe?g|svg|webp)$/
-  )
-);
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
 const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
 const stdemetrios =
-  "https://allconcontracting.com/image-resizing?&quality=60&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
 const nold =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
 const bareBurger =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00355.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00354.JPG";
 const wilsonAnimal =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/willstonanimal/DSC00051.JPG";
 const west255 =
@@ -176,9 +54,9 @@ const carlPlaceLobby =
 const carlPlaceLib =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplacelibrary/DSC00231.JPG";
 const njvet =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/njvet/DSC00209.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/njvet/DSC00265.JPG";
 const hudsonAnimal =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/hudsonanimal/DSC00135.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/hudsonanimal/DSC00249.JPG";
 const westchesterAve =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/866westchester/DSC00300.JPG";
 const pierrpointStreet =
@@ -186,16 +64,16 @@ const pierrpointStreet =
 const w79thStreet =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/164w79th/image001.jpg";
 const townhouse17w =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7491.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7490.jpg";
 
 const ogsElwood =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/overall.jpg";
 
 const greatneckRoofs =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
 
 const rockvillePolice =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const useStyles = makeStyles({
   root: {
@@ -322,54 +200,55 @@ const Projects = () => {
 
   const height = useDetectHeight();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   cacheImages([
-  //     lupton,
-  //     stdemetrios,
-  //     nold,
-  //     brightwater500,
-  //     bareBurger,
-  //     wilsonAnimal,
-  //     west255,
-  //     east209th,
-  //     upperEastVetenary,
-  //     carlePlaceAuditorium,
-  //     carlPlaceLobby,
-  //     carlPlaceLib,
-  //     njvet,
-  //     hudsonAnimal,
-  //     westchesterAve,
-  //     pierrpointStreet,
-  //     w79thStreet,
-  //     townhouse17w,
-  //   ])
-  //     .then(() => {
-  //       setLoading(false);
-  //     })
-  //     .catch(() => {
-  //       setLoading(true);
-  //     });
-  // }, []);
+  useEffect(() => {
+    cacheImages([
+      lupton,
+      stdemetrios,
+      nold,
+      brightwater500,
+      bareBurger,
+      wilsonAnimal,
+      west255,
+      east209th,
+      upperEastVetenary,
+      carlePlaceAuditorium,
+      carlPlaceLobby,
+      carlPlaceLib,
+      njvet,
+      hudsonAnimal,
+      westchesterAve,
+      pierrpointStreet,
+      w79thStreet,
+      townhouse17w,
+    ])
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(true);
+      });
+  }, []);
 
   if (!loading) {
     return (
       <Grid container spacing={2} className={styles.root}>
         {listData.map((value, index) => (
-          <ProjectCard
-            title={value.title}
-            image={value.image}
-            link={value.link}
-            index={index}
-            key={index}
-          />
+          <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+            <ProjectCard
+              title={value.title}
+              image={value.image}
+              link={value.link}
+              index={index}
+            />
+          </Grid>
         ))}
       </Grid>
     );
   } else {
     return (
-      <div style={{ height: `calc(${height}px - 65px)` }}>
+      <div style={{ height: `calc(${height})` }}>
         <LoadingSpinner />
       </div>
     );

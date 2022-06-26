@@ -1,5 +1,5 @@
 //Basic dependencies
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,22 +18,24 @@ import { Box, Tooltip } from "@material-ui/core";
 //Styling
 import "./App.css";
 
-//Pages
-import Navbar from "./components/Navbar/Navbar.jsx";
-import Home from "./pages/Home/Home.jsx";
-//import Services from "./pages/Services/Services.jsx";
-import Projects from "./pages/Projects/Projects.jsx";
-import About from "./pages/About/About.jsx";
-
-import Contacts from "./pages/Contacts/Contacts";
-import Testimonies from "./pages/Testimonies/Testimonies";
-
 import projectRoutes from "./utilities/routes/projectRoutes";
 
 import profileRoutes from "./utilities/routes/profileRoutes";
 
 import cacheImages from "./utilities/customFunctions/cacheImages.jsx";
 import LoadingSquares from "./components/LoadingSquares/LoadingSquares";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
+
+//Pages
+import Navbar from "./components/Navbar/Navbar.jsx";
+
+const Home = React.lazy(() => import("./pages/Home/Home.jsx"));
+//const Services = React.lazy(() => import()) "./pages/Services/Services.jsx";
+const Projects = React.lazy(() => import("./pages/Projects/Projects.jsx"));
+const About = React.lazy(() => import("./pages/About/About.jsx"));
+
+const Contacts = React.lazy(() => import("./pages/Contacts/Contacts"));
+const Testimonies = React.lazy(() => import("./pages/Testimonies/Testimonies"));
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -113,14 +115,6 @@ const theme = createTheme({
 const church =
   "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
 
-const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
-const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
-
-const nold =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
-
 const george =
   "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-24.jpg";
 const markos =
@@ -144,11 +138,16 @@ const ana =
 const company =
   "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-8.jpg";
 
+const lupton =
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
 const stdemetrios =
-  "https://allconcontracting.com/image-resizing?&quality=60&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
-
+  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+const nold =
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+const brightwater500 =
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
 const bareBurger =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00355.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00354.JPG";
 const wilsonAnimal =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/willstonanimal/DSC00051.JPG";
 const west255 =
@@ -164,9 +163,9 @@ const carlPlaceLobby =
 const carlPlaceLib =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplacelibrary/DSC00231.JPG";
 const njvet =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/njvet/DSC00209.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/njvet/DSC00265.JPG";
 const hudsonAnimal =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/hudsonanimal/DSC00135.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/hudsonanimal/DSC00249.JPG";
 const westchesterAve =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/866westchester/DSC00300.JPG";
 const pierrpointStreet =
@@ -174,15 +173,16 @@ const pierrpointStreet =
 const w79thStreet =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/164w79th/image001.jpg";
 const townhouse17w =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7491.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7490.jpg";
+
 const ogsElwood =
   "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/overall.jpg";
 
 const greatneckRoofs =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
 
 const rockvillePolice =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const companyLogo =
   "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
@@ -191,49 +191,49 @@ function App() {
   const styles = useStyles();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    cacheImages([
-      companyLogo,
-      nold,
-      church,
-      brightwater500,
-      lupton,
-      george,
-      markos,
-      joseph,
-      nick,
-      ahmed,
-      sandra,
-      tina,
-      wahid,
-      ana,
-      company,
-      stdemetrios,
-      bareBurger,
-      wilsonAnimal,
-      west255,
-      east209th,
-      upperEastVetenary,
-      carlePlaceAuditorium,
-      carlPlaceLobby,
-      carlPlaceLib,
-      njvet,
-      hudsonAnimal,
-      westchesterAve,
-      pierrpointStreet,
-      w79thStreet,
-      townhouse17w,
-      ogsElwood,
-      greatneckRoofs,
-      rockvillePolice,
-    ])
-      .then(() => {
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(true);
-      });
-  }, []);
+  // useEffect(() => {
+  //   cacheImages([
+  //     companyLogo,
+  //     nold,
+  //     church,
+  //     brightwater500,
+  //     lupton,
+  //     george,
+  //     markos,
+  //     joseph,
+  //     nick,
+  //     ahmed,
+  //     sandra,
+  //     tina,
+  //     wahid,
+  //     ana,
+  //     company,
+  //     stdemetrios,
+  //     bareBurger,
+  //     wilsonAnimal,
+  //     west255,
+  //     east209th,
+  //     upperEastVetenary,
+  //     carlePlaceAuditorium,
+  //     carlPlaceLobby,
+  //     carlPlaceLib,
+  //     njvet,
+  //     hudsonAnimal,
+  //     westchesterAve,
+  //     pierrpointStreet,
+  //     w79thStreet,
+  //     townhouse17w,
+  //     ogsElwood,
+  //     greatneckRoofs,
+  //     rockvillePolice,
+  //   ])
+  //     .then(() => {
+  //       setLoading(false);
+  //     })
+  //     .catch(() => {
+  //       setLoading(true);
+  //     });
+  // }, []);
 
   const projectComponents = projectRoutes.map(({ path, component }, key) => (
     // <Route exact path={path} component={component} key={key} />
@@ -248,43 +248,45 @@ function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        {!loading ? (
+        {loading ? (
           <Router>
             <Navbar />
-            <Box
-              style={{
-                maxHeight: "100%",
-              }}
-            >
-              <Routes>
-                {/* <Route path="/" exact element={<Home />} /> */}
-                <Route path="/Home" exact element={<Home />} />
-                <Route path="/About" exact element={<About />} />
-                <Route path="/Contacts" exact element={<Contacts />} />
-                <Route path="/Projects" exact element={<Projects />} />
-                <Route path="/Testimonies" exact element={<Testimonies />} />
+            <Suspense fallback={<LoadingSquares />}>
+              <Box
+                style={{
+                  maxHeight: "100%",
+                }}
+              >
+                <Routes>
+                  {/* <Route path="/" exact element={<Home />} /> */}
+                  <Route path="/Home" exact element={<Home />} />
+                  <Route path="/About" exact element={<About />} />
+                  <Route path="/Contacts" exact element={<Contacts />} />
+                  <Route path="/Projects" exact element={<Projects />} />
+                  <Route path="/Testimonies" exact element={<Testimonies />} />
 
-                <Route
-                  path="*"
-                  exact
-                  element={<Navigate to="/Home" replace />}
-                />
+                  <Route
+                    path="*"
+                    exact
+                    element={<Navigate to="/Home" replace />}
+                  />
 
-                <Route
-                  path="/"
-                  exact
-                  element={<Navigate to="/Home" replace />}
-                />
+                  <Route
+                    path="/"
+                    exact
+                    element={<Navigate to="/Home" replace />}
+                  />
 
-                {/* <Route
+                  {/* <Route
                   path="/projects/LuptonHall"
                   exact
                   element={<LuptonHall />}
                 /> */}
-                {projectComponents}
-                {profileComponents}
-              </Routes>
-            </Box>
+                  {projectComponents}
+                  {profileComponents}
+                </Routes>
+              </Box>
+            </Suspense>
           </Router>
         ) : (
           <LoadingSquares />

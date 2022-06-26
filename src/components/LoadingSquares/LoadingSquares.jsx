@@ -1,10 +1,16 @@
 import React from "react";
+import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
 
 import "./LoadingSquares.css";
 
 const LoadingSquares = () => {
+  const height = useDetectHeight();
+
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{ lineHeight: `${height}px`, touchAction: "none" }}
+    >
       <div className="group">
         <div className="bigSqr">
           <div className="square first"></div>

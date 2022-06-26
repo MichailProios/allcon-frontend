@@ -130,5 +130,4 @@ const ProfileCard = ({ link, title, subtitle, description, picture }) => {
     // {/* </Suspense> */}
   );
 };
-
 export default ProfileCard;

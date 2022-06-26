@@ -314,7 +314,7 @@ const HideOnScroll = ({ children }) => {
   }
 };
 
-const Navbar = () => {
+const Navbar = React.memo(() => {
   const styles = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
@@ -606,6 +606,6 @@ const Navbar = () => {
       />
     </React.Fragment>
   );
-};
+});
 
 export default Navbar;
