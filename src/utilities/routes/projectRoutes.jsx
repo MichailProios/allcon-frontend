@@ -1,6 +1,9 @@
 import React from "react";
-import ProjectPage from "../../components/ProjectPage/ProjectPage";
+
 import projects from "../projects/projects.jsx";
+const ProjectPage = React.lazy(() =>
+  import("../../components/ProjectPage/ProjectPage")
+);
 
 export const projectRoutes = [];
 

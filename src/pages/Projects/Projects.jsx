@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 
 // Material-UI
 import {
@@ -27,7 +27,9 @@ import imagesImport from "../../utilities/customFunctions/imagesImport.jsx";
 import getImageList from "../../utilities/customFunctions/getImageList.jsx";
 import useDetectHeight from "../../utilities/customHooks/useDetectHeight.jsx";
 
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
+const ProjectCard = React.lazy(() =>
+  import("../../components/ProjectCard/ProjectCard")
+);
 
 const lupton =
   "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
@@ -96,7 +98,6 @@ const Projects = () => {
       image: brightwater500,
       link: "/Projects/500Bridgewater",
     },
-
     {
       title: "Lupton Hall - Roof Replacement",
       image: lupton,
@@ -234,16 +235,16 @@ const Projects = () => {
   if (!loading) {
     return (
       <Grid container spacing={2} className={styles.root}>
-        {listData.map((value, index) => (
-          <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+        <Suspense fallback={<LoadingSpinner />}>
+          {listData.map((value, index) => (
             <ProjectCard
               title={value.title}
               image={value.image}
               link={value.link}
               index={index}
             />
-          </Grid>
-        ))}
+          ))}
+        </Suspense>
       </Grid>
     );
   } else {

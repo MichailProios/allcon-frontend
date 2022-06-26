@@ -189,7 +189,7 @@ const companyLogo =
 
 function App() {
   const styles = useStyles();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   cacheImages([
@@ -248,49 +248,40 @@ function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        {loading ? (
-          <Router>
-            <Navbar />
-            <Suspense fallback={<LoadingSquares />}>
-              <Box
-                style={{
-                  maxHeight: "100%",
-                }}
-              >
-                <Routes>
-                  {/* <Route path="/" exact element={<Home />} /> */}
-                  <Route path="/Home" exact element={<Home />} />
-                  <Route path="/About" exact element={<About />} />
-                  <Route path="/Contacts" exact element={<Contacts />} />
-                  <Route path="/Projects" exact element={<Projects />} />
-                  <Route path="/Testimonies" exact element={<Testimonies />} />
+        <Router>
+          <Navbar />
+          <Suspense fallback={<LoadingSquares />}>
+            <Box
+              style={{
+                maxHeight: "100%",
+              }}
+            >
+              <Routes>
+                {/* <Route path="/" exact element={<Home />} /> */}
+                <Route path="/Home" exact element={<Home />} />
+                <Route path="/About" exact element={<About />} />
+                <Route path="/Contacts" exact element={<Contacts />} />
+                <Route path="/Projects" exact element={<Projects />} />
+                <Route path="/Testimonies" exact element={<Testimonies />} />
 
-                  <Route
-                    path="*"
-                    exact
-                    element={<Navigate to="/Home" replace />}
-                  />
-
-                  <Route
-                    path="/"
-                    exact
-                    element={<Navigate to="/Home" replace />}
-                  />
-
-                  {/* <Route
-                  path="/projects/LuptonHall"
+                <Route
+                  path="*"
                   exact
-                  element={<LuptonHall />}
-                /> */}
-                  {projectComponents}
-                  {profileComponents}
-                </Routes>
-              </Box>
-            </Suspense>
-          </Router>
-        ) : (
-          <LoadingSquares />
-        )}
+                  element={<Navigate to="/Home" replace />}
+                />
+
+                <Route
+                  path="/"
+                  exact
+                  element={<Navigate to="/Home" replace />}
+                />
+
+                {projectComponents}
+                {profileComponents}
+              </Routes>
+            </Box>
+          </Suspense>
+        </Router>
       </ThemeProvider>
     </React.Fragment>
   );
