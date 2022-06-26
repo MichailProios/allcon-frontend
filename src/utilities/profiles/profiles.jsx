@@ -8,16 +8,27 @@ import React from "react";
 //   return images;
 // }
 
-import pic from "../images/Logos/logo-new.png";
-import george from "../../utilities/images/temp/5-8-2022-24.jpg";
-import markos from "../../utilities/images/temp/5-8-2022-19.jpg";
-import joseph from "../../utilities/images/temp/5-8-2022-23.jpg";
-import nick from "../../utilities/images/temp/5-8-2022-16.jpg";
-import ahmed from "../../utilities/images/temp/5-8-2022-28.jpg";
-import sandra from "../../utilities/images/temp/5-8-2022-14.jpg";
-import tina from "../../utilities/images/temp/5-8-2022-13.jpg";
-import wahid from "../../utilities/images/temp/5-8-2022-12.jpg";
-import ana from "../../utilities/images/temp/5-8-2022-27.jpg";
+const pic =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
+const george =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-24.jpg";
+const markos =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-19.jpg";
+
+const joseph =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-23.jpg";
+const nick =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-16.jpg";
+const ahmed =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-28.jpg";
+const sandra =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-14.jpg";
+const tina =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-13.jpg";
+const wahid =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-12.jpg";
+const ana =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-27.jpg";
 
 export const profiles = [
   {

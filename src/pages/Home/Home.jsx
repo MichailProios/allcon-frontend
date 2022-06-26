@@ -1,11 +1,6 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-import church from "../../utilities/images/optimizedImages/image003.jpg";
-import lupton from "../../utilities/images/optimizedImages/10-23-1-22.webp";
-import brightwater500 from "../../utilities/images/optimizedImages/1-18-2022-35.webp";
-import nold from "../../utilities/images/optimizedImages/11-6-21-2.webp";
-
 import MuiImage from "material-ui-image";
 import ApartmentIcon from "@material-ui/icons/Apartment";
 import Slider from "react-slick";
@@ -37,8 +32,20 @@ import SimpleImageSlider from "react-simple-image-slider";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useImage } from "react-image";
+// import { useImage } from "react-image";
 import { AccountCircleTwoTone } from "@material-ui/icons";
+import ReactImage from "../../components/ReactImage/ReactImage";
+
+const church =
+  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+
+const lupton =
+  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+const brightwater500 =
+  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
+
+const nold =
+  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 
 const useStyles = makeStyles((theme) => ({
   quote: {
@@ -53,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     letterSpacing: "0.04em",
     fontSize: "2.3em",
+    textShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
 
     [theme.breakpoints.down("lg")]: { fontSize: "2.0em" },
 
@@ -76,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   quoteButton: {
     marginTop: "0.2em",
     fontSize: "1em",
-
+    textShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
     color: "#fff",
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
@@ -88,13 +96,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ReactImage = ({ image, imageStyles }) => {
-  const { src } = useImage({
-    srcList: image,
-  });
+// const ReactImage = ({ image, imageStyles }) => {
+//   const { src } = useImage({
+//     srcList: image,
+//   });
 
-  return <img src={src} alt="" style={imageStyles} />;
-};
+//   return <img src={src} alt="" style={imageStyles} />;
+// };
 
 const Home = () => {
   const styles = useStyles();
@@ -118,118 +126,127 @@ const Home = () => {
     lazyLoad: "progressive",
   };
 
-  return (
-    <Fade in={true} timeout={300}>
-      <div
-        style={{
-          display: "block",
-          lineHeight: 0,
-          touchAction: "none",
-          userDrag: "none",
-          userSelect: "none",
-        }}
-      >
-        <Slider {...settings}>
-          <div>
-            <Suspense fallback={<LoadingSpinner />}>
-              <ReactImage
-                image={nold}
-                imageStyles={{
-                  height: `calc(${height}px - 65px)`,
-                  objectFit: "cover",
-                  width: "100%",
-                  display: "block",
-                  lineHeight: 0,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(50%)",
-                }}
-              />
-            </Suspense>
-          </div>
-          <div>
-            <Suspense fallback={<LoadingSpinner />}>
-              <ReactImage
-                image={brightwater500}
-                imageStyles={{
-                  height: `calc(${height}px - 65px)`,
-                  objectFit: "cover",
-                  width: "100%",
-                  display: "block",
-                  lineHeight: 0,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(50%)",
-                }}
-              />
-            </Suspense>
-          </div>
-          <div>
-            <Suspense fallback={<LoadingSpinner />}>
-              <ReactImage
-                image={lupton}
-                imageStyles={{
-                  height: `calc(${height}px - 65px)`,
-                  objectFit: "cover",
-                  width: "100%",
-                  display: "block",
-                  lineHeight: 0,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(50%)",
-                }}
-              />
-            </Suspense>
-          </div>
-          <div>
-            <Suspense fallback={<LoadingSpinner />}>
-              <ReactImage
-                image={church}
-                imageStyles={{
-                  height: `calc(${height}px - 65px)`,
-                  objectFit: "cover",
-                  width: "100%",
-                  display: "block",
-                  lineHeight: 0,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(50%)",
-                }}
-              />
-            </Suspense>
-          </div>
-        </Slider>
+  const [loading, setLoading] = useState(true);
 
-        <Fade
-          in={true}
+  useEffect(() => {
+    cacheImages([nold, church, brightwater500, lupton])
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(true);
+      });
+  }, []);
+
+  if (!loading) {
+    return (
+      <Fade in={true} timeout={300}>
+        <div
           style={{
-            // transformOrigin: "0 0 0",
-            transitionDelay: `${15 + `00`}ms`,
+            height: `calc(${height}px - 65px)`,
+            touchAction: "none",
+            userDrag: "none",
+            userSelect: "none",
+            overflow: "hidden",
           }}
-          timeout={400}
         >
-          <div className={styles.quoteContainer}>
-            <Typography className={styles.quote}>
-              Infinite Possibilities through Integrated Solutions
-            </Typography>
-            <Button
-              className={styles.quoteButton}
-              color="secondary"
-              variant="outlined"
-              startIcon={<ApartmentIcon />}
-              onClick={() => navigate("/Projects")}
-            >
-              explore our projects
-            </Button>
-          </div>
-        </Fade>
+          <Slider {...settings}>
+            <div>
+              <MuiImage
+                src={nold}
+                style={{ height: `calc(${height}px - 65px)` }}
+                imageStyle={{
+                  objectFit: "cover",
+                  maxWidth: "100%",
+                  height: `calc(${height}px - 65px)`,
+                  userDrag: "none",
+                  userSelect: "none",
+                  pointerEvents: "none",
+                  filter: "brightness(90%)",
+                }}
+              />
+            </div>
+            <div>
+              <MuiImage
+                src={brightwater500}
+                style={{ height: `calc(${height}px - 65px)` }}
+                imageStyle={{
+                  objectFit: "cover",
+                  maxWidth: "100%",
+                  height: `calc(${height}px - 65px)`,
+                  userDrag: "none",
+                  userSelect: "none",
+                  pointerEvents: "none",
+                  filter: "brightness(90%)",
+                }}
+              />
+            </div>
+            <div>
+              <MuiImage
+                src={lupton}
+                style={{ height: `calc(${height}px - 65px)` }}
+                imageStyle={{
+                  objectFit: "cover",
+                  maxWidth: "100%",
+                  height: `calc(${height}px - 65px)`,
+                  userDrag: "none",
+                  userSelect: "none",
+                  pointerEvents: "none",
+                  filter: "brightness(90%)",
+                }}
+              />
+            </div>
+
+            <div>
+              <MuiImage
+                src={church}
+                style={{ height: `calc(${height}px - 65px)` }}
+                imageStyle={{
+                  objectFit: "cover",
+                  maxWidth: "100%",
+                  height: `calc(${height}px - 65px)`,
+                  userDrag: "none",
+                  userSelect: "none",
+                  pointerEvents: "none",
+                  filter: "brightness(90%)",
+                }}
+              />
+            </div>
+          </Slider>
+
+          <Fade
+            in={true}
+            style={{
+              // transformOrigin: "0 0 0",
+              transitionDelay: `${15 + `00`}ms`,
+            }}
+            timeout={400}
+          >
+            <div className={styles.quoteContainer}>
+              <Typography className={styles.quote}>
+                Infinite Possibilities through Integrated Solutions
+              </Typography>
+              <Button
+                className={styles.quoteButton}
+                color="secondary"
+                variant="outlined"
+                startIcon={<ApartmentIcon />}
+                onClick={() => navigate("/Projects")}
+              >
+                explore our projects
+              </Button>
+            </div>
+          </Fade>
+        </div>
+      </Fade>
+    );
+  } else {
+    return (
+      <div style={{ height: `calc(${height}px - 65px)` }}>
+        <LoadingSpinner />
       </div>
-    </Fade>
-  );
+    );
+  }
 };
 
 export default Home;

@@ -46,8 +46,10 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
 //Pictures and Icons
-import companyLogo from "../../utilities/images/optimizedImages/logo-new.webp";
+// import companyLogo from "../../utilities/images/optimizedImages/logo-new.webp";
 import { useTheme } from "@material-ui/styles";
+const companyLogo =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
 
 const drawerWidth = 240;
 

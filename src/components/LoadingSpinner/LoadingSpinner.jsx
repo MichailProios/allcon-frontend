@@ -7,18 +7,15 @@ const useStyles = makeStyles((theme) => ({}));
 const LoadingSpinner = () => {
   const styles = useStyles();
 
-  const height = useDetectHeight();
-
   return (
     <Grid
       container
-      spacing={0}
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: `calc(${height}px - 65px)` }}
+      style={{ height: "100%" }}
     >
-      <Grid item xs={3}>
+      <Grid container item alignItems="center" justifyContent="center">
         <CircularProgress size={60} />
       </Grid>
     </Grid>

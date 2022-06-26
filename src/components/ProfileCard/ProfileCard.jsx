@@ -7,10 +7,11 @@ import {
   Card,
   Grid,
   Typography,
-  Grow,
+  Fade,
   CardActionArea,
   CardHeader,
   CardMedia,
+  Paper,
 } from "@material-ui/core";
 import { isMobile } from "react-device-detect";
 
@@ -21,6 +22,10 @@ import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MuiImage from "material-ui-image";
 import { Link } from "react-router-dom";
+import ReactImage from "../ReactImage/ReactImage";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
+import { Img } from "react-image";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   profileDescription: { padding: "0.8em", width: "100%" },
 }));
 
-const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
+const ProfileCard = ({ link, title, subtitle, description, picture }) => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -65,14 +70,14 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
   }, [inView]);
 
   return (
-    <Grow in={flag} timeout={350}>
+    <Fade in={flag} timeout={400}>
       <Card className={styles.root} ref={ref}>
         <CardActionArea
           className={styles.cardAction}
           component={Link}
           to={link}
         >
-          <Grid container spacing={0} direction="row">
+          <Grid container spacing={0}>
             <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
               <MuiImage
                 imageStyle={
@@ -102,8 +107,8 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
                         height: "100%",
                       }
                 }
-                src={image}
-                animationDuration={100}
+                src={picture}
+                animationDuration={0}
                 className={styles.profileImage}
               />
             </Grid>
@@ -121,7 +126,8 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
           </Grid>
         </CardActionArea>
       </Card>
-    </Grow>
+    </Fade>
+    // {/* </Suspense> */}
   );
 };
 

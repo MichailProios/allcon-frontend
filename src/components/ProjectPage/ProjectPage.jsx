@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import Card from "@material-ui/core/Card";
@@ -49,6 +49,9 @@ import { Paper, Grid, Fade, Grow } from "@material-ui/core";
 
 import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import ReactImage from "../ReactImage/ReactImage";
+import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
+import getImageList from "../../utilities/customFunctions/getImageList";
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -84,46 +87,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
 
-  paper: {
-    overflow: "hidden",
-    height: "45em",
-
-    // [theme.breakpoints.down("lg")]: {
-    //   height: "45em",
-    // },
-    // [theme.breakpoints.up("xl")]: {
-    //   height: "45em",
-    // },
-    [theme.breakpoints.up("xxl")]: {
-      height: "65em",
-    },
-
-    [theme.breakpoints.up("xxxl")]: {
-      height: "120em",
-    },
-
-    borderBottomLeftRadius: "0px",
-    borderBottomRightRadius: "0px",
-  },
-
-  card: {
-    height: "48em",
-
-    // [theme.breakpoints.up("xl")]: {
-    //   height: "63em",
-    // },
-    [theme.breakpoints.up("xxl")]: {
-      height: "68em",
-    },
-
-    [theme.breakpoints.up("xxxl")]: {
-      height: "123em",
-    },
-
-    [theme.breakpoints.down("lg")]: {
-      height: "auto",
-    },
-  },
   cardHeader: {
     userSelect: "none",
     userDragL: "none",
@@ -154,14 +117,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function slideRenderer(params, images) {
+function slideRenderer(params, images, quality) {
   const { index, key } = params;
 
-  return <Picture key={key} image={Object.values(images)[index]} />;
+  return (
+    <Picture key={key} image={Object.values(images)[index]} quality={quality} />
+  );
 }
 
 const ProjectPage = ({
   pictures,
+  quality,
   projectName,
   projectLocation,
   clientAffiliatedAgency,
@@ -173,7 +139,7 @@ const ProjectPage = ({
   const styles = useStyles();
   const theme = useTheme();
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [animationFlag1, setAnimationFlag1] = useState(false);
   const [animationFlag2, setAnimationFlag2] = useState(false);
   const [animationFlag3, setAnimationFlag3] = useState(false);
@@ -181,19 +147,34 @@ const ProjectPage = ({
   // setAnimationFlag1(useDelayTransition(100));
   // setAnimationFlag2(useDelayTransition(500));
   // setAnimationFlag3(useDelayTransition(800));
-
-  let images = pictures;
-
+  const height = useDetectHeight();
   useEffect(() => {
-    cacheImages(Object.values(images)).then(() => setIsLoaded(true));
-
     delayTransition(0).then((response) => setAnimationFlag1(response));
     delayTransition(500).then((response) => setAnimationFlag2(response));
     delayTransition(1200).then((response) => setAnimationFlag3(response));
   }, []);
 
+  // useEffect(() => {
+  //   cacheImages(Object.values(pictures))
+  //     .then(() => {
+  //       setLoading(false);
+  //     })
+  //     .catch(() => {
+  //       setLoading(true);
+  //     });
+  // }, [pictures]);
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = Object.values(images).length;
+  const [payloadPictures, setPayloadPictures] = useState({});
+  const [maxSteps, setMaxSteps] = useState();
+
+  useEffect(() => {
+    getImageList(pictures).then((payload) => {
+      setMaxSteps(Object.values(payload).length);
+      setPayloadPictures(payload);
+
+      setLoading(false);
+    });
+  }, [pictures]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -225,7 +206,7 @@ const ProjectPage = ({
     }
   };
 
-  if (isLoaded) {
+  if (!loading) {
     return (
       <div className={styles.root}>
         <Grid container spacing={1}>
@@ -238,10 +219,16 @@ const ProjectPage = ({
                   index={activeStep}
                   onChangeIndex={handleStepChange}
                   enableMouseEvents={false}
-                  slideRenderer={(params) => slideRenderer(params, images)}
-                  overscanSlideAfter={1}
-                  overscanSlideBefore={1}
-                  disableLazyLoading={false}
+                  slideRenderer={(params) =>
+                    slideRenderer(
+                      params,
+                      Object.values(payloadPictures),
+                      quality
+                    )
+                  }
+                  overscanSlideAfter={3}
+                  overscanSlideBefore={3}
+                  disableLazyLoading={true}
                   slideCount={maxSteps}
                   animateTransitions={true}
                 />
@@ -312,7 +299,7 @@ const ProjectPage = ({
           </Grow>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
             <Grow in={animationFlag2} timeout={800}>
-              <Card className={styles.card}>
+              <Card style={{ height: `calc(${height}px - 154px)` }}>
                 <CardHeader
                   title="Project Info"
                   className={styles.cardHeader}
@@ -423,54 +410,48 @@ const ProjectPage = ({
       </div>
     );
   } else {
-    return <LoadingSpinner />;
+    return (
+      <div style={{ height: `calc(${height}px - 65px)` }}>
+        <LoadingSpinner />
+      </div>
+    );
   }
 };
 
-const Picture = ({ name, image, position }) => {
+const Picture = ({ image, quality }) => {
   const styles = useStyles();
   const theme = useTheme();
-  // const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
-  const matchesXXL = useMediaQuery(theme.breakpoints.up("xxl"));
-  const matchesXXXL = useMediaQuery(theme.breakpoints.up("xxxl"));
+
+  const height = useDetectHeight();
 
   return (
-    <Paper className={styles.paper}>
+    <Paper
+      style={{
+        height: `calc(${height}px - 202px)`,
+        overflow: "hidden",
+        borderBottomLeftRadius: "0px",
+        borderBottomRightRadius: "0px",
+      }}
+    >
       <MuiImage
-        imageStyle={
-          matchesXXL && !matchesXXXL
-            ? {
-                maxWidth: "100%",
-                height: "65em",
-                objectFit: "contain",
-              }
-            : matchesXXXL
-            ? { maxWidth: "100%", height: "120em", objectFit: "contain" }
-            : { maxWidth: "100%", height: "45em", objectFit: "contain" }
-        }
+        imageStyle={{
+          width: "100%",
+          height: `calc(${height}px - 202px)`,
+          objectFit: "contain",
+        }}
         // cover={true}
-        iconContainerStyle={
-          matchesXXL && !matchesXXXL
-            ? {
-                maxWidth: "100%",
-                height: "60em",
-              }
-            : matchesXXL && !matchesXXXL
-            ? {
-                maxWidth: "100%",
-                height: "65em",
-              }
-            : matchesXXXL
-            ? { maxWidth: "100%", height: "120em" }
-            : { maxWidth: "100%", height: "45em" }
-        }
+        iconContainerStyle={{ height: `calc(${height}px - 202px)` }}
         // iconContainerStyle={{
         //   maxWidth: "100%",
         //   height: "45em",
         // }}
+
         animationDuration={800}
         disableTransition={false}
-        src={image}
+        src={
+          `https://allconcontracting.com/image-resizing?&quality=${quality}&image=` +
+          image
+        }
         className={styles.picture}
       />
     </Paper>

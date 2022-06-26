@@ -102,7 +102,6 @@ function ProjectCard({ title, image, link, index }) {
               imageStyle={{
                 maxWidth: "100%",
                 height: "30em",
-
                 transition: "transform 0.15s ease-in-out",
                 "&:hover": {
                   transform: "scale3d(1.02, 1.02, 1)",
@@ -240,7 +239,6 @@ function ProjectCard({ title, image, link, index }) {
               imageStyle={{
                 maxWidth: "100%",
                 height: "30em",
-
                 transition: "transform 0.15s ease-in-out",
                 "&:hover": {
                   transform: "scale3d(1.02, 1.02, 1)",
