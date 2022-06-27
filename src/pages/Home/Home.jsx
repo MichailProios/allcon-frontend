@@ -26,8 +26,8 @@ import ReactImage from "../../components/ReactImage/ReactImage";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 //Pictures
-const church =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+const successAcademy =
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/SuccessAcademySchools/BBR_0252-edit-1.jpg";
 
 const policeStation =
   "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
@@ -109,7 +109,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cacheImages([nold, policeStation, church, brightwater500, lupton])
+    cacheImages([nold, policeStation, successAcademy, brightwater500, lupton])
       .then(() => {
         setLoading(false);
       })
@@ -244,7 +244,7 @@ const Home = () => {
                 }
               >
                 <ReactImage
-                  image={church}
+                  image={successAcademy}
                   alt=""
                   style={{
                     objectFit: "cover",
