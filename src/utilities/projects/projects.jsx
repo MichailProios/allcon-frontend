@@ -16,20 +16,41 @@ export const projects = [
   {
     link: "/Projects/SuccessAcademySchools",
     pictures: "/Projects/SuccessAcademySchools",
-    quality: 100,
+    quality: 90,
     projectName: "Success Academy Schools",
     projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
+    clientAffiliatedAgency: "Success Academy Charter Schools",
+    yearCompleted: "2019",
     projectCostBudget: "N/A",
-    projectDesigner: "N/A",
-    description: "N/A",
+    projectDesigner: "$5,000,000+",
+    description: (
+      <>
+        ALLCON was selected by Success Academy Charter Schools as the General
+        Contractor to complete full renovations of interior spaces throughout
+        the school’s system. The projects were done at an extremely rapid pace
+        at multiple facilities and required quick mobilization of the worker
+        force and constant coordination between ALLCON, the owner and design
+        team to meet this schedule. The collaborative approach between these
+        parties was a major component for the programs success. ALLCON worked
+        with suppliers to obtain and secure materials in advance of the actual
+        work starting. ALLCON was able to secure what are typically long lead
+        items by preplanning the construction and preparing deliveries prior to
+        the summer period when work was required to be completed. Updated
+        finishes and materials were installed throughout. Equipment that was
+        provided by the school system to ensure state of the art classroom
+        spaces was coordinated in advance by the ALLCON team. ALLCON coordinated
+        any required mechanical, electrical and plumbing systems, upgrades
+        needed with each space. The success of this project led to additional
+        projects being successfully completed by ALLCON over the next three
+        years.
+      </>
+    ),
   },
 
   {
     link: "/Projects/RockvilleCentrePolice",
     pictures: "/Projects/police-station-email",
-    quality: 100,
+    quality: 90,
     projectName: "Rockville Centre Police Station",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -41,7 +62,7 @@ export const projects = [
   {
     link: "/Projects/GreatneckTerraceRoofs",
     pictures: "/Projects/greatneck-terrace-roofs",
-    quality: 100,
+    quality: 80,
     projectName: "Greatneck Terrace Roofs",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -53,7 +74,7 @@ export const projects = [
   {
     link: "/Projects/DOTGardenCity",
     pictures: "/Projects/OGS_Elwood",
-    quality: 100,
+    quality: 90,
     projectName: "DOT Elwood, NY Operation Facility ",
     projectLocation: "N/A",
     clientAffiliatedAgency: "NYS Office of General Services",
@@ -83,7 +104,7 @@ export const projects = [
   {
     link: "/Projects/DOTElwood",
     pictures: "/Projects/OGS_Elwood",
-    quality: 100,
+    quality: 90,
     projectName: "DOT Elwood, NY Operation Facility ",
     projectLocation: "N/A",
     clientAffiliatedAgency: "NYS Office of General Services",
@@ -113,7 +134,7 @@ export const projects = [
   {
     link: "/Projects/LuptonHall",
     pictures: "/Projects/lupton-hall",
-    quality: 100,
+    quality: 80,
     projectName: "SUNY Lupton Hall",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
@@ -142,7 +163,7 @@ export const projects = [
   {
     link: "/Projects/SaintDemetriosChurch",
     pictures: "/Projects/stdemetrios",
-    quality: 100,
+    quality: 90,
     projectName: "Saint Demetrios Greek Orthodox Church",
     projectLocation:
       "2 Annette Ave, 12 Annette Ave, 127 Hewlett Ave Merrick, NY 11566",
@@ -163,7 +184,7 @@ export const projects = [
   {
     link: "/Projects/Nold",
     pictures: "/Projects/nold",
-    quality: 100,
+    quality: 80,
     projectName: "SUNY Farmingdale Nold Hall Gymnasium",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "State University Construction Fund",
@@ -193,7 +214,7 @@ export const projects = [
   {
     link: "/Projects/500Bridgewater",
     pictures: "/Projects/500brightwater",
-    quality: 100,
+    quality: 80,
     projectName:
       "Brighton Houses Inc. – Alterations Associated to Superstorm SANDY",
     projectLocation: "500 Brightwater Court, Brooklyn, NY 11235",
@@ -222,25 +243,39 @@ export const projects = [
   {
     link: "/Projects/Bareburger",
     pictures: "/Projects/bareburger",
-    quality: 100,
+    quality: 90,
     projectName: "Bareburger 1681 East 87th Street",
     projectLocation: "1681 East 87th Street",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    projectCostBudget: "N/A",
-    projectDesigner: "N/A",
+    clientAffiliatedAgency: "Petrus Tzanidakis",
+    yearCompleted: "2014",
+    projectCostBudget: "$300,000+",
+    projectDesigner: "Theta Design",
     description: (
       <>
-        Complete new build out of restaurant. Work consisted of demolition,
-        rough carpentry, painting new ceilings, flooring, bathrooms, new
-        kitchen, and exhaust, plumbing and electric.
+        ALLCON was selected as the General Contractor to complete this full
+        renovation/interior fit-out for this Bareburger Establishment. Since the
+        project was being conducted along a busy NYC street, pedestrian
+        protection was planned and installed to a secure work site and assure
+        efficient access to complete the work on a tight time schedule. ALLCON
+        modified the existing structure by removing a n existing stair and
+        installing new wood joist and subfloor. A decorative tin ceiling was
+        installed by ALLCON craftsmen and reclaimed wood planks were fitted
+        throughout the restaurant. Fire rated materials were installed in-order
+        to establish the required fire rating between the first-floor restaurant
+        and residential apartments above. Masonry openings were modified to
+        provide the required access to both the restaurant and apartments above.
+        ALLCON provided all the required MEP systems, filtration and Fire
+        Protection required for the fit-out and installed all furniture and
+        equipment through close coordination with the owner. This project was
+        the first of two Bareburger restaurant projects successfully completed
+        by ALLCON.
       </>
     ),
   },
   {
     link: "/Projects/WilsonAnimal",
     pictures: "/Projects/willstonanimal",
-    quality: 100,
+    quality: 90,
     projectName: "Williston Animal Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -258,7 +293,7 @@ export const projects = [
   {
     link: "/Projects/255West",
     pictures: "/Projects/255w",
-    quality: 100,
+    quality: 90,
     projectName: "255 West 108th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -270,7 +305,7 @@ export const projects = [
   {
     link: "/Projects/20East",
     pictures: "/Projects/20east9th",
-    quality: 100,
+    quality: 90,
     projectName: "20 East 9th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -282,7 +317,7 @@ export const projects = [
   {
     link: "/Projects/UpperEastVetenary",
     pictures: "/Projects/uppereastveterinary",
-    quality: 100,
+    quality: 90,
     projectName: "Upper East Side Veterinary Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -300,7 +335,7 @@ export const projects = [
   {
     link: "/Projects/CarlePlaceAuditorium",
     pictures: "/Projects/carlplace",
-    quality: 100,
+    quality: 90,
     projectName: "Carle Place UFSD – Auditorium Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -318,7 +353,7 @@ export const projects = [
   {
     link: "/Projects/CarlePlaceLobby",
     pictures: "/Projects/carlplacelobby",
-    quality: 100,
+    quality: 90,
     projectName: "Carle Place UFSD – Lobby Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -330,7 +365,7 @@ export const projects = [
   {
     link: "/Projects/CarlePlaceLibrary",
     pictures: "/Projects/carlplacelibrary",
-    quality: 100,
+    quality: 90,
     projectName: "Carle Place UFSD – Library Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -342,7 +377,7 @@ export const projects = [
   {
     link: "/Projects/NewJerseyVeterinary",
     pictures: "/Projects/njvet",
-    quality: 100,
+    quality: 90,
     projectName: "New Jersey Veterinary Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -360,7 +395,7 @@ export const projects = [
   {
     link: "/Projects/HudsonAnimalHospital",
     pictures: "/Projects/hudsonanimal",
-    quality: 100,
+    quality: 90,
     projectName: "Hudson Animal Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -378,7 +413,7 @@ export const projects = [
   {
     link: "/Projects/866Westchester",
     pictures: "/Projects/866westchester",
-    quality: 100,
+    quality: 90,
     projectName: "866 Westchester Ave.",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -396,7 +431,7 @@ export const projects = [
   {
     link: "/Projects/55Pierrpoint",
     pictures: "/Projects/55pierre",
-    quality: 100,
+    quality: 90,
     projectName: "55 Pierrpoint Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -416,7 +451,7 @@ export const projects = [
     link: "/Projects/164_W79th",
 
     pictures: "/Projects/164w79th",
-    quality: 100,
+    quality: 90,
     projectName: "164 W79th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -429,7 +464,7 @@ export const projects = [
     link: "/Projects/17W_10th_Townhouse",
 
     pictures: "/Projects/17w10street",
-    quality: 100,
+    quality: 90,
     projectName: "17W 10th St Townhouse",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
