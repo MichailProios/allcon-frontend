@@ -70,7 +70,7 @@ const ProjectCard = ({ title, image, link, index }) => {
   const theme = useTheme();
 
   // const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesLGdown = useMediaQuery(theme.breakpoints.down("lg"));
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -96,10 +96,12 @@ const ProjectCard = ({ title, image, link, index }) => {
   return (
     <Fade
       in={flag}
-      style={{
-        // transformOrigin: "0 0 0",
-        transitionDelay: `${(index + `00`) / 3}ms`,
-      }}
+      style={
+        (!isMobile || !matchesLGdown) && {
+          // transformOrigin: "0 0 0",
+          transitionDelay: `${(index + `00`) / 8}ms`,
+        }
+      }
       timeout={400}
     >
       <Grid item xs={12} sm={12} md={6} lg={6} xl={4} ref={ref}>

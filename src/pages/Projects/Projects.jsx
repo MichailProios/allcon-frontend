@@ -42,7 +42,7 @@ const stdemetrios =
 const nold =
   "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-4.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
 const bareBurger =
   "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00354.JPG";
 const wilsonAnimal =
