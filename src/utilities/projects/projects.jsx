@@ -52,12 +52,35 @@ export const projects = [
     pictures: "/Projects/police-station-email",
     quality: 90,
     projectName: "Rockville Centre Police Station",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    projectCostBudget: "N/A",
-    projectDesigner: "N/A",
-    description: "N/A",
+    projectLocation: "142 Maple Ave Rockville Ctr, NY 11570",
+    clientAffiliatedAgency: "Incorporated Village of Rockville Centre",
+    yearCompleted: "2022",
+    projectCostBudget: "$2,344,107.00",
+    projectDesigner: "H2M Architects",
+    description: (
+      <>
+        ALLCon was selected to construct a new state of the art Police
+        headquarters for the Village of Rockville Center. The new facility will
+        replace the old, outdated, and cramped facility located on Maple Avenue.
+        The new headquarters will be located the former old Rockville Center
+        Municipal Water Department Building. ALLCON’s work includes full
+        demolition of all interior components and asbestos abatement. The
+        construction team installed insulation to be in comply with the latest
+        energy codes, CMU and stud framed walls to comply with the required
+        security and ACT Ceilings that enhance the working environment for the
+        staff providing vital services to the community. The team built new
+        secure holding cells and sally ports to allow for proper transfer of
+        offenders. Our flooring experts installed a combination of carpet, LVT
+        and ceramic tiles throughout to meet the strict requirements of the
+        designers. The ALLCON team manufacturers and installed custom millwork
+        counters throughout the facility. New wood doors, wood clad windows and
+        roll up gates were installed to rejuvenate the building’s exterior and
+        provide the necessary security within. Lastly exterior new signage and
+        aluminum metal panels were installed as identity indicators to the
+        Village Police and a handicap lift was installed to provided needed
+        public access to the facility.
+      </>
+    ),
   },
   {
     link: "/Projects/GreatneckTerraceRoofs",
