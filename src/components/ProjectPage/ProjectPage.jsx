@@ -441,7 +441,7 @@ const Picture = ({ image, quality }) => {
       >
         <ReactImage
           image={
-            `https://allconcontracting.com/image-resizing?&quality=${quality}&height=1920&width=1080&image=` +
+            `https://allconcontracting.com/image-resizing?&quality=${quality}&height=1920&width=1080&metadata=none&image=` +
             image
           }
           alt=""
