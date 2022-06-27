@@ -26,19 +26,24 @@ import ReactImage from "../../components/ReactImage/ReactImage";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 //Pictures
-const successAcademy =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/SuccessAcademySchools/BBR_0252-edit-1.jpg";
+
+const greatneckRoofs =
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+
+const church =
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
 
 const policeStation =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+
 const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
 
 const nold =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 
 //Styling
 const useStyles = makeStyles((theme) => ({
@@ -102,6 +107,7 @@ const Home = () => {
     autoplaySpeed: 5000,
     arrows: false,
     draggable: false,
+    swipe: false,
     pauseOnHover: false,
     lazyLoad: "progressive",
   };
@@ -109,7 +115,14 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cacheImages([nold, policeStation, successAcademy, brightwater500, lupton])
+    cacheImages([
+      nold,
+      // church,
+      policeStation,
+      greatneckRoofs,
+      brightwater500,
+      lupton,
+    ])
       .then(() => {
         setLoading(false);
       })
@@ -175,7 +188,7 @@ const Home = () => {
                     userDrag: "none",
                     userSelect: "none",
                     pointerEvents: "none",
-                    filter: "brightness(80%)",
+                    filter: "brightness(85%)",
                     display: "block",
                     lineHeight: 0,
                   }}
@@ -201,7 +214,7 @@ const Home = () => {
                     userDrag: "none",
                     userSelect: "none",
                     pointerEvents: "none",
-                    filter: "brightness(90%)",
+                    filter: "brightness(85%)",
                     display: "block",
                     lineHeight: 0,
                   }}
@@ -227,7 +240,7 @@ const Home = () => {
                     userDrag: "none",
                     userSelect: "none",
                     pointerEvents: "none",
-                    filter: "brightness(90%)",
+                    filter: "brightness(85%)",
                     display: "block",
                     lineHeight: 0,
                   }}
@@ -244,7 +257,7 @@ const Home = () => {
                 }
               >
                 <ReactImage
-                  image={successAcademy}
+                  image={greatneckRoofs}
                   alt=""
                   style={{
                     objectFit: "cover",
@@ -253,7 +266,7 @@ const Home = () => {
                     userDrag: "none",
                     userSelect: "none",
                     pointerEvents: "none",
-                    filter: "brightness(90%)",
+                    filter: "brightness(80%)",
                     display: "block",
                     lineHeight: 0,
                   }}
@@ -261,6 +274,32 @@ const Home = () => {
                 />
               </Suspense>
             </div>
+            {/* <div>
+              <Suspense
+                fallback={
+                  <div style={{ height: "100%" }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={church}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(85%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
+            </div> */}
           </Slider>
 
           <Fade
