@@ -14,9 +14,22 @@ import imagesImport from "../customFunctions/imagesImport";
 
 export const projects = [
   {
+    link: "/Projects/SuccessAcademySchools",
+    pictures: "/Projects/SuccessAcademySchools",
+    quality: 100,
+    projectName: "Success Academy Schools",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "N/A",
+    yearCompleted: "N/A",
+    projectCostBudget: "N/A",
+    projectDesigner: "N/A",
+    description: "N/A",
+  },
+
+  {
     link: "/Projects/RockvilleCentrePolice",
     pictures: "/Projects/police-station-email",
-    quality: 30,
+    quality: 100,
     projectName: "Rockville Centre Police Station",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -28,7 +41,7 @@ export const projects = [
   {
     link: "/Projects/GreatneckTerraceRoofs",
     pictures: "/Projects/greatneck-terrace-roofs",
-    quality: 20,
+    quality: 100,
     projectName: "Greatneck Terrace Roofs",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -40,7 +53,7 @@ export const projects = [
   {
     link: "/Projects/DOTGardenCity",
     pictures: "/Projects/OGS_Elwood",
-    quality: 50,
+    quality: 100,
     projectName: "DOT Elwood, NY Operation Facility ",
     projectLocation: "N/A",
     clientAffiliatedAgency: "NYS Office of General Services",
@@ -70,7 +83,7 @@ export const projects = [
   {
     link: "/Projects/DOTElwood",
     pictures: "/Projects/OGS_Elwood",
-    quality: 50,
+    quality: 100,
     projectName: "DOT Elwood, NY Operation Facility ",
     projectLocation: "N/A",
     clientAffiliatedAgency: "NYS Office of General Services",
@@ -100,7 +113,7 @@ export const projects = [
   {
     link: "/Projects/LuptonHall",
     pictures: "/Projects/lupton-hall",
-    quality: 20,
+    quality: 100,
     projectName: "SUNY Lupton Hall",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
@@ -129,7 +142,7 @@ export const projects = [
   {
     link: "/Projects/SaintDemetriosChurch",
     pictures: "/Projects/stdemetrios",
-    quality: 50,
+    quality: 100,
     projectName: "Saint Demetrios Greek Orthodox Church",
     projectLocation:
       "2 Annette Ave, 12 Annette Ave, 127 Hewlett Ave Merrick, NY 11566",
@@ -150,7 +163,7 @@ export const projects = [
   {
     link: "/Projects/Nold",
     pictures: "/Projects/nold",
-    quality: 20,
+    quality: 100,
     projectName: "SUNY Farmingdale Nold Hall Gymnasium",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "State University Construction Fund",
@@ -180,7 +193,7 @@ export const projects = [
   {
     link: "/Projects/500Bridgewater",
     pictures: "/Projects/500brightwater",
-    quality: 15,
+    quality: 100,
     projectName:
       "Brighton Houses Inc. – Alterations Associated to Superstorm SANDY",
     projectLocation: "500 Brightwater Court, Brooklyn, NY 11235",
@@ -209,7 +222,7 @@ export const projects = [
   {
     link: "/Projects/Bareburger",
     pictures: "/Projects/bareburger",
-    quality: 50,
+    quality: 100,
     projectName: "Bareburger 1681 East 87th Street",
     projectLocation: "1681 East 87th Street",
     clientAffiliatedAgency: "N/A",
@@ -227,7 +240,7 @@ export const projects = [
   {
     link: "/Projects/WilsonAnimal",
     pictures: "/Projects/willstonanimal",
-    quality: 50,
+    quality: 100,
     projectName: "Williston Animal Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -245,7 +258,7 @@ export const projects = [
   {
     link: "/Projects/255West",
     pictures: "/Projects/255w",
-    quality: 50,
+    quality: 100,
     projectName: "255 West 108th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -257,7 +270,7 @@ export const projects = [
   {
     link: "/Projects/20East",
     pictures: "/Projects/20east9th",
-    quality: 50,
+    quality: 100,
     projectName: "20 East 9th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -269,7 +282,7 @@ export const projects = [
   {
     link: "/Projects/UpperEastVetenary",
     pictures: "/Projects/uppereastveterinary",
-    quality: 50,
+    quality: 100,
     projectName: "Upper East Side Veterinary Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -287,7 +300,7 @@ export const projects = [
   {
     link: "/Projects/CarlePlaceAuditorium",
     pictures: "/Projects/carlplace",
-    quality: 50,
+    quality: 100,
     projectName: "Carle Place UFSD – Auditorium Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -305,7 +318,7 @@ export const projects = [
   {
     link: "/Projects/CarlePlaceLobby",
     pictures: "/Projects/carlplacelobby",
-    quality: 50,
+    quality: 100,
     projectName: "Carle Place UFSD – Lobby Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -317,7 +330,7 @@ export const projects = [
   {
     link: "/Projects/CarlePlaceLibrary",
     pictures: "/Projects/carlplacelibrary",
-    quality: 50,
+    quality: 100,
     projectName: "Carle Place UFSD – Library Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -329,7 +342,7 @@ export const projects = [
   {
     link: "/Projects/NewJerseyVeterinary",
     pictures: "/Projects/njvet",
-    quality: 50,
+    quality: 100,
     projectName: "New Jersey Veterinary Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -347,7 +360,7 @@ export const projects = [
   {
     link: "/Projects/HudsonAnimalHospital",
     pictures: "/Projects/hudsonanimal",
-    quality: 50,
+    quality: 100,
     projectName: "Hudson Animal Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -365,7 +378,7 @@ export const projects = [
   {
     link: "/Projects/866Westchester",
     pictures: "/Projects/866westchester",
-    quality: 50,
+    quality: 100,
     projectName: "866 Westchester Ave.",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -383,7 +396,7 @@ export const projects = [
   {
     link: "/Projects/55Pierrpoint",
     pictures: "/Projects/55pierre",
-    quality: 50,
+    quality: 100,
     projectName: "55 Pierrpoint Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -403,7 +416,7 @@ export const projects = [
     link: "/Projects/164_W79th",
 
     pictures: "/Projects/164w79th",
-    quality: 50,
+    quality: 100,
     projectName: "164 W79th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -416,7 +429,7 @@ export const projects = [
     link: "/Projects/17W_10th_Townhouse",
 
     pictures: "/Projects/17w10street",
-    quality: 50,
+    quality: 100,
     projectName: "17W 10th St Townhouse",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",

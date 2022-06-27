@@ -1,8 +1,6 @@
 import React from "react";
 import profiles from "../profiles/profiles.jsx";
-const ProfilePage = React.lazy(() =>
-  import("../../components/ProfilePage/ProfilePage")
-);
+import ProfilePage from "../../components/ProfilePage/ProfilePage";
 
 export const profileRoutes = [];
 

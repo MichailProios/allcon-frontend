@@ -1,81 +1,88 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 
 // Material-UI
 import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  Grow,
+  // ImageList,
+  // ImageListItem,
+  // ImageListItemBar,
+  // Grow,
   Grid,
-  useScrollTrigger,
+  // useScrollTrigger,
+  // Card,
+  // CardContent,
 } from "@material-ui/core";
+
+// import { FixedSizeGrid } from "react-window";
+
+// import { motion } from "framer-motion";
 
 // import Image from "material-ui-image";
 
-import { Transition } from "react-transition-group";
+// import { Transition } from "react-transition-group";
 
-import delayTransition from "../../utilities/customFunctions/delayTransition.jsx";
+// import delayTransition from "../../utilities/customFunctions/delayTransition.jsx";
 
 //Material-UI Styles
 import { makeStyles } from "@material-ui/styles";
 
-import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
+// import useDelayTransition from "../../utilities/customHooks/useDelayTransition.jsx";
 
 import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import imagesImport from "../../utilities/customFunctions/imagesImport.jsx";
-import getImageList from "../../utilities/customFunctions/getImageList.jsx";
+import LoadingSquares from "../../components/LoadingSquares/LoadingSquares";
+// import imagesImport from "../../utilities/customFunctions/imagesImport.jsx";
+// import getImageList from "../../utilities/customFunctions/getImageList.jsx";
 import useDetectHeight from "../../utilities/customHooks/useDetectHeight.jsx";
 
-const ProjectCard = React.lazy(() =>
-  import("../../components/ProjectCard/ProjectCard")
-);
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
 const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
 const stdemetrios =
-  "https://allconcontracting.com/image-resizing?&quality=20&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
 const nold =
-  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-4.jpg";
 const bareBurger =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00354.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/bareburger/DSC00354.JPG";
 const wilsonAnimal =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/willstonanimal/DSC00051.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/willstonanimal/DSC00051.JPG";
 const west255 =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/255w/1DSC00385.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/255w/1DSC00385.JPG";
 const east209th =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/20east9th/DSC00345.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/20east9th/DSC00345.JPG";
 const upperEastVetenary =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/uppereastveterinary/DSC00250.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/uppereastveterinary/DSC00250.JPG";
 const carlePlaceAuditorium =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplace/DSC00161.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplace/DSC00161.JPG";
 const carlPlaceLobby =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplacelobby/carlplacelobby.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplacelobby/carlplacelobby.JPG";
 const carlPlaceLib =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplacelibrary/DSC00231.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/carlplacelibrary/DSC00231.JPG";
 const njvet =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/njvet/DSC00265.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/njvet/DSC00265.JPG";
 const hudsonAnimal =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/hudsonanimal/DSC00249.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/hudsonanimal/DSC00249.JPG";
 const westchesterAve =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/866westchester/DSC00300.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/866westchester/DSC00300.JPG";
 const pierrpointStreet =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/55pierre/DSC00083.JPG";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/55pierre/DSC00083.JPG";
 const w79thStreet =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/164w79th/image001.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/164w79th/image001.jpg";
 const townhouse17w =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7490.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7490.jpg";
 
 const ogsElwood =
-  "https://allconcontracting.com/image-resizing?&quality=100&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/overall.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/overall.jpg";
 
 const greatneckRoofs =
-  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+
+const successAcademy =
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/SuccessAcademySchools/BBR_0252-edit-1.jpg";
 
 const rockvillePolice =
-  "https://allconcontracting.com/image-resizing?&quality=15&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const useStyles = makeStyles({
   root: {
@@ -93,6 +100,7 @@ const Projects = () => {
       image: nold,
       link: "/Projects/Nold",
     },
+
     {
       title: "500 Brightwater Court",
       image: brightwater500,
@@ -102,6 +110,11 @@ const Projects = () => {
       title: "Lupton Hall - Roof Replacement",
       image: lupton,
       link: "/Projects/LuptonHall",
+    },
+    {
+      title: "Success Academy Schools",
+      image: successAcademy,
+      link: "/Projects/SuccessAcademySchools",
     },
     {
       title: "Greatneck Terrace Roofs",
@@ -199,7 +212,7 @@ const Projects = () => {
     },
   ]);
 
-  const height = useDetectHeight();
+  // const height = useDetectHeight();
 
   const [loading, setLoading] = useState(true);
 
@@ -210,6 +223,7 @@ const Projects = () => {
       nold,
       brightwater500,
       bareBurger,
+      successAcademy,
       wilsonAnimal,
       west255,
       east209th,
@@ -235,24 +249,19 @@ const Projects = () => {
   if (!loading) {
     return (
       <Grid container spacing={2} className={styles.root}>
-        <Suspense fallback={<LoadingSpinner />}>
-          {listData.map((value, index) => (
-            <ProjectCard
-              title={value.title}
-              image={value.image}
-              link={value.link}
-              index={index}
-            />
-          ))}
-        </Suspense>
+        {listData.map((value, index) => (
+          <ProjectCard
+            title={value.title}
+            image={value.image}
+            link={value.link}
+            index={index}
+            key={index}
+          />
+        ))}
       </Grid>
     );
   } else {
-    return (
-      <div style={{ height: `calc(${height})` }}>
-        <LoadingSpinner />
-      </div>
-    );
+    return <LoadingSquares />;
   }
 };
 

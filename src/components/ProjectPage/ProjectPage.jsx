@@ -125,301 +125,298 @@ function slideRenderer(params, images, quality) {
   );
 }
 
-const ProjectPage =
-  ({
-    pictures,
-    quality,
-    projectName,
-    projectLocation,
-    clientAffiliatedAgency,
-    yearCompleted,
-    projectCostBudget,
-    projectDesigner,
-    description,
-  }) => {
-    const styles = useStyles();
-    const theme = useTheme();
+const ProjectPage = ({
+  pictures,
+  quality,
+  projectName,
+  projectLocation,
+  clientAffiliatedAgency,
+  yearCompleted,
+  projectCostBudget,
+  projectDesigner,
+  description,
+}) => {
+  const styles = useStyles();
+  const theme = useTheme();
 
-    const [loading, setLoading] = useState(true);
-    const [animationFlag1, setAnimationFlag1] = useState(false);
-    const [animationFlag2, setAnimationFlag2] = useState(false);
-    const [animationFlag3, setAnimationFlag3] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [animationFlag1, setAnimationFlag1] = useState(false);
+  const [animationFlag2, setAnimationFlag2] = useState(false);
+  const [animationFlag3, setAnimationFlag3] = useState(false);
 
-    // setAnimationFlag1(useDelayTransition(100));
-    // setAnimationFlag2(useDelayTransition(500));
-    // setAnimationFlag3(useDelayTransition(800));
-    const height = useDetectHeight();
-    useEffect(() => {
-      delayTransition(0).then((response) => setAnimationFlag1(response));
-      delayTransition(500).then((response) => setAnimationFlag2(response));
-      delayTransition(1200).then((response) => setAnimationFlag3(response));
-    }, []);
+  // setAnimationFlag1(useDelayTransition(100));
+  // setAnimationFlag2(useDelayTransition(500));
+  // setAnimationFlag3(useDelayTransition(800));
+  const height = useDetectHeight();
+  useEffect(() => {
+    delayTransition(0).then((response) => setAnimationFlag1(response));
+    delayTransition(500).then((response) => setAnimationFlag2(response));
+    delayTransition(1200).then((response) => setAnimationFlag3(response));
+  }, []);
 
-    // useEffect(() => {
-    //   cacheImages(Object.values(pictures))
-    //     .then(() => {
-    //       setLoading(false);
-    //     })
-    //     .catch(() => {
-    //       setLoading(true);
-    //     });
-    // }, [pictures]);
-    const [activeStep, setActiveStep] = useState(0);
-    const [payloadPictures, setPayloadPictures] = useState({});
-    const [maxSteps, setMaxSteps] = useState();
+  // useEffect(() => {
+  //   cacheImages(Object.values(pictures))
+  //     .then(() => {
+  //       setLoading(false);
+  //     })
+  //     .catch(() => {
+  //       setLoading(true);
+  //     });
+  // }, [pictures]);
+  const [activeStep, setActiveStep] = useState(0);
+  const [payloadPictures, setPayloadPictures] = useState({});
+  const [maxSteps, setMaxSteps] = useState();
 
-    useEffect(() => {
-      getImageList(pictures).then((payload) => {
-        setMaxSteps(Object.values(payload).length);
-        setPayloadPictures(payload);
+  useEffect(() => {
+    getImageList(pictures).then((payload) => {
+      setMaxSteps(Object.values(payload).length);
+      setPayloadPictures(payload);
 
-        setLoading(false);
-      });
-    }, [pictures]);
+      setLoading(false);
+    });
+  }, [pictures]);
 
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
-    const handleStepChange = (step) => {
-      setActiveStep(step);
-    };
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
 
-    const handleClick = (event, expanded) => {
-      if (expanded) {
-        if (isMobile) {
-          scroll.scrollToBottom({
-            duration: 400,
-            delay: 250,
-            smooth: "easeInOutQuart",
-          });
-        } else {
-          scroll.scrollToBottom({
-            duration: 0,
-            delay: 250,
-            smooth: "easeInOutQuart",
-          });
-        }
+  const handleClick = (event, expanded) => {
+    if (expanded) {
+      if (isMobile) {
+        scroll.scrollToBottom({
+          duration: 400,
+          delay: 250,
+          smooth: "easeInOutQuart",
+        });
+      } else {
+        scroll.scrollToBottom({
+          duration: 0,
+          delay: 250,
+          smooth: "easeInOutQuart",
+        });
       }
-    };
-
-    if (!loading) {
-      return (
-        <div className={styles.root}>
-          <Grid container spacing={1}>
-            <Grow in={animationFlag1} timeout={800}>
-              <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
-                <Paper elevation={2} className={styles.carousel}>
-                  <VirtualizeSwipeableViews
-                    className={styles.views}
-                    axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                    index={activeStep}
-                    onChangeIndex={handleStepChange}
-                    enableMouseEvents={false}
-                    slideRenderer={(params) =>
-                      slideRenderer(
-                        params,
-                        Object.values(payloadPictures),
-                        quality
-                      )
-                    }
-                    overscanSlideAfter={3}
-                    overscanSlideBefore={3}
-                    disableLazyLoading={true}
-                    slideCount={maxSteps}
-                    animateTransitions={true}
-                  />
-
-                  <Fab
-                    color="primary"
-                    size="small"
-                    onClick={handleBack}
-                    disabled={activeStep === 0}
-                    className={styles.prevButton}
-                  >
-                    <KeyboardArrowLeft style={{ color: "#fff" }} />
-                  </Fab>
-
-                  <Fab
-                    color="primary"
-                    size="small"
-                    onClick={handleNext}
-                    disabled={activeStep === maxSteps - 1}
-                    className={styles.nextButton}
-                  >
-                    <KeyboardArrowRight style={{ color: "#fff" }} />
-                  </Fab>
-
-                  <MobileStepper
-                    className={styles.stepper}
-                    steps={maxSteps}
-                    position="static"
-                    variant={!isMobile ? "dots" : "text"}
-                    activeStep={activeStep}
-                    backButton={<div />}
-                    nextButton={<div />}
-                    // nextButton={
-                    //   <Button
-                    //     variant="contained"
-                    //     color="primary"
-                    //     size="small"
-                    //     onClick={handleNext}
-                    //     disabled={activeStep === maxSteps - 1}
-                    //   >
-                    //     Next
-                    //     {theme.direction === "rtl" ? (
-                    //       <KeyboardArrowLeft />
-                    //     ) : (
-                    //       <KeyboardArrowRight />
-                    //     )}
-                    //   </Button>
-                    // }
-                    // backButton={
-                    //   <Button
-                    //     variant="contained"
-                    //     color="primary"
-                    //     size="small"
-                    //     onClick={handleBack}
-                    //     disabled={activeStep === 0}
-                    //   >
-                    //     {theme.direction === "rtl" ? (
-                    //       <KeyboardArrowRight />
-                    //     ) : (
-                    //       <KeyboardArrowLeft />
-                    //     )}
-                    //     Back
-                    //   </Button>
-                    // }
-                  />
-                </Paper>
-              </Grid>
-            </Grow>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
-              <Grow in={animationFlag2} timeout={800}>
-                <Card style={{ height: `calc(${height}px - 154px)` }}>
-                  <CardHeader
-                    title="Project Info"
-                    className={styles.cardHeader}
-                  />
-                  <Divider />
-                  <CardContent>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="h6" className={styles.textPrimary}>
-                          Project Name
-                        </Typography>
-                        <Typography
-                          color="primary"
-                          variant="body1"
-                          className={styles.textSecondary}
-                        >
-                          {projectName}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="h6" className={styles.textPrimary}>
-                          Project Location
-                        </Typography>
-                        <Typography
-                          color="primary"
-                          variant="body1"
-                          className={styles.textSecondary}
-                        >
-                          {projectLocation}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="h6" className={styles.textPrimary}>
-                          Client/ Affiliated Agency
-                        </Typography>
-                        <Typography
-                          color="primary"
-                          variant="body1"
-                          className={styles.textSecondary}
-                        >
-                          {clientAffiliatedAgency}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="h6" className={styles.textPrimary}>
-                          Year Completed
-                        </Typography>
-                        <Typography
-                          color="primary"
-                          variant="body1"
-                          className={styles.textSecondary}
-                        >
-                          {yearCompleted}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="h6" className={styles.textPrimary}>
-                          Project Cost/Budget
-                        </Typography>
-                        <Typography
-                          color="primary"
-                          variant="body1"
-                          className={styles.textSecondary}
-                        >
-                          {projectCostBudget}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="h6" className={styles.textPrimary}>
-                          Project Designer
-                        </Typography>
-                        <Typography
-                          color="primary"
-                          variant="body1"
-                          className={styles.textSecondary}
-                        >
-                          {projectDesigner}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
-              </Grow>
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <Grow in={animationFlag3} timeout={800}>
-                <Accordion onChange={handleClick}>
-                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography
-                      variant="body1"
-                      component="div"
-                      className={styles.accordionHeader}
-                    >
-                      <Box sx={{ fontWeight: "bold" }}>
-                        Project Description (Click to Expand)
-                      </Box>
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography variant="body1" className={styles.textPrimary}>
-                      {description}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-              </Grow>
-            </Grid>
-          </Grid>
-        </div>
-      );
-    } else {
-      return (
-        <div style={{ height: `calc(${height}px - 65px)` }}>
-          <LoadingSpinner />
-        </div>
-      );
     }
-  }
-;
+  };
 
+  if (!loading) {
+    return (
+      <div className={styles.root}>
+        <Grid container spacing={1}>
+          <Grow in={animationFlag1} timeout={800}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
+              <Paper elevation={2} className={styles.carousel}>
+                <VirtualizeSwipeableViews
+                  className={styles.views}
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents={false}
+                  slideRenderer={(params) =>
+                    slideRenderer(
+                      params,
+                      Object.values(payloadPictures),
+                      quality
+                    )
+                  }
+                  overscanSlideAfter={3}
+                  overscanSlideBefore={3}
+                  disableLazyLoading={true}
+                  slideCount={maxSteps}
+                  animateTransitions={true}
+                />
+
+                <Fab
+                  color="primary"
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                  className={styles.prevButton}
+                >
+                  <KeyboardArrowLeft style={{ color: "#fff" }} />
+                </Fab>
+
+                <Fab
+                  color="primary"
+                  size="small"
+                  onClick={handleNext}
+                  disabled={activeStep === maxSteps - 1}
+                  className={styles.nextButton}
+                >
+                  <KeyboardArrowRight style={{ color: "#fff" }} />
+                </Fab>
+
+                <MobileStepper
+                  className={styles.stepper}
+                  steps={maxSteps}
+                  position="static"
+                  variant={!isMobile ? "dots" : "text"}
+                  activeStep={activeStep}
+                  backButton={<div />}
+                  nextButton={<div />}
+                  // nextButton={
+                  //   <Button
+                  //     variant="contained"
+                  //     color="primary"
+                  //     size="small"
+                  //     onClick={handleNext}
+                  //     disabled={activeStep === maxSteps - 1}
+                  //   >
+                  //     Next
+                  //     {theme.direction === "rtl" ? (
+                  //       <KeyboardArrowLeft />
+                  //     ) : (
+                  //       <KeyboardArrowRight />
+                  //     )}
+                  //   </Button>
+                  // }
+                  // backButton={
+                  //   <Button
+                  //     variant="contained"
+                  //     color="primary"
+                  //     size="small"
+                  //     onClick={handleBack}
+                  //     disabled={activeStep === 0}
+                  //   >
+                  //     {theme.direction === "rtl" ? (
+                  //       <KeyboardArrowRight />
+                  //     ) : (
+                  //       <KeyboardArrowLeft />
+                  //     )}
+                  //     Back
+                  //   </Button>
+                  // }
+                />
+              </Paper>
+            </Grid>
+          </Grow>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+            <Grow in={animationFlag2} timeout={800}>
+              <Card style={{ height: `calc(${height}px - 154px)` }}>
+                <CardHeader
+                  title="Project Info"
+                  className={styles.cardHeader}
+                />
+                <Divider />
+                <CardContent>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Name
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectName}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Location
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectLocation}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Client/ Affiliated Agency
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {clientAffiliatedAgency}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Year Completed
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {yearCompleted}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Cost/Budget
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectCostBudget}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography variant="h6" className={styles.textPrimary}>
+                        Project Designer
+                      </Typography>
+                      <Typography
+                        color="primary"
+                        variant="body1"
+                        className={styles.textSecondary}
+                      >
+                        {projectDesigner}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grow>
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grow in={animationFlag3} timeout={800}>
+              <Accordion onChange={handleClick}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography
+                    variant="body1"
+                    component="div"
+                    className={styles.accordionHeader}
+                  >
+                    <Box sx={{ fontWeight: "bold" }}>
+                      Project Description (Click to Expand)
+                    </Box>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body1" className={styles.textPrimary}>
+                    {description}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Grow>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  } else {
+    return (
+      <div style={{ height: `calc(${height}px - 65px)` }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
+};
 const Picture = ({ image, quality }) => {
   const styles = useStyles();
   const theme = useTheme();
@@ -427,7 +424,7 @@ const Picture = ({ image, quality }) => {
   const height = useDetectHeight();
 
   return (
-    <Paper
+    <div
       style={{
         height: `calc(${height}px - 202px)`,
         overflow: "hidden",
@@ -435,28 +432,30 @@ const Picture = ({ image, quality }) => {
         borderBottomRightRadius: "0px",
       }}
     >
-      <MuiImage
-        imageStyle={{
-          width: "100%",
-          height: `calc(${height}px - 202px)`,
-          objectFit: "contain",
-        }}
-        // cover={true}
-        iconContainerStyle={{ height: `calc(${height}px - 202px)` }}
-        // iconContainerStyle={{
-        //   maxWidth: "100%",
-        //   height: "45em",
-        // }}
-
-        animationDuration={800}
-        disableTransition={false}
-        src={
-          `https://allconcontracting.com/image-resizing?&quality=${quality}&image=` +
-          image
+      <Suspense
+        fallback={
+          <div style={{ height: "100%" }}>
+            <LoadingSpinner />
+          </div>
         }
-        className={styles.picture}
-      />
-    </Paper>
+      >
+        <ReactImage
+          image={
+            `https://allconcontracting.com/image-resizing?&quality=${quality}&height=1920&width=1080&image=` +
+            image
+          }
+          alt=""
+          style={{
+            width: "100%",
+            height: `calc(${height}px - 202px)`,
+            objectFit: "contain",
+            display: "block",
+            lineHeight: 0,
+          }}
+          className={styles.picture}
+        />
+      </Suspense>
+    </div>
   );
 };
 

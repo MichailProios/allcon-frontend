@@ -9,7 +9,7 @@ const LoadingSquares = () => {
   return (
     <div
       className="container"
-      style={{ lineHeight: `${height}px`, touchAction: "none" }}
+      style={{ lineHeight: `calc(${height}px - 65px)`, touchAction: "none" }}
     >
       <div className="group">
         <div className="bigSqr">

@@ -25,6 +25,7 @@ import { isMobile } from "react-device-detect";
 import MuiImage from "material-ui-image";
 
 import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
+import LoadingSquares from "../../components/LoadingSquares/LoadingSquares";
 
 // const images = imagesImport(
 //   require.context(
@@ -34,30 +35,30 @@ import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
 //   )
 // );
 const pic =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
 
 const george =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-24.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-24.jpg";
 const markos =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-19.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-19.jpg";
 
 const joseph =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-23.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-23.jpg";
 const nick =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-16.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-16.jpg";
 const ahmed =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-28.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-28.jpg";
 const sandra =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-14.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-14.jpg";
 const tina =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-13.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-13.jpg";
 const wahid =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-12.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-12.jpg";
 const ana =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-27.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-27.jpg";
 
 const company =
-  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-8.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-8.jpg";
 
 const useStyles = makeStyles((theme) => ({
   companyProfileGrid: {
@@ -205,28 +206,28 @@ const About = () => {
     },
   ]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   cacheImages([
-  //     george,
-  //     markos,
-  //     joseph,
-  //     nick,
-  //     ahmed,
-  //     sandra,
-  //     tina,
-  //     wahid,
-  //     ana,
-  //     company,
-  //   ])
-  //     .then(() => {
-  //       setLoading(false);
-  //     })
-  //     .catch(() => {
-  //       setLoading(true);
-  //     });
-  // }, []);
+  useEffect(() => {
+    cacheImages([
+      george,
+      markos,
+      joseph,
+      nick,
+      ahmed,
+      sandra,
+      tina,
+      wahid,
+      ana,
+      company,
+    ])
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(true);
+      });
+  }, []);
 
   if (!loading) {
     return (
@@ -343,23 +344,13 @@ const About = () => {
               timeout={800}
             >
               <Paper className={styles.paper}>
-                <MuiImage
-                  imageStyle={{
-                    maxWidth: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                    borderRadius: "6px",
-                  }}
-                  cover={true}
-                  aspectRatio={1.5}
-                  animationDuration={800}
-                  src={company}
-                  style={{
-                    borderRadius: "6px",
-                  }}
-                />
-
-                {/* <Suspense fallback={<LoadingSpinner />}>
+                <Suspense
+                  fallback={
+                    <div style={{ height: "100%" }}>
+                      <LoadingSpinner />
+                    </div>
+                  }
+                >
                   <ReactImage
                     image={company}
                     style={{
@@ -372,7 +363,7 @@ const About = () => {
                     }}
                     className={styles.media}
                   />
-                </Suspense> */}
+                </Suspense>
               </Paper>
             </Fade>
           </Grid>
@@ -435,7 +426,7 @@ const About = () => {
   } else {
     return (
       <div style={{ height: `calc(${height}px - 65px)` }}>
-        <LoadingSpinner />
+        <LoadingSquares />
       </div>
     );
   }

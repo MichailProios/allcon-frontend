@@ -1,52 +1,46 @@
-import React, { useEffect, useState, Suspense } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+//React
+import React, { Suspense, useEffect, useState } from "react";
 
-import MuiImage from "material-ui-image";
-import ApartmentIcon from "@material-ui/icons/Apartment";
-import Slider from "react-slick";
-
-import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
-
-import { useTransition, animated, config } from "react-spring";
-
-import { isMobile } from "react-device-detect";
-import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
-
-import {
-  Paper,
-  Typography,
-  Fade,
-  Button,
-  InputAdornment,
-} from "@material-ui/core";
-
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay, virtualize } from "react-swipeable-views-utils";
-
-import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
-import delayTransition from "../../utilities/customFunctions/delayTransition";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+//React Router
 import { useNavigate } from "react-router";
 
-import SimpleImageSlider from "react-simple-image-slider";
+//Material UI
+import { Typography, Fade, Button } from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+//Icons
+import ApartmentIcon from "@material-ui/icons/Apartment";
+
+//React Slick
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import { useImage } from "react-image";
-import { AccountCircleTwoTone } from "@material-ui/icons";
-import ReactImage from "../../components/ReactImage/ReactImage";
 
+//Components
+import LoadingSquares from "../../components/LoadingSquares/LoadingSquares";
+
+//Functions
+import useDetectHeight from "../../utilities/customHooks/useDetectHeight";
+import cacheImages from "../../utilities/customFunctions/cacheImages.jsx";
+import ReactImage from "../../components/ReactImage/ReactImage";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+
+//Pictures
 const church =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+
+const policeStation =
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
 const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-35.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-4.jpg";
 
 const nold =
-  "https://allconcontracting.com/image-resizing?&quality=50&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 
+//Styling
 const useStyles = makeStyles((theme) => ({
   quote: {
     margin: 0,
@@ -96,22 +90,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const ReactImage = ({ image, imageStyles }) => {
-//   const { src } = useImage({
-//     srcList: image,
-//   });
-
-//   return <img src={src} alt="" style={imageStyles} />;
-// };
-
 const Home = () => {
   const styles = useStyles();
-  const theme = useTheme();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const navigate = useNavigate();
   const height = useDetectHeight();
 
@@ -129,7 +109,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cacheImages([nold, church, brightwater500, lupton])
+    cacheImages([nold, policeStation, church, brightwater500, lupton])
       .then(() => {
         setLoading(false);
       })
@@ -152,72 +132,140 @@ const Home = () => {
         >
           <Slider {...settings}>
             <div>
-              <MuiImage
-                src={nold}
-                style={{ height: `calc(${height}px - 65px)` }}
-                imageStyle={{
-                  objectFit: "cover",
-                  maxWidth: "100%",
-                  height: `calc(${height}px - 65px)`,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(90%)",
-                }}
-              />
+              <Suspense
+                fallback={
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={nold}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(90%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
             </div>
             <div>
-              <MuiImage
-                src={brightwater500}
-                style={{ height: `calc(${height}px - 65px)` }}
-                imageStyle={{
-                  objectFit: "cover",
-                  maxWidth: "100%",
-                  height: `calc(${height}px - 65px)`,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(90%)",
-                }}
-              />
+              <Suspense
+                fallback={
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={brightwater500}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(90%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
             </div>
             <div>
-              <MuiImage
-                src={lupton}
-                style={{ height: `calc(${height}px - 65px)` }}
-                imageStyle={{
-                  objectFit: "cover",
-                  maxWidth: "100%",
-                  height: `calc(${height}px - 65px)`,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(90%)",
-                }}
-              />
+              <Suspense
+                fallback={
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={policeStation}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(90%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
             </div>
-
             <div>
-              <MuiImage
-                src={church}
-                style={{ height: `calc(${height}px - 65px)` }}
-                imageStyle={{
-                  objectFit: "cover",
-                  maxWidth: "100%",
-                  height: `calc(${height}px - 65px)`,
-                  userDrag: "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                  filter: "brightness(90%)",
-                }}
-              />
+              <Suspense
+                fallback={
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={lupton}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(90%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
+            </div>
+            <div>
+              <Suspense
+                fallback={
+                  <div style={{ height: "100%" }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={church}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(90%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
             </div>
           </Slider>
 
           <Fade
             in={true}
             style={{
-              // transformOrigin: "0 0 0",
               transitionDelay: `${15 + `00`}ms`,
             }}
             timeout={400}
@@ -233,7 +281,7 @@ const Home = () => {
                 startIcon={<ApartmentIcon />}
                 onClick={() => navigate("/Projects")}
               >
-                explore our projects
+                Explore our Projects
               </Button>
             </div>
           </Fade>
@@ -241,11 +289,7 @@ const Home = () => {
       </Fade>
     );
   } else {
-    return (
-      <div style={{ height: `calc(${height}px - 65px)` }}>
-        <LoadingSpinner />
-      </div>
-    );
+    return <LoadingSquares />;
   }
 };
 

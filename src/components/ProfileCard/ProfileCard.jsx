@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 //Material-UI Styles
 import { makeStyles, useTheme } from "@material-ui/styles";
@@ -78,39 +78,44 @@ const ProfileCard = ({ link, title, subtitle, description, picture }) => {
           to={link}
         >
           <Grid container spacing={0}>
-            <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
-              <MuiImage
-                imageStyle={
-                  matchesMD
-                    ? {
-                        maxWidth: "100%",
-
-                        objectFit: "cover",
-                      }
-                    : {
-                        maxWidth: "100%",
-                        height: "auto",
-                        objectFit: "contain",
-                        // borderTopRightRadius: "2px",
-                        // borderBottomRightRadius: "2px",
-                      }
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={3}
+              xl={3}
+              style={{ display: "block", lineHeight: 0 }}
+            >
+              <Suspense
+                fallback={
+                  <div style={{ height: "100%" }}>
+                    <LoadingSpinner />
+                  </div>
                 }
-                // aspectRatio={matchesMD ? 1.5 : 1}
-                iconContainerStyle={
-                  matchesMD
-                    ? {
-                        maxWidth: "100%",
-                        height: "100%",
-                      }
-                    : {
-                        maxWidth: "100%",
-                        height: "100%",
-                      }
-                }
-                src={picture}
-                animationDuration={0}
-                className={styles.profileImage}
-              />
+              >
+                <ReactImage
+                  image={picture}
+                  style={
+                    matchesMD
+                      ? {
+                          width: "100%",
+                          height: "auto",
+                          objectFit: "contain",
+                          display: "block",
+                          lineHeight: 0,
+                        }
+                      : {
+                          width: "100%",
+                          height: "auto",
+                          objectFit: "contain",
+                          display: "block",
+                          lineHeight: 0,
+                        }
+                  }
+                  className={styles.profileImage}
+                />
+              </Suspense>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
               <CardHeader title={title} subheader={subtitle} />

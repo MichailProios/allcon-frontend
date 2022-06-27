@@ -5,7 +5,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 export const ReactImage = (props) => {
   const { src } = useImage({
     srcList: props.image,
-    useSuspense: typeof props.suspense === "undefined" ? true : props.suspense,
+    useSuspense: true,
   });
 
   const { suspense, ...rest } = props;
