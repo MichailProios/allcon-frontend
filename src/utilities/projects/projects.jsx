@@ -1,23 +1,119 @@
 import React from "react";
+import getImageList from "../customFunctions/getImageList";
 
-function importAll(r) {
-  let images = {};
-  r.keys().forEach((item, index) => {
-    images[item.replace("./", "")] = r(item);
-  });
-  return images;
-}
+import imagesImport from "../customFunctions/imagesImport";
+
+// function imagesImport(r) {
+//   let images = {};
+//   r.keys().forEach((item, index) => {
+//     images[item.replace("./", "")] = r(item);
+//   });
+
+//   return images;
+// }
 
 export const projects = [
   {
-    link: "/Projects/LuptonHall",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/lupton-hall",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
+    link: "/Projects/SuccessAcademySchools",
+    pictures: "/Projects/SuccessAcademySchools",
+    quality: 100,
+    projectName: "Success Academy Schools",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "N/A",
+    yearCompleted: "N/A",
+    projectCostBudget: "N/A",
+    projectDesigner: "N/A",
+    description: "N/A",
+  },
+
+  {
+    link: "/Projects/RockvilleCentrePolice",
+    pictures: "/Projects/police-station-email",
+    quality: 100,
+    projectName: "Rockville Centre Police Station",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "N/A",
+    yearCompleted: "N/A",
+    projectCostBudget: "N/A",
+    projectDesigner: "N/A",
+    description: "N/A",
+  },
+  {
+    link: "/Projects/GreatneckTerraceRoofs",
+    pictures: "/Projects/greatneck-terrace-roofs",
+    quality: 100,
+    projectName: "Greatneck Terrace Roofs",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "N/A",
+    yearCompleted: "N/A",
+    projectCostBudget: "N/A",
+    projectDesigner: "N/A",
+    description: "N/A",
+  },
+  {
+    link: "/Projects/DOTGardenCity",
+    pictures: "/Projects/OGS_Elwood",
+    quality: 100,
+    projectName: "DOT Elwood, NY Operation Facility ",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "NYS Office of General Services",
+    yearCompleted: "In Closeout",
+    projectCostBudget: "$7,000,000",
+    projectDesigner: "Kallen & Lemelson, LLP",
+    description: (
+      <>
+        ALLCON Contracting was selected as the general contractor for the
+        construction of a new DOT Operation Facility in Elwood, NY. The project
+        included the restoration of an existing salt shed, the construction of a
+        new heavy timer shed, new vehicle service and storage building as well
+        as the new operations office. ALLCON performed more than 60% of the
+        general contracting work on this project which included interior
+        finishes, masonry, millwork, and metal panel installation. We worked
+        closely with Laland Baptiste who served as the CM on the project. Both
+        companies built on a spirit of collaboration to make sure a quality
+        building was assembled for both NYS OGS the contract manager and the NYS
+        Department of Transportation. This was the second project collaboration
+        between ALLCON and Laland Baptiste and that team spirit proved
+        invaluable at addressing unforeseen field conditions, addressing issues
+        as they arose and maintain both schedule constraints and budgetary
+        limitations.
+      </>
     ),
+  },
+  {
+    link: "/Projects/DOTElwood",
+    pictures: "/Projects/OGS_Elwood",
+    quality: 100,
+    projectName: "DOT Elwood, NY Operation Facility ",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "NYS Office of General Services",
+    yearCompleted: "In Closeout",
+    projectCostBudget: "$7,000,000",
+    projectDesigner: "Kallen & Lemelson, LLP",
+    description: (
+      <>
+        ALLCON Contracting was selected as the general contractor for the
+        construction of a new DOT Operation Facility in Elwood, NY. The project
+        included the restoration of an existing salt shed, the construction of a
+        new heavy timer shed, new vehicle service and storage building as well
+        as the new operations office. ALLCON performed more than 60% of the
+        general contracting work on this project which included interior
+        finishes, masonry, millwork, and metal panel installation. We worked
+        closely with Laland Baptiste who served as the CM on the project. Both
+        companies built on a spirit of collaboration to make sure a quality
+        building was assembled for both NYS OGS the contract manager and the NYS
+        Department of Transportation. This was the second project collaboration
+        between ALLCON and Laland Baptiste and that team spirit proved
+        invaluable at addressing unforeseen field conditions, addressing issues
+        as they arose and maintain both schedule constraints and budgetary
+        limitations.
+      </>
+    ),
+  },
+  {
+    link: "/Projects/LuptonHall",
+    pictures: "/Projects/lupton-hall",
+    quality: 100,
     projectName: "SUNY Lupton Hall",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
@@ -26,34 +122,27 @@ export const projects = [
     projectDesigner: "Hoffmann Architects, Inc.",
     description: (
       <>
-        An extensive 90,000 square foot of new copper roofing. The project
-        started with the removal of the existing roofing system and Asbestos
-        abatement.
-        <br /> <br />
-        Moving to a new unique structural design that Allcon proposed and
-        developed.
-        <br /> <br />
-        The structural design included a high gauge metal system that bypass the
-        concrete deck and attached to the existing structural system with blind
-        bolts (box bolts) and withstands wind speed up to 126 mph.
-        <br /> <br />
-        The copper fabrication was a mix between machine fabrications for the
-        panels and hand art for the little details.
-        <br /> <br />
-        With all the beautiful details, this building is set to be a landmarks
-        for Farmingdale.
+        ALLCON constructed this uniquely designed 90,000sf copper roof which now
+        transforms Lupton Hall into a landmark for the SUNY Farmingdale Campus.
+        ALLCON proposed and helped developed a distinctive structural design
+        during the initial removal and abatement stages of the project. The
+        structural design included a high gauge metal framing system that
+        bypasses the concrete deck and attaches to the existing framing
+        structure with blind bolts. Craftsmanship is found throughout the roof
+        from the artfully fabricated dormers to the carefully sculpted gutter
+        system designed to withstands wind speed up to 126 mph. ALLCON made sure
+        that the copper fabrication was a mix of machine fabrication for the
+        panels to control cost and hard created units for the fine intricate
+        detail work. This inspiration assignment is not just a showcase project
+        for ALLCON but a signature piece of work for Farmingdale’s dedication to
+        excellence on campus.
       </>
     ),
   },
   {
     link: "/Projects/SaintDemetriosChurch",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/stdemetrios",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/stdemetrios",
+    quality: 100,
     projectName: "Saint Demetrios Greek Orthodox Church",
     projectLocation:
       "2 Annette Ave, 12 Annette Ave, 127 Hewlett Ave Merrick, NY 11566",
@@ -65,7 +154,7 @@ export const projects = [
       <>
         As part of a multiphase project for Saint Demetrios Greek Orthodox
         Church, AllCon was selected as the General Contractor for the first
-        phase. AllCon performed all demolition and site clearing/preparation of
+        phase. AllCon performed the demolition and site clearing/preparation of
         existing adjacent houses and garages acquired by the church to expand
         its site and it service to the South Nassau Hellenic Community.
       </>
@@ -73,13 +162,8 @@ export const projects = [
   },
   {
     link: "/Projects/Nold",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/nold",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/nold",
+    quality: 100,
     projectName: "SUNY Farmingdale Nold Hall Gymnasium",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
     clientAffiliatedAgency: "State University Construction Fund",
@@ -108,13 +192,8 @@ export const projects = [
   },
   {
     link: "/Projects/500Bridgewater",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/500brightwater",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/500brightwater",
+    quality: 100,
     projectName:
       "Brighton Houses Inc. – Alterations Associated to Superstorm SANDY",
     projectLocation: "500 Brightwater Court, Brooklyn, NY 11235",
@@ -131,24 +210,19 @@ export const projects = [
         structure/ promenade to house the facilities new boilers, hot water
         heaters, electrical services, and new generator system. This 18 story,
         192-unit apartment building for the elderly was fully occupied during
-        construction and required extensive coordination between AllCon and the
+        construction and required extensive coordination between ALLCON and the
         construction manager. Complete window and balcony door replacement was
         required as well as over 15,000 sf of built-up roofing and 35,000 sf of
         unit pavers throughout the building. Through close collaboration with
-        the CM and building occupants AllCon was able to complete this project
+        the CM and building occupants ALLCON was able to complete this project
         ahead of schedule.
       </>
     ),
   },
   {
     link: "/Projects/Bareburger",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/bareburger",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/bareburger",
+    quality: 100,
     projectName: "Bareburger 1681 East 87th Street",
     projectLocation: "1681 East 87th Street",
     clientAffiliatedAgency: "N/A",
@@ -165,13 +239,8 @@ export const projects = [
   },
   {
     link: "/Projects/WilsonAnimal",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/willstonanimal",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/willstonanimal",
+    quality: 100,
     projectName: "Williston Animal Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -188,13 +257,8 @@ export const projects = [
   },
   {
     link: "/Projects/255West",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/255w",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/255w",
+    quality: 100,
     projectName: "255 West 108th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -205,13 +269,8 @@ export const projects = [
   },
   {
     link: "/Projects/20East",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/20east9th",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/20east9th",
+    quality: 100,
     projectName: "20 East 9th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -222,13 +281,8 @@ export const projects = [
   },
   {
     link: "/Projects/UpperEastVetenary",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/uppereastveterinary",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/uppereastveterinary",
+    quality: 100,
     projectName: "Upper East Side Veterinary Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -245,13 +299,8 @@ export const projects = [
   },
   {
     link: "/Projects/CarlePlaceAuditorium",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/carlplace",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/carlplace",
+    quality: 100,
     projectName: "Carle Place UFSD – Auditorium Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -268,13 +317,8 @@ export const projects = [
   },
   {
     link: "/Projects/CarlePlaceLobby",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/carlplacelobby",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/carlplacelobby",
+    quality: 100,
     projectName: "Carle Place UFSD – Lobby Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -285,13 +329,8 @@ export const projects = [
   },
   {
     link: "/Projects/CarlePlaceLibrary",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/carlplacelibrary",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/carlplacelibrary",
+    quality: 100,
     projectName: "Carle Place UFSD – Library Renovations",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -302,13 +341,8 @@ export const projects = [
   },
   {
     link: "/Projects/NewJerseyVeterinary",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/njvet",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/njvet",
+    quality: 100,
     projectName: "New Jersey Veterinary Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -325,13 +359,8 @@ export const projects = [
   },
   {
     link: "/Projects/HudsonAnimalHospital",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/hudsonanimal",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/hudsonanimal",
+    quality: 100,
     projectName: "Hudson Animal Hospital",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -348,13 +377,8 @@ export const projects = [
   },
   {
     link: "/Projects/866Westchester",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/866westchester",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/866westchester",
+    quality: 100,
     projectName: "866 Westchester Ave.",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -371,13 +395,8 @@ export const projects = [
   },
   {
     link: "/Projects/55Pierrpoint",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/55pierre",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+    pictures: "/Projects/55pierre",
+    quality: 100,
     projectName: "55 Pierrpoint Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -395,13 +414,9 @@ export const projects = [
   },
   {
     link: "/Projects/164_W79th",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/164w79th",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+
+    pictures: "/Projects/164w79th",
+    quality: 100,
     projectName: "164 W79th Street",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",
@@ -412,13 +427,9 @@ export const projects = [
   },
   {
     link: "/Projects/17W_10th_Townhouse",
-    pictures: importAll(
-      require.context(
-        "D:/Websites/Pictures/Projects/17w10street",
-        false,
-        /\.(JPG|PNG|png|jpe?g|svg)$/
-      )
-    ),
+
+    pictures: "/Projects/17w10street",
+    quality: 100,
     projectName: "17W 10th St Townhouse",
     projectLocation: "N/A",
     clientAffiliatedAgency: "N/A",

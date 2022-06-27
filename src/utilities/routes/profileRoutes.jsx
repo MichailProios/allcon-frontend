@@ -1,6 +1,6 @@
 import React from "react";
-import ProfilePage from "../../components/ProfilePage/ProfilePage";
 import profiles from "../profiles/profiles.jsx";
+import ProfilePage from "../../components/ProfilePage/ProfilePage";
 
 export const profileRoutes = [];
 

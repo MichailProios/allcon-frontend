@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 //Material-UI Styles
 import { makeStyles, useTheme } from "@material-ui/styles";
@@ -7,10 +7,11 @@ import {
   Card,
   Grid,
   Typography,
-  Grow,
+  Fade,
   CardActionArea,
   CardHeader,
   CardMedia,
+  Paper,
 } from "@material-ui/core";
 import { isMobile } from "react-device-detect";
 
@@ -21,6 +22,10 @@ import useDelayTransition from "../../utilities/customHooks/useDelayTransition";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MuiImage from "material-ui-image";
 import { Link } from "react-router-dom";
+import ReactImage from "../ReactImage/ReactImage";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
+import { Img } from "react-image";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   profileDescription: { padding: "0.8em", width: "100%" },
 }));
 
-const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
+const ProfileCard = ({ link, title, subtitle, description, picture }) => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -65,47 +70,52 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
   }, [inView]);
 
   return (
-    <Grow in={flag} timeout={800}>
+    <Fade in={flag} timeout={400}>
       <Card className={styles.root} ref={ref}>
         <CardActionArea
           className={styles.cardAction}
           component={Link}
           to={link}
         >
-          <Grid container spacing={0} direction="row">
-            <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
-              <MuiImage
-                imageStyle={
-                  matchesMD
-                    ? {
-                        maxWidth: "100%",
-                        // height: "20em",
-                        objectFit: "contain",
-                      }
-                    : {
-                        maxWidth: "100%",
-                        height: "auto",
-                        objectFit: "contain",
-                        // borderTopRightRadius: "2px",
-                        // borderBottomRightRadius: "2px",
-                      }
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={3}
+              xl={3}
+              style={{ display: "block", lineHeight: 0 }}
+            >
+              <Suspense
+                fallback={
+                  <div style={{ height: "100%" }}>
+                    <LoadingSpinner />
+                  </div>
                 }
-                // aspectRatio={matchesMD ? 1.5 : 1}
-                // iconContainerStyle={
-                //   matchesMD
-                //     ? {
-                //         maxWidth: "100%",
-                //         height: "auto",
-                //       }
-                //     : {
-                //         maxWidth: "100%",
-                //         height: "auto",
-                //       }
-                // }
-                src={image}
-                animationDuration={100}
-                className={styles.profileImage}
-              />
+              >
+                <ReactImage
+                  image={picture}
+                  style={
+                    matchesMD
+                      ? {
+                          width: "100%",
+                          height: "auto",
+                          objectFit: "contain",
+                          display: "block",
+                          lineHeight: 0,
+                        }
+                      : {
+                          width: "100%",
+                          height: "auto",
+                          objectFit: "contain",
+                          display: "block",
+                          lineHeight: 0,
+                        }
+                  }
+                  className={styles.profileImage}
+                />
+              </Suspense>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
               <CardHeader title={title} subheader={subtitle} />
@@ -121,8 +131,8 @@ const ProfileCard = ({ link, title, subtitle, description, image, delay }) => {
           </Grid>
         </CardActionArea>
       </Card>
-    </Grow>
+    </Fade>
+    // {/* </Suspense> */}
   );
 };
-
 export default ProfileCard;

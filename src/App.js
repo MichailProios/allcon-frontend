@@ -1,5 +1,5 @@
 //Basic dependencies
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,30 +13,27 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
-import { Box } from "@material-ui/core";
+import { Box, Tooltip } from "@material-ui/core";
 
 //Styling
 import "./App.css";
 
-//Pages
-import Navbar from "./components/Navbar/Navbar.jsx";
-import Home from "./pages/Home/Home.jsx";
-//import Services from "./pages/Services/Services.jsx";
-import Projects from "./pages/Projects/Projects.jsx";
-import About from "./pages/About/About.jsx";
-
-import Contacts from "./pages/Contacts/Contacts";
-import Testimonies from "./pages/Testimonies/Testimonies";
+import projectRoutes from "./utilities/routes/projectRoutes";
+import profileRoutes from "./utilities/routes/profileRoutes";
+import cacheImages from "./utilities/customFunctions/cacheImages.jsx";
+import LoadingSquares from "./components/LoadingSquares/LoadingSquares";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
-import projectRoutes from "./utilities/routes/projectRoutes";
+//Pages
+import Navbar from "./components/Navbar/Navbar.jsx";
+import useDetectHeight from "./utilities/customHooks/useDetectHeight";
+// import Home from "./pages/Home/Home.jsx";
+// import Projects from "./pages/Projects/Projects.jsx";
+// import About from "./pages/About/About.jsx";
+// import Contacts from "./pages/Contacts/Contacts";
+// import Testimonies from "./pages/Testimonies/Testimonies";
 
-import profileRoutes from "./utilities/routes/profileRoutes";
-
-import lupton from "./utilities/images/Home/lupton.jpg";
-import church from "./utilities/images/Home/church.jpg";
-
-import cacheImages from "./utilities/customFunctions/cacheImages.jsx";
+import loadable from "react-loadable";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -79,17 +76,12 @@ const theme = createTheme({
       main: "#008B8B",
       light: "#00b3b3",
       dark: "#006666",
-      // dark: "#001d3e",
     },
     secondary: {
       main: "#008B8B",
       light: "#00b3b3",
       dark: "#006666",
     },
-    // button: {
-    //   main: "#1d4369",
-    //   hover: "#4D8AC9",
-    // },
     success: {
       main: "#4caf50",
       secondary: "#3e8e41",
@@ -99,6 +91,7 @@ const theme = createTheme({
       secondary: "#c2160a",
     },
   },
+
   breakpoints: {
     values: {
       xs: 0,
@@ -112,17 +105,61 @@ const theme = createTheme({
   },
 });
 
+const AsyncPages = {
+  Home: loadable({
+    loader: () => import("./pages/Home/Home.jsx"),
+    loading: LoadingSquares,
+  }),
+  Projects: loadable({
+    loader: () => import("./pages/Projects/Projects.jsx"),
+    loading: LoadingSquares,
+  }),
+  About: loadable({
+    loader: () => import("./pages/About/About.jsx"),
+    loading: LoadingSquares,
+  }),
+  Contacts: loadable({
+    loader: () => import("./pages/Contacts/Contacts.jsx"),
+    loading: LoadingSquares,
+  }),
+  Testimonies: loadable({
+    loader: () => import("./pages/Testimonies/Testimonies.jsx"),
+    loading: LoadingSquares,
+  }),
+};
+
+export const siteMap = {
+  Home: {
+    title: "Home",
+    path: "/Home",
+    description: "Allcon Home",
+  },
+  About: {
+    title: "About",
+    path: "/About",
+    description: "Allcon About Us",
+  },
+  Projects: {
+    title: "Projects",
+    path: "/Projects",
+    description: "Allcon Projects",
+  },
+  Testimonies: {
+    title: "Testimonies",
+    path: "/Testimonies",
+    description: "Allcon Testimonies",
+  },
+  Contacts: {
+    title: "Contacts",
+    path: "/Contacts",
+    description: "Allcon Contacts",
+  },
+};
+
 function App() {
   const styles = useStyles();
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const imgs = [church, lupton];
-
-    cacheImages(imgs);
-
-    setIsLoaded(true);
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const height = useDetectHeight();
 
   const projectComponents = projectRoutes.map(({ path, component }, key) => (
     // <Route exact path={path} component={component} key={key} />
@@ -137,21 +174,35 @@ function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        {isLoaded === true ? (
-          <Router>
-            <Navbar />
-            <Box
-              style={{
-                maxHeight: "100%",
-              }}
-            >
+        <Router>
+          <Navbar>
+            <Box>
               <Routes>
-                {/* <Route path="/" exact element={<Home />} /> */}
-                <Route path="/Home" exact element={<Home />} />
-                <Route path="/About" exact element={<About />} />
-                <Route path="/Contacts" exact element={<Contacts />} />
-                <Route path="/Projects" exact element={<Projects />} />
-                <Route path="/Testimonies" exact element={<Testimonies />} />
+                <Route
+                  path={siteMap.Home.path}
+                  exact
+                  element={<AsyncPages.Home />}
+                />
+                <Route
+                  path={siteMap.About.path}
+                  exact
+                  element={<AsyncPages.About />}
+                />
+                <Route
+                  path={siteMap.Contacts.path}
+                  exact
+                  element={<AsyncPages.Contacts />}
+                />
+                <Route
+                  path={siteMap.Projects.path}
+                  exact
+                  element={<AsyncPages.Projects />}
+                />
+                <Route
+                  path={siteMap.Testimonies.path}
+                  exact
+                  element={<AsyncPages.Testimonies />}
+                />
 
                 <Route
                   path="*"
@@ -165,19 +216,12 @@ function App() {
                   element={<Navigate to="/Home" replace />}
                 />
 
-                {/* <Route
-                  path="/projects/LuptonHall"
-                  exact
-                  element={<LuptonHall />}
-                /> */}
                 {projectComponents}
                 {profileComponents}
               </Routes>
             </Box>
-          </Router>
-        ) : (
-          <LoadingSpinner />
-        )}
+          </Navbar>
+        </Router>
       </ThemeProvider>
     </React.Fragment>
   );

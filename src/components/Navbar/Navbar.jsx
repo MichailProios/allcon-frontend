@@ -1,17 +1,7 @@
 //Basic dependencies
 import React, { useState, useEffect } from "react";
-import clsx from "clsx";
-import * as Scroll from "react-scroll";
 import { isMobile } from "react-device-detect";
-import {
-  LinkScroll,
-  DirectLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
+import { animateScroll as scroll } from "react-scroll";
 
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,7 +9,6 @@ import {
   AppBar,
   IconButton,
   Toolbar,
-  Button,
   Typography,
   Grid,
   Divider,
@@ -45,9 +34,9 @@ import { useLocation } from "react-router-dom";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
-//Pictures and Icons
-import companyLogo from "../../utilities/images/optimizedImages/logo-new.webp";
 import { useTheme } from "@material-ui/styles";
+const companyLogo =
+  "https://allconcontracting.com/image-resizing?&quality=30&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
 
 const drawerWidth = 240;
 
@@ -86,30 +75,12 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     backgroundColor: "#fff",
-
     zIndex: theme.zIndex.drawer + 1,
     widht: "100vh",
-    // backgroundColor: theme.palette.primary.main,
-    // transition: theme.transitions.create(["width", "margin"], {
-    //   easing: theme.transitions.easing.sharp,
-    //   duration: theme.transitions.duration.leavingScreen,
-    // }),
   },
 
-  // appbarShift: {
-  //   marginLeft: drawerWidth,
-  //   width: `calc(100% - ${drawerWidth}px)`,
-  //   transition: theme.transitions.create(["width", "margin"], {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.enteringScreen,
-  //   }),
-
-  //   [theme.breakpoints.down("sm")]: {
-  //     width: "100%",
-  //   },
-  // },
-
   drawer: {
+    overflow: "hidden",
     width: drawerWidth,
     zIndex: theme.zIndex.drawer + 2,
     flexShrink: 0,
@@ -141,13 +112,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   menuButton: {
-    // display: "none",
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "100%",
-    // },
-    // top: "50%",
-    // transform: "translateY(-50%)",
-    // margin: "0.1em 0em 0em 0em",
     color: "black",
   },
 
@@ -214,10 +178,7 @@ const useStyles = makeStyles((theme) => ({
 
   backdrop: {
     zIndex: theme.zIndex.drawer + 301,
-
-    // [theme.breakpoints.down("xs")]: {
-    //   zIndex: theme.zIndex.drawer + 1,
-    // },
+    overflow: "none",
   },
   verticalTabs: {
     userSelect: "none",
@@ -227,13 +188,6 @@ const useStyles = makeStyles((theme) => ({
   indicator: {
     left: 0,
   },
-  // contentShift: {
-  //   transition: theme.transitions.create("margin", {
-  //     easing: theme.transitions.easing.easeOut,
-  //     duration: theme.transitions.duration.enteringScreen,
-  //   }),
-  //   marginRight: 0,
-  // },
 }));
 
 function ScrollTop(props) {
@@ -295,7 +249,9 @@ function BackFAB() {
 }
 
 const HideOnScroll = ({ children }) => {
-  const trigger = useScrollTrigger();
+  const trigger = useScrollTrigger({
+    // target: document.getElementById("contentContainer"),
+  });
   if (isMobile) {
     return (
       <Slide direction={"down"} in={true}>
@@ -311,12 +267,9 @@ const HideOnScroll = ({ children }) => {
   }
 };
 
-const Navbar = () => {
+const Navbar = ({ children }) => {
   const styles = useStyles();
-  const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [loading, setLoading] = useState(true);
-
   const location = useLocation();
 
   useEffect(() => {
@@ -414,17 +367,12 @@ const Navbar = () => {
     }
   }, [location]);
 
-  // useEffect(() => {
-  //   const img1 = new Image();
-  //   img1.src = companyLogo.fileName;
-  // }, []);
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleDrawerOpen = (e) => {
     setOpenDrawer(true);
   };
 
-  // Fire to close drawer
   const handleDrawerClose = (e) => {
     setOpenDrawer(false);
   };
@@ -589,7 +537,7 @@ const Navbar = () => {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-      {/* <BackFAB /> */}
+      <main className={styles.content}>{children}</main>
       <Backdrop
         className={styles.backdrop}
         open={openDrawer}

@@ -5,12 +5,16 @@ export const cacheImages = async (srcArray) => {
       const img = new Image();
 
       img.src = src;
-      img.onload = resolve();
-      img.onerror = reject();
+      img.onload = () => {
+        resolve();
+      };
+      img.onerror = () => {
+        reject();
+      };
     });
   });
 
-  await Promise.all(promises);
+  return await Promise.all(promises);
 };
 
 export default cacheImages;

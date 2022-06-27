@@ -1,6 +1,7 @@
 import React from "react";
-import ProjectPage from "../../components/ProjectPage/ProjectPage";
+
 import projects from "../projects/projects.jsx";
+import ProjectPage from "../../components/ProjectPage/ProjectPage";
 
 export const projectRoutes = [];
 
@@ -9,6 +10,7 @@ projects.map(
     {
       link,
       pictures,
+      quality,
       projectName,
       projectLocation,
       clientAffiliatedAgency,
@@ -24,6 +26,7 @@ projects.map(
       component: (
         <ProjectPage
           pictures={pictures}
+          quality={quality}
           projectName={projectName}
           projectLocation={projectLocation}
           clientAffiliatedAgency={clientAffiliatedAgency}
