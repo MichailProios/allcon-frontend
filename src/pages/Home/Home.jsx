@@ -28,22 +28,22 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 //Pictures
 
 const greatneckRoofs =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
 
 const church =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
 
 const policeStation =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
 
 const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
 
 const nold =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=2560&width=1440&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
 
 //Styling
 const useStyles = makeStyles((theme) => ({
@@ -153,6 +153,32 @@ const Home = () => {
                 }
               >
                 <ReactImage
+                  image={lupton}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(85%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
+            </div>
+            <div>
+              <Suspense
+                fallback={
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
                   image={nold}
                   alt=""
                   style={{
@@ -206,32 +232,6 @@ const Home = () => {
               >
                 <ReactImage
                   image={policeStation}
-                  alt=""
-                  style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: `calc(${height}px - 65px)`,
-                    userDrag: "none",
-                    userSelect: "none",
-                    pointerEvents: "none",
-                    filter: "brightness(85%)",
-                    display: "block",
-                    lineHeight: 0,
-                  }}
-                  className={styles.media}
-                />
-              </Suspense>
-            </div>
-            <div>
-              <Suspense
-                fallback={
-                  <div style={{ height: `calc(${height}px - 65px)` }}>
-                    <LoadingSpinner />
-                  </div>
-                }
-              >
-                <ReactImage
-                  image={lupton}
                   alt=""
                   style={{
                     objectFit: "cover",
