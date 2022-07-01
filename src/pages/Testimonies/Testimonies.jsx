@@ -118,11 +118,12 @@ const Testimonies = () => {
               variant="h6"
               className={styles.text}
             >
-              “At the end of the day, I knew exactly what I was paying for –
-              without hidden costs or add-ons – and I was extremely satisfied
-              with the results”
+              “Your gift of supplies for the renovation of AHRC’s Astoria’s Blue
+              Feather Head Start program helped improve the educational
+              experience for many small children who face big challenges every
+              day.”
               <br /> <br />
-              Edward L. Rose – Apt 53B Client
+              Pamela Richard, Director of Development – AHRC New York
             </Typography>
           </Grow>
         </Grid>
@@ -144,12 +145,11 @@ const Testimonies = () => {
               variant="h6"
               className={styles.text}
             >
-              “Your gift of supplies for the renovation of AHRC’s Astoria’s Blue
-              Feather Head Start program helped improve the educational
-              experience for many small children who face big challenges every
-              day.”
+              “At the end of the day, I knew exactly what I was paying for –
+              without hidden costs or add-ons – and I was extremely satisfied
+              with the results”
               <br /> <br />
-              Pamela Richard, Director of Development – AHRC New York
+              Edward L. Rose – Apt 53B Client
             </Typography>
           </Grow>
         </Grid>

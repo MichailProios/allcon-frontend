@@ -728,7 +728,7 @@ const Contacts = () => {
         </Grid>
 
         <Grow in={useDelayTransition(500)} timeout={800}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={10}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={9}>
             <Paper className={styles.mapPaper}>
               <GoogleMapReact
                 bootstrapURLKeys={{
@@ -826,7 +826,7 @@ const Contacts = () => {
           </Grid>
         </Grow>
         <Grow in={useDelayTransition(1000)} timeout={800}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={3}>
             <Card className={styles.card}>
               <CardHeader
                 title="General Information"

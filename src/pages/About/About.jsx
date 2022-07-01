@@ -58,7 +58,7 @@ const ana =
   "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-27.jpg";
 
 const company =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-8.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Personnel/5-8-2022-8.jpg";
 
 const useStyles = makeStyles((theme) => ({
   companyProfileGrid: {
