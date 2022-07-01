@@ -299,7 +299,13 @@ const ProjectPage = ({
           </Grow>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
             <Grow in={animationFlag2} timeout={800}>
-              <Card style={{ height: `calc(${height}px - 154px)` }}>
+              <Card
+                style={
+                  !isMobile
+                    ? { height: `calc(${height}px - 154px)` }
+                    : { height: `calc(${window.screen.height}px - 174px)` }
+                }
+              >
                 <CardHeader
                   title="Project Info"
                   className={styles.cardHeader}
@@ -425,12 +431,21 @@ const Picture = ({ image, quality }) => {
 
   return (
     <div
-      style={{
-        height: `calc(${height}px - 202px)`,
-        overflow: "hidden",
-        borderBottomLeftRadius: "0px",
-        borderBottomRightRadius: "0px",
-      }}
+      style={
+        !isMobile
+          ? {
+              height: `calc(${height}px - 202px)`,
+              overflow: "hidden",
+              borderBottomLeftRadius: "0px",
+              borderBottomRightRadius: "0px",
+            }
+          : {
+              height: `calc(${window.screen.height}px - 222px)`,
+              overflow: "hidden",
+              borderBottomLeftRadius: "0px",
+              borderBottomRightRadius: "0px",
+            }
+      }
     >
       <Suspense
         fallback={
@@ -445,13 +460,23 @@ const Picture = ({ image, quality }) => {
             image
           }
           alt=""
-          style={{
-            width: "100%",
-            height: `calc(${height}px - 202px)`,
-            objectFit: "contain",
-            display: "block",
-            lineHeight: 0,
-          }}
+          style={
+            !isMobile
+              ? {
+                  width: "100%",
+                  height: `calc(${height}px - 202px)`,
+                  objectFit: "contain",
+                  display: "block",
+                  lineHeight: 0,
+                }
+              : {
+                  width: "100%",
+                  height: `calc(${window.screen.height}px - 222px)`,
+                  objectFit: "contain",
+                  display: "block",
+                  lineHeight: 0,
+                }
+          }
           className={styles.picture}
         />
       </Suspense>

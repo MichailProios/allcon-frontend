@@ -73,7 +73,7 @@ const townhouse17w =
   "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/17w10street/IMG_7490.jpg";
 
 const ogsElwood =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/overall.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/20220412_120728229_iOS.jpg";
 
 const greatneckRoofs =
   "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
@@ -83,6 +83,9 @@ const successAcademy =
 
 const rockvillePolice =
   "https://allconcontracting.com/image-resizing?&quality=90&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
+
+const apt724 =
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/724/3-8-20.7.jpg";
 
 const useStyles = makeStyles({
   root: {
@@ -96,6 +99,18 @@ const Projects = () => {
 
   const [listData, setListData] = useState([
     {
+      title: "Lupton Hall - Roof Replacement",
+      image: lupton,
+      link: "/Projects/LuptonHall",
+    },
+
+    {
+      title: "DOT Elwood Operation Facility",
+      image: ogsElwood,
+      link: "/Projects/DOTElwood",
+    },
+
+    {
       title: "Farmingdale Nold Hall Gymnasium",
       image: nold,
       link: "/Projects/Nold",
@@ -107,26 +122,26 @@ const Projects = () => {
       link: "/Projects/500Bridgewater",
     },
     {
-      title: "Lupton Hall - Roof Replacement",
-      image: lupton,
-      link: "/Projects/LuptonHall",
+      title: "Rockville Centre Police Station",
+      image: rockvillePolice,
+      link: "/Projects/RockvilleCentrePolice",
     },
-    {
-      title: "Success Academy Schools",
-      image: successAcademy,
-      link: "/Projects/SuccessAcademySchools",
-    },
+
     {
       title: "Greatneck Terrace Roofs",
       image: greatneckRoofs,
       link: "/Projects/GreatneckTerraceRoofs",
     },
     {
-      title: "Rockville Centre Police Station",
-      image: rockvillePolice,
-      link: "/Projects/RockvilleCentrePolice",
+      title: "Apartment 724",
+      image: apt724,
+      link: "/Projects/Apartment724",
     },
-
+    {
+      title: "Success Academy Schools",
+      image: successAcademy,
+      link: "/Projects/SuccessAcademySchools",
+    },
     {
       title: "St. Demetrios Greek Orthodox Church",
       image: stdemetrios,
@@ -147,11 +162,7 @@ const Projects = () => {
       image: west255,
       link: "/Projects/255West",
     },
-    {
-      title: "DOT Elwood Operation Facility",
-      image: ogsElwood,
-      link: "/Projects/DOTElwood",
-    },
+
     {
       title: "20 East 9th Street",
       image: east209th,
@@ -223,7 +234,6 @@ const Projects = () => {
       nold,
       brightwater500,
       bareBurger,
-      successAcademy,
       wilsonAnimal,
       west255,
       east209th,
@@ -237,6 +247,11 @@ const Projects = () => {
       pierrpointStreet,
       w79thStreet,
       townhouse17w,
+      ogsElwood,
+      greatneckRoofs,
+      successAcademy,
+      rockvillePolice,
+      apt724,
     ])
       .then(() => {
         setLoading(false);

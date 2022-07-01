@@ -26,24 +26,29 @@ import ReactImage from "../../components/ReactImage/ReactImage";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 //Pictures
+const lupton =
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=1&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
 
-const greatneckRoofs =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
-
-const church =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+const elwood =
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=1&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/OGS_Elwood/20220412_120728229_iOS.jpg";
 
 const policeStation =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
-
-const lupton =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/lupton-hall/10-23-1-22.jpg";
-
-const brightwater500 =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=1&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/police-station-email/police-station-05.jpg";
 
 const nold =
-  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/11-6-21-2.webp";
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=1&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/nold/11-6-21-2.webp";
+
+const apt724 =
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=1&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/724/3-8-20.7.jpg";
+
+const greatneckRoofs =
+  "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=1&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/greatneck-terrace-roofs/11-13-21-5.jpg";
+
+// const church =
+//   "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/optimizedImages/image003.jpg";
+
+// const brightwater500 =
+//   "https://allconcontracting.com/image-resizing?&quality=90&height=3840&width=2160&sharpen=2&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Projects/500brightwater/1-18-2022-26.jpg";
 
 //Styling
 const useStyles = makeStyles((theme) => ({
@@ -115,14 +120,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    cacheImages([
-      nold,
-      // church,
-      policeStation,
-      greatneckRoofs,
-      brightwater500,
-      lupton,
-    ])
+    cacheImages([lupton, elwood, policeStation, nold, apt724, greatneckRoofs])
       .then(() => {
         setLoading(false);
       })
@@ -170,7 +168,7 @@ const Home = () => {
                 />
               </Suspense>
             </div>
-            <div>
+            {/* <div>
               <Suspense
                 fallback={
                   <div style={{ height: `calc(${height}px - 65px)` }}>
@@ -179,7 +177,7 @@ const Home = () => {
                 }
               >
                 <ReactImage
-                  image={nold}
+                  image={elwood}
                   alt=""
                   style={{
                     objectFit: "cover",
@@ -195,33 +193,8 @@ const Home = () => {
                   className={styles.media}
                 />
               </Suspense>
-            </div>
-            <div>
-              <Suspense
-                fallback={
-                  <div style={{ height: `calc(${height}px - 65px)` }}>
-                    <LoadingSpinner />
-                  </div>
-                }
-              >
-                <ReactImage
-                  image={brightwater500}
-                  alt=""
-                  style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: `calc(${height}px - 65px)`,
-                    userDrag: "none",
-                    userSelect: "none",
-                    pointerEvents: "none",
-                    filter: "brightness(85%)",
-                    display: "block",
-                    lineHeight: 0,
-                  }}
-                  className={styles.media}
-                />
-              </Suspense>
-            </div>
+            </div> */}
+
             <div>
               <Suspense
                 fallback={
@@ -248,16 +221,17 @@ const Home = () => {
                 />
               </Suspense>
             </div>
+
             <div>
               <Suspense
                 fallback={
-                  <div style={{ height: "100%" }}>
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
                     <LoadingSpinner />
                   </div>
                 }
               >
                 <ReactImage
-                  image={greatneckRoofs}
+                  image={nold}
                   alt=""
                   style={{
                     objectFit: "cover",
@@ -266,7 +240,7 @@ const Home = () => {
                     userDrag: "none",
                     userSelect: "none",
                     pointerEvents: "none",
-                    filter: "brightness(80%)",
+                    filter: "brightness(100%)",
                     display: "block",
                     lineHeight: 0,
                   }}
@@ -274,16 +248,17 @@ const Home = () => {
                 />
               </Suspense>
             </div>
-            {/* <div>
+
+            <div>
               <Suspense
                 fallback={
-                  <div style={{ height: "100%" }}>
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
                     <LoadingSpinner />
                   </div>
                 }
               >
                 <ReactImage
-                  image={church}
+                  image={apt724}
                   alt=""
                   style={{
                     objectFit: "cover",
@@ -299,7 +274,34 @@ const Home = () => {
                   className={styles.media}
                 />
               </Suspense>
-            </div> */}
+            </div>
+
+            <div>
+              <Suspense
+                fallback={
+                  <div style={{ height: `calc(${height}px - 65px)` }}>
+                    <LoadingSpinner />
+                  </div>
+                }
+              >
+                <ReactImage
+                  image={greatneckRoofs}
+                  alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: `calc(${height}px - 65px)`,
+                    userDrag: "none",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                    filter: "brightness(85%)",
+                    display: "block",
+                    lineHeight: 0,
+                  }}
+                  className={styles.media}
+                />
+              </Suspense>
+            </div>
           </Slider>
 
           <Fade

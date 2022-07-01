@@ -14,6 +14,18 @@ import imagesImport from "../customFunctions/imagesImport";
 
 export const projects = [
   {
+    link: "/Projects/Apartment724",
+    pictures: "/Projects/724",
+    quality: 90,
+    projectName: "Apartment 724",
+    projectLocation: "N/A",
+    clientAffiliatedAgency: "N/A",
+    yearCompleted: "N/A",
+    projectCostBudget: "N/A",
+    projectDesigner: "N/A",
+    description: <>N/A</>,
+  },
+  {
     link: "/Projects/SuccessAcademySchools",
     pictures: "/Projects/SuccessAcademySchools",
     quality: 90,
