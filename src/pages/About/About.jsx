@@ -305,12 +305,12 @@ const About = () => {
                 className={styles.text}
               >
                 Our Executive Management understands that teamwork, which
-                includes hands on involvement of the owners, guarantee that all
-                projects are completed on time and on the budget. AllCon's staff
-                is always meticulous with details of each project and
-                continually thrives to go the extra mile and deliver quality
+                includes hands on involvement of the owners, guarantees that all
+                projects are completed on time and on budget. ALL•CON's staff is
+                always meticulous with the details of each project and they
+                continuously strive to go the extra mile and deliver quality
                 results. From architects, planners, designers, and construction
-                specialists everyone works in a collaborative environment
+                specialists, everyone works in a collaborative environment
                 bringing forth their unique talent and techniques.
                 <br />
                 <br />
@@ -329,7 +329,7 @@ const About = () => {
                 variant="h6"
                 className={styles.text}
               >
-                With a goal to "build it once and build it right" we use
+                With a goal to "Build it once, Build it right," we use
                 innovative solutions to achieve infinite possibilities for each
                 project.
                 <br />
