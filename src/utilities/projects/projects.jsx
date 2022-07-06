@@ -39,22 +39,18 @@ export const projects = [
       <>
         ALLCON was selected by Success Academy Charter Schools as the General
         Contractor to complete full renovations of interior spaces throughout
-        the school’s system. The projects were done at an extremely rapid pace
-        at multiple facilities and required quick mobilization of the worker
-        force and constant coordination between ALLCON, the owner and design
-        team to meet this schedule. The collaborative approach between these
-        parties was a major component for the programs success. ALLCON worked
-        with suppliers to obtain and secure materials in advance of the actual
-        work starting. ALLCON was able to secure what are typically long lead
-        items by preplanning the construction and preparing deliveries prior to
-        the summer period when work was required to be completed. Updated
-        finishes and materials were installed throughout. Equipment that was
-        provided by the school system to ensure state of the art classroom
-        spaces was coordinated in advance by the ALLCON team. ALLCON coordinated
-        any required mechanical, electrical and plumbing systems, upgrades
-        needed with each space. The success of this project led to additional
-        projects being successfully completed by ALLCON over the next three
-        years.
+        the school system. The projects were done at an extremely rapid pace at
+        multiple facilities and required quick mobilization of the work force
+        and constant coordination between ALLCON, the owner and design team to
+        meet the 4 week completion schedule. The collaborative approach between
+        these parties was a major component for the programs success. ALLCON
+        worked with suppliers to obtain and secure materials in advance of the
+        actual work starting. ALLCON was able to secure what are typically long
+        lead items by preplanning the construction and preparing deliveries
+        prior to the summer period when work was required to be completed. Over
+        a period of five years Allcon delivered state of the art classroom
+        spaces which included mechanical, electrical and plumbing systems
+        upgrades.
       </>
     ),
   },
@@ -71,26 +67,20 @@ export const projects = [
     projectDesigner: "H2M Architects",
     description: (
       <>
-        ALLCon was selected to construct a new state of the art Police
-        headquarters for the Village of Rockville Center. The new facility will
-        replace the old, outdated, and cramped facility located on Maple Avenue.
-        The new headquarters will be located the former old Rockville Center
-        Municipal Water Department Building. ALLCON’s work includes full
-        demolition of all interior components and asbestos abatement. The
-        construction team installed insulation to be in comply with the latest
-        energy codes, CMU and stud framed walls to comply with the required
-        security and ACT Ceilings that enhance the working environment for the
-        staff providing vital services to the community. The team built new
-        secure holding cells and sally ports to allow for proper transfer of
-        offenders. Our flooring experts installed a combination of carpet, LVT
-        and ceramic tiles throughout to meet the strict requirements of the
-        designers. The ALLCON team manufacturers and installed custom millwork
-        counters throughout the facility. New wood doors, wood clad windows and
-        roll up gates were installed to rejuvenate the building’s exterior and
-        provide the necessary security within. Lastly exterior new signage and
-        aluminum metal panels were installed as identity indicators to the
-        Village Police and a handicap lift was installed to provided needed
-        public access to the facility.
+        ALLCON’s was selected to construct a new state of the art Police
+        headquarters for the Village of Rockville Center located at the former
+        Municipal Water Dept. building. The new facility replaced the old,
+        outdated, and cramped facility located on Maple Avenue. ALLCON’s work
+        included demolition of all interior components and asbestos abatement.
+        The construction included new CMU walls, stud framed walls, and ACT
+        ceilings. The team also built new secure holding cells and sally ports.
+        Our flooring experts installed a combination of carpet, LVT, and ceramic
+        tiles throughout. The ALLCON team manufactured and installed custom
+        millwork counters throughout the facility. New wood doors, wood-clad
+        windows, and roll-up gates were installed to rejuvenate the building’s
+        exterior and provide the necessary security. Lastly, exterior new
+        signage and aluminum metal panels were installed, as well as a handicap
+        lift to provide needed public access to the facilty.
       </>
     ),
   },
