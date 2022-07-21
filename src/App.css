@@ -13,9 +13,9 @@ body {
   touch-action: none;
 } */
 
-/* body {
-  
-} */
+body {
+  overflow: "hidden";
+}
 
 * {
   box-sizing: border-box;
